@@ -1,0 +1,23 @@
+<?php
+// $Id$
+
+// Poland
+
+function address_province_list_pl() {
+  return array('DO' => "Dolnoslaskie",
+    'KP' => "Kujawsko-Pomorskie",
+    'LO' => "Lodzkie",
+    'LL' => "Lubelskie",
+    'LU' => "Lubuskie",
+    'ML' => "Malopolskie",
+    'MZ' => "Mazowieckie",
+    'OP' => "Opolskie",
+    'PP' => "Podkarpackie",
+    'PL' => "Podlaskie",
+    'PM' => "Pomorskie",
+    'SL' => "Slaskie",
+    'SW' => "Swietokrzyskie",
+    'WM' => "Warminsko-Mazurskie",
+    'WP' => "Wielkopolskie",
+    'ZA' => "Zachodniopomorskie");
+}

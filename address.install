@@ -1,0 +1,146 @@
+<?php
+/**
+ * $Id$
+ * @author Bruno Massa
+ * @file address.install
+ * Installation / uninstallation routines.
+ */
+
+/**
+ * Implementation of hook_install().
+ */
+function address_install() {
+  // Install the necessary Database tables
+  drupal_install_schema('address');
+}
+
+/**
+ * Implementation of hook_schema().
+ */
+function address_schema() {
+  $schema['address'] = array(
+  'description' => t('Products-specific fields'),
+    'fields' => array(
+      'aid' => array(
+        'type'        => 'serial',
+        'not null'    => TRUE,
+        'description' => t('Address ID'),
+      ),
+      'eid' => array(
+        'type'        => 'int',
+        'unsigned'    => TRUE,
+        'not null'    => TRUE,
+        'description' => t('Element ID can be the User ID from {user}.uid or Node ID from {node}.nid'),
+      ),
+      'atype' => array(
+        'type'        => 'varchar',
+        'length'      => 5,
+        'description' => t('Identify what type of address is this: "user" and "node" addresses are the most common'),
+      ),
+      'aname' => array(
+        'type'        => 'varchar',
+        'length'      => 75,
+        'description' => t('The nickname of this address, like "Home", "Office", "Annas appartment"'),
+      ),
+      'street' => array(
+        'type'        => 'varchar',
+        'length'      => 255,
+        'description' => t('Street, number...'),
+      ),
+      'additional' => array(
+        'type'        => 'varchar',
+        'length'      => 255,
+        'description' => t('More info like appartment block, number or address reference'),
+      ),
+      'city' => array(
+        'type'        => 'varchar',
+        'length'      => 255,
+        'description' => t('Name of the city'),
+      ),
+      'province' => array(
+        'type'        => 'varchar',
+        'length'      => 16,
+        'description' => t('Name of the state/province/county/territory'),
+      ),
+      'country' => array(
+        'type'        => 'varchar',
+        'length'      => 2,
+        'description' => t('The ISO alpha 3 code of each country (its a 2-digit code)'),
+      ),
+      'postal_code' => array(
+        'type'        => 'varchar',
+        'length'      => 16,
+        'description' => t('The address postal code (ZIP code for US people)'),
+      ),
+      'is_primary' => array(
+        'type'        => 'int',
+        'size'        => 'tiny',
+        'default'     => 0,
+        'description' => t('Mark it as the primary address or not (default is not)'),
+      )
+    ),
+    'primary key' => array('aid'),
+    'indexes' => array(
+      'eid'   => array('eid'),
+    ),
+  );
+  $schema['address_zipcodes'] = array(
+  'description' => t('Products-specific fields'),
+    'fields' => array(
+      'country' => array(
+        'type'        => 'varchar',
+        'length'      => 2,
+        'not null'    => TRUE,
+        'description' => t('The ISO alpha 3 code of each country (its a 2-digit code)'),
+      ),
+      'postal_code' => array(
+        'type'        => 'varchar',
+        'length'      => 2,
+        'not null'    => TRUE,
+        'description' => t('The address postal code (ZIP code for US people)'),
+      ),
+      'city' => array(
+        'type'        => 'varchar',
+        'length'      => 255,
+        'description' => t('Name of the city'),
+      ),
+      'province' => array(
+        'type'        => 'varchar',
+        'length'      => 16,
+        'description' => t('Name of the state/province/county/territory'),
+      ),
+      'latitude' => array(
+        'type'        => 'float',
+        'description' => t('The place Latitute, if available'),
+      ),
+      'longitude' => array(
+        'type'        => 'float',
+        'description' => t('The place Longitude, if available'),
+      ),
+      'timezone' => array(
+        'type'        => 'int',
+        'size'        => 'small',
+        'description' => t('How much hours (more or less) than Greenwich time'),
+      ),
+      'dst' => array(
+        'type'        => 'int',
+        'size'        => 'small',
+        'description' => t('????'),
+      )
+    ),
+    'primary key' => array('country', 'postal_code'),
+    'indexes' => array(
+      'country'     => array('country'),
+      'postal_code' => array('postal_code'),
+    ),
+  );
+  return $schema;
+}
+
+/**
+ * Implentation of hook_uninstall().
+ */
+function address_uninstall() {
+  // Delete tables
+  drupal_uninstall_schema('address');
+}
