@@ -3,6 +3,6 @@
 
 // Christmas Island
 
-function address_province_list_cx() {
+function addresses_province_list_cx() {
   return array();
 }

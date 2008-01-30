@@ -3,7 +3,7 @@
 
 // Niger
 
-function address_province_list_ne() {
+function addresses_province_list_ne() {
   return array(
 
   );

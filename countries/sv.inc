@@ -3,7 +3,7 @@
 
 // El Salvador
 
-function address_province_list_sv() {
+function addresses_province_list_sv() {
   return array('AH' => "Ahuachapan",
     'CA' => "Cabanas",
     'CH' => "Chalatenango",

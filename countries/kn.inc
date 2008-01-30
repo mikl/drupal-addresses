@@ -3,7 +3,7 @@
 
 // Saint Kitts and Nevis
 
-function address_province_list_kn() {
+function addresses_province_list_kn() {
   return array('CCN' => "Christ Church Nichola Town",
     'SAS' => "Saint Anne Sandy Point",
     'SGB' => "Saint George Basseterre",

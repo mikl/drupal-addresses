@@ -3,7 +3,7 @@
 
 // Egypt
 
-function address_province_list_eg() {
+function addresses_province_list_eg() {
   return array('DHY' => "Ad Daqahliyah",
     'BAM' => "Al Bahr al Ahmar",
     'BHY' => "Al Buhayrah",

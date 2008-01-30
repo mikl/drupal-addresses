@@ -3,7 +3,7 @@
 
 // Cuba
 
-function address_province_list_cu() {
+function addresses_province_list_cu() {
   return array('IJU' => "Isla de la Juventud",
     'PRI' => "Pinar del Rio",
     'LHA' => "La Habana",

@@ -3,7 +3,7 @@
 
 // Afghanistan
 
-function address_province_list_af() {
+function addresses_province_list_af() {
   return array('BDS' => "Badakhshan province",
     'BDG' => "Badghis province",
     'BGL' => "Baghlan province",

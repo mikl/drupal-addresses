@@ -3,7 +3,7 @@
 
 // Poland
 
-function address_province_list_pl() {
+function addresses_province_list_pl() {
   return array('DO' => "Dolnoslaskie",
     'KP' => "Kujawsko-Pomorskie",
     'LO' => "Lodzkie",

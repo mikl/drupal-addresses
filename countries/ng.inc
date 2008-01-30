@@ -3,7 +3,7 @@
 
 // Nigeria
 
-function address_province_list_ng() {
+function addresses_province_list_ng() {
   return array('AB' => "Abia",
     'AD' => "Adamawa",
     'AK' => "Akwa Ibom",

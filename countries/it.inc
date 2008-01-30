@@ -3,7 +3,7 @@
 
 // Italy
 
-function address_province_list_it() {
+function addresses_province_list_it() {
   return array('AG' => "Agrigento",
     'AL' => "Alessandria",
     'AN' => "Ancona",

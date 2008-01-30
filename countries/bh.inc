@@ -3,7 +3,7 @@
 
 // Bahrain
 
-function address_province_list_bh() {
+function addresses_province_list_bh() {
   return array('CAP' => "Capital",
     'CEN' => "Central",
     'MUH' => "Muharraq",

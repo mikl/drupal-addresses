@@ -3,7 +3,7 @@
 
 // Heard Island and McDonald Islands
 
-function address_province_list_hm() {
+function addresses_province_list_hm() {
   return array('F' => "Flat Island",
     'M' => "McDonald Island",
     'S' => "Shag Island",

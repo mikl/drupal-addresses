@@ -3,7 +3,7 @@
 
 // Angola
 
-function address_province_list_ao() {
+function addresses_province_list_ao() {
   return array('BGO' => "Bengo",
     'BGU' => "Benguela province",
     'BIE' => "Bie",

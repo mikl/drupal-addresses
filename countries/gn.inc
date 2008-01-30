@@ -3,7 +3,7 @@
 
 // Guinea
 
-function address_province_list_gn() {
+function addresses_province_list_gn() {
   return array('CNK' => "Conakry",
     'BYL' => "Beyla",
     'BFA' => "Boffa",

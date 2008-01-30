@@ -3,6 +3,6 @@
 
 // Falkland Islands (Malvinas)
 
-function address_province_list_fk() {
+function addresses_province_list_fk() {
   return array();
 }

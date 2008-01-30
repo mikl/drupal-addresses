@@ -3,7 +3,7 @@
 
 // Mongolia
 
-function address_province_list_mn() {
+function addresses_province_list_mn() {
   return array('1' => "Ulanbaatar",
     '035' => "Orhon",
     '037' => "Darhan uul",

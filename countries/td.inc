@@ -3,7 +3,7 @@
 
 // Chad
 
-function address_province_list_td() {
+function addresses_province_list_td() {
   return array('BA' => "Batha",
     'BI' => "Biltine",
     'BE' => "Borkou-Ennedi-Tibesti",

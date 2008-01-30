@@ -3,7 +3,7 @@
 
 // Pakistan
 
-function address_province_list_pk() {
+function addresses_province_list_pk() {
   return array('B' => "Balochistan",
     'T' => "Federally Administered Tribal Areas",
     'I' => "Islamabad Capital Territory",

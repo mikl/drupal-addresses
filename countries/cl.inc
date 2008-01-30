@@ -3,7 +3,7 @@
 
 // Chile
 
-function address_province_list_cl() {
+function addresses_province_list_cl() {
   return array('AI' => "Aisen del General Carlos Ibanez del Campo (XI)",
     'AN' => "Antofagasta (II)",
     'AR' => "Araucania (IX)",

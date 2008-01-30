@@ -3,7 +3,7 @@
 
 // Jordan
 
-function address_province_list_jo() {
+function addresses_province_list_jo() {
   return array('AJ' => "Ajlun",
     'AQ' => "Al 'Aqabah",
     'BA' => "Al Balqa'",

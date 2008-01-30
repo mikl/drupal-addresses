@@ -3,7 +3,7 @@
 
 // Honduras
 
-function address_province_list_hn() {
+function addresses_province_list_hn() {
   return array('AT' => "Atlantida",
     'CH' => "Choluteca",
     'CL' => "Colon",

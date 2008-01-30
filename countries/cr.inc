@@ -3,7 +3,7 @@
 
 // Costa Rica
 
-function address_province_list_cr() {
+function addresses_province_list_cr() {
   return array('AL' => "Alajuela",
     'CA' => "Cartago",
     'GU' => "Guanacaste",

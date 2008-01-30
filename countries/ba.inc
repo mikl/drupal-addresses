@@ -3,7 +3,7 @@
 
 // Bosnia and Herzegovina
 
-function address_province_list_ba() {
+function addresses_province_list_ba() {
   return array('BRO' => "Brcko district",
     'FUS' => "Unsko-Sanski Kanton",
     'FPO' => "Posavski Kanton",

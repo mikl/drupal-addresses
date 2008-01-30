@@ -3,6 +3,6 @@
 
 // Palestinian Territory, Occupied
 
-function address_province_list_ps() {
+function addresses_province_list_ps() {
   return array();
 }

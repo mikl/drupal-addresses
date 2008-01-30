@@ -3,7 +3,7 @@
 
 // Great Britain
 
-function address_province_list_uk() {
+function addresses_province_list_uk() {
   return array('GSY' => "Guernsey",
     'JSY' => "Jersey",
     'BDG' => "Barking and Dagenham",

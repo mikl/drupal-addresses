@@ -3,7 +3,7 @@
 
 // Korea, Republic Of (South Korea)
 
-function address_province_list_kr() {
+function addresses_province_list_kr() {
   return array('11' => "Seoul Special City",
     '26' => "Busan Metropolitan City",
     '27' => "Daegu Metropolitan City",

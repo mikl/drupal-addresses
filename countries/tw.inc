@@ -3,7 +3,7 @@
 
 // Taiwan, Province of China
 
-function address_province_list_tw() {
+function addresses_province_list_tw() {
   return array('CH' => "Chang-hua",
     'CI' => "Chia-i",
     'HS' => "Hsin-chu",

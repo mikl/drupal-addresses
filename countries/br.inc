@@ -3,7 +3,7 @@
 
 // Brazil
 
-function address_province_list_br() {
+function addresses_province_list_br() {
   return array('AC' => "Acre",
     'AL' => "Alagoas ",
     'AM' => "Amazonas ",

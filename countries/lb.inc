@@ -3,7 +3,7 @@
 
 // Lebanon
 
-function address_province_list_lb() {
+function addresses_province_list_lb() {
   return array(
 
   );

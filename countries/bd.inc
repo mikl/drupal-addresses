@@ -3,7 +3,7 @@
 
 // Bangladesh
 
-function address_province_list_bd() {
+function addresses_province_list_bd() {
   return array('BAR' => "Barisal",
     'CHI' => "Chittagong",
     'DHA' => "Dhaka",

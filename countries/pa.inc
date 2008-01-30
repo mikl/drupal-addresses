@@ -3,7 +3,7 @@
 
 // Panama
 
-function address_province_list_pa() {
+function addresses_province_list_pa() {
   return array('BT' => "Bocas del Toro",
     'CH' => "Chiriqui",
     'CC' => "Cocle",

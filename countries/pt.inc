@@ -3,7 +3,7 @@
 
 // Portugal
 
-function address_province_list_pt() {
+function addresses_province_list_pt() {
   return array('AV' => "Aveiro",
     'AR' => "Acores (Azores)",
     'BJ' => "Beja",

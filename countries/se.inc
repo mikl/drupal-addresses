@@ -3,7 +3,7 @@
 
 // Sweden
 
-function address_province_list_se() {
+function addresses_province_list_se() {
   return array('ST' => "Stockholm",
     'UP' => "Uppsala",
     'SO' => "Södermanland",

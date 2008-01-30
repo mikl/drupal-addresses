@@ -3,7 +3,7 @@
 
 // Romania
 
-function address_province_list_ro() {
+function addresses_province_list_ro() {
   return array('AL' => "Alba",
     'AD' => "Arad",
     'AG' => "Arges",

@@ -3,7 +3,7 @@
 
 // Antigua and Barbuda
 
-function address_province_list_ag() {
+function addresses_province_list_ag() {
   return array('ASG' => "Saint George",
     'ASJ' => "Saint John",
     'ASM' => "Saint Mary",

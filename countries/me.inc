@@ -3,7 +3,7 @@
 
 // Montenegro
 
-function address_province_list_me() {
+function addresses_province_list_me() {
   return array(
 
   );

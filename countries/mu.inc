@@ -3,7 +3,7 @@
 
 // Mauritius
 
-function address_province_list_mu() {
+function addresses_province_list_mu() {
   return array('BR' => "Beau Bassin-Rose Hill",
     'CU' => "Curepipe",
     'PU' => "Port Louis",

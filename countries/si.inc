@@ -3,6 +3,6 @@
 
 // Slovenia
 
-function address_province_list_si() {
+function addresses_province_list_si() {
   return array();
 }

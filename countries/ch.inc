@@ -3,7 +3,7 @@
 
 // Switzerland
 
-function address_province_list_ch() {
+function addresses_province_list_ch() {
   return array('ZH' => "Zurich",
     'BE' => "Bern",
     'LU' => "Lucerne",

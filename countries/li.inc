@@ -3,7 +3,7 @@
 
 // Liechtenstein
 
-function address_province_list_li() {
+function addresses_province_list_li() {
   return array('V' => "Vaduz",
     'A' => "Schaan",
     'B' => "Balzers",

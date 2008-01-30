@@ -3,7 +3,7 @@
 
 // Tunisia
 
-function address_province_list_tn() {
+function addresses_province_list_tn() {
   return array('AR' => "Ariana",
     'BJ' => "Beja",
     'BA' => "Ben Arous",

@@ -3,7 +3,7 @@
 
 // Nauru
 
-function address_province_list_nr() {
+function addresses_province_list_nr() {
   return array('AO' => "Aiwo",
     'AA' => "Anabar",
     'AT' => "Anetan",

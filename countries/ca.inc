@@ -15,7 +15,7 @@
  * alphabetically.
  *
  */
-function address_province_list_ca() {
+function addresses_province_list_ca() {
   return array(
     'AB' => 'Alberta',
     'BC' => 'British Columbia',

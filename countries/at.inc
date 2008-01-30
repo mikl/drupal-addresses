@@ -3,7 +3,7 @@
 
 // Austria
 
-function address_province_list_at() {
+function addresses_province_list_at() {
   return array('BUR' => "Burgenland",
     'KAR' => "Karnten",
     'NOS' => "Niederosterreich",

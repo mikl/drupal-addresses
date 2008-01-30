@@ -3,7 +3,7 @@
 
 // Cayman Islands
 
-function address_province_list_ky() {
+function addresses_province_list_ky() {
   return array('CR' => "Creek",
     'EA' => "Eastern",
     'ML' => "Midland",

@@ -3,7 +3,7 @@
 
 // Andorra
 
-function address_province_list_ad() {
+function addresses_province_list_ad() {
   return array('ALV' => "Andorra la Vella",
     'CAN' => "Canillo",
     'ENC' => "Encamp",

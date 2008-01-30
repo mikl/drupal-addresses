@@ -3,6 +3,6 @@
 
 // Reunion
 
-function address_province_list_re() {
+function addresses_province_list_re() {
   return array();
 }

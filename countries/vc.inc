@@ -3,7 +3,7 @@
 
 // Saint Vincent and the Grenadines
 
-function address_province_list_vc() {
+function addresses_province_list_vc() {
   return array('C' => "Charlotte",
     'R' => "Grenadines",
     'A' => "Saint Andrew",

@@ -3,7 +3,7 @@
 
 // Guernsey
 
-function address_province_list_gg() {
+function addresses_province_list_gg() {
   return array(
 
   );

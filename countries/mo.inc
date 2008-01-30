@@ -3,7 +3,7 @@
 
 // Macau
 
-function address_province_list_mo() {
+function addresses_province_list_mo() {
   return array('OLF' => "Our Lady Fatima Parish",
     'ANT' => "St. Anthony Parish",
     'LAZ' => "St. Lazarus Parish",

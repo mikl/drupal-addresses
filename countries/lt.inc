@@ -3,7 +3,7 @@
 
 // Lithuania
 
-function address_province_list_lt() {
+function addresses_province_list_lt() {
   return array('AL' => "Alytus",
     'KA' => "Kaunas",
     'KL' => "Klaipeda",

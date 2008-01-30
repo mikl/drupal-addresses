@@ -3,7 +3,7 @@
 
 // Eritrea
 
-function address_province_list_er() {
+function addresses_province_list_er() {
   return array('MA' => "Central (Maekel)",
     'KE' => "Anseba (Keren)",
     'DK' => "Southern Red Sea (Debub-Keih-Bahri)",

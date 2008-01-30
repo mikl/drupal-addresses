@@ -3,7 +3,7 @@
 
 // Hong Kong
 
-function address_province_list_hk() {
+function addresses_province_list_hk() {
   return array('HCW' => "Central and Western Hong Kong Island",
     'HEA' => "Eastern Hong Kong Island",
     'HSO' => "Southern Hong Kong Island",

@@ -3,7 +3,7 @@
 
 // Central African Republic
 
-function address_province_list_cf() {
+function addresses_province_list_cf() {
   return array('BBA' => "Bamingui-Bangoran",
     'BKO' => "Basse-Kotto",
     'HKO' => "Haute-Kotto",

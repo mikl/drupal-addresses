@@ -3,7 +3,7 @@
 
 // Cameroon
 
-function address_province_list_cm() {
+function addresses_province_list_cm() {
   return array('ADA' => "Adamawa Province (Adamaoua)",
     'CEN' => "Centre Province",
     'EST' => "East Province (Est)",

@@ -3,7 +3,7 @@
 
 // Fiji
 
-function address_province_list_fj() {
+function addresses_province_list_fj() {
   return array('C' => "Central Division",
     'N' => "Northern Division",
     'E' => "Eastern Division",

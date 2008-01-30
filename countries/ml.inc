@@ -3,7 +3,7 @@
 
 // Mali
 
-function address_province_list_ml() {
+function addresses_province_list_ml() {
   return array('GA' => "Gao",
     'KY' => "Kayes",
     'KD' => "Kidal",

@@ -15,7 +15,7 @@
  * alphabetically.
  *
  */
-function address_province_list_au() {
+function addresses_province_list_au() {
   return array('ACT' => "Australian Capital Territory",
     'NSW' => "New South Wales",
     'NT' => "Northern Territory",

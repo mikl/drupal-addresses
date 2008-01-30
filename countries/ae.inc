@@ -3,7 +3,7 @@
 
 // United Arab Emirates
 
-function address_province_list_ae() {
+function addresses_province_list_ae() {
   return array('AZ' => "Abu Zaby",
     'AJ' => "'Ajman",
     'FU' => "Al Fujayrah",

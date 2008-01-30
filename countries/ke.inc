@@ -3,7 +3,7 @@
 
 // Kenya
 
-function address_province_list_ke() {
+function addresses_province_list_ke() {
   return array('CE' => "Central",
     'CO' => "Coast",
     'EA' => "Eastern",

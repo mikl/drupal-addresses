@@ -3,7 +3,7 @@
 
 // Algeria
 
-function address_province_list_dz() {
+function addresses_province_list_dz() {
   return array('ADR' => "Adrar",
     'ADE' => "Ain Defla",
     'ATE' => "Ain Temouchent",

@@ -3,6 +3,6 @@
 
 // Antarctica
 
-function address_province_list_aq() {
+function addresses_province_list_aq() {
   return array();
 }

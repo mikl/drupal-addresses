@@ -3,7 +3,7 @@
 
 // Senegal
 
-function address_province_list_sn() {
+function addresses_province_list_sn() {
   return array('DA' => "Dakar",
     'DI' => "Diourbel",
     'FA' => "Fatick",

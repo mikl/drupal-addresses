@@ -3,7 +3,7 @@
 
 // Oman
 
-function address_province_list_om() {
+function addresses_province_list_om() {
   return array('DA' => "Ad Dakhiliyah",
     'BA' => "Al Batinah",
     'WU' => "Al Wusta",

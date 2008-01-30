@@ -3,7 +3,7 @@
 
 // Ukraine
 
-function address_province_list_ua() {
+function addresses_province_list_ua() {
   return array('CK' => "Cherkasy",
     'CH' => "Chernihiv",
     'CV' => "Chernivtsi",

@@ -3,7 +3,7 @@
 
 // Mexico
 
-function address_province_list_mx() {
+function addresses_province_list_mx() {
   return array('AGU' => "Aguascalientes",
     'BCN' => "Baja California",
     'BCS' => "Baja California Sur",

@@ -3,7 +3,7 @@
 
 // Turkey
 
-function address_province_list_tr() {
+function addresses_province_list_tr() {
   return array('ADA' => "Adana",
     'ADI' => "Adiyaman",
     'AFY' => "Afyonkarahisar",

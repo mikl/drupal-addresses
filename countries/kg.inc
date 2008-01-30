@@ -3,7 +3,7 @@
 
 // Kyrgyzstan
 
-function address_province_list_kg() {
+function addresses_province_list_kg() {
   return array('GB' => "Bishkek",
     'B' => "Batken",
     'C' => "Chu",

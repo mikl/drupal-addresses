@@ -3,6 +3,6 @@
 
 // Niue
 
-function address_province_list_nu() {
+function addresses_province_list_nu() {
   return array();
 }

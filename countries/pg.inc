@@ -3,7 +3,7 @@
 
 // Papua New Guinea
 
-function address_province_list_pg() {
+function addresses_province_list_pg() {
   return array('BV' => "Bougainville",
     'CE' => "Central",
     'CH' => "Chimbu",

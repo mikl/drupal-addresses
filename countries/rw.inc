@@ -3,7 +3,7 @@
 
 // Rwanda
 
-function address_province_list_rw() {
+function addresses_province_list_rw() {
   return array('BU' => "Butare",
     'BY' => "Byumba",
     'CY' => "Cyangugu",

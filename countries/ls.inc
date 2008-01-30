@@ -3,7 +3,7 @@
 
 // Lesotho
 
-function address_province_list_ls() {
+function addresses_province_list_ls() {
   return array('BE' => "Berea",
     'BB' => "Butha-Buthe",
     'LE' => "Leribe",

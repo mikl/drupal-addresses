@@ -3,6 +3,6 @@
 
 // Faroe Islands
 
-function address_province_list_fo() {
+function addresses_province_list_fo() {
   return array();
 }

@@ -3,7 +3,7 @@
 
 // Jamaica
 
-function address_province_list_jm() {
+function addresses_province_list_jm() {
   return array('CLA' => "Clarendon Parish",
     'HAN' => "Hanover Parish",
     'KIN' => "Kingston Parish",

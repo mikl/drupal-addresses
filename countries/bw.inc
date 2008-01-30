@@ -3,7 +3,7 @@
 
 // Botswana
 
-function address_province_list_bw() {
+function addresses_province_list_bw() {
   return array('CE' => "Central",
     'GH' => "Ghanzi",
     'KD' => "Kgalagadi",

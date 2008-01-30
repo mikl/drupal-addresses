@@ -3,7 +3,7 @@
 
 // Venezuela
 
-function address_province_list_ve() {
+function addresses_province_list_ve() {
   return array('Z' => "Amazonas",
     'B' => "Anzoategui",
     'C' => "Apure",

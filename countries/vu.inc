@@ -3,7 +3,7 @@
 
 // Vanuatu
 
-function address_province_list_vu() {
+function addresses_province_list_vu() {
   return array('MA' => "Malampa",
     'PE' => "Penama",
     'SA' => "Sanma",

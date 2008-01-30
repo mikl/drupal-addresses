@@ -3,7 +3,7 @@
 
 // Bolivia
 
-function address_province_list_bo() {
+function addresses_province_list_bo() {
   return array('BEN' => "Departmento Beni",
     'CHU' => "Departmento Chuquisaca",
     'COC' => "Departmento Cochabamba",

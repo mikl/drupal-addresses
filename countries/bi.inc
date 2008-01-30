@@ -3,7 +3,7 @@
 
 // Burundi
 
-function address_province_list_bi() {
+function addresses_province_list_bi() {
   return array('BB' => "Bubanza",
     'BJ' => "Bujumbura",
     'BR' => "Bururi",

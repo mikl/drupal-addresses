@@ -3,7 +3,7 @@
 
 // Belgium
 
-function address_province_list_be() {
+function addresses_province_list_be() {
   return array('VAN' => "Antwerpen",
     'VBR' => "Vlaams Brabant",
     'VLI' => "Limburg",

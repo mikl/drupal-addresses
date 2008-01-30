@@ -3,7 +3,7 @@
 
 // Russian Federation
 
-function address_province_list_ru() {
+function addresses_province_list_ru() {
   return array('AD' => "Adygeya",
     'BA' => "Bashkortostan",
     'BU' => "Buryatia",

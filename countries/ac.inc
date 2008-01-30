@@ -3,6 +3,6 @@
 
 // Ascension Island
 
-function address_province_list_ac() {
+function addresses_province_list_ac() {
   return array();
 }

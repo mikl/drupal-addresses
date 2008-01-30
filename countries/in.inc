@@ -3,7 +3,7 @@
 
 // India
 
-function address_province_list_in() {
+function addresses_province_list_in() {
   return array('AP' => "Andhra Pradesh",
     'AR' => "Arunachal Pradesh",
     'AS' => "Assam",

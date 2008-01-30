@@ -3,7 +3,7 @@
 
 // Tuvalu
 
-function address_province_list_tv() {
+function addresses_province_list_tv() {
   return array('NMG' => "Nanumanga",
     'NLK' => "Niulakita",
     'NTO' => "Niutao",

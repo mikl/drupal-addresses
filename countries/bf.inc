@@ -3,7 +3,7 @@
 
 // Burkina Faso
 
-function address_province_list_bf() {
+function addresses_province_list_bf() {
   return array('BAL' => "Bale",
     'BAM' => "Bam",
     'BAN' => "Banwa",

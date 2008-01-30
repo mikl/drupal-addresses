@@ -3,7 +3,7 @@
 
 // Belize
 
-function address_province_list_bz() {
+function addresses_province_list_bz() {
   return array('BZ' => "Belize District",
     'CY' => "Cayo District",
     'CR' => "Corozal District",

@@ -3,7 +3,7 @@
 
 // Indonesia
 
-function address_province_list_id() {
+function addresses_province_list_id() {
   return array('BA' => "Bali",
     'BB' => "Bangka-Belitung",
     'BT' => "Banten",

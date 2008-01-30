@@ -3,7 +3,7 @@
 
 // Marshall Islands
 
-function address_province_list_mh() {
+function addresses_province_list_mh() {
   return array('ALG' => "Ailinginae",
     'ALL' => "Ailinglaplap",
     'ALK' => "Ailuk",

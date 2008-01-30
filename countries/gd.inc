@@ -3,7 +3,7 @@
 
 // Grenada
 
-function address_province_list_gd() {
+function addresses_province_list_gd() {
   return array('A' => "Saint Andrew",
     'D' => "Saint David",
     'G' => "Saint George",

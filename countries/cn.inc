@@ -3,7 +3,7 @@
 
 // China
 
-function address_province_list_cn() {
+function addresses_province_list_cn() {
   return array('11' => "Beijing",
     '12' => "Tianjin",
     '13' => "Hebei",

@@ -3,6 +3,6 @@
 
 // Martinique
 
-function address_province_list_mq() {
+function addresses_province_list_mq() {
   return array();
 }

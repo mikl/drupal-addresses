@@ -3,6 +3,6 @@
 
 // Gibraltar
 
-function address_province_list_gi() {
+function addresses_province_list_gi() {
   return array();
 }

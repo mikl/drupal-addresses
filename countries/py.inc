@@ -3,7 +3,7 @@
 
 // Paraguay
 
-function address_province_list_py() {
+function addresses_province_list_py() {
   return array('AG' => "Alto Paraguay",
     'AN' => "Alto Parana",
     'AM' => "Amambay",

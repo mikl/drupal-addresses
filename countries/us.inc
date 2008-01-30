@@ -17,7 +17,7 @@
  * Currently not being used, but may be in order to be compatible with CiviCRM
  * TODO: These numeric indices need to be changed to match those in the CiviCRM database
  */
-function address_province_list_numeric_us() {
+function addresses_province_list_numeric_us() {
   return array('001' => 'Alabama',
                '002' => 'Alaska',
                '003' => 'Arizona',

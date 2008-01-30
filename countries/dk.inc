@@ -3,7 +3,7 @@
 
 // Denmark
 
-function address_province_list_dk() {
+function addresses_province_list_dk() {
   return array('CC' => "Copenhagen (municipality)",
     'FC' => "Frederiksberg (municipality)",
     'CO' => "Copenhagen",

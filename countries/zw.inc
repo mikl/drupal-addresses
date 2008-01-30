@@ -3,7 +3,7 @@
 
 // Zimbabwe
 
-function address_province_list_zw() {
+function addresses_province_list_zw() {
   return array('BU' => "Bulawayo (city)",
     'HA' => "Harare (city)",
     'ML' => "Manicaland",

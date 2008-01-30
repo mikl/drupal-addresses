@@ -3,7 +3,7 @@
 
 // Liberia
 
-function address_province_list_lr() {
+function addresses_province_list_lr() {
   return array('BI' => "Bomi",
     'BG' => "Bong",
     'GB' => "Grand Bassa",

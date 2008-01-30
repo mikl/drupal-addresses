@@ -3,7 +3,7 @@
 
 // Bermuda
 
-function address_province_list_bm() {
+function addresses_province_list_bm() {
   return array('DS' => "Devonshire",
     'HC' => "Hamilton City",
     'HA' => "Hamilton",

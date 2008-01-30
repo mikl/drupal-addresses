@@ -3,7 +3,7 @@
 
 // Argentina
 
-function address_province_list_ar() {
+function addresses_province_list_ar() {
   return array('A' => "Salta",
     'B' => "Buenos Aires Province",
     'C' => "Distrito Federal",

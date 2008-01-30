@@ -3,7 +3,7 @@
 
 // Gambia
 
-function address_province_list_gm() {
+function addresses_province_list_gm() {
   return array('BJ' => "Banjul",
     'BS' => "Basse",
     'BR' => "Brikama",

@@ -3,7 +3,7 @@
 
 // Georgia
 
-function address_province_list_ge() {
+function addresses_province_list_ge() {
   return array('AB' => "Abkhazia",
     'AJ' => "Ajaria",
     'TB' => "Tbilisi",

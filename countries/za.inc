@@ -3,7 +3,7 @@
 
 // South Africa
 
-function address_province_list_za() {
+function addresses_province_list_za() {
   return array('WC' => "Western Cape",
     'NC' => "Northern Cape",
     'EC' => "Eastern Cape",

@@ -3,7 +3,7 @@
 
 // Sudan
 
-function address_province_list_sd() {
+function addresses_province_list_sd() {
   return array('ANL' => "A'ali an Nil",
     'BAM' => "Al Bahr al Ahmar",
     'BRT' => "Al Buhayrat",

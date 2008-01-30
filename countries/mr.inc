@@ -3,7 +3,7 @@
 
 // Mauritania
 
-function address_province_list_mr() {
+function addresses_province_list_mr() {
   return array('AD' => "Adrar",
     'AS' => "Assaba",
     'BR' => "Brakna",

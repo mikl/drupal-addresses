@@ -3,7 +3,7 @@
 
 // Sri Lanka
 
-function address_province_list_lk() {
+function addresses_province_list_lk() {
   return array('CE' => "Central",
     'EA' => "Eastern",
     'NC' => "North Central",

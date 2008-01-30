@@ -3,7 +3,7 @@
 
 // Estonia
 
-function address_province_list_ee() {
+function addresses_province_list_ee() {
   return array('37' => "Harju County",
     '39' => "Hiiu County",
     '44' => "Ida-Viru County",

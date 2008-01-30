@@ -3,7 +3,7 @@
 
 // Kuwait
 
-function address_province_list_kw() {
+function addresses_province_list_kw() {
   return array('D' => "Al Ahmadi",
     'F' => "Al Farwaniyah",
     'S' => "Al Asimah",

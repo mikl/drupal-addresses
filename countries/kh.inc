@@ -3,7 +3,7 @@
 
 // Cambodia
 
-function address_province_list_kh() {
+function addresses_province_list_kh() {
   return array('PP' => "Phnom Penh",
     'PS' => "Preah Seihanu (Kompong Som or Sihanoukville)",
     'PA' => "Pailin",

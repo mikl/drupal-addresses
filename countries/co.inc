@@ -3,7 +3,7 @@
 
 // Colombia
 
-function address_province_list_co() {
+function addresses_province_list_co() {
   return array('AMZ' => "Amazonas",
     'ANT' => "Antioquia",
     'ARA' => "Arauca",

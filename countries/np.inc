@@ -3,7 +3,7 @@
 
 // Nepal
 
-function address_province_list_np() {
+function addresses_province_list_np() {
   return array('BA' => "Bagmati",
     'BH' => "Bheri",
     'DH' => "Dhawalagiri",

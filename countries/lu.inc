@@ -3,7 +3,7 @@
 
 // Luxembourg
 
-function address_province_list_lu() {
+function addresses_province_list_lu() {
   return array('DD' => "Diekirch",
     'DC' => "Clervaux",
     'DR' => "Redange",

@@ -3,7 +3,7 @@
 
 // Uganda
 
-function address_province_list_ug() {
+function addresses_province_list_ug() {
   return array('KAL' => "Kalangala",
     'KMP' => "Kampala",
     'KAY' => "Kayunga",

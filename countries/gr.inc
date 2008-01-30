@@ -3,7 +3,7 @@
 
 // Greece
 
-function address_province_list_gr() {
+function addresses_province_list_gr() {
   return array('AT' => "Attica",
     'CN' => "Central Greece",
     'CM' => "Central Macedonia",

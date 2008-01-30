@@ -3,7 +3,7 @@
 
 // Ethiopia
 
-function address_province_list_et() {
+function addresses_province_list_et() {
   return array('AF' => "Afar",
     'AH' => "Amhara",
     'BG' => "Benishangul-Gumaz",

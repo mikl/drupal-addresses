@@ -3,7 +3,7 @@
 
 // Bulgaria
 
-function address_province_list_bg() {
+function addresses_province_list_bg() {
   return array('01' => "Blagoevgrad",
     '02' => "Burgas",
     '03' => "Varna",

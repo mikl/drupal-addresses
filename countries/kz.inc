@@ -3,7 +3,7 @@
 
 // Kazakhstan
 
-function address_province_list_kz() {
+function addresses_province_list_kz() {
   return array('ALA' => "Almaty",
     'AST' => "Astana",
     'ALM' => "Almaty",

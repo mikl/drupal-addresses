@@ -3,7 +3,7 @@
 
 // Uruguay
 
-function address_province_list_uy() {
+function addresses_province_list_uy() {
   return array('AR' => "Artigas",
     'CA' => "Canelones",
     'CL' => "Cerro Largo",

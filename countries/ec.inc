@@ -3,7 +3,7 @@
 
 // Ecuador
 
-function address_province_list_ec() {
+function addresses_province_list_ec() {
   return array('A' => "Azuay",
     'B' => "Bolivar",
     'C' => "Carchi",

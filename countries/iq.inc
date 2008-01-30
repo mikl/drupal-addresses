@@ -3,7 +3,7 @@
 
 // Iraq
 
-function address_province_list_iq() {
+function addresses_province_list_iq() {
   return array('BD' => "Baghdad",
     'SD' => "Salah ad Din",
     'DY' => "Diyala",

@@ -3,7 +3,7 @@
 
 // Finland
 
-function address_province_list_fi() {
+function addresses_province_list_fi() {
   return array('ES' => "Etela-Suomen laani",
     'LS' => "Lansi-Suomen laani",
     'IS' => "Ita-Suomen laani",

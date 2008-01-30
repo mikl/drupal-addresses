@@ -3,6 +3,6 @@
 
 // Anguilla
 
-function address_province_list_ai() {
+function addresses_province_list_ai() {
   return array();
 }

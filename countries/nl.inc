@@ -3,7 +3,7 @@
 
 // Netherlands
 
-function address_province_list_nl() {
+function addresses_province_list_nl() {
   return array('DR' => "Drenthe",
     'FL' => "Flevoland",
     'FR' => "Friesland",

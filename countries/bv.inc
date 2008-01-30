@@ -3,6 +3,6 @@
 
 // Bouvet Island
 
-function address_province_list_bv() {
+function addresses_province_list_bv() {
   return array();
 }

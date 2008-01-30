@@ -3,7 +3,7 @@
 
 // Ireland
 
-function address_province_list_ie() {
+function addresses_province_list_ie() {
   return array('DB' => "Dublin",
     'WK' => "Wicklow",
     'WX' => "Wexford",

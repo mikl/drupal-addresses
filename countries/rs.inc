@@ -3,7 +3,7 @@
 
 // Serbia
 
-function address_province_list_rs() {
+function addresses_province_list_rs() {
   return array(
 
   );

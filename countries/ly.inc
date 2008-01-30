@@ -3,7 +3,7 @@
 
 // Libyan Arab Jamahiriya
 
-function address_province_list_ly() {
+function addresses_province_list_ly() {
   return array('AJ' => "Ajdabiya",
     'AZ' => "Al 'Aziziyah",
     'FA' => "Al Fatih",

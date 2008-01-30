@@ -3,7 +3,7 @@
 
 // Maldives
 
-function address_province_list_mv() {
+function addresses_province_list_mv() {
   return array('THU' => "Thiladhunmathi Uthuru",
     'THD' => "Thiladhunmathi Dhekunu",
     'MLU' => "Miladhunmadulu Uthuru",

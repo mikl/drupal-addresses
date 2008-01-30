@@ -3,6 +3,6 @@
 
 // Macedonia, The Former Yugoslav Republic of
 
-function address_province_list_mk() {
+function addresses_province_list_mk() {
   return array();
 }

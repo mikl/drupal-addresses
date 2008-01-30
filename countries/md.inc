@@ -3,7 +3,7 @@
 
 // Moldova, Republic of
 
-function address_province_list_md() {
+function addresses_province_list_md() {
   return array('GA' => "Gagauzia",
     'CU' => "Chisinau",
     'BA' => "Balti",

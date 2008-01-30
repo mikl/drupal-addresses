@@ -3,7 +3,7 @@
 
 // Cape Verde
 
-function address_province_list_cv() {
+function addresses_province_list_cv() {
   return array('BV' => "Boa Vista",
     'BR' => "Brava",
     'CS' => "Calheta de Sao Miguel",

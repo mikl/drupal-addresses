@@ -3,7 +3,7 @@
 
 // Cook Islands
 
-function address_province_list_ck() {
+function addresses_province_list_ck() {
   return array('PU' => "Pukapuka",
     'RK' => "Rakahanga",
     'MK' => "Manihiki",

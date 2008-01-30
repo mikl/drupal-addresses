@@ -3,7 +3,7 @@
 
 // Belarus
 
-function address_province_list_by() {
+function addresses_province_list_by() {
   return array('BR' => "Brest voblast",
     'HO' => "Homyel voblast",
     'HR' => "Hrodna voblast",

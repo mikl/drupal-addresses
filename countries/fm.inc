@@ -3,7 +3,7 @@
 
 // Micronesia, Federated States of
 
-function address_province_list_fm() {
+function addresses_province_list_fm() {
   return array('C' => "Chuuk",
     'K' => "Kosrae",
     'P' => "Pohnpei",

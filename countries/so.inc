@@ -3,7 +3,7 @@
 
 // Somalia
 
-function address_province_list_so() {
+function addresses_province_list_so() {
   return array('AW' => "Awdal",
     'BK' => "Bakool",
     'BN' => "Banaadir",

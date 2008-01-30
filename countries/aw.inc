@@ -3,6 +3,6 @@
 
 // Aruba
 
-function address_province_list_aw() {
+function addresses_province_list_aw() {
   return array();
 }

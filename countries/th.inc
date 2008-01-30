@@ -3,7 +3,7 @@
 
 // Thailand
 
-function address_province_list_th() {
+function addresses_province_list_th() {
   return array('10' => "Bangkok",
     '11' => "Samut Prakan",
     '12' => "Nonthaburi",

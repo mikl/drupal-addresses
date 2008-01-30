@@ -3,7 +3,7 @@
 
 // Equatorial Guinea
 
-function address_province_list_gq() {
+function addresses_province_list_gq() {
   return array('AN' => "Provincia Annobon",
     'BN' => "Provincia Bioko Norte",
     'BS' => "Provincia Bioko Sur",

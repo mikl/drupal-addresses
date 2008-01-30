@@ -3,7 +3,7 @@
 
 // Nicaragua
 
-function address_province_list_ni() {
+function addresses_province_list_ni() {
   return array('BO' => "Boaco",
     'CA' => "Carazo",
     'CD' => "Chinandega",

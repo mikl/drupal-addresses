@@ -3,7 +3,7 @@
 
 // British Indian Ocean Territory
 
-function address_province_list_io() {
+function addresses_province_list_io() {
   return array('PB' => "Peros Banhos",
     'SI' => "Salomon Islands",
     'NI' => "Nelsons Island",

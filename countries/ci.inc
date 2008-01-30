@@ -3,7 +3,7 @@
 
 // Cote D'Ivoire
 
-function address_province_list_ci() {
+function addresses_province_list_ci() {
   return array('ABE' => "Abengourou",
     'ABI' => "Abidjan",
     'ABO' => "Aboisso",

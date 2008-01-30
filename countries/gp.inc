@@ -3,6 +3,6 @@
 
 // Guadeloupe
 
-function address_province_list_gp() {
+function addresses_province_list_gp() {
   return array();
 }

@@ -3,7 +3,7 @@
 
 // France
 
-function address_province_list_fr() {
+function addresses_province_list_fr() {
   return array('A67' => "Bas-Rhin - Alsace",
     'A68' => "Haut-Rhin - Alsace",
     'B24' => "Dordogne - Aquitaine",

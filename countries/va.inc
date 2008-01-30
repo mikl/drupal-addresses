@@ -3,6 +3,6 @@
 
 // Holy See (Vatican City State)
 
-function address_province_list_va() {
+function addresses_province_list_va() {
   return array();
 }

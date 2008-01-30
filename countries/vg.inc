@@ -3,6 +3,6 @@
 
 // Virgin Islands, British
 
-function address_province_list_vg() {
+function addresses_province_list_vg() {
   return array();
 }

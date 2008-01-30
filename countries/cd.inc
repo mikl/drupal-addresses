@@ -3,7 +3,7 @@
 
 // Congo, The Democratic Republic of the
 
-function address_province_list_cd() {
+function addresses_province_list_cd() {
   return array('BC' => "Bas-Congo",
     'BN' => "Bandundu",
     'EQ' => "Equateur",

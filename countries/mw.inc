@@ -3,7 +3,7 @@
 
 // Malawi
 
-function address_province_list_mw() {
+function addresses_province_list_mw() {
   return array('BLK' => "Balaka",
     'BLT' => "Blantyre",
     'CKW' => "Chikwawa",

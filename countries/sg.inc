@@ -3,6 +3,6 @@
 
 // Singapore
 
-function address_province_list_sg() {
+function addresses_province_list_sg() {
   return array();
 }

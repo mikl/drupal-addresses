@@ -3,7 +3,7 @@
 
 // Yemen
 
-function address_province_list_ye() {
+function addresses_province_list_ye() {
   return array('AB' => "Abyan",
     'AD' => "Adan",
     'AM' => "Amran",

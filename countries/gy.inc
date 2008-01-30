@@ -3,7 +3,7 @@
 
 // Guyana
 
-function address_province_list_gy() {
+function addresses_province_list_gy() {
   return array('BW' => "Barima-Waini",
     'CM' => "Cuyuni-Mazaruni",
     'DM' => "Demerara-Mahaica",

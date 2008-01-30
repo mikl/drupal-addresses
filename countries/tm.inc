@@ -3,7 +3,7 @@
 
 // Turkmenistan
 
-function address_province_list_tm() {
+function addresses_province_list_tm() {
   return array('A' => "Ahal Welayaty",
     'B' => "Balkan Welayaty ",
     'D' => "Dashhowuz Welayaty",

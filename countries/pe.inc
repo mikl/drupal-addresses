@@ -3,7 +3,7 @@
 
 // Peru
 
-function address_province_list_pe() {
+function addresses_province_list_pe() {
   return array('AM' => "Amazonas",
     'AN' => "Ancash",
     'AP' => "Apurimac",

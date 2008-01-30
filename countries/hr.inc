@@ -3,7 +3,7 @@
 
 // Croatia
 
-function address_province_list_hr() {
+function addresses_province_list_hr() {
   return array('01' => "Zagreb county",
     '02' => "Krapina-Zagorje county",
     '03' => "Sisak-Moslavina county",

@@ -3,7 +3,7 @@
 
 // Benin
 
-function address_province_list_bj() {
+function addresses_province_list_bj() {
   return array('AL' => "Alibori",
     'AK' => "Atakora",
     'AQ' => "Atlantique",

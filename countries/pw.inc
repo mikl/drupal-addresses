@@ -3,7 +3,7 @@
 
 // Palau
 
-function address_province_list_pw() {
+function addresses_province_list_pw() {
   return array('AM' => "Aimeliik",
     'AR' => "Airai",
     'AN' => "Angaur",

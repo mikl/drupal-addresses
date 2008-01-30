@@ -3,7 +3,7 @@
 
 // Slovakia
 
-function address_province_list_sk() {
+function addresses_province_list_sk() {
   return array('BA' => "Banskobystricky",
     'BR' => "Bratislavsky",
     'KO' => "Kosicky",

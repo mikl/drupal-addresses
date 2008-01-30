@@ -3,7 +3,7 @@
 
 // Korea, Democratic People's Republic Of (North Korea)
 
-function address_province_list_kp() {
+function addresses_province_list_kp() {
   return array('CHA' => "Chagang-do",
     'HAB' => "Hamgyong-bukto",
     'HAN' => "Hamgyong-namdo",

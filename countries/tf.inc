@@ -3,7 +3,7 @@
 
 // French Southern Territories
 
-function address_province_list_tf() {
+function addresses_province_list_tf() {
   return array('C' => "Iles Crozet",
     'K' => "Iles Kerguelen",
     'A' => "Ile Amsterdam",

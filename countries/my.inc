@@ -3,7 +3,7 @@
 
 // Malaysia
 
-function address_province_list_my() {
+function addresses_province_list_my() {
   return array('JH' => "Johor",
     'KD' => "Kedah",
     'KN' => "Kelantan",

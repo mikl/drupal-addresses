@@ -3,6 +3,6 @@
 
 // Pitcairn
 
-function address_province_list_pn() {
+function addresses_province_list_pn() {
   return array();
 }

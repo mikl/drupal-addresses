@@ -3,7 +3,7 @@
 
 // Saudia Arabia
 
-function address_province_list_sa() {
+function addresses_province_list_sa() {
   return array('BH' => "Al Bahah",
     'HS' => "Al Hudud ash Shamaliyah",
     'JF' => "Al Jawf",

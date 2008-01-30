@@ -3,7 +3,7 @@
 
 // Congo
 
-function address_province_list_cg() {
+function addresses_province_list_cg() {
   return array('BO' => "Bouenza",
     'BR' => "Brazzaville",
     'CU' => "Cuvette",

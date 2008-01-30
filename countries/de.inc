@@ -15,7 +15,7 @@
  * alphabetically.
  *
  */
-function address_province_list_de() {
+function addresses_province_list_de() {
   return array(
     'BB' => 'Brandenburg',
     'BE' => 'Berlin',

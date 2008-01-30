@@ -3,7 +3,7 @@
 
 // Albania
 
-function address_province_list_al() {
+function addresses_province_list_al() {
   return array('BR' => "Berat",
     'BU' => "Bulqize",
     'DL' => "Delvine",

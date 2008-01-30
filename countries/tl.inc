@@ -3,7 +3,7 @@
 
 // Timor Leste
 
-function address_province_list_tl() {
+function addresses_province_list_tl() {
   return array('AL' => "Aileu",
     'AN' => "Ainaro",
     'BA' => "Baucau",

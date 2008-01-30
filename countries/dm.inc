@@ -3,7 +3,7 @@
 
 // Dominica
 
-function address_province_list_dm() {
+function addresses_province_list_dm() {
   return array('AND' => "Saint Andrew Parish",
     'DAV' => "Saint David Parish",
     'GEO' => "Saint George Parish",

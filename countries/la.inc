@@ -3,7 +3,7 @@
 
 // Lao People's Democratic Republic
 
-function address_province_list_la() {
+function addresses_province_list_la() {
   return array('VT' => "Vientiane",
     'AT' => "Attapu",
     'BK' => "Bokeo",

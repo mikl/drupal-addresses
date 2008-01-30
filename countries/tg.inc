@@ -3,7 +3,7 @@
 
 // Togo
 
-function address_province_list_tg() {
+function addresses_province_list_tg() {
   return array('K' => "Kara",
     'P' => "Plateaux",
     'S' => "Savanes",

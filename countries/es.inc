@@ -3,7 +3,7 @@
 
 // Spain
 
-function address_province_list_es() {
+function addresses_province_list_es() {
   return array('AL' => "Alava",
     'AB' => "Albacete",
     'AC' => "Alicante",

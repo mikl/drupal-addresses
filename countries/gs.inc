@@ -3,6 +3,6 @@
 
 // South Georgia and the South Sandwich Islands
 
-function address_province_list_gs() {
+function addresses_province_list_gs() {
   return array();
 }

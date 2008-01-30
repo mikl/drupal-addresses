@@ -3,7 +3,7 @@
 
 // Armenia
 
-function address_province_list_am() {
+function addresses_province_list_am() {
   return array('AGT' => "Aragatsotn",
     'ARR' => "Ararat",
     'ARM' => "Armavir",

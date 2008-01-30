@@ -3,7 +3,7 @@
 
 // New Zealand
 
-function address_province_list_nz() {
+function addresses_province_list_nz() {
   return array('AUK' => "Auckland",
     'BOP' => "Bay of Plenty",
     'CAN' => "Canterbury",

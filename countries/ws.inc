@@ -3,7 +3,7 @@
 
 // Samoa
 
-function address_province_list_ws() {
+function addresses_province_list_ws() {
   return array('AN' => "A'ana",
     'AI' => "Aiga-i-le-Tai",
     'AT' => "Atua",

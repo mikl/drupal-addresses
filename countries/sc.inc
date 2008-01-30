@@ -3,7 +3,7 @@
 
 // Seychelles
 
-function address_province_list_sc() {
+function addresses_province_list_sc() {
   return array('AP' => "Anse aux Pins",
     'AB' => "Anse Boileau",
     'AE' => "Anse Etoile",

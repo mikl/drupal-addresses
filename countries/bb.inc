@@ -3,7 +3,7 @@
 
 // Barbados
 
-function address_province_list_bb() {
+function addresses_province_list_bb() {
   return array('CC' => "Christ Church",
     'AND' => "Saint Andrew",
     'GEO' => "Saint George",

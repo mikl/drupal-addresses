@@ -3,7 +3,7 @@
 
 // Israel
 
-function address_province_list_il() {
+function addresses_province_list_il() {
   return array('C' => "Central",
     'H' => "Haifa",
     'J' => "Jerusalem",

@@ -3,7 +3,7 @@
 
 // Solomon Islands
 
-function address_province_list_sb() {
+function addresses_province_list_sb() {
   return array('CE' => "Central",
     'CH' => "Choiseul",
     'GC' => "Guadalcanal",

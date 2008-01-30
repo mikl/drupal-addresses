@@ -3,7 +3,7 @@
 
 // Qatar
 
-function address_province_list_qa() {
+function addresses_province_list_qa() {
   return array('DW' => "Ad Dawhah",
     'GW' => "Al Ghuwayriyah",
     'JM' => "Al Jumayliyah",

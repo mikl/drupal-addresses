@@ -3,7 +3,7 @@
 
 // Trinidad and Tobago
 
-function address_province_list_tt() {
+function addresses_province_list_tt() {
   return array('CT' => "Couva/Tabaquite/Talparo",
     'DM' => "Diego Martin",
     'MR' => "Mayaro/Rio Claro",

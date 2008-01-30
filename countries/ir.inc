@@ -3,7 +3,7 @@
 
 // Iran, Islamic Republic Of
 
-function address_province_list_ir() {
+function addresses_province_list_ir() {
   return array('TEH' => "Tehran",
     'QOM' => "Qom",
     'MKZ' => "Markazi",

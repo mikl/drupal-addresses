@@ -3,7 +3,7 @@
 
 // Czech Republic
 
-function address_province_list_cz() {
+function addresses_province_list_cz() {
   return array('JC' => "South Bohemian Region (Jihocesky kraj)",
     'JM' => "South Moravian Region (Jihomoravsky kraj)",
     'KA' => "Carlsbad Region  (Karlovarsky kraj)",

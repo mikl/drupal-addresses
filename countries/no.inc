@@ -3,7 +3,7 @@
 
 // Norway
 
-function address_province_list_no() {
+function addresses_province_list_no() {
   return array('AK' => "Akershus",
     'AA' => "Aust-Agder",
     'BU' => "Buskerud",

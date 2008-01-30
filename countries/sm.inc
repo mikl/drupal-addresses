@@ -3,7 +3,7 @@
 
 // San Marino
 
-function address_province_list_sm() {
+function addresses_province_list_sm() {
   return array('AC' => "Acquaviva",
     'BM' => "Borgo Maggiore",
     'CH' => "Chiesanuova",

@@ -3,6 +3,6 @@
 
 // Norfolk Island
 
-function address_province_list_nf() {
+function addresses_province_list_nf() {
   return array();
 }

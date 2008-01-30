@@ -3,7 +3,7 @@
 
 // Morocco
 
-function address_province_list_ma() {
+function addresses_province_list_ma() {
   return array('AGD' => "Agadir",
     'HOC' => "Al Hoceima",
     'AZI' => "Azilal",

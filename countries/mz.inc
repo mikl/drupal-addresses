@@ -3,7 +3,7 @@
 
 // Mozambique
 
-function address_province_list_mz() {
+function addresses_province_list_mz() {
   return array('CD' => "Cabo Delgado",
     'GZ' => "Gaza",
     'IN' => "Inhambane",

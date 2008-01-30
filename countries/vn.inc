@@ -3,7 +3,7 @@
 
 // Vietnam
 
-function address_province_list_vn() {
+function addresses_province_list_vn() {
   return array('AG' => "An Giang",
     'BG' => "Bac Giang",
     'BK' => "Bac Kan",

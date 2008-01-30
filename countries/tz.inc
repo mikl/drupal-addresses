@@ -3,7 +3,7 @@
 
 // Tanzania, United Republic of
 
-function address_province_list_tz() {
+function addresses_province_list_tz() {
   return array('AR' => "Arusha",
     'DS' => "Dar es Salaam",
     'DO' => "Dodoma",

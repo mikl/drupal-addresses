@@ -3,7 +3,7 @@
 
 // Japan
 
-function address_province_list_jp() {
+function addresses_province_list_jp() {
   return array('01' => "Hokkaido",
     '02' => "Aomori",
     '03' => "Iwate",

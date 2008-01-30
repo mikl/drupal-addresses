@@ -3,7 +3,7 @@
 
 // Syrian Arab Republic
 
-function address_province_list_sy() {
+function addresses_province_list_sy() {
   return array('HA' => "Al Hasakah",
     'LA' => "Al Ladhiqiyah",
     'QU' => "Al Qunaytirah",

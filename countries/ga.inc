@@ -3,7 +3,7 @@
 
 // Gabon
 
-function address_province_list_ga() {
+function addresses_province_list_ga() {
   return array('ES' => "Estuaire",
     'HO' => "Haut-Ogooue",
     'MO' => "Moyen-Ogooue",

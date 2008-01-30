@@ -3,7 +3,7 @@
 
 // Haiti
 
-function address_province_list_ht() {
+function addresses_province_list_ht() {
   return array('AR' => "Artibonite",
     'CE' => "Centre",
     'GA' => "Grand'Anse",

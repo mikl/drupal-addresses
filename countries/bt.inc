@@ -3,7 +3,7 @@
 
 // Bhutan
 
-function address_province_list_bt() {
+function addresses_province_list_bt() {
   return array('BUM' => "Bumthang",
     'CHU' => "Chukha",
     'DAG' => "Dagana",

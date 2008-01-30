@@ -3,7 +3,7 @@
 
 // Djibouti
 
-function address_province_list_dj() {
+function addresses_province_list_dj() {
   return array('S' => "'Ali Sabih",
     'K' => "Dikhil",
     'J' => "Djibouti",

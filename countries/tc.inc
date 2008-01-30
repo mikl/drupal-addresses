@@ -3,7 +3,7 @@
 
 // Turks and Caicos Islands
 
-function address_province_list_tc() {
+function addresses_province_list_tc() {
   return array('AC' => "Ambergris Cays",
     'DC' => "Dellis Cay",
     'FC' => "French Cay",

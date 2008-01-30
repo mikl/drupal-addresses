@@ -3,7 +3,7 @@
 
 // Latvia
 
-function address_province_list_lv() {
+function addresses_province_list_lv() {
   return array('AIZ' => "Aizkraukles Rajons",
     'ALU' => "Aluksnes Rajons",
     'BAL' => "Balvu Rajons",

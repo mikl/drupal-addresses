@@ -3,7 +3,7 @@
 
 // Guatemala
 
-function address_province_list_gt() {
+function addresses_province_list_gt() {
   return array('AV' => "Alta Verapaz",
     'BV' => "Baja Verapaz",
     'CM' => "Chimaltenango",

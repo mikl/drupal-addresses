@@ -3,7 +3,7 @@
 
 // Bahamas
 
-function address_province_list_bs() {
+function addresses_province_list_bs() {
   return array('ACK' => "Acklins",
     'BER' => "Berry Islands",
     'BIM' => "Bimini",

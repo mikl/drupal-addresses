@@ -3,7 +3,7 @@
 
 // Philippines
 
-function address_province_list_ph() {
+function addresses_province_list_ph() {
   return array('ABR' => "Abra",
     'ANO' => "Agusan del Norte",
     'ASU' => "Agusan del Sur",

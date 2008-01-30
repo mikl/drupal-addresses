@@ -3,6 +3,6 @@
 
 // Puerto Rico
 
-function address_province_list_pr() {
+function addresses_province_list_pr() {
   return array();
 }

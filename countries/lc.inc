@@ -3,7 +3,7 @@
 
 // Saint Lucia
 
-function address_province_list_lc() {
+function addresses_province_list_lc() {
   return array('AR' => "Anse-la-Raye",
     'CA' => "Castries",
     'CH' => "Choiseul",

@@ -3,7 +3,7 @@
 
 // Namibia
 
-function address_province_list_na() {
+function addresses_province_list_na() {
   return array('CA' => "Caprivi",
     'ER' => "Erongo",
     'HA' => "Hardap",

@@ -3,7 +3,7 @@
 
 // Azerbaijan
 
-function address_province_list_az() {
+function addresses_province_list_az() {
   return array('AB' => "Ali Bayramli",
     'ABS' => "Abseron",
     'AGC' => "AgcabAdi",

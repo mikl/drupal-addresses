@@ -3,7 +3,7 @@
 
 // Guinea-Bissau
 
-function address_province_list_gw() {
+function addresses_province_list_gw() {
   return array('BF' => "Bafata Region",
     'BB' => "Biombo Region",
     'BS' => "Bissau Region",

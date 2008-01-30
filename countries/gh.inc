@@ -3,7 +3,7 @@
 
 // Ghana
 
-function address_province_list_gh() {
+function addresses_province_list_gh() {
   return array('AS' => "Ashanti Region",
     'BA' => "Brong-Ahafo Region",
     'CE' => "Central Region",

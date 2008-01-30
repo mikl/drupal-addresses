@@ -3,7 +3,7 @@
 
 // Uzbekistan
 
-function address_province_list_uz() {
+function addresses_province_list_uz() {
   return array('AN' => "Andijon",
     'BU' => "Buxoro",
     'FA' => "Farg'ona",

@@ -3,7 +3,7 @@
 
 // Myanmar
 
-function address_province_list_mm() {
+function addresses_province_list_mm() {
   return array('AY' => "Ayeyarwady",
     'BG' => "Bago",
     'MG' => "Magway",

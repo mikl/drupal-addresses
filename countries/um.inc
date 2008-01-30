@@ -3,7 +3,7 @@
 
 // United States Minor Outlying Islands
 
-function address_province_list_um() {
+function addresses_province_list_um() {
   return array('BI' => "Baker Island",
     'HI' => "Howland Island",
     'JI' => "Jarvis Island",

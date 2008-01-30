@@ -3,7 +3,7 @@
 
 // Dominican Republic
 
-function address_province_list_do() {
+function addresses_province_list_do() {
   return array('DN' => "Distrito Nacional",
     'AZ' => "Azua",
     'BC' => "Baoruco",

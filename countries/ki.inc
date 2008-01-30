@@ -3,7 +3,7 @@
 
 // Kiribati
 
-function address_province_list_ki() {
+function addresses_province_list_ki() {
   return array('AG' => "Abaiang",
     'AM' => "Abemama",
     'AK' => "Aranuka",

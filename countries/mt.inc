@@ -3,7 +3,7 @@
 
 // Malta
 
-function address_province_list_mt() {
+function addresses_province_list_mt() {
   return array('ATT' => "Attard",
     'BAL' => "Balzan",
     'BGU' => "Birgu",

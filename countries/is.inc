@@ -3,7 +3,7 @@
 
 // Iceland
 
-function address_province_list_is() {
+function addresses_province_list_is() {
   return array('AL' => "Austurland",
     'HF' => "Hofuoborgarsvaeoi",
     'NE' => "Norourland eystra",

@@ -3,7 +3,7 @@
 
 // Zambia
 
-function address_province_list_zm() {
+function addresses_province_list_zm() {
   return array('CE' => "Central Province",
     'CB' => "Copperbelt Province",
     'EA' => "Eastern Province",

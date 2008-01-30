@@ -3,7 +3,7 @@
 
 // Hungary
 
-function address_province_list_hu() {
+function addresses_province_list_hu() {
   return array('BU' => "Budapest",
     'BC' => "Békéscsaba",
     'DB' => "Debrecen",
