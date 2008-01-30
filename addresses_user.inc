@@ -39,13 +39,12 @@ function _addresses_user_address($op = NULL, $aid = NULL) {
       // If its a existing address, get the whole
       // address information
       $edit = arg(4) ? _addresses_address_get(arg(4), 'address') : array();
-      $edit = $edit[0];
 
       if (empty($edit)) {
         // Set the Element ID as User ID form new addresses
-        $edit['eid'] = $uid;
+        $edit[0]['eid'] = $uid;
       }
-      elseif (empty($access) or $edit['eid'] != $uid) {
+      elseif (empty($access) or $edit[0]['eid'] != $uid) {
         // If the user has no permission or the user from
         // address is not the same as the user that are
         // accessing, deny the access
@@ -96,10 +95,12 @@ function _addresses_user_form(&$form_state, $fields = array(), $values = array()
 
 /**
  * Submit the address
+ *
+ * @ingroup form
  */
 function _addresses_user_form_submit($form, &$form_state) {
   global $user;
-  _addresses_address_save($form_state['values']['address'][0], $user, 'user');
+  _addresses_address_save($form_state['values']['addresses'][0], $user->uid, 'user');
 }
 
 /**
@@ -128,7 +129,7 @@ function theme_addresses_user_overview($uid, &$addresses) {
       $colunm = array();
 
       // Display a single address
-      $colunm[] = theme('address', $address);
+      $colunm[] = theme('addresses', $address);
 
       // More readable variable
       $aid = $address['aid'];
