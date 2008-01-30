@@ -8,19 +8,25 @@
 
 /**
  * Modules settings page
+ *
+ * @ingroup form
  */
-function _addresses_admin() {
+function _addresses_admin(&$form_state) {
   $form = array();
 
-  $form['location_default_country'] = array(
-    '#type'           => 'select',
-    '#title'          => t('Default country selection'),
-    '#default_value'  => variable_get('addresses_default_country', 'us'),
+  // List of contries that the site allow
+  $form['addresses_contry_list'] = array(
+    '#default_value'  => variable_get('addresses_contry_list', array_keys(_addresses_country_get())),
+    '#description'    => t('You might want to limit the contry lists. Select the contries you want.'),
+    '#multiple'       => TRUE,
     '#options'        => _addresses_country_get(),
-    '#description'    => t('This will be the country that is automatically selected when a location form is served for a new location.')
+    '#type'           => 'select',
+    '#title'          => t('Possible country'),
   );
 
-  return $form;
+  // We will use the this function that automatically
+  // save all form fields into global variables
+  return system_settings_form($form);
 }
 
 /**
@@ -46,46 +52,6 @@ function _addresses_address_delete($id, $type = 'address') {
 
   // Show an warning message
   drupal_set_message(t('The address has been deleted.'), 'warning');
-}
-
-/**
- * Load the full address from a given Address ID or User ID
- *
- * @param $id
- *   Number. The ID to look into the table. Depends on $type variable:
- *   if it is 'address' (default), it should look for a unique address
- *   ID, on 'aid' column. For anything else, search on 'eid' column.
- * @param $type
- *   String (optional). It can be:
- *   - 'address' (default): than search for a unique Address ID
- *   - 'user': get all address from a user
- *   - 'node: get all address from a node
- * @return
- *   Array. The numeric list of addresses arrays
- */
-function _addresses_address_get($id, $type = 'address') {
-  static $addresses;
-
-  if (empty($addresses[$type][$id])) {
-    // Get the address based on Address ID or
-    // the (User/Node) ID and the given identification
-    if ($type == 'address') {
-      $adr = db_query('SELECT * FROM {addresses} WHERE aid = %d', $id);
-    }
-    else {
-      $adr = db_query("SELECT * FROM {addresses}
-        WHERE atype = '%s' AND eid = %d
-        ORDER BY is_primary DESC", $type, $id);
-    }
-
-    // Transform all SQL findings into arrays
-    $addresses[$type][$id] = array();
-    while ($address = db_fetch_array($adr)) {
-      $addresses[$type][$id][] = $address;
-    }
-  }
-
-  return $addresses[$type][$id];
 }
 
 /**
@@ -202,11 +168,13 @@ function _addresses_autocomplete($country, $string = '') {
  *   be totally in Upper Case. Its the default ISO code,
  *   but the files and function are all named with lower
  *   case, so its better to return lower case by default
+ * @param $available
+ *   String (optional). A list of contries that are allowed.
  * @return
  *   Array. 'COUNTRY CODE' => 'COUNTRY CODE' pairs as layed out in
  *   ISO 3166-1 alpha-2
  */
-function _addresses_country_get($upper = FALSE) {
+function _addresses_country_get($upper = FALSE, $available = array()) {
   $countries = array(
     'ad' => t('Andorra'),
     'ae' => t('United Arab Emirates'),
@@ -455,14 +423,24 @@ function _addresses_country_get($upper = FALSE) {
     'zw' => t('Zimbabwe'),
   );
 
+  if (!empty($available)) {
+    foreach ($countries as $ccode => $country) {
+      if (empty($available[$ccode])) {
+        unset($countries[$ccode]);
+      }
+    }
+  }
+
   // In fact, the ISO codes for countries are all Upper Case.
   // So, if someone needs the list as the official records,
   // it will convert.
   if (!empty($upper)) {
     $countries = array_change_key_case($countries, CASE_UPPER);
   }
+
   // Sort the list and return
   natcasesort($countries);
+
   return $countries;
 }
 
@@ -511,7 +489,6 @@ function _addresses_form(&$form, $group = '', $values = array()) {
     if (!empty($fields['local_fieldset'])) {
       $form['addresses'][$a] = array(
         '#collapsible'  => TRUE,
-//         '#collapsed'    => TRUE,
         '#title'        => $a + 1,
         '#type'         => 'fieldset',
       );
@@ -570,7 +547,9 @@ function _addresses_form(&$form, $group = '', $values = array()) {
       );
     }
     elseif (!empty($fields['country'])) {
-      $countries = array('' => '') + _addresses_country_get();
+      // Get a list of enabled contries
+      $countries = array('' => '') +
+        _addresses_country_get(FALSE, variable_get('addresses_contry_list', array()));
 
       $form['addresses'][$a]['country'] = array(
         '#type'           => 'select',
