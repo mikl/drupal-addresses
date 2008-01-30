@@ -6,7 +6,7 @@
  * You can associate a geographic address with content and users.
  */
 
-define('ADDRESSES_PATH' , drupal_get_path('module', 'address'));
+define('ADDRESSES_PATH' , drupal_get_path('module', 'addresses'));
 
 /**
  * The address fields can be: displayed, required, hidden or not
@@ -16,6 +16,47 @@ define('ADDRESSES_FIELD_NONE',      0);
 define('ADDRESSES_FIELD_SHOW',      1);
 define('ADDRESSES_FIELD_REQUIRED',  2);
 define('ADDRESSES_FIELD_HIDDEN',    3);
+
+
+/**
+ * Load the full address from a given Address ID or User ID
+ *
+ * @param $id
+ *   Number. The ID to look into the table. Depends on $type variable:
+ *   if it is 'address' (default), it should look for a unique address
+ *   ID, on 'aid' column. For anything else, search on 'eid' column.
+ * @param $type
+ *   String (optional). It can be:
+ *   - 'address' (default): than search for a unique Address ID
+ *   - 'user': get all address from a user
+ *   - 'node: get all address from a node
+ * @return
+ *   Array. The numeric list of addresses arrays
+ */
+function _addresses_address_get($id, $type = 'address') {
+  static $addresses;
+
+  if (empty($addresses[$type][$id])) {
+    // Get the address based on Address ID or
+    // the (User/Node) ID and the given identification
+    if ($type == 'address') {
+      $adr = db_query('SELECT * FROM {addresses} WHERE aid = %d', $id);
+    }
+    else {
+      $adr = db_query("SELECT * FROM {addresses}
+        WHERE atype = '%s' AND eid = %d
+        ORDER BY is_primary DESC", $type, $id);
+    }
+
+    // Transform all SQL findings into arrays
+    $addresses[$type][$id] = array();
+    while ($address = db_fetch_array($adr)) {
+      $addresses[$type][$id][] = $address;
+    }
+  }
+
+  return $addresses[$type][$id];
+}
 
 /**
  * Implementation of hook_menu().
