@@ -16,14 +16,16 @@ function addresses_node_addresses_fields_api($op) {
   }
   elseif ($op == 'group') {
     return array(
-      'user' => array(
-        'is_primary'  => ADDRESSES_FIELD_SHOW,
-        'aname'       => ADDRESSES_FIELD_SHOW,
-        'street'      => ADDRESSES_FIELD_SHOW,
-        'city'        => ADDRESSES_FIELD_SHOW,
-        'province'    => ADDRESSES_FIELD_SHOW,
-        'postal_code' => ADDRESSES_FIELD_SHOW,
-        'country'     => ADDRESSES_FIELD_SHOW
+      'node' => array(
+        'master_fieldset' => TRUE,
+        'local_fieldset'  => TRUE,
+
+        'aname'           => ADDRESSES_FIELD_SHOW,
+        'street'          => ADDRESSES_FIELD_SHOW,
+        'city'            => ADDRESSES_FIELD_SHOW,
+        'province'        => ADDRESSES_FIELD_SHOW,
+        'postal_code'     => ADDRESSES_FIELD_SHOW,
+        'country'         => ADDRESSES_FIELD_SHOW
       )
     );
   }
@@ -38,5 +40,40 @@ function addresses_node_form_alter(&$form, $form_state, $form_id) {
   if (isset($form['type'])
       and isset($form['#node'])
       and $form['type']['#value'] .'_node_form' == $form_id) {
+    include_once ADDRESSES_PATH .'/addresses.inc';
+
+    // Get the address form builder
+    _addresses_form($form, 'node', $form['#node']->addresses);
+  }
+}
+
+/**
+ * Implementation of hook_nodeapi().
+ */
+function addresses_node_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL) {
+  switch ($op) {
+    case 'delete':
+      include_once ADDRESSES_PATH .'/addresses.inc';
+
+      // Delete all addresses linked to this node
+      _addresses_address_delete($node->nid, 'node');
+      break;
+    case 'update':
+    case 'insert':
+      include_once ADDRESSES_PATH .'/addresses.inc';
+
+      // Save each address
+      foreach ($node->addresses as $address) {
+        _addresses_address_save($address, $node->nid, 'node');
+      }
+      break;
+    case 'load':
+      include_once ADDRESSES_PATH .'/addresses.inc';
+
+      // Load all all addresses linked to this node
+      $output['addresses'] = _addresses_address_get($node->nid, 'node');
+      return $output;
+    case 'view':
+      break;
   }
 }
