@@ -1,4 +1,4 @@
 ; $Id$
 core        = "6.x"
 description = "You can associate a geographic location with content and users."
-name        = "Address"
+name        = "Addresses"

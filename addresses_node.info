@@ -2,4 +2,4 @@
 core            = "6.x"
 description     = "Link addresses to contents"
 dependencies[]  = addresses
-name            = "Node address"
+name            = "Addresses - Contents"
