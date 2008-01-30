@@ -4,15 +4,17 @@
 // Samoa
 
 function addresses_province_list_ws() {
-  return array('AN' => "A'ana",
-    'AI' => "Aiga-i-le-Tai",
-    'AT' => "Atua",
-    'FA' => "Fa'asaleleaga",
-    'GE' => "Gaga'emauga",
-    'GF' => "Gagaifomauga",
-    'PA' => "Palauli",
-    'SA' => "Satupa'itea",
-    'TU' => "Tuamasaga",
-    'VF' => "Va'a-o-Fonoti",
-    'VS' => "Vaisigano");
+  return array(
+    'AN' => t("A'ana"),
+    'AI' => t('Aiga-i-le-Tai'),
+    'AT' => t('Atua'),
+    'FA' => t("Fa'asaleleaga"),
+    'GE' => t("Gaga'emauga"),
+    'GF' => t('Gagaifomauga'),
+    'PA' => t('Palauli'),
+    'SA' => t("Satupa'itea"),
+    'TU' => t('Tuamasaga'),
+    'VF' => t("Va'a-o-Fonoti"),
+    'VS' => t('Vaisigano')
+  );
 }

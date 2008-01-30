@@ -4,9 +4,11 @@
 // Kuwait
 
 function addresses_province_list_kw() {
-  return array('D' => "Al Ahmadi",
-    'F' => "Al Farwaniyah",
-    'S' => "Al Asimah",
-    'J' => "Al Jahra",
-    'H' => "Hawalli");
+  return array(
+    'D' => t('Al Ahmadi'),
+    'F' => t('Al Farwaniyah'),
+    'S' => t('Al Asimah'),
+    'J' => t('Al Jahra'),
+    'H' => t('Hawalli')
+  );
 }

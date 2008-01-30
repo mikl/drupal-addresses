@@ -4,15 +4,17 @@
 // Senegal
 
 function addresses_province_list_sn() {
-  return array('DA' => "Dakar",
-    'DI' => "Diourbel",
-    'FA' => "Fatick",
-    'KA' => "Kaolack",
-    'KO' => "Kolda",
-    'LO' => "Louga",
-    'MA' => "Matam",
-    'SL' => "Saint-Louis",
-    'TA' => "Tambacounda",
-    'TH' => "Thies ",
-    'ZI' => "Ziguinchor");
+  return array(
+    'DA' => t('Dakar'),
+    'DI' => t('Diourbel'),
+    'FA' => t('Fatick'),
+    'KA' => t('Kaolack'),
+    'KO' => t('Kolda'),
+    'LO' => t('Louga'),
+    'MA' => t('Matam'),
+    'SL' => t('Saint-Louis'),
+    'TA' => t('Tambacounda'),
+    'TH' => t('Thies'),
+    'ZI' => t('Ziguinchor')
+  );
 }

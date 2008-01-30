@@ -4,20 +4,22 @@
 // New Zealand
 
 function addresses_province_list_nz() {
-  return array('AUK' => "Auckland",
-    'BOP' => "Bay of Plenty",
-    'CAN' => "Canterbury",
-    'GIS' => "Gisborne",
-    'HKB' => "Hawke's Bay",
-    'MBH' => "Marlborough",
-    'MWT' => "Manawatu-Wanganui",
-    'NSN' => "Nelson",
-    'NTL' => "Northland",
-    'OTA' => "Otago",
-    'STL' => "Southland",
-    'TAS' => "Tasman",
-    'TKI' => "Taranaki",
-    'WGN' => "Wellington",
-    'WKO' => "Waikato",
-    'WTC' => "West Coast");
+  return array(
+    'AUK' => t('Auckland'),
+    'BOP' => t('Bay of Plenty'),
+    'CAN' => t('Canterbury'),
+    'GIS' => t('Gisborne'),
+    'HKB' => t("Hawke's Bay"),
+    'MBH' => t('Marlborough'),
+    'MWT' => t('Manawatu-Wanganui'),
+    'NSN' => t('Nelson'),
+    'NTL' => t('Northland'),
+    'OTA' => t('Otago'),
+    'STL' => t('Southland'),
+    'TAS' => t('Tasman'),
+    'TKI' => t('Taranaki'),
+    'WGN' => t('Wellington'),
+    'WKO' => t('Waikato'),
+    'WTC' => t('West Coast')
+  );
 }

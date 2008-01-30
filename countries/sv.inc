@@ -4,18 +4,20 @@
 // El Salvador
 
 function addresses_province_list_sv() {
-  return array('AH' => "Ahuachapan",
-    'CA' => "Cabanas",
-    'CH' => "Chalatenango",
-    'CU' => "Cuscatlan",
-    'LB' => "La Libertad",
-    'PZ' => "La Paz",
-    'UN' => "La Union",
-    'MO' => "Morazan",
-    'SM' => "San Miguel",
-    'SS' => "San Salvador",
-    'SA' => "Santa Ana",
-    'SV' => "San Vicente",
-    'SO' => "Sonsonate",
-    'US' => "Usulutan");
+  return array(
+    'AH' => t('Ahuachapan'),
+    'CA' => t('Cabanas'),
+    'CH' => t('Chalatenango'),
+    'CU' => t('Cuscatlan'),
+    'LB' => t('La Libertad'),
+    'PZ' => t('La Paz'),
+    'UN' => t('La Union'),
+    'MO' => t('Morazan'),
+    'SM' => t('San Miguel'),
+    'SS' => t('San Salvador'),
+    'SA' => t('Santa Ana'),
+    'SV' => t('San Vicente'),
+    'SO' => t('Sonsonate'),
+    'US' => t('Usulutan')
+  );
 }

@@ -17,21 +17,21 @@
  */
 function addresses_province_list_de() {
   return array(
-    'BB' => 'Brandenburg',
-    'BE' => 'Berlin',
-    'BW' => 'Baden-Württemberg',
-    'BY' => 'Bayern',
-    'HB' => 'Bremen',
-    'HE' => 'Hessen',
-    'HH' => 'Hamburg',
-    'MV' => 'Mecklenburg-Vorpommern',
-    'NI' => 'Niedersachsen',
-    'NW' => 'Nordrhein-Westfalen',
-    'RP' => 'Rheinland-Pfalz',
-    'SH' => 'Schleswig-Holstein',
-    'SL' => 'Saarland',
-    'SN' => 'Sachsen',
-    'ST' => 'Sachsen-Anhalt',
-    'TH' => 'Thüringen'
+    'BB' => t('Brandenburg'),
+    'BE' => t('Berlin'),
+    'BW' => t('Baden-Württemberg'),
+    'BY' => t('Bayern'),
+    'HB' => t('Bremen'),
+    'HE' => t('Hessen'),
+    'HH' => t('Hamburg'),
+    'MV' => t('Mecklenburg-Vorpommern'),
+    'NI' => t('Niedersachsen'),
+    'NW' => t('Nordrhein-Westfalen'),
+    'RP' => t('Rheinland-Pfalz'),
+    'SH' => t('Schleswig-Holstein'),
+    'SL' => t('Saarland'),
+    'SN' => t('Sachsen'),
+    'ST' => t('Sachsen-Anhalt'),
+    'TH' => t('Thüringen')
   );
 }

@@ -4,17 +4,19 @@
 // Chile
 
 function addresses_province_list_cl() {
-  return array('AI' => "Aisen del General Carlos Ibanez del Campo (XI)",
-    'AN' => "Antofagasta (II)",
-    'AR' => "Araucania (IX)",
-    'AT' => "Atacama (III)",
-    'BI' => "Bio-Bio (VIII)",
-    'CO' => "Coquimbo (IV)",
-    'LI' => "Libertador General Bernardo O'Higgins (VI)",
-    'LL' => "Los Lagos (X)",
-    'MA' => "Magallanes (XII)",
-    'ML' => "Maule (VII)",
-    'RM' => "Region Metropolitana (RM)",
-    'TA' => "Tarapaca (I)",
-    'VS' => "Valparaiso (V)");
+  return array(
+    'AI' => t('Aisen del General Carlos Ibanez del Campo (XI)'),
+    'AN' => t('Antofagasta (II)'),
+    'AR' => t('Araucania (IX)'),
+    'AT' => t('Atacama (III)'),
+    'BI' => t('Bio-Bio (VIII)'),
+    'CO' => t('Coquimbo (IV)'),
+    'LI' => t("Libertador General Bernardo O'Higgins (VI)"),
+    'LL' => t('Los Lagos (X)'),
+    'MA' => t('Magallanes (XII)'),
+    'ML' => t('Maule (VII)'),
+    'RM' => t('Region Metropolitana (RM)'),
+    'TA' => t('Tarapaca (I)'),
+    'VS' => t('Valparaiso (V)')
+  );
 }

@@ -4,10 +4,12 @@
 // Vanuatu
 
 function addresses_province_list_vu() {
-  return array('MA' => "Malampa",
-    'PE' => "Penama",
-    'SA' => "Sanma",
-    'SH' => "Shefa",
-    'TA' => "Tafea",
-    'TO' => "Torba");
+  return array(
+    'MA' => t('Malampa'),
+    'PE' => t('Penama'),
+    'SA' => t('Sanma'),
+    'SH' => t('Shefa'),
+    'TA' => t('Tafea'),
+    'TO' => t('Torba')
+  );
 }

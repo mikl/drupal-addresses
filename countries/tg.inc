@@ -4,9 +4,11 @@
 // Togo
 
 function addresses_province_list_tg() {
-  return array('K' => "Kara",
-    'P' => "Plateaux",
-    'S' => "Savanes",
-    'C' => "Centrale",
-    'M' => "Maritime");
+  return array(
+    'K' => t('Kara'),
+    'P' => t('Plateaux'),
+    'S' => t('Savanes'),
+    'C' => t('Centrale'),
+    'M' => t('Maritime')
+  );
 }

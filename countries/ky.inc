@@ -4,12 +4,14 @@
 // Cayman Islands
 
 function addresses_province_list_ky() {
-  return array('CR' => "Creek",
-    'EA' => "Eastern",
-    'ML' => "Midland",
-    'ST' => "South Town",
-    'SP' => "Spot Bay",
-    'SK' => "Stake Bay",
-    'WD' => "West End ",
-    'WN' => "Western");
+  return array(
+    'CR' => t('Creek'),
+    'EA' => t('Eastern'),
+    'ML' => t('Midland'),
+    'ST' => t('South Town'),
+    'SP' => t('Spot Bay'),
+    'SK' => t('Stake Bay'),
+    'WD' => t('West End'),
+    'WN' => t('Western')
+  );
 }

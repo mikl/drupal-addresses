@@ -4,22 +4,24 @@
 // Denmark
 
 function addresses_province_list_dk() {
-  return array('CC' => "Copenhagen (municipality)",
-    'FC' => "Frederiksberg (municipality)",
-    'CO' => "Copenhagen",
-    'FR' => "Frederiksborg",
-    'RO' => "Roskilde",
-    'WZ' => "West Zealand",
-    'ST' => "Storstrom",
-    'FU' => "Funen",
-    'SJ' => "South Jutland",
-    'RB' => "Ribe",
-    'VK' => "Vejle",
-    'RK' => "Ringkjobing",
-    'VB' => "Viborg",
-    'NJ' => "North Jutland",
-    'AR' => "Arhus",
-    'BH' => "Bornholm",
-    'GL' => "Greenland",
-    'FO' => "Faroe Islands");
+  return array(
+    'CC' => t('Copenhagen (municipality)'),
+    'FC' => t('Frederiksberg (municipality)'),
+    'CO' => t('Copenhagen'),
+    'FR' => t('Frederiksborg'),
+    'RO' => t('Roskilde'),
+    'WZ' => t('West Zealand'),
+    'ST' => t('Storstrom'),
+    'FU' => t('Funen'),
+    'SJ' => t('South Jutland'),
+    'RB' => t('Ribe'),
+    'VK' => t('Vejle'),
+    'RK' => t('Ringkjobing'),
+    'VB' => t('Viborg'),
+    'NJ' => t('North Jutland'),
+    'AR' => t('Arhus'),
+    'BH' => t('Bornholm'),
+    'GL' => t('Greenland'),
+    'FO' => t('Faroe Islands')
+  );
 }

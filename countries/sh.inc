@@ -4,7 +4,9 @@
 // Saint Helena
 
 function addresses_province_list_sh() {
-  return array('A' => "Ascension",
-    'S' => "Saint Helena",
-    'T' => "Tristan da Cunha");
+  return array(
+    'A' => t('Ascension'),
+    'S' => t('Saint Helena'),
+    'T' => t('Tristan da Cunha')
+  );
 }

@@ -4,14 +4,16 @@
 // Dominica
 
 function addresses_province_list_dm() {
-  return array('AND' => "Saint Andrew Parish",
-    'DAV' => "Saint David Parish",
-    'GEO' => "Saint George Parish",
-    'JOH' => "Saint John Parish",
-    'JOS' => "Saint Joseph Parish",
-    'LUK' => "Saint Luke Parish",
-    'MAR' => "Saint Mark Parish",
-    'PAT' => "Saint Patrick Parish",
-    'PAU' => "Saint Paul Parish",
-    'PET' => "Saint Peter Parish");
+  return array(
+    'AND' => t('Saint Andrew Parish'),
+    'DAV' => t('Saint David Parish'),
+    'GEO' => t('Saint George Parish'),
+    'JOH' => t('Saint John Parish'),
+    'JOS' => t('Saint Joseph Parish'),
+    'LUK' => t('Saint Luke Parish'),
+    'MAR' => t('Saint Mark Parish'),
+    'PAT' => t('Saint Patrick Parish'),
+    'PAU' => t('Saint Paul Parish'),
+    'PET' => t('Saint Peter Parish')
+  );
 }

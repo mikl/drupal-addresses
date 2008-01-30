@@ -4,15 +4,17 @@
 // Moldova, Republic of
 
 function addresses_province_list_md() {
-  return array('GA' => "Gagauzia",
-    'CU' => "Chisinau",
-    'BA' => "Balti",
-    'CA' => "Cahul",
-    'ED' => "Edinet",
-    'LA' => "Lapusna",
-    'OR' => "Orhei",
-    'SO' => "Soroca",
-    'TI' => "Tighina",
-    'UN' => "Ungheni",
-    'SN' => "St�nga Nistrului");
+  return array(
+    'GA' => t('Gagauzia'),
+    'CU' => t('Chisinau'),
+    'BA' => t('Balti'),
+    'CA' => t('Cahul'),
+    'ED' => t('Edinet'),
+    'LA' => t('Lapusna'),
+    'OR' => t('Orhei'),
+    'SO' => t('Soroca'),
+    'TI' => t('Tighina'),
+    'UN' => t('Ungheni'),
+    'SN' => t('St�nga Nistrului')
+  );
 }

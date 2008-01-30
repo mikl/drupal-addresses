@@ -4,9 +4,11 @@
 // French Southern Territories
 
 function addresses_province_list_tf() {
-  return array('C' => "Iles Crozet",
-    'K' => "Iles Kerguelen",
-    'A' => "Ile Amsterdam",
-    'P' => "Ile Saint-Paul",
-    'D' => "Adelie Land");
+  return array(
+    'C' => t('Iles Crozet'),
+    'K' => t('Iles Kerguelen'),
+    'A' => t('Ile Amsterdam'),
+    'P' => t('Ile Saint-Paul'),
+    'D' => t('Adelie Land')
+  );
 }

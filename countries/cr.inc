@@ -4,11 +4,13 @@
 // Costa Rica
 
 function addresses_province_list_cr() {
-  return array('AL' => "Alajuela",
-    'CA' => "Cartago",
-    'GU' => "Guanacaste",
-    'HE' => "Heredia",
-    'LI' => "Limon",
-    'PU' => "Puntarenas",
-    'SJ' => "San Jose");
+  return array(
+    'AL' => t('Alajuela'),
+    'CA' => t('Cartago'),
+    'GU' => t('Guanacaste'),
+    'HE' => t('Heredia'),
+    'LI' => t('Limon'),
+    'PU' => t('Puntarenas'),
+    'SJ' => t('San Jose')
+  );
 }

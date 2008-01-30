@@ -4,13 +4,15 @@
 // San Marino
 
 function addresses_province_list_sm() {
-  return array('AC' => "Acquaviva",
-    'BM' => "Borgo Maggiore",
-    'CH' => "Chiesanuova",
-    'DO' => "Domagnano",
-    'FA' => "Faetano",
-    'FI' => "Fiorentino",
-    'MO' => "Montegiardino",
-    'SM' => "Citta di San Marino",
-    'SE' => "Serravalle");
+  return array(
+    'AC' => t('Acquaviva'),
+    'BM' => t('Borgo Maggiore'),
+    'CH' => t('Chiesanuova'),
+    'DO' => t('Domagnano'),
+    'FA' => t('Faetano'),
+    'FI' => t('Fiorentino'),
+    'MO' => t('Montegiardino'),
+    'SM' => t('Citta di San Marino'),
+    'SE' => t('Serravalle')
+  );
 }

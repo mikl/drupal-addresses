@@ -4,15 +4,17 @@
 // Armenia
 
 function addresses_province_list_am() {
-  return array('AGT' => "Aragatsotn",
-    'ARR' => "Ararat",
-    'ARM' => "Armavir",
-    'GEG' => "Geghark'unik'",
-    'KOT' => "Kotayk'",
-    'LOR' => "Lorri",
-    'SHI' => "Shirak",
-    'SYU' => "Syunik'",
-    'TAV' => "Tavush",
-    'VAY' => "Vayots' Dzor",
-    'YER' => "Yerevan");
+  return array(
+    'AGT' => t('Aragatsotn'),
+    'ARR' => t('Ararat'),
+    'ARM' => t('Armavir'),
+    'GEG' => t("Geghark'unik'"),
+    'KOT' => t("Kotayk'"),
+    'LOR' => t('Lorri'),
+    'SHI' => t('Shirak'),
+    'SYU' => t("Syunik'"),
+    'TAV' => t('Tavush'),
+    'VAY' => t("Vayots' Dzor"),
+    'YER' => t('Yerevan')
+  );
 }

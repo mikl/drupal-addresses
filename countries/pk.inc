@@ -4,10 +4,12 @@
 // Pakistan
 
 function addresses_province_list_pk() {
-  return array('B' => "Balochistan",
-    'T' => "Federally Administered Tribal Areas",
-    'I' => "Islamabad Capital Territory",
-    'N' => "North-West Frontier Province",
-    'P' => "Punjab",
-    'S' => "Sindh ");
+  return array(
+    'B' => t('Balochistan'),
+    'T' => t('Federally Administered Tribal Areas'),
+    'I' => t('Islamabad Capital Territory'),
+    'N' => t('North-West Frontier Province'),
+    'P' => t('Punjab'),
+    'S' => t('Sindh')
+  );
 }

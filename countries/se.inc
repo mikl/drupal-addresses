@@ -4,25 +4,27 @@
 // Sweden
 
 function addresses_province_list_se() {
-  return array('ST' => "Stockholm",
-    'UP' => "Uppsala",
-    'SO' => "Södermanland",
-    'OG' => "Östergotland",
-    'JO' => "Jönköping",
-    'KR' => "Kronoberg",
-    'KA' => "Kalmar",
-    'GO' => "Gotland",
-    'BL' => "Blekinge",
-    'SK' => "Skåne",
-    'HA' => "Halland",
-    'VG' => "Västra Götaland",
-    'VL' => "Värmland",
-    'OR' => "Örebro",
-    'VM' => "Västmanland",
-    'DA' => "Dalarna",
-    'GA' => "Gävleborg",
-    'VN' => "Västernorrland",
-    'JA' => "Jämtland",
-    'VB' => "Västerbotten",
-    'NO' => "Norrbotten");
+  return array(
+    'ST' => t('Stockholm'),
+    'UP' => t('Uppsala'),
+    'SO' => t('Södermanland'),
+    'OG' => t('Östergotland'),
+    'JO' => t('Jönköping'),
+    'KR' => t('Kronoberg'),
+    'KA' => t('Kalmar'),
+    'GO' => t('Gotland'),
+    'BL' => t('Blekinge'),
+    'SK' => t('Skåne'),
+    'HA' => t('Halland'),
+    'VG' => t('Västra Götaland'),
+    'VL' => t('Värmland'),
+    'OR' => t('Örebro'),
+    'VM' => t('Västmanland'),
+    'DA' => t('Dalarna'),
+    'GA' => t('Gävleborg'),
+    'VN' => t('Västernorrland'),
+    'JA' => t('Jämtland'),
+    'VB' => t('Västerbotten'),
+    'NO' => t('Norrbotten')
+  );
 }

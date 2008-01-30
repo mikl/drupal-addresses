@@ -4,11 +4,13 @@
 // United Arab Emirates
 
 function addresses_province_list_ae() {
-  return array('AZ' => "Abu Zaby",
-    'AJ' => "'Ajman",
-    'FU' => "Al Fujayrah",
-    'SH' => "Ash Shariqah",
-    'DU' => "Dubayy",
-    'RK' => "R'as al Khaymah",
-    'UQ' => "Umm al Qaywayn");
+  return array(
+    'AZ' => t('Abu Zaby'),
+    'AJ' => t("'Ajman"),
+    'FU' => t('Al Fujayrah'),
+    'SH' => t('Ash Shariqah'),
+    'DU' => t('Dubayy'),
+    'RK' => t("R'as al Khaymah"),
+    'UQ' => t('Umm al Qaywayn')
+  );
 }

@@ -4,22 +4,24 @@
 // Uruguay
 
 function addresses_province_list_uy() {
-  return array('AR' => "Artigas",
-    'CA' => "Canelones",
-    'CL' => "Cerro Largo",
-    'CO' => "Colonia",
-    'DU' => "Durazno",
-    'FS' => "Flores",
-    'FA' => "Florida",
-    'LA' => "Lavalleja",
-    'MA' => "Maldonado",
-    'MO' => "Montevideo",
-    'PA' => "Paysandu",
-    'RN' => "Rio Negro",
-    'RV' => "Rivera",
-    'RO' => "Rocha",
-    'SL' => "Salto",
-    'SO' => "Soriano",
-    'SJ' => "San Jose",
-    'TT' => "Treinta y Tres");
+  return array(
+    'AR' => t('Artigas'),
+    'CA' => t('Canelones'),
+    'CL' => t('Cerro Largo'),
+    'CO' => t('Colonia'),
+    'DU' => t('Durazno'),
+    'FS' => t('Flores'),
+    'FA' => t('Florida'),
+    'LA' => t('Lavalleja'),
+    'MA' => t('Maldonado'),
+    'MO' => t('Montevideo'),
+    'PA' => t('Paysandu'),
+    'RN' => t('Rio Negro'),
+    'RV' => t('Rivera'),
+    'RO' => t('Rocha'),
+    'SL' => t('Salto'),
+    'SO' => t('Soriano'),
+    'SJ' => t('San Jose'),
+    'TT' => t('Treinta y Tres')
+  );
 }

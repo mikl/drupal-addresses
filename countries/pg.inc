@@ -4,24 +4,26 @@
 // Papua New Guinea
 
 function addresses_province_list_pg() {
-  return array('BV' => "Bougainville",
-    'CE' => "Central",
-    'CH' => "Chimbu",
-    'EH' => "Eastern Highlands",
-    'EB' => "East New Britain",
-    'ES' => "East Sepik",
-    'EN' => "Enga",
-    'GU' => "Gulf",
-    'MD' => "Madang",
-    'MN' => "Manus",
-    'MB' => "Milne Bay",
-    'MR' => "Morobe",
-    'NC' => "National Capital",
-    'NI' => "New Ireland",
-    'NO' => "Northern",
-    'SA' => "Sandaun",
-    'SH' => "Southern Highlands",
-    'WE' => "Western",
-    'WH' => "Western Highlands",
-    'WB' => "West New Britain");
+  return array(
+    'BV' => t('Bougainville'),
+    'CE' => t('Central'),
+    'CH' => t('Chimbu'),
+    'EH' => t('Eastern Highlands'),
+    'EB' => t('East New Britain'),
+    'ES' => t('East Sepik'),
+    'EN' => t('Enga'),
+    'GU' => t('Gulf'),
+    'MD' => t('Madang'),
+    'MN' => t('Manus'),
+    'MB' => t('Milne Bay'),
+    'MR' => t('Morobe'),
+    'NC' => t('National Capital'),
+    'NI' => t('New Ireland'),
+    'NO' => t('Northern'),
+    'SA' => t('Sandaun'),
+    'SH' => t('Southern Highlands'),
+    'WE' => t('Western'),
+    'WH' => t('Western Highlands'),
+    'WB' => t('West New Britain')
+  );
 }

@@ -4,9 +4,11 @@
 // Turkmenistan
 
 function addresses_province_list_tm() {
-  return array('A' => "Ahal Welayaty",
-    'B' => "Balkan Welayaty ",
-    'D' => "Dashhowuz Welayaty",
-    'L' => "Lebap Welayaty",
-    'M' => "Mary Welayaty");
+  return array(
+    'A' => t('Ahal Welayaty'),
+    'B' => t('Balkan Welayaty'),
+    'D' => t('Dashhowuz Welayaty'),
+    'L' => t('Lebap Welayaty'),
+    'M' => t('Mary Welayaty')
+  );
 }

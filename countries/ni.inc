@@ -4,21 +4,23 @@
 // Nicaragua
 
 function addresses_province_list_ni() {
-  return array('BO' => "Boaco",
-    'CA' => "Carazo",
-    'CD' => "Chinandega",
-    'CT' => "Chontales",
-    'ES' => "Esteli",
-    'GR' => "Granada",
-    'JI' => "Jinotega",
-    'LE' => "Leon",
-    'MD' => "Madriz",
-    'MN' => "Managua",
-    'MS' => "Masaya",
-    'MT' => "Matagalpa",
-    'NS' => "Nueva Segovia",
-    'RV' => "Rivas",
-    'SJ' => "Rio San Juan",
-    'AN' => "Region Autonoma del Atlantico Norte",
-    'AS' => "Region Autonoma del Atlantico Sur");
+  return array(
+    'BO' => t('Boaco'),
+    'CA' => t('Carazo'),
+    'CD' => t('Chinandega'),
+    'CT' => t('Chontales'),
+    'ES' => t('Esteli'),
+    'GR' => t('Granada'),
+    'JI' => t('Jinotega'),
+    'LE' => t('Leon'),
+    'MD' => t('Madriz'),
+    'MN' => t('Managua'),
+    'MS' => t('Masaya'),
+    'MT' => t('Matagalpa'),
+    'NS' => t('Nueva Segovia'),
+    'RV' => t('Rivas'),
+    'SJ' => t('Rio San Juan'),
+    'AN' => t('Region Autonoma del Atlantico Norte'),
+    'AS' => t('Region Autonoma del Atlantico Sur')
+  );
 }

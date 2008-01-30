@@ -4,7 +4,9 @@
 // Montserrat
 
 function addresses_province_list_ms() {
-  return array('A' => "Saint Anthony",
-    'G' => "Saint Georges",
-    'P' => "Saint Peter");
+  return array(
+    'A' => t('Saint Anthony'),
+    'G' => t('Saint Georges'),
+    'P' => t('Saint Peter')
+  );
 }

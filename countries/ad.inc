@@ -4,11 +4,13 @@
 // Andorra
 
 function addresses_province_list_ad() {
-  return array('ALV' => "Andorra la Vella",
-    'CAN' => "Canillo",
-    'ENC' => "Encamp",
-    'ESE' => "Escaldes-Engordany",
-    'LMA' => "La Massana",
-    'ORD' => "Ordino",
-    'SJL' => "Sant Julia de L�ria");
+  return array(
+    'ALV' => t('Andorra la Vella'),
+    'CAN' => t('Canillo'),
+    'ENC' => t('Encamp'),
+    'ESE' => t('Escaldes-Engordany'),
+    'LMA' => t('La Massana'),
+    'ORD' => t('Ordino'),
+    'SJL' => t('Sant Julia de L�ria')
+  );
 }

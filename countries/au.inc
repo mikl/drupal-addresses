@@ -16,12 +16,14 @@
  *
  */
 function addresses_province_list_au() {
-  return array('ACT' => "Australian Capital Territory",
-    'NSW' => "New South Wales",
-    'NT' => "Northern Territory",
-    'QLD' => "Queensland",
-    'SA' => "South Australia",
-    'TAS' => "Tasmania",
-    'VIC' => "Victoria",
-    'WA' => "Western Australia");
+  return array(
+    'ACT' => t('Australian Capital Territory'),
+    'NSW' => t('New South Wales'),
+    'NT' => t('Northern Territory'),
+    'QLD' => t('Queensland'),
+    'SA' => t('South Australia'),
+    'TAS' => t('Tasmania'),
+    'VIC' => t('Victoria'),
+    'WA' => t('Western Australia')
+  );
 }

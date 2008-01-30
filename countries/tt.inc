@@ -4,19 +4,21 @@
 // Trinidad and Tobago
 
 function addresses_province_list_tt() {
-  return array('CT' => "Couva/Tabaquite/Talparo",
-    'DM' => "Diego Martin",
-    'MR' => "Mayaro/Rio Claro",
-    'PD' => "Penal/Debe",
-    'PT' => "Princes Town",
-    'SG' => "Sangre Grande",
-    'SL' => "San Juan/Laventille",
-    'SI' => "Siparia",
-    'TP' => "Tunapuna/Piarco",
-    'PS' => "Port of Spain",
-    'SF' => "San Fernando",
-    'AR' => "Arima",
-    'PF' => "Point Fortin",
-    'CH' => "Chaguanas",
-    'TO' => "Tobago");
+  return array(
+    'CT' => t('Couva/Tabaquite/Talparo'),
+    'DM' => t('Diego Martin'),
+    'MR' => t('Mayaro/Rio Claro'),
+    'PD' => t('Penal/Debe'),
+    'PT' => t('Princes Town'),
+    'SG' => t('Sangre Grande'),
+    'SL' => t('San Juan/Laventille'),
+    'SI' => t('Siparia'),
+    'TP' => t('Tunapuna/Piarco'),
+    'PS' => t('Port of Spain'),
+    'SF' => t('San Fernando'),
+    'AR' => t('Arima'),
+    'PF' => t('Point Fortin'),
+    'CH' => t('Chaguanas'),
+    'TO' => t('Tobago')
+  );
 }

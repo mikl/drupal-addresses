@@ -4,16 +4,18 @@
 // Georgia
 
 function addresses_province_list_ge() {
-  return array('AB' => "Abkhazia",
-    'AJ' => "Ajaria",
-    'TB' => "Tbilisi",
-    'GU' => "Guria",
-    'IM' => "Imereti",
-    'KA' => "Kakheti",
-    'KK' => "Kvemo Kartli",
-    'MM' => "Mtskheta-Mtianeti",
-    'RL' => "Racha Lechkhumi and Kvemo Svaneti",
-    'SZ' => "Samegrelo-Zemo Svaneti",
-    'SJ' => "Samtskhe-Javakheti",
-    'SK' => "Shida Kartli");
+  return array(
+    'AB' => t('Abkhazia'),
+    'AJ' => t('Ajaria'),
+    'TB' => t('Tbilisi'),
+    'GU' => t('Guria'),
+    'IM' => t('Imereti'),
+    'KA' => t('Kakheti'),
+    'KK' => t('Kvemo Kartli'),
+    'MM' => t('Mtskheta-Mtianeti'),
+    'RL' => t('Racha Lechkhumi and Kvemo Svaneti'),
+    'SZ' => t('Samegrelo-Zemo Svaneti'),
+    'SJ' => t('Samtskhe-Javakheti'),
+    'SK' => t('Shida Kartli')
+  );
 }

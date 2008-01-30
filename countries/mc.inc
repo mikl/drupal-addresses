@@ -4,8 +4,10 @@
 // Monaco
 
 function addresses_province_list_mc() {
-  return array('FV' => "Fontvieille",
-    'LC' => "La Condamine",
-    'MV' => "Monaco-Ville",
-    'MC' => "Monte-Carlo");
+  return array(
+    'FV' => t('Fontvieille'),
+    'LC' => t('La Condamine'),
+    'MV' => t('Monaco-Ville'),
+    'MC' => t('Monte-Carlo')
+  );
 }

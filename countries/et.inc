@@ -4,15 +4,17 @@
 // Ethiopia
 
 function addresses_province_list_et() {
-  return array('AF' => "Afar",
-    'AH' => "Amhara",
-    'BG' => "Benishangul-Gumaz",
-    'GB' => "Gambela",
-    'HR' => "Hariai",
-    'OR' => "Oromia",
-    'SM' => "Somali",
-    'SN' => "Southern Nations - Nationalities and Peoples Region",
-    'TG' => "Tigray",
-    'AA' => "Addis Ababa",
-    'DD' => "Dire Dawa");
+  return array(
+    'AF' => t('Afar'),
+    'AH' => t('Amhara'),
+    'BG' => t('Benishangul-Gumaz'),
+    'GB' => t('Gambela'),
+    'HR' => t('Hariai'),
+    'OR' => t('Oromia'),
+    'SM' => t('Somali'),
+    'SN' => t('Southern Nations - Nationalities and Peoples Region'),
+    'TG' => t('Tigray'),
+    'AA' => t('Addis Ababa'),
+    'DD' => t('Dire Dawa')
+  );
 }

@@ -4,9 +4,11 @@
 // Djibouti
 
 function addresses_province_list_dj() {
-  return array('S' => "'Ali Sabih",
-    'K' => "Dikhil",
-    'J' => "Djibouti",
-    'O' => "Obock",
-    'T' => "Tadjoura");
+  return array(
+    'S' => t("'Ali Sabih"),
+    'K' => t('Dikhil'),
+    'J' => t('Djibouti'),
+    'O' => t('Obock'),
+    'T' => t('Tadjoura')
+  );
 }

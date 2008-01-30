@@ -4,7 +4,9 @@
 // Tonga
 
 function addresses_province_list_to() {
-  return array('H' => "Ha'apai",
-    'T' => "Tongatapu",
-    'V' => "Vava'u");
+  return array(
+    'H' => t("Ha'apai"),
+    'T' => t('Tongatapu'),
+    'V' => t("Vava'u")
+  );
 }

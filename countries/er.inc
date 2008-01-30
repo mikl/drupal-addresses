@@ -4,10 +4,12 @@
 // Eritrea
 
 function addresses_province_list_er() {
-  return array('MA' => "Central (Maekel)",
-    'KE' => "Anseba (Keren)",
-    'DK' => "Southern Red Sea (Debub-Keih-Bahri)",
-    'SK' => "Northern Red Sea (Semien-Keih-Bahri)",
-    'DE' => "Southern (Debub)",
-    'BR' => "Gash-Barka (Barentu)");
+  return array(
+    'MA' => t('Central (Maekel)'),
+    'KE' => t('Anseba (Keren)'),
+    'DK' => t('Southern Red Sea (Debub-Keih-Bahri)'),
+    'SK' => t('Northern Red Sea (Semien-Keih-Bahri)'),
+    'DE' => t('Southern (Debub)'),
+    'BR' => t('Gash-Barka (Barentu)')
+  );
 }

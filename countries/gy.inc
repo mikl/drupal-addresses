@@ -4,14 +4,16 @@
 // Guyana
 
 function addresses_province_list_gy() {
-  return array('BW' => "Barima-Waini",
-    'CM' => "Cuyuni-Mazaruni",
-    'DM' => "Demerara-Mahaica",
-    'EC' => "East Berbice-Corentyne",
-    'EW' => "Essequibo Islands-West Demerara",
-    'MB' => "Mahaica-Berbice",
-    'PM' => "Pomeroon-Supenaam",
-    'PI' => "Potaro-Siparuni",
-    'UD' => "Upper Demerara-Berbice",
-    'UT' => "Upper Takutu-Upper Essequibo");
+  return array(
+    'BW' => t('Barima-Waini'),
+    'CM' => t('Cuyuni-Mazaruni'),
+    'DM' => t('Demerara-Mahaica'),
+    'EC' => t('East Berbice-Corentyne'),
+    'EW' => t('Essequibo Islands-West Demerara'),
+    'MB' => t('Mahaica-Berbice'),
+    'PM' => t('Pomeroon-Supenaam'),
+    'PI' => t('Potaro-Siparuni'),
+    'UD' => t('Upper Demerara-Berbice'),
+    'UT' => t('Upper Takutu-Upper Essequibo')
+  );
 }

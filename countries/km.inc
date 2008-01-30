@@ -4,7 +4,9 @@
 // Comoros
 
 function addresses_province_list_km() {
-  return array('G' => "Grande Comore",
-    'A' => "Anjouan",
-    'M' => "Moheli");
+  return array(
+    'G' => t('Grande Comore'),
+    'A' => t('Anjouan'),
+    'M' => t('Moheli')
+  );
 }

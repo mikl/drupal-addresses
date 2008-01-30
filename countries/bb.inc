@@ -4,15 +4,17 @@
 // Barbados
 
 function addresses_province_list_bb() {
-  return array('CC' => "Christ Church",
-    'AND' => "Saint Andrew",
-    'GEO' => "Saint George",
-    'JAM' => "Saint James",
-    'JOH' => "Saint John",
-    'JOS' => "Saint Joseph",
-    'LUC' => "Saint Lucy",
-    'MIC' => "Saint Michael",
-    'PET' => "Saint Peter",
-    'PHI' => "Saint Philip",
-    'THO' => "Saint Thomas");
+  return array(
+    'CC' => t('Christ Church'),
+    'AND' => t('Saint Andrew'),
+    'GEO' => t('Saint George'),
+    'JAM' => t('Saint James'),
+    'JOH' => t('Saint John'),
+    'JOS' => t('Saint Joseph'),
+    'LUC' => t('Saint Lucy'),
+    'MIC' => t('Saint Michael'),
+    'PET' => t('Saint Peter'),
+    'PHI' => t('Saint Philip'),
+    'THO' => t('Saint Thomas')
+  );
 }

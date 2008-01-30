@@ -4,10 +4,12 @@
 // Cyprus
 
 function addresses_province_list_cy() {
-  return array('F' => "Famagusta",
-    'K' => "Kyrenia",
-    'A' => "Larnaca",
-    'I' => "Limassol",
-    'N' => "Nicosia",
-    'P' => "Paphos");
+  return array(
+    'F' => t('Famagusta'),
+    'K' => t('Kyrenia'),
+    'A' => t('Larnaca'),
+    'I' => t('Limassol'),
+    'N' => t('Nicosia'),
+    'P' => t('Paphos')
+  );
 }

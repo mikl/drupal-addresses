@@ -4,12 +4,14 @@
 // Oman
 
 function addresses_province_list_om() {
-  return array('DA' => "Ad Dakhiliyah",
-    'BA' => "Al Batinah",
-    'WU' => "Al Wusta",
-    'SH' => "Ash Sharqiyah",
-    'ZA' => "Az Zahirah",
-    'MA' => "Masqat",
-    'MU' => "Musandam",
-    'ZU' => "Zufar");
+  return array(
+    'DA' => t('Ad Dakhiliyah'),
+    'BA' => t('Al Batinah'),
+    'WU' => t('Al Wusta'),
+    'SH' => t('Ash Sharqiyah'),
+    'ZA' => t('Az Zahirah'),
+    'MA' => t('Masqat'),
+    'MU' => t('Musandam'),
+    'ZU' => t('Zufar')
+  );
 }

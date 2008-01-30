@@ -4,20 +4,22 @@
 // Poland
 
 function addresses_province_list_pl() {
-  return array('DO' => "Dolnoslaskie",
-    'KP' => "Kujawsko-Pomorskie",
-    'LO' => "Lodzkie",
-    'LL' => "Lubelskie",
-    'LU' => "Lubuskie",
-    'ML' => "Malopolskie",
-    'MZ' => "Mazowieckie",
-    'OP' => "Opolskie",
-    'PP' => "Podkarpackie",
-    'PL' => "Podlaskie",
-    'PM' => "Pomorskie",
-    'SL' => "Slaskie",
-    'SW' => "Swietokrzyskie",
-    'WM' => "Warminsko-Mazurskie",
-    'WP' => "Wielkopolskie",
-    'ZA' => "Zachodniopomorskie");
+  return array(
+    'DO' => t('Dolnoslaskie'),
+    'KP' => t('Kujawsko-Pomorskie'),
+    'LO' => t('Lodzkie'),
+    'LL' => t('Lubelskie'),
+    'LU' => t('Lubuskie'),
+    'ML' => t('Malopolskie'),
+    'MZ' => t('Mazowieckie'),
+    'OP' => t('Opolskie'),
+    'PP' => t('Podkarpackie'),
+    'PL' => t('Podlaskie'),
+    'PM' => t('Pomorskie'),
+    'SL' => t('Slaskie'),
+    'SW' => t('Swietokrzyskie'),
+    'WM' => t('Warminsko-Mazurskie'),
+    'WP' => t('Wielkopolskie'),
+    'ZA' => t('Zachodniopomorskie')
+  );
 }

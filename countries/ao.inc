@@ -4,22 +4,24 @@
 // Angola
 
 function addresses_province_list_ao() {
-  return array('BGO' => "Bengo",
-    'BGU' => "Benguela province",
-    'BIE' => "Bie",
-    'CAB' => "Cabinda",
-    'CCU' => "Cuando-Cubango",
-    'CNO' => "Cuanza Norte",
-    'CUS' => "Cuanza Sul",
-    'CNN' => "Cunene",
-    'HUA' => "Huambo province",
-    'HUI' => "Huila province",
-    'LUA' => "Luanda",
-    'LNO' => "Lunda Norte",
-    'LSU' => "Lunda Sul",
-    'MAL' => "Malange",
-    'MOX' => "Moxico",
-    'NAM' => "Namibe",
-    'UIG' => "Uige",
-    'ZAI' => "Zaire");
+  return array(
+    'BGO' => t('Bengo'),
+    'BGU' => t('Benguela province'),
+    'BIE' => t('Bie'),
+    'CAB' => t('Cabinda'),
+    'CCU' => t('Cuando-Cubango'),
+    'CNO' => t('Cuanza Norte'),
+    'CUS' => t('Cuanza Sul'),
+    'CNN' => t('Cunene'),
+    'HUA' => t('Huambo province'),
+    'HUI' => t('Huila province'),
+    'LUA' => t('Luanda'),
+    'LNO' => t('Lunda Norte'),
+    'LSU' => t('Lunda Sul'),
+    'MAL' => t('Malange'),
+    'MOX' => t('Moxico'),
+    'NAM' => t('Namibe'),
+    'UIG' => t('Uige'),
+    'ZAI' => t('Zaire')
+  );
 }

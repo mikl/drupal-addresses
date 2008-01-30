@@ -4,12 +4,14 @@
 // Slovakia
 
 function addresses_province_list_sk() {
-  return array('BA' => "Banskobystricky",
-    'BR' => "Bratislavsky",
-    'KO' => "Kosicky",
-    'NI' => "Nitriansky",
-    'PR' => "Presovsky",
-    'TC' => "Trenciansky",
-    'TV' => "Trnavsky",
-    'ZI' => "Zilinsky");
+  return array(
+    'BA' => t('Banskobystricky'),
+    'BR' => t('Bratislavsky'),
+    'KO' => t('Kosicky'),
+    'NI' => t('Nitriansky'),
+    'PR' => t('Presovsky'),
+    'TC' => t('Trenciansky'),
+    'TV' => t('Trnavsky'),
+    'ZI' => t('Zilinsky')
+  );
 }

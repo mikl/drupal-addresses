@@ -4,12 +4,14 @@
 // Kyrgyzstan
 
 function addresses_province_list_kg() {
-  return array('GB' => "Bishkek",
-    'B' => "Batken",
-    'C' => "Chu",
-    'J' => "Jalal-Abad",
-    'N' => "Naryn",
-    'O' => "Osh",
-    'T' => "Talas",
-    'Y' => "Ysyk-Kol");
+  return array(
+    'GB' => t('Bishkek'),
+    'B' => t('Batken'),
+    'C' => t('Chu'),
+    'J' => t('Jalal-Abad'),
+    'N' => t('Naryn'),
+    'O' => t('Osh'),
+    'T' => t('Talas'),
+    'Y' => t('Ysyk-Kol')
+  );
 }

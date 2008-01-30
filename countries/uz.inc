@@ -4,18 +4,20 @@
 // Uzbekistan
 
 function addresses_province_list_uz() {
-  return array('AN' => "Andijon",
-    'BU' => "Buxoro",
-    'FA' => "Farg'ona",
-    'JI' => "Jizzax",
-    'NG' => "Namangan",
-    'NW' => "Navoiy",
-    'QA' => "Qashqadaryo",
-    'QR' => "Qoraqalpog'iston Republikasi",
-    'SA' => "Samarqand",
-    'SI' => "Sirdaryo",
-    'SU' => "Surxondaryo",
-    'TK' => "Toshkent city",
-    'TO' => "Toshkent region",
-    'XO' => "Xorazm");
+  return array(
+    'AN' => t('Andijon'),
+    'BU' => t('Buxoro'),
+    'FA' => t("Farg'ona"),
+    'JI' => t('Jizzax'),
+    'NG' => t('Namangan'),
+    'NW' => t('Navoiy'),
+    'QA' => t('Qashqadaryo'),
+    'QR' => t("Qoraqalpog'iston Republikasi"),
+    'SA' => t('Samarqand'),
+    'SI' => t('Sirdaryo'),
+    'SU' => t('Surxondaryo'),
+    'TK' => t('Toshkent city'),
+    'TO' => t('Toshkent region'),
+    'XO' => t('Xorazm')
+  );
 }

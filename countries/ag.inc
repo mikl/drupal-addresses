@@ -4,12 +4,14 @@
 // Antigua and Barbuda
 
 function addresses_province_list_ag() {
-  return array('ASG' => "Saint George",
-    'ASJ' => "Saint John",
-    'ASM' => "Saint Mary",
-    'ASL' => "Saint Paul",
-    'ASR' => "Saint Peter",
-    'ASH' => "Saint Philip",
-    'BAR' => "Barbuda",
-    'RED' => "Redonda");
+  return array(
+    'ASG' => t('Saint George'),
+    'ASJ' => t('Saint John'),
+    'ASM' => t('Saint Mary'),
+    'ASL' => t('Saint Paul'),
+    'ASR' => t('Saint Peter'),
+    'ASH' => t('Saint Philip'),
+    'BAR' => t('Barbuda'),
+    'RED' => t('Redonda')
+  );
 }

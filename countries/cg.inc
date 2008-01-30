@@ -4,15 +4,17 @@
 // Congo
 
 function addresses_province_list_cg() {
-  return array('BO' => "Bouenza",
-    'BR' => "Brazzaville",
-    'CU' => "Cuvette",
-    'CO' => "Cuvette-Ouest",
-    'KO' => "Kouilou",
-    'LE' => "Lekoumou",
-    'LI' => "Likouala",
-    'NI' => "Niari",
-    'PL' => "Plateaux",
-    'PO' => "Pool ",
-    'SA' => "Sangha");
+  return array(
+    'BO' => t('Bouenza'),
+    'BR' => t('Brazzaville'),
+    'CU' => t('Cuvette'),
+    'CO' => t('Cuvette-Ouest'),
+    'KO' => t('Kouilou'),
+    'LE' => t('Lekoumou'),
+    'LI' => t('Likouala'),
+    'NI' => t('Niari'),
+    'PL' => t('Plateaux'),
+    'PO' => t('Pool'),
+    'SA' => t('Sangha')
+  );
 }

@@ -4,18 +4,20 @@
 // Turks and Caicos Islands
 
 function addresses_province_list_tc() {
-  return array('AC' => "Ambergris Cays",
-    'DC' => "Dellis Cay",
-    'FC' => "French Cay",
-    'LW' => "Little Water Cay",
-    'RC' => "Parrot Cay",
-    'PN' => "Pine Cay",
-    'SL' => "Salt Cay",
-    'GT' => "Grand Turk",
-    'SC' => "South Caicos",
-    'EC' => "East Caicos",
-    'MC' => "Middle Caicos",
-    'NC' => "North Caicos",
-    'PR' => "Providenciales",
-    'WC' => "West Caicos");
+  return array(
+    'AC' => t('Ambergris Cays'),
+    'DC' => t('Dellis Cay'),
+    'FC' => t('French Cay'),
+    'LW' => t('Little Water Cay'),
+    'RC' => t('Parrot Cay'),
+    'PN' => t('Pine Cay'),
+    'SL' => t('Salt Cay'),
+    'GT' => t('Grand Turk'),
+    'SC' => t('South Caicos'),
+    'EC' => t('East Caicos'),
+    'MC' => t('Middle Caicos'),
+    'NC' => t('North Caicos'),
+    'PR' => t('Providenciales'),
+    'WC' => t('West Caicos')
+  );
 }

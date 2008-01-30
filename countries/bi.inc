@@ -4,20 +4,22 @@
 // Burundi
 
 function addresses_province_list_bi() {
-  return array('BB' => "Bubanza",
-    'BJ' => "Bujumbura",
-    'BR' => "Bururi",
-    'CA' => "Cankuzo",
-    'CI' => "Cibitoke",
-    'GI' => "Gitega",
-    'KR' => "Karuzi",
-    'KY' => "Kayanza",
-    'KI' => "Kirundo",
-    'MA' => "Makamba",
-    'MU' => "Muramvya",
-    'MY' => "Muyinga",
-    'MW' => "Mwaro",
-    'NG' => "Ngozi",
-    'RT' => "Rutana",
-    'RY' => "Ruyigi");
+  return array(
+    'BB' => t('Bubanza'),
+    'BJ' => t('Bujumbura'),
+    'BR' => t('Bururi'),
+    'CA' => t('Cankuzo'),
+    'CI' => t('Cibitoke'),
+    'GI' => t('Gitega'),
+    'KR' => t('Karuzi'),
+    'KY' => t('Kayanza'),
+    'KI' => t('Kirundo'),
+    'MA' => t('Makamba'),
+    'MU' => t('Muramvya'),
+    'MY' => t('Muyinga'),
+    'MW' => t('Mwaro'),
+    'NG' => t('Ngozi'),
+    'RT' => t('Rutana'),
+    'RY' => t('Ruyigi')
+  );
 }

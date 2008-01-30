@@ -4,18 +4,20 @@
 // Myanmar
 
 function addresses_province_list_mm() {
-  return array('AY' => "Ayeyarwady",
-    'BG' => "Bago",
-    'MG' => "Magway",
-    'MD' => "Mandalay",
-    'SG' => "Sagaing",
-    'TN' => "Tanintharyi",
-    'YG' => "Yangon",
-    'CH' => "Chin State",
-    'KC' => "Kachin State",
-    'KH' => "Kayah State",
-    'KN' => "Kayin State",
-    'MN' => "Mon State",
-    'RK' => "Rakhine State",
-    'SH' => "Shan State");
+  return array(
+    'AY' => t('Ayeyarwady'),
+    'BG' => t('Bago'),
+    'MG' => t('Magway'),
+    'MD' => t('Mandalay'),
+    'SG' => t('Sagaing'),
+    'TN' => t('Tanintharyi'),
+    'YG' => t('Yangon'),
+    'CH' => t('Chin State'),
+    'KC' => t('Kachin State'),
+    'KH' => t('Kayah State'),
+    'KN' => t('Kayin State'),
+    'MN' => t('Mon State'),
+    'RK' => t('Rakhine State'),
+    'SH' => t('Shan State')
+  );
 }

@@ -4,14 +4,16 @@
 // Lithuania
 
 function addresses_province_list_lt() {
-  return array('AL' => "Alytus",
-    'KA' => "Kaunas",
-    'KL' => "Klaipeda",
-    'MA' => "Marijampole",
-    'PA' => "Panevezys",
-    'SI' => "Siauliai",
-    'TA' => "Taurage",
-    'TE' => "Telsiai",
-    'UT' => "Utena",
-    'VI' => "Vilnius");
+  return array(
+    'AL' => t('Alytus'),
+    'KA' => t('Kaunas'),
+    'KL' => t('Klaipeda'),
+    'MA' => t('Marijampole'),
+    'PA' => t('Panevezys'),
+    'SI' => t('Siauliai'),
+    'TA' => t('Taurage'),
+    'TE' => t('Telsiai'),
+    'UT' => t('Utena'),
+    'VI' => t('Vilnius')
+  );
 }

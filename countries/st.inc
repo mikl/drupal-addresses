@@ -4,6 +4,8 @@
 // Sao Tome and Principe
 
 function addresses_province_list_st() {
-  return array('S' => "Sao Tome",
-    'P' => "Principe");
+  return array(
+    'S' => t('Sao Tome'),
+    'P' => t('Principe')
+  );
 }

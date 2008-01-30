@@ -4,17 +4,19 @@
 // Namibia
 
 function addresses_province_list_na() {
-  return array('CA' => "Caprivi",
-    'ER' => "Erongo",
-    'HA' => "Hardap",
-    'KR' => "Karas",
-    'KV' => "Kavango",
-    'KH' => "Khomas",
-    'KU' => "Kunene",
-    'OW' => "Ohangwena",
-    'OK' => "Omaheke",
-    'OT' => "Omusati",
-    'ON' => "Oshana",
-    'OO' => "Oshikoto",
-    'OJ' => "Otjozondjupa");
+  return array(
+    'CA' => t('Caprivi'),
+    'ER' => t('Erongo'),
+    'HA' => t('Hardap'),
+    'KR' => t('Karas'),
+    'KV' => t('Kavango'),
+    'KH' => t('Khomas'),
+    'KU' => t('Kunene'),
+    'OW' => t('Ohangwena'),
+    'OK' => t('Omaheke'),
+    'OT' => t('Omusati'),
+    'ON' => t('Oshana'),
+    'OO' => t('Oshikoto'),
+    'OJ' => t('Otjozondjupa')
+  );
 }

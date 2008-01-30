@@ -4,24 +4,26 @@
 // Portugal
 
 function addresses_province_list_pt() {
-  return array('AV' => "Aveiro",
-    'AR' => "Acores (Azores)",
-    'BJ' => "Beja",
-    'BA' => "Braga",
-    'BN' => "Braganca",
-    'CB' => "Castelo Branco",
-    'CO' => "Coimbra",
-    'EV' => "Evora",
-    'FA' => "Faro",
-    'GU' => "Guarda",
-    'LE' => "Leiria",
-    'LI' => "Lisboa",
-    'MA' => "Madeira",
-    'PG' => "Portalegre",
-    'PO' => "Porto",
-    'SA' => "Santarem",
-    'SE' => "Setubal",
-    'VC' => "Viana do Castelo",
-    'VR' => "Vila Real",
-    'VS' => "Viseu");
+  return array(
+    'AV' => t('Aveiro'),
+    'AR' => t('Acores (Azores)'),
+    'BJ' => t('Beja'),
+    'BA' => t('Braga'),
+    'BN' => t('Braganca'),
+    'CB' => t('Castelo Branco'),
+    'CO' => t('Coimbra'),
+    'EV' => t('Evora'),
+    'FA' => t('Faro'),
+    'GU' => t('Guarda'),
+    'LE' => t('Leiria'),
+    'LI' => t('Lisboa'),
+    'MA' => t('Madeira'),
+    'PG' => t('Portalegre'),
+    'PO' => t('Porto'),
+    'SA' => t('Santarem'),
+    'SE' => t('Setubal'),
+    'VC' => t('Viana do Castelo'),
+    'VR' => t('Vila Real'),
+    'VS' => t('Viseu')
+  );
 }

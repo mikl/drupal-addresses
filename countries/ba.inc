@@ -4,22 +4,24 @@
 // Bosnia and Herzegovina
 
 function addresses_province_list_ba() {
-  return array('BRO' => "Brcko district",
-    'FUS' => "Unsko-Sanski Kanton",
-    'FPO' => "Posavski Kanton",
-    'FTU' => "Tuzlanski Kanton",
-    'FZE' => "Zenicko-Dobojski Kanton",
-    'FBP' => "Bosanskopodrinjski Kanton",
-    'FSB' => "Srednjebosanski Kanton",
-    'FHN' => "Hercegovacko-neretvanski Kanton",
-    'FZH' => "Zapadnohercegovacka Zupanija",
-    'FSA' => "Kanton Sarajevo",
-    'FZA' => "Zapadnobosanska",
-    'SBL' => "Banja Luka",
-    'SDO' => "Doboj",
-    'SBI' => "Bijeljina",
-    'SVL' => "Vlasenica",
-    'SSR' => "Sarajevo-Romanija or Sokolac",
-    'SFO' => "Foca",
-    'STR' => "Trebinje");
+  return array(
+    'BRO' => t('Brcko district'),
+    'FUS' => t('Unsko-Sanski Kanton'),
+    'FPO' => t('Posavski Kanton'),
+    'FTU' => t('Tuzlanski Kanton'),
+    'FZE' => t('Zenicko-Dobojski Kanton'),
+    'FBP' => t('Bosanskopodrinjski Kanton'),
+    'FSB' => t('Srednjebosanski Kanton'),
+    'FHN' => t('Hercegovacko-neretvanski Kanton'),
+    'FZH' => t('Zapadnohercegovacka Zupanija'),
+    'FSA' => t('Kanton Sarajevo'),
+    'FZA' => t('Zapadnobosanska'),
+    'SBL' => t('Banja Luka'),
+    'SDO' => t('Doboj'),
+    'SBI' => t('Bijeljina'),
+    'SVL' => t('Vlasenica'),
+    'SSR' => t('Sarajevo-Romanija or Sokolac'),
+    'SFO' => t('Foca'),
+    'STR' => t('Trebinje')
+  );
 }

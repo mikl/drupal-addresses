@@ -4,10 +4,12 @@
 // Israel
 
 function addresses_province_list_il() {
-  return array('C' => "Central",
-    'H' => "Haifa",
-    'J' => "Jerusalem",
-    'N' => "Northern",
-    'S' => "Southern",
-    'T' => "Tel Aviv");
+  return array(
+    'C' => t('Central'),
+    'H' => t('Haifa'),
+    'J' => t('Jerusalem'),
+    'N' => t('Northern'),
+    'S' => t('Southern'),
+    'T' => t('Tel Aviv')
+  );
 }

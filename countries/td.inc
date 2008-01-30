@@ -4,18 +4,20 @@
 // Chad
 
 function addresses_province_list_td() {
-  return array('BA' => "Batha",
-    'BI' => "Biltine",
-    'BE' => "Borkou-Ennedi-Tibesti",
-    'CB' => "Chari-Baguirmi",
-    'GU' => "Guera",
-    'KA' => "Kanem",
-    'LA' => "Lac",
-    'LC' => "Logone Occidental",
-    'LR' => "Logone Oriental",
-    'MK' => "Mayo-Kebbi",
-    'MC' => "Moyen-Chari",
-    'OU' => "Ouaddai",
-    'SA' => "Salamat",
-    'TA' => "Tandjile");
+  return array(
+    'BA' => t('Batha'),
+    'BI' => t('Biltine'),
+    'BE' => t('Borkou-Ennedi-Tibesti'),
+    'CB' => t('Chari-Baguirmi'),
+    'GU' => t('Guera'),
+    'KA' => t('Kanem'),
+    'LA' => t('Lac'),
+    'LC' => t('Logone Occidental'),
+    'LR' => t('Logone Oriental'),
+    'MK' => t('Mayo-Kebbi'),
+    'MC' => t('Moyen-Chari'),
+    'OU' => t('Ouaddai'),
+    'SA' => t('Salamat'),
+    'TA' => t('Tandjile')
+  );
 }

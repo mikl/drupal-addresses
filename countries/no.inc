@@ -4,23 +4,25 @@
 // Norway
 
 function addresses_province_list_no() {
-  return array('AK' => "Akershus",
-    'AA' => "Aust-Agder",
-    'BU' => "Buskerud",
-    'FM' => "Finnmark",
-    'HM' => "Hedmark",
-    'HL' => "Hordaland",
-    'MR' => "More og Romdal",
-    'NL' => "Nordland",
-    'NT' => "Nord-Trondelag",
-    'OP' => "Oppland",
-    'OL' => "Oslo",
-    'OF' => "Ostfold",
-    'RL' => "Rogaland",
-    'SJ' => "Sogn og Fjordane",
-    'ST' => "Sor-Trondelag",
-    'TM' => "Telemark",
-    'TR' => "Troms",
-    'VA' => "Vest-Agder",
-    'VF' => "Vestfold");
+  return array(
+    'AK' => t('Akershus'),
+    'AA' => t('Aust-Agder'),
+    'BU' => t('Buskerud'),
+    'FM' => t('Finnmark'),
+    'HM' => t('Hedmark'),
+    'HL' => t('Hordaland'),
+    'MR' => t('More og Romdal'),
+    'NL' => t('Nordland'),
+    'NT' => t('Nord-Trondelag'),
+    'OP' => t('Oppland'),
+    'OL' => t('Oslo'),
+    'OF' => t('Ostfold'),
+    'RL' => t('Rogaland'),
+    'SJ' => t('Sogn og Fjordane'),
+    'ST' => t('Sor-Trondelag'),
+    'TM' => t('Telemark'),
+    'TR' => t('Troms'),
+    'VA' => t('Vest-Agder'),
+    'VF' => t('Vestfold')
+  );
 }

@@ -4,22 +4,24 @@
 // Iraq
 
 function addresses_province_list_iq() {
-  return array('BD' => "Baghdad",
-    'SD' => "Salah ad Din",
-    'DY' => "Diyala",
-    'WS' => "Wasit",
-    'MY' => "Maysan",
-    'BA' => "Al Basrah",
-    'DQ' => "Dhi Qar",
-    'MU' => "Al Muthanna",
-    'QA' => "Al Qadisyah",
-    'BB' => "Babil",
-    'KB' => "Al Karbala",
-    'NJ' => "An Najaf",
-    'AB' => "Al Anbar",
-    'NN' => "Ninawa",
-    'DH' => "Dahuk",
-    'AL' => "Arbil",
-    'TM' => "At Ta'mim",
-    'SL' => "As Sulaymaniyah");
+  return array(
+    'BD' => t('Baghdad'),
+    'SD' => t('Salah ad Din'),
+    'DY' => t('Diyala'),
+    'WS' => t('Wasit'),
+    'MY' => t('Maysan'),
+    'BA' => t('Al Basrah'),
+    'DQ' => t('Dhi Qar'),
+    'MU' => t('Al Muthanna'),
+    'QA' => t('Al Qadisyah'),
+    'BB' => t('Babil'),
+    'KB' => t('Al Karbala'),
+    'NJ' => t('An Najaf'),
+    'AB' => t('Al Anbar'),
+    'NN' => t('Ninawa'),
+    'DH' => t('Dahuk'),
+    'AL' => t('Arbil'),
+    'TM' => t("At Ta'mim"),
+    'SL' => t('As Sulaymaniyah')
+  );
 }

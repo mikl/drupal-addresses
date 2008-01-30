@@ -4,8 +4,10 @@
 // Sierra Leone
 
 function addresses_province_list_sl() {
-  return array('E' => "Eastern",
-    'N' => "Northern",
-    'S' => "Southern",
-    'W' => "Western");
+  return array(
+    'E' => t('Eastern'),
+    'N' => t('Northern'),
+    'S' => t('Southern'),
+    'W' => t('Western')
+  );
 }

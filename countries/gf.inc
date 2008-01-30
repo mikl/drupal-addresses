@@ -4,5 +4,6 @@
 // French Guiana
 
 function addresses_province_list_gf() {
-  return array();
+  return array(
+  );
 }

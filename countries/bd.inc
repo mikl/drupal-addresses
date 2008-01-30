@@ -4,10 +4,12 @@
 // Bangladesh
 
 function addresses_province_list_bd() {
-  return array('BAR' => "Barisal",
-    'CHI' => "Chittagong",
-    'DHA' => "Dhaka",
-    'KHU' => "Khulna",
-    'RAJ' => "Rajshahi",
-    'SYL' => "Sylhet");
+  return array(
+    'BAR' => t('Barisal'),
+    'CHI' => t('Chittagong'),
+    'DHA' => t('Dhaka'),
+    'KHU' => t('Khulna'),
+    'RAJ' => t('Rajshahi'),
+    'SYL' => t('Sylhet')
+  );
 }

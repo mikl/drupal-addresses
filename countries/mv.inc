@@ -4,24 +4,26 @@
 // Maldives
 
 function addresses_province_list_mv() {
-  return array('THU' => "Thiladhunmathi Uthuru",
-    'THD' => "Thiladhunmathi Dhekunu",
-    'MLU' => "Miladhunmadulu Uthuru",
-    'MLD' => "Miladhunmadulu Dhekunu",
-    'MAU' => "Maalhosmadulu Uthuru",
-    'MAD' => "Maalhosmadulu Dhekunu",
-    'FAA' => "Faadhippolhu",
-    'MAA' => "Male Atoll",
-    'AAU' => "Ari Atoll Uthuru",
-    'AAD' => "Ari Atoll Dheknu",
-    'FEA' => "Felidhe Atoll",
-    'MUA' => "Mulaku Atoll",
-    'NAU' => "Nilandhe Atoll Uthuru",
-    'NAD' => "Nilandhe Atoll Dhekunu",
-    'KLH' => "Kolhumadulu",
-    'HDH' => "Hadhdhunmathi",
-    'HAU' => "Huvadhu Atoll Uthuru",
-    'HAD' => "Huvadhu Atoll Dhekunu",
-    'FMU' => "Fua Mulaku",
-    'ADD' => "Addu");
+  return array(
+    'THU' => t('Thiladhunmathi Uthuru'),
+    'THD' => t('Thiladhunmathi Dhekunu'),
+    'MLU' => t('Miladhunmadulu Uthuru'),
+    'MLD' => t('Miladhunmadulu Dhekunu'),
+    'MAU' => t('Maalhosmadulu Uthuru'),
+    'MAD' => t('Maalhosmadulu Dhekunu'),
+    'FAA' => t('Faadhippolhu'),
+    'MAA' => t('Male Atoll'),
+    'AAU' => t('Ari Atoll Uthuru'),
+    'AAD' => t('Ari Atoll Dheknu'),
+    'FEA' => t('Felidhe Atoll'),
+    'MUA' => t('Mulaku Atoll'),
+    'NAU' => t('Nilandhe Atoll Uthuru'),
+    'NAD' => t('Nilandhe Atoll Dhekunu'),
+    'KLH' => t('Kolhumadulu'),
+    'HDH' => t('Hadhdhunmathi'),
+    'HAU' => t('Huvadhu Atoll Uthuru'),
+    'HAD' => t('Huvadhu Atoll Dhekunu'),
+    'FMU' => t('Fua Mulaku'),
+    'ADD' => t('Addu')
+  );
 }

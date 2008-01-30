@@ -4,7 +4,9 @@
 // Tokelau
 
 function addresses_province_list_tk() {
-  return array('A' => "Atafu",
-    'F' => "Fakaofo",
-    'N' => "Nukunonu");
+  return array(
+    'A' => t('Atafu'),
+    'F' => t('Fakaofo'),
+    'N' => t('Nukunonu')
+  );
 }

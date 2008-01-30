@@ -4,9 +4,11 @@
 // Bahrain
 
 function addresses_province_list_bh() {
-  return array('CAP' => "Capital",
-    'CEN' => "Central",
-    'MUH' => "Muharraq",
-    'NOR' => "Northern",
-    'SOU' => "Southern");
+  return array(
+    'CAP' => t('Capital'),
+    'CEN' => t('Central'),
+    'MUH' => t('Muharraq'),
+    'NOR' => t('Northern'),
+    'SOU' => t('Southern')
+  );
 }

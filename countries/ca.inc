@@ -17,18 +17,18 @@
  */
 function addresses_province_list_ca() {
   return array(
-    'AB' => 'Alberta',
-    'BC' => 'British Columbia',
-    'MB' => 'Manitoba',
-    'NB' => 'New Brunswick',
-    'NL' => 'Newfoundland and Labrador',
-    'NS' => 'Nova Scotia',
-    'ON' => 'Ontario',
-    'PE' => 'Prince Edward Island',
-    'QC' => 'Quebec',
-    'SK' => 'Saskatchewan',
-    'NT' => 'Northwest Territories',
-    'NU' => 'Nunavut',
-    'YT' => 'Yukon Territory'
+    'AB' => t('Alberta'),
+    'BC' => t('British Columbia'),
+    'MB' => t('Manitoba'),
+    'NB' => t('New Brunswick'),
+    'NL' => t('Newfoundland and Labrador'),
+    'NS' => t('Nova Scotia'),
+    'ON' => t('Ontario'),
+    'PE' => t('Prince Edward Island'),
+    'QC' => t('Quebec'),
+    'SK' => t('Saskatchewan'),
+    'NT' => t('Northwest Territories'),
+    'NU' => t('Nunavut'),
+    'YT' => t('Yukon Territory')
   );
 }
