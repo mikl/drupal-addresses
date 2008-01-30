@@ -13,7 +13,7 @@
  *   Array. states where the keys are the state
  *   code and the value is the state name
  */
-functionaddresses_province_list_cm() {
+function addresses_province_list_cm() {
   return array(
     'ADA' => t('Adamawa Province (Adamaoua)'),
     'CEN' => t('Centre Province'),

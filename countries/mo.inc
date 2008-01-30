@@ -13,7 +13,7 @@
  *   Array. states where the keys are the state
  *   code and the value is the state name
  */
-functionaddresses_province_list_mo() {
+function addresses_province_list_mo() {
   return array(
     'OLF' => t('Our Lady Fatima Parish'),
     'ANT' => t('St. Anthony Parish'),

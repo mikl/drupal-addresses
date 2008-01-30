@@ -13,7 +13,7 @@
  *   Array. states where the keys are the state
  *   code and the value is the state name
  */
-functionaddresses_province_list_fi() {
+function addresses_province_list_fi() {
   return array(
     'ES' => t('Etela-Suomen laani'),
     'LS' => t('Lansi-Suomen laani'),

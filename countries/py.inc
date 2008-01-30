@@ -13,7 +13,7 @@
  *   Array. states where the keys are the state
  *   code and the value is the state name
  */
-functionaddresses_province_list_py() {
+function addresses_province_list_py() {
   return array(
     'AG' => t('Alto Paraguay'),
     'AN' => t('Alto Parana'),

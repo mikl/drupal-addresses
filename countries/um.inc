@@ -13,7 +13,7 @@
  *   Array. states where the keys are the state
  *   code and the value is the state name
  */
-functionaddresses_province_list_um() {
+function addresses_province_list_um() {
   return array(
     'BI' => t('Baker Island'),
     'HI' => t('Howland Island'),

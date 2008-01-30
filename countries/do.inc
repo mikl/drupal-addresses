@@ -13,7 +13,7 @@
  *   Array. states where the keys are the state
  *   code and the value is the state name
  */
-functionaddresses_province_list_do() {
+function addresses_province_list_do() {
   return array(
     'DN' => t('Distrito Nacional'),
     'AZ' => t('Azua'),

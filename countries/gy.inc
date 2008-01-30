@@ -13,7 +13,7 @@
  *   Array. states where the keys are the state
  *   code and the value is the state name
  */
-functionaddresses_province_list_gy() {
+function addresses_province_list_gy() {
   return array(
     'BW' => t('Barima-Waini'),
     'CM' => t('Cuyuni-Mazaruni'),

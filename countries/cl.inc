@@ -13,7 +13,7 @@
  *   Array. states where the keys are the state
  *   code and the value is the state name
  */
-functionaddresses_province_list_cl() {
+function addresses_province_list_cl() {
   return array(
     'AI' => t('Aisen del General Carlos Ibanez del Campo (XI)'),
     'AN' => t('Antofagasta (II)'),

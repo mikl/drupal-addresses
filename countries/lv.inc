@@ -13,7 +13,7 @@
  *   Array. states where the keys are the state
  *   code and the value is the state name
  */
-functionaddresses_province_list_lv() {
+function addresses_province_list_lv() {
   return array(
     'AIZ' => t('Aizkraukles Rajons'),
     'ALU' => t('Aluksnes Rajons'),

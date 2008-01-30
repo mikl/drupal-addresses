@@ -13,7 +13,7 @@
  *   Array. states where the keys are the state
  *   code and the value is the state name
  */
-functionaddresses_province_list_cd() {
+function addresses_province_list_cd() {
   return array(
     'BC' => t('Bas-Congo'),
     'BN' => t('Bandundu'),

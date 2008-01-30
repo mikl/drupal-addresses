@@ -13,7 +13,7 @@
  *   Array. states where the keys are the state
  *   code and the value is the state name
  */
-functionaddresses_province_list_eg() {
+function addresses_province_list_eg() {
   return array(
     'DHY' => t('Ad Daqahliyah'),
     'BAM' => t('Al Bahr al Ahmar'),

@@ -13,7 +13,7 @@
  *   Array. states where the keys are the state
  *   code and the value is the state name
  */
-functionaddresses_province_list_pf() {
+function addresses_province_list_pf() {
   return array(
     'M' => t('Archipel des Marquises'),
     'T' => t('Archipel des Tuamotu'),

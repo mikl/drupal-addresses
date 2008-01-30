@@ -13,7 +13,7 @@
  *   Array. states where the keys are the state
  *   code and the value is the state name
  */
-functionaddresses_province_list_jm() {
+function addresses_province_list_jm() {
   return array(
     'CLA' => t('Clarendon Parish'),
     'HAN' => t('Hanover Parish'),

@@ -25,7 +25,7 @@
  *   Array. states where the keys are the state
  *   code and the value is the state name
  */
-functionaddresses_province_list_ca() {
+function addresses_province_list_ca() {
   return array(
     'AB' => t('Alberta'),
     'BC' => t('British Columbia'),

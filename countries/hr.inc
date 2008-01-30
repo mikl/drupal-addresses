@@ -13,7 +13,7 @@
  *   Array. states where the keys are the state
  *   code and the value is the state name
  */
-functionaddresses_province_list_hr() {
+function addresses_province_list_hr() {
   return array(
     '01' => t('Zagreb county'),
     '02' => t('Krapina-Zagorje county'),

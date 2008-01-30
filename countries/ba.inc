@@ -13,7 +13,7 @@
  *   Array. states where the keys are the state
  *   code and the value is the state name
  */
-functionaddresses_province_list_ba() {
+function addresses_province_list_ba() {
   return array(
     'BRO' => t('Brcko district'),
     'FUS' => t('Unsko-Sanski Kanton'),

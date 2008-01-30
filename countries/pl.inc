@@ -13,7 +13,7 @@
  *   Array. states where the keys are the state
  *   code and the value is the state name
  */
-functionaddresses_province_list_pl() {
+function addresses_province_list_pl() {
   return array(
     'DO' => t('Dolnoslaskie'),
     'KP' => t('Kujawsko-Pomorskie'),

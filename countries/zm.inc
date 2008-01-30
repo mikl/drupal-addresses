@@ -13,7 +13,7 @@
  *   Array. states where the keys are the state
  *   code and the value is the state name
  */
-functionaddresses_province_list_zm() {
+function addresses_province_list_zm() {
   return array(
     'CE' => t('Central Province'),
     'CB' => t('Copperbelt Province'),

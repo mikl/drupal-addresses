@@ -13,7 +13,7 @@
  *   Array. states where the keys are the state
  *   code and the value is the state name
  */
-functionaddresses_province_list_lt() {
+function addresses_province_list_lt() {
   return array(
     'AL' => t('Alytus'),
     'KA' => t('Kaunas'),

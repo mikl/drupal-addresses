@@ -13,7 +13,7 @@
  *   Array. states where the keys are the state
  *   code and the value is the state name
  */
-functionaddresses_province_list_kn() {
+function addresses_province_list_kn() {
   return array(
     'CCN' => t('Christ Church Nichola Town'),
     'SAS' => t('Saint Anne Sandy Point'),

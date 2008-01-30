@@ -13,7 +13,7 @@
  *   Array. states where the keys are the state
  *   code and the value is the state name
  */
-functionaddresses_province_list_cz() {
+function addresses_province_list_cz() {
   return array(
     'JC' => t('South Bohemian Region (Jihocesky kraj)'),
     'JM' => t('South Moravian Region (Jihomoravsky kraj)'),

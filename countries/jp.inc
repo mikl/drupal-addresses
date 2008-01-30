@@ -13,7 +13,7 @@
  *   Array. states where the keys are the state
  *   code and the value is the state name
  */
-functionaddresses_province_list_jp() {
+function addresses_province_list_jp() {
   return array(
     '01' => t('Hokkaido'),
     '02' => t('Aomori'),

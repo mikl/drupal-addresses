@@ -13,7 +13,7 @@
  *   Array. states where the keys are the state
  *   code and the value is the state name
  */
-functionaddresses_province_list_fj() {
+function addresses_province_list_fj() {
   return array(
     'C' => t('Central Division'),
     'N' => t('Northern Division'),

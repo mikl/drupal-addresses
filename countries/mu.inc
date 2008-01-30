@@ -13,7 +13,7 @@
  *   Array. states where the keys are the state
  *   code and the value is the state name
  */
-functionaddresses_province_list_mu() {
+function addresses_province_list_mu() {
   return array(
     'BR' => t('Beau Bassin-Rose Hill'),
     'CU' => t('Curepipe'),

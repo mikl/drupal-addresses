@@ -13,7 +13,7 @@
  *   Array. states where the keys are the state
  *   code and the value is the state name
  */
-functionaddresses_province_list_kh() {
+function addresses_province_list_kh() {
   return array(
     'PP' => t('Phnom Penh'),
     'PS' => t('Preah Seihanu (Kompong Som or Sihanoukville)'),
