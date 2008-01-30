@@ -38,10 +38,10 @@ function _addresses_address_delete($id, $type = 'address') {
   // Check what address should be deleted: a single one or
   // all addresses related to a given Element (Node, User)
   if ($type == 'address') {
-    db_query('DELETE FROM {address} WHERE aid = %d', $id);
+    db_query('DELETE FROM {addresses} WHERE aid = %d', $id);
   }
   else {
-    db_query("DELETE FROM {address} WHERE aid = %d AND atype = '%s'", $id, $type);
+    db_query("DELETE FROM {addresses} WHERE aid = %d AND atype = '%s'", $id, $type);
   }
 
   // Show an warning message
@@ -70,10 +70,10 @@ function _addresses_address_get($id, $type = 'address') {
     // Get the address based on Address ID or
     // the (User/Node) ID and the given identification
     if ($type == 'address') {
-      $adr = db_query('SELECT * FROM {address} WHERE aid = %d', $id);
+      $adr = db_query('SELECT * FROM {addresses} WHERE aid = %d', $id);
     }
     else {
-      $adr = db_query("SELECT * FROM {address}
+      $adr = db_query("SELECT * FROM {addresses}
         WHERE atype = '%s' AND eid = %d
         ORDER BY is_primary DESC", $type, $id);
     }
@@ -117,7 +117,7 @@ function _addresses_address_save($address, &$object, $type = 'node') {
       // Instead of create INSERT and UPDATE SQL
       // instrauctions, we DELETE (if exists) the given
       // Address and create another one in its place
-      db_query('DELETE FROM {address} WHERE aid = %d', $address['aid']);
+      db_query('DELETE FROM {addresses} WHERE aid = %d', $address['aid']);
       $aid_sql = ', aid';
       $aid_sql2 = ', %d';
     }
@@ -125,7 +125,7 @@ function _addresses_address_save($address, &$object, $type = 'node') {
     // If this address is the Primary, change all other address
     // to NOT primary
     if (!empty($address['is_primary'])) {
-      db_query("UPDATE {address} SET is_primary = 0
+      db_query("UPDATE {addresses} SET is_primary = 0
         WHERE is_primary = 1 AND eid = %d AND atype = '%s'",
         $object->$field, $type);
     }
@@ -133,7 +133,7 @@ function _addresses_address_save($address, &$object, $type = 'node') {
     // Let other modules change the standard behaviour
     module_invoke_all('addressapi', 'save', $address);
 
-    db_query("INSERT INTO {address}
+    db_query("INSERT INTO {addresses}
       (atype, eid, aname, street,
       additional, city, province, postal_code, country, is_primary". $aid_sql .")
       VALUES ('%s', %d, '%s', '%s',
@@ -768,7 +768,7 @@ function _addresses_province_validate($form, &$form_state) {
  * @param $hide
  *   Array (optional). The values are the address fields to suppress in the themed display.
  */
-function theme_address($address, $hide = array()) {
+function theme_addresses($address, $hide = array()) {
   // Check if it have at least one field to be displayed.
   // If not, return '' and stop everything
   foreach ($hide as $field) {
