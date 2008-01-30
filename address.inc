@@ -2,7 +2,7 @@
 /**
  * $Id$
  * @author Bruno Massa
- * @file address.inc
+ * @file addresses.inc
  * An implementation of a universal API for address manipulation.
  */
 
