@@ -3,7 +3,17 @@
 
 // Croatia
 
-function addresses_province_list_hr() {
+/**
+ * Implementation of hook_province_list().
+ *
+ * Its a hook from Addresses module to list all
+ * states/provinces/teritories of a given contry
+ *
+ * @return
+ *   Array. states where the keys are the state
+ *   code and the value is the state name
+ */
+functionaddresses_province_list_hr() {
   return array(
     '01' => t('Zagreb county'),
     '02' => t('Krapina-Zagorje county'),

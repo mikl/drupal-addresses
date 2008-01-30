@@ -4,79 +4,76 @@
 // United States
 
 /**
- * Returns an associative array of states/territories where
- *   -> the keys are integers starting from 1
- *   -> the values are the English names for those states/territories
+ * Implementation of hook_province_list().
  *
- * The states are grouped together at the beginning of the array and sorted
- * alphabetically.
+ * Its a hook from Addresses module to list all
+ * states/provinces/teritories of a given contry
  *
- * The territories are grouped together at the end of the array and sorted
- * alphabetically.
- *
- * Currently not being used, but may be in order to be compatible with CiviCRM
- * TODO: These numeric indices need to be changed to match those in the CiviCRM database
+ * @return
+ *   Array. states where the keys are the state
+ *   code and the value is the state name
  */
-function addresses_province_list_numeric_us() {
+functionlocation_province_list_us() {
   return array(
-    '001' => t('Alabama'),
-    '002' => t('Alaska'),
-    '003' => t('Arizona'),
-    '004' => t('Arkansas'),
-    '005' => t('California'),
-    '006' => t('Colorado'),
-    '007' => t('Connecticut'),
-    '008' => t('Delaware'),
-    '009' => t('District Of Columbia'),
-    '010' => t('Florida'),
-    '011' => t('Georgia'),
-    '012' => t('Hawaii'),
-    '013' => t('Idaho'),
-    '014' => t('Illinois'),
-    '015' => t('Indiana'),
-    '016' => t('Iowa'),
-    '017' => t('Kansas'),
-    '018' => t('Kentucky'),
-    '019' => t('Louisiana'),
-    '020' => t('Maine'),
-    '021' => t('Maryland'),
-    '022' => t('Massachusetts'),
-    '023' => t('Michigan'),
-    '024' => t('Minnesota'),
-    '025' => t('Mississippi'),
-    '026' => t('Missouri'),
-    '027' => t('Montana'),
-    '028' => t('Nebraska'),
-    '029' => t('Nevada'),
-    '030' => t('New Hampshire'),
-    '031' => t('New Jersey'),
-    '032' => t('New Mexico'),
-    '033' => t('New York'),
-    '034' => t('North Carolina'),
-    '035' => t('North Dakota'),
-    '036' => t('Ohio'),
-    '037' => t('Oklahoma'),
-    '038' => t('Oregon'),
-    '039' => t('Pennsylvania'),
-    '040' => t('Rhode Island'),
-    '041' => t('South Carolina'),
-    '042' => t('South Dakota'),
-    '043' => t('Tennessee'),
-    '044' => t('Texas'),
-    '045' => t('Utah'),
-    '046' => t('Vermont'),
-    '047' => t('Virginia'),
-    '048' => t('Washington'),
-    '049' => t('West Virginia'),
-    '050' => t('Wisconsin'),
-    '051' => t('Wyoming'),
-    '052' => t('American Samoa'),
-    '053' => t('Federated States of Micronesia'),
-    '054' => t('Guam'),
-    '055' => t('Marshall Islands'),
-    '056' => t('Northern Mariana Islands'),
-    '057' => t('Palau'),
-    '058' => t('Puerto Rico'),
-    '059' => t('Virgin Islands')
-);
+    'AL' => t('Alabama'),
+    'AK' => t('Alaska'),
+    'AZ' => t('Arizona'),
+    'AR' => t('Arkansas'),
+    'CA' => t('California'),
+    'CO' => t('Colorado'),
+    'CT' => t('Connecticut'),
+    'DE' => t('Delaware'),
+    'DC' => t('District Of Columbia'),
+    'FL' => t('Florida'),
+    'GA' => t('Georgia'),
+    'HI' => t('Hawaii'),
+    'ID' => t('Idaho'),
+    'IL' => t('Illinois'),
+    'IN' => t('Indiana'),
+    'IA' => t('Iowa'),
+    'KS' => t('Kansas'),
+    'KY' => t('Kentucky'),
+    'LA' => t('Louisiana'),
+    'ME' => t('Maine'),
+    'MD' => t('Maryland'),
+    'MA' => t('Massachusetts'),
+    'MI' => t('Michigan'),
+    'MN' => t('Minnesota'),
+    'MS' => t('Mississippi'),
+    'MO' => t('Missouri'),
+    'MT' => t('Montana'),
+    'NE' => t('Nebraska'),
+    'NV' => t('Nevada'),
+    'NH' => t('New Hampshire'),
+    'NJ' => t('New Jersey'),
+    'NM' => t('New Mexico'),
+    'NY' => t('New York'),
+    'NC' => t('North Carolina'),
+    'ND' => t('North Dakota'),
+    'OH' => t('Ohio'),
+    'OK' => t('Oklahoma'),
+    'OR' => t('Oregon'),
+    'PA' => t('Pennsylvania'),
+    'RI' => t('Rhode Island'),
+    'SC' => t('South Carolina'),
+    'SD' => t('South Dakota'),
+    'TN' => t('Tennessee'),
+    'TX' => t('Texas'),
+    'UT' => t('Utah'),
+    'VT' => t('Vermont'),
+    'VA' => t('Virginia'),
+    'WA' => t('Washington'),
+    'WV' => t('West Virginia'),
+    'WI' => t('Wisconsin'),
+    'WY' => t('Wyoming'),
+
+    'AS' => t('American Samoa'),
+    'FM' => t('Federated States of Micronesia'),
+    'GU' => t('Guam'),
+    'MH' => t('Marshall Islands'),
+    'MP' => t('Northern Mariana Islands'),
+    'PW' => t('Palau'),
+    'PR' => t('Puerto Rico'),
+    'VI' => t('Virgin Islands')
+  );
 }

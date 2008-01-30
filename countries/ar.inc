@@ -3,7 +3,17 @@
 
 // Argentina
 
-function addresses_province_list_ar() {
+/**
+ * Implementation of hook_province_list().
+ *
+ * Its a hook from Addresses module to list all
+ * states/provinces/teritories of a given contry
+ *
+ * @return
+ *   Array. states where the keys are the state
+ *   code and the value is the state name
+ */
+functionaddresses_province_list_ar() {
   return array(
     'A' => t('Salta'),
     'B' => t('Buenos Aires Province'),
