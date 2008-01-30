@@ -16,7 +16,7 @@ function _addresses_admin() {
     '#type'           => 'select',
     '#title'          => t('Default country selection'),
     '#default_value'  => variable_get('addresses_default_country', 'us'),
-    '#options'        => $iso_list_sorted,
+    '#options'        => _addresses_country_get(),
     '#description'    => t('This will be the country that is automatically selected when a location form is served for a new location.')
   );
 
@@ -94,20 +94,14 @@ function _addresses_address_get($id, $type = 'address') {
  *
  * @param $address
  *   Array. The address data to be saved.
- * @param &$object
- *   Object. It might be or the $user object or the $node.
- *   We will extract its ID to correct link it to the
- *   address
+ * @param $id
+ *   Number. It might be the Node ID (nid) or the User ID (uid),
+ *   depending on the $type variable
  * @param $type
  *   String (optional). 'node' to link the address to a
  *   node or 'user' to link it to a site user
  */
-function _addresses_address_save($address, &$object, $type = 'node') {
-  // Since the address can be from a User
-  // or ia Node Address, we need to choose the right
-  // ID: node version or user ID
-  $field = ($type == 'node' ? 'vid': 'uid');
-
+function _addresses_address_save($address, $id, $type = 'node') {
   if (!empty($address)) {
     if (empty($address['aid'])) {
       $aid_sql = '';
@@ -127,7 +121,7 @@ function _addresses_address_save($address, &$object, $type = 'node') {
     if (!empty($address['is_primary'])) {
       db_query("UPDATE {addresses} SET is_primary = 0
         WHERE is_primary = 1 AND eid = %d AND atype = '%s'",
-        $object->$field, $type);
+        $id, $type);
     }
 
     // Let other modules change the standard behaviour
@@ -139,7 +133,7 @@ function _addresses_address_save($address, &$object, $type = 'node') {
       VALUES ('%s', %d, '%s', '%s',
       '%s', '%s', '%s', '%s', '%s', %d". $aid_sql2 .")",
       $type,
-      $object->$field,
+      $id,
       (empty($address['aname'])        ? '' : $address['aname']),
       (empty($address['street'])       ? '' : $address['street']),
       (empty($address['additional'])   ? '' : $address['additional']),
@@ -497,70 +491,69 @@ function _addresses_country_get($upper = FALSE) {
  * @see _addresses_form_submit()
  */
 function _addresses_form(&$form, $group = '', $values = array()) {
-  // If no field was specified, use all
-//   if (empty($fields)) {
-//     $fields = array(
-//       'aname'       => 1,
-//       'street'      => 1,
-//       'city'        => 1,
-//       'province'    => 1,
-//       'postal_code' => 1,
-//       'country'     => 1
-//     );
-//   }
   $fields = module_invoke_all('addresses_fields_api', 'group');
   $fields = $fields[$group];
 
-  // Generate the Address fieldset
-  $form['address'] = array(
-    '#tree'       => TRUE,
-  );
+  // Generate the Global Address fieldset or only the
+  // form hierarchy
+  if (!empty($fields['master_fieldset'])) {
+    $form['addresses'] = array(
+      '#collapsible'  => TRUE,
+      '#collapsed'    => TRUE,
+      '#title'        => t('Addresses'),
+      '#type'         => 'fieldset',
+    );
+  }
+  $form['addresses']['#tree'] = TRUE;
 
   for ($a = 0; $a < 1; $a++) {
     // Address fieldset
-    $form['address'][$a] = array(
-      '#attributes' => array('class' => 'address'),
-      '#title'      => t('Address %number', array('%number' => $index + 1)),
-      '#tree'       => TRUE,
-      '#type'       => 'fieldset',
-    );
+    if (!empty($fields['local_fieldset'])) {
+      $form['addresses'][$a] = array(
+        '#collapsible'  => TRUE,
+//         '#collapsed'    => TRUE,
+        '#title'        => $a + 1,
+        '#type'         => 'fieldset',
+      );
+    }
+    $form['addresses'][$a]['#tree'] = TRUE;
 
     // If its a existing address, save the Address ID
     // for further processing
-    if (!empty($values['aid'])) {
-      $form['address'][$a]['aid'] = array(
+    if (!empty($values[$a]['aid'])) {
+      $form['addresses'][$a]['aid'] = array(
         '#type'   => 'hidden',
-        '#value'  => $values['aid']
+        '#value'  => $values[$a]['aid']
       );
     }
 
     // Let users select if the address is the primary
     if ($fields['is_primary'] == ADDRESSES_FIELD_HIDDEN) {
-      $form['address'][$a]['is_primary'] = array(
+      $form['addresses'][$a]['is_primary'] = array(
         '#type'           => 'hidden',
-        '#value'          => isset($values['is_primary']) ? $values['is_primarys'] : '',
+        '#value'          => isset($values[$a]['is_primary']) ? $values[$a]['is_primarys'] : '',
       );
     }
     elseif (!empty($fields['is_primary'])) {
-      $form['address'][$a]['is_primary'] = array(
+      $form['addresses'][$a]['is_primary'] = array(
         '#type'           => 'checkbox',
         '#title'          => t('Default address'),
-        '#default_value'  => isset($values['is_primary']) ? $values['is_primary'] : ''
+        '#default_value'  => isset($values[$a]['is_primary']) ? $values[$a]['is_primary'] : ''
       );
     }
 
     // Adds the Address Name (Home, Office, Rio de Janeiro...)
     if ($fields['aname'] == ADDRESSES_FIELD_HIDDEN) {
-      $form['address'][$a]['aname'] = array(
+      $form['addresses'][$a]['aname'] = array(
         '#type'           => 'hidden',
-        '#value'          => isset($values['aname']) ? $values['aname'] : '',
+        '#value'          => isset($values[$a]['aname']) ? $values[$a]['aname'] : '',
       );
     }
     elseif (!empty($fields['aname'])) {
-      $form['address'][$a]['aname'] = array(
+      $form['addresses'][$a]['aname'] = array(
         '#type'           => 'textfield',
         '#title'          => t('Address name'),
-        '#default_value'  => isset($values['aname']) ? $values['aname'] : '',
+        '#default_value'  => isset($values[$a]['aname']) ? $values[$a]['aname'] : '',
         '#size'           => 64,
         '#maxlength'      => 64,
         '#description'    => t('e.g. a place of business, venue, meeting point'),
@@ -571,18 +564,18 @@ function _addresses_form(&$form, $group = '', $values = array()) {
 
     // Adds the Country
     if ($fields['country'] == ADDRESSES_FIELD_HIDDEN) {
-      $form['address'][$a]['country'] = array(
+      $form['addresses'][$a]['country'] = array(
         '#type'           => 'hidden',
-        '#value'          => isset($values['country']) ? $values['country'] : '',
+        '#value'          => isset($values[$a]['country']) ? $values[$a]['country'] : '',
       );
     }
     elseif (!empty($fields['country'])) {
       $countries = array('' => '') + _addresses_country_get();
 
-      $form['address'][$a]['country'] = array(
+      $form['addresses'][$a]['country'] = array(
         '#type'           => 'select',
         '#title'          => t('Country'),
-        '#default_value'  => isset($values['country']) ? $values['country'] : '',
+        '#default_value'  => isset($values[$a]['country']) ? $values[$a]['country'] : '',
         '#options'        => $countries,
         '#description'    => NULL,
         '#extra'          => 0,
@@ -593,15 +586,15 @@ function _addresses_form(&$form, $group = '', $values = array()) {
 
     // Adds the Province field
     if ($fields['province'] == ADDRESSES_FIELD_HIDDEN) {
-      $form['address'][$a]['province'] = array(
+      $form['addresses'][$a]['province'] = array(
         '#type'           => 'hidden',
-        '#value'          => isset($values['province']) ? $values['province'] : '',
+        '#value'          => isset($values[$a]['province']) ? $values[$a]['province'] : '',
       );
     }
     elseif (!empty($fields['province'])) {
-      $form['address'][$a]['province'] = array(
+      $form['addresses'][$a]['province'] = array(
   //       '#autocomplete_path'  => 'admin/settings/address/autocomplete',
-        '#default_value'  => isset($values['province']) ? $values['province'] : '',
+        '#default_value'  => isset($values[$a]['province']) ? $values[$a]['province'] : '',
         '#maxlength'      => 64,
         '#required'       => ($fields['province'] == ADDRESSES_FIELD_REQUIRED),
         '#size'           => 30,
@@ -613,16 +606,16 @@ function _addresses_form(&$form, $group = '', $values = array()) {
 
     // Adds the City
     if ($fields['city'] == ADDRESSES_FIELD_HIDDEN) {
-      $form['address'][$a]['city'] = array(
+      $form['addresses'][$a]['city'] = array(
         '#type'           => 'hidden',
-        '#value'          => isset($values['city']) ? $values['city'] : '',
+        '#value'          => isset($values[$a]['city']) ? $values[$a]['city'] : '',
       );
     }
     elseif (!empty($fields['city'])) {
-      $form['address'][$a]['city'] = array(
+      $form['addresses'][$a]['city'] = array(
         '#type'           => 'textfield',
         '#title'          => t('City'),
-        '#default_value'  => isset($values['city']) ? $values['city'] : '',
+        '#default_value'  => isset($values[$a]['city']) ? $values[$a]['city'] : '',
         '#size'           => 64,
         '#maxlength'      => 64,
         '#description'    => NULL,
@@ -633,28 +626,28 @@ function _addresses_form(&$form, $group = '', $values = array()) {
 
     // Adds the Streets and the Additional fields
     if ($fields['street'] == ADDRESSES_FIELD_HIDDEN) {
-      $form['address'][$a]['street'] = array(
+      $form['addresses'][$a]['street'] = array(
         '#type'           => 'hidden',
-        '#value'          => isset($values['street']) ? $values['street'] : '',
+        '#value'          => isset($values[$a]['street']) ? $values[$a]['street'] : '',
       );
-      $form['address'][$a]['additional'] = array(
+      $form['addresses'][$a]['additional'] = array(
         '#type'           => 'hidden',
-        '#value'          => isset($values['additional']) ? $values['additional'] : '',
+        '#value'          => isset($values[$a]['additional']) ? $values[$a]['additional'] : '',
       );
     }
     elseif (!empty($fields['street'])) {
-      $form['address'][$a]['street'] = array(
+      $form['addresses'][$a]['street'] = array(
         '#type'           => 'textfield',
         '#title'          => t('Street'),
-        '#default_value'  => isset($values['street']) ? $values['street'] : '',
+        '#default_value'  => isset($values[$a]['street']) ? $values[$a]['street'] : '',
         '#size'           => 64,
         '#maxlength'      => 64,
         '#required'       => ($fields['street'] == ADDRESSES_FIELD_REQUIRED)
       );
-      $form['address'][$a]['additional'] = array(
+      $form['addresses'][$a]['additional'] = array(
         '#type'           => 'textfield',
         '#title'          => t('Additional'),
-        '#default_value'  => isset($values['additional']) ? $values['additional'] : '',
+        '#default_value'  => isset($values[$a]['additional']) ? $values[$a]['additional'] : '',
         '#size'           => 64,
         '#maxlength'      => 64
       );
@@ -662,16 +655,16 @@ function _addresses_form(&$form, $group = '', $values = array()) {
 
     // Adds the Postal Code
     if ($fields['postal_code'] == ADDRESSES_FIELD_HIDDEN) {
-      $form['address'][$a]['postal_code'] = array(
+      $form['addresses'][$a]['postal_code'] = array(
         '#type'           => 'hidden',
-        '#value'          => isset($values['postal_code']) ? $values['postal_code'] : '',
+        '#value'          => isset($values[$a]['postal_code']) ? $values[$a]['postal_code'] : '',
       );
     }
     elseif (!empty($fields['postal_code'])) {
-      $form['address'][$a]['postal_code'] = array(
+      $form['addresses'][$a]['postal_code'] = array(
         '#type'           => 'textfield',
         '#title'          => t('Postal code'),
-        '#default_value'  => isset($values['postal_code']) ? $values['postal_code'] : '',
+        '#default_value'  => isset($values[$a]['postal_code']) ? $values[$a]['postal_code'] : '',
         '#size'           => 16,
         '#maxlength'      => 16,
         '#required'       => ($fields['postal_code'] == ADDRESSES_FIELD_REQUIRED)
@@ -745,9 +738,9 @@ function _addresses_province_validate($form, &$form_state) {
   // given COUNTRY.inc file
   $form_values = $form_state['values'];
 
-  foreach (element_children($form_values['address']) as $a) {
-    if ($provinces = _addresses_province_get($form_values['address'][$a]['country']) and
-        empty($provinces[strtoupper($form_values['address'][$a]['province'])])) {
+  foreach (element_children($form_values['addresses']) as $a) {
+    if ($provinces = _addresses_province_get($form_values['addresses'][$a]['country']) and
+        empty($provinces[strtoupper($form_values['addresses'][$a]['province'])])) {
       form_set_error("address][$a][province", t('Invalid province. Try to use the province code.'));
     }
   }
