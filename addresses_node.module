@@ -1,0 +1,42 @@
+<?php
+/**
+ * $Id$
+ * @author Bruno Massa
+ * @file addresses_node.module
+ * You can associate a geographic address with content.
+ */
+
+define('ADDRESSES_NODE_PATH' , drupal_get_path('module', 'addresses_node'));
+
+/**
+ * Implementation of hook_addresses_fields_api().
+ */
+function addresses_node_addresses_fields_api($op) {
+  if ($op == 'field') {
+  }
+  elseif ($op == 'group') {
+    return array(
+      'user' => array(
+        'is_primary'  => ADDRESSES_FIELD_SHOW,
+        'aname'       => ADDRESSES_FIELD_SHOW,
+        'street'      => ADDRESSES_FIELD_SHOW,
+        'city'        => ADDRESSES_FIELD_SHOW,
+        'province'    => ADDRESSES_FIELD_SHOW,
+        'postal_code' => ADDRESSES_FIELD_SHOW,
+        'country'     => ADDRESSES_FIELD_SHOW
+      )
+    );
+  }
+}
+
+/**
+ * Implementation of hook_form_alter().
+ *
+ * It will modify the general behaviour of your node forms.
+ */
+function addresses_node_form_alter(&$form, $form_state, $form_id) {
+  if (isset($form['type'])
+      and isset($form['#node'])
+      and $form['type']['#value'] .'_node_form' == $form_id) {
+  }
+}

@@ -9,13 +9,13 @@
 /**
  * Modules settings page
  */
-function _address_admin() {
+function _addresses_admin() {
   $form = array();
 
   $form['location_default_country'] = array(
     '#type'           => 'select',
     '#title'          => t('Default country selection'),
-    '#default_value'  => variable_get('address_default_country', 'us'),
+    '#default_value'  => variable_get('addresses_default_country', 'us'),
     '#options'        => $iso_list_sorted,
     '#description'    => t('This will be the country that is automatically selected when a location form is served for a new location.')
   );
@@ -34,7 +34,7 @@ function _address_admin() {
  *   - 'user': get all address from a user
  *   - 'node: get all address from a node
  */
-function _address_address_delete($id, $type = 'address') {
+function _addresses_address_delete($id, $type = 'address') {
   // Check what address should be deleted: a single one or
   // all addresses related to a given Element (Node, User)
   if ($type == 'address') {
@@ -63,7 +63,7 @@ function _address_address_delete($id, $type = 'address') {
  * @return
  *   Array. The numeric list of addresses arrays
  */
-function _address_address_get($id, $type = 'address') {
+function _addresses_address_get($id, $type = 'address') {
   static $addresses;
 
   if (empty($addresses[$type][$id])) {
@@ -102,7 +102,7 @@ function _address_address_get($id, $type = 'address') {
  *   String (optional). 'node' to link the address to a
  *   node or 'user' to link it to a site user
  */
-function _address_address_save($address, &$object, $type = 'node') {
+function _addresses_address_save($address, &$object, $type = 'node') {
   // Since the address can be from a User
   // or ia Node Address, we need to choose the right
   // ID: node version or user ID
@@ -163,7 +163,7 @@ function _address_address_save($address, &$object, $type = 'node') {
  * @return
  *   Javascript array. List of states
  */
-function _address_autocomplete($country, $string = '') {
+function _addresses_autocomplete($country, $string = '') {
   $matches  = array();
 
   // Check if the country code is there
@@ -172,7 +172,7 @@ function _address_autocomplete($country, $string = '') {
     $string   = strtolower($string);
     $string   = '/^'. $string .'/';
 
-    $provinces   = _address_province_get($country);
+    $provinces   = _addresses_province_get($country);
 
     // Get only the first 5 provinces that matches
     // partially with the given piece of text
@@ -212,7 +212,7 @@ function _address_autocomplete($country, $string = '') {
  *   Array. 'COUNTRY CODE' => 'COUNTRY CODE' pairs as layed out in
  *   ISO 3166-1 alpha-2
  */
-function _address_country_get($upper = FALSE) {
+function _addresses_country_get($upper = FALSE) {
   $countries = array(
     'ad' => t('Andorra'),
     'ae' => t('United Arab Emirates'),
@@ -493,10 +493,10 @@ function _address_country_get($upper = FALSE) {
  *   An address form based on the parameters specified.  If the $fields array is empty, then the
  *   function returns a form in which all possible fields are served as optional form items.
  *
- * @see _address_form_validate()
- * @see _address_form_submit()
+ * @see _addresses_form_validate()
+ * @see _addresses_form_submit()
  */
-function _address_form(&$form, $group = '', $values = array()) {
+function _addresses_form(&$form, $group = '', $values = array()) {
   // If no field was specified, use all
 //   if (empty($fields)) {
 //     $fields = array(
@@ -508,7 +508,7 @@ function _address_form(&$form, $group = '', $values = array()) {
 //       'country'     => 1
 //     );
 //   }
-  $fields = module_invoke_all('address_fields_api', 'group');
+  $fields = module_invoke_all('addresses_fields_api', 'group');
   $fields = $fields[$group];
 
   // Generate the Address fieldset
@@ -535,7 +535,7 @@ function _address_form(&$form, $group = '', $values = array()) {
     }
 
     // Let users select if the address is the primary
-    if ($fields['is_primary'] == ADDRESS_FIELD_HIDDEN) {
+    if ($fields['is_primary'] == ADDRESSES_FIELD_HIDDEN) {
       $form['address'][$a]['is_primary'] = array(
         '#type'           => 'hidden',
         '#value'          => isset($values['is_primary']) ? $values['is_primarys'] : '',
@@ -550,7 +550,7 @@ function _address_form(&$form, $group = '', $values = array()) {
     }
 
     // Adds the Address Name (Home, Office, Rio de Janeiro...)
-    if ($fields['aname'] == ADDRESS_FIELD_HIDDEN) {
+    if ($fields['aname'] == ADDRESSES_FIELD_HIDDEN) {
       $form['address'][$a]['aname'] = array(
         '#type'           => 'hidden',
         '#value'          => isset($values['aname']) ? $values['aname'] : '',
@@ -565,19 +565,19 @@ function _address_form(&$form, $group = '', $values = array()) {
         '#maxlength'      => 64,
         '#description'    => t('e.g. a place of business, venue, meeting point'),
         '#attributes'     => NULL,
-        '#required'       => ($fields['aname'] == ADDRESS_FIELD_REQUIRED)
+        '#required'       => ($fields['aname'] == ADDRESSES_FIELD_REQUIRED)
       );
     }
 
     // Adds the Country
-    if ($fields['country'] == ADDRESS_FIELD_HIDDEN) {
+    if ($fields['country'] == ADDRESSES_FIELD_HIDDEN) {
       $form['address'][$a]['country'] = array(
         '#type'           => 'hidden',
         '#value'          => isset($values['country']) ? $values['country'] : '',
       );
     }
     elseif (!empty($fields['country'])) {
-      $countries = array('' => '') + _address_country_get();
+      $countries = array('' => '') + _addresses_country_get();
 
       $form['address'][$a]['country'] = array(
         '#type'           => 'select',
@@ -587,12 +587,12 @@ function _address_form(&$form, $group = '', $values = array()) {
         '#description'    => NULL,
         '#extra'          => 0,
         '#multiple'       => FALSE,
-        '#required'       => ($fields['country'] == ADDRESS_FIELD_REQUIRED)
+        '#required'       => ($fields['country'] == ADDRESSES_FIELD_REQUIRED)
       );
     }
 
     // Adds the Province field
-    if ($fields['province'] == ADDRESS_FIELD_HIDDEN) {
+    if ($fields['province'] == ADDRESSES_FIELD_HIDDEN) {
       $form['address'][$a]['province'] = array(
         '#type'           => 'hidden',
         '#value'          => isset($values['province']) ? $values['province'] : '',
@@ -603,16 +603,16 @@ function _address_form(&$form, $group = '', $values = array()) {
   //       '#autocomplete_path'  => 'admin/settings/address/autocomplete',
         '#default_value'  => isset($values['province']) ? $values['province'] : '',
         '#maxlength'      => 64,
-        '#required'       => ($fields['province'] == ADDRESS_FIELD_REQUIRED),
+        '#required'       => ($fields['province'] == ADDRESSES_FIELD_REQUIRED),
         '#size'           => 30,
         '#title'          => t('State / Province'),
         '#type'           => 'textfield',
       );
-      $form['#validate'][] = '_address_province_validate';
+      $form['#validate'][] = '_addresses_province_validate';
     }
 
     // Adds the City
-    if ($fields['city'] == ADDRESS_FIELD_HIDDEN) {
+    if ($fields['city'] == ADDRESSES_FIELD_HIDDEN) {
       $form['address'][$a]['city'] = array(
         '#type'           => 'hidden',
         '#value'          => isset($values['city']) ? $values['city'] : '',
@@ -627,12 +627,12 @@ function _address_form(&$form, $group = '', $values = array()) {
         '#maxlength'      => 64,
         '#description'    => NULL,
         '#attributes'     => NULL,
-        '#required'       => ($fields['city'] == ADDRESS_FIELD_REQUIRED)
+        '#required'       => ($fields['city'] == ADDRESSES_FIELD_REQUIRED)
       );
     }
 
     // Adds the Streets and the Additional fields
-    if ($fields['street'] == ADDRESS_FIELD_HIDDEN) {
+    if ($fields['street'] == ADDRESSES_FIELD_HIDDEN) {
       $form['address'][$a]['street'] = array(
         '#type'           => 'hidden',
         '#value'          => isset($values['street']) ? $values['street'] : '',
@@ -649,7 +649,7 @@ function _address_form(&$form, $group = '', $values = array()) {
         '#default_value'  => isset($values['street']) ? $values['street'] : '',
         '#size'           => 64,
         '#maxlength'      => 64,
-        '#required'       => ($fields['street'] == ADDRESS_FIELD_REQUIRED)
+        '#required'       => ($fields['street'] == ADDRESSES_FIELD_REQUIRED)
       );
       $form['address'][$a]['additional'] = array(
         '#type'           => 'textfield',
@@ -661,7 +661,7 @@ function _address_form(&$form, $group = '', $values = array()) {
     }
 
     // Adds the Postal Code
-    if ($fields['postal_code'] == ADDRESS_FIELD_HIDDEN) {
+    if ($fields['postal_code'] == ADDRESSES_FIELD_HIDDEN) {
       $form['address'][$a]['postal_code'] = array(
         '#type'           => 'hidden',
         '#value'          => isset($values['postal_code']) ? $values['postal_code'] : '',
@@ -674,13 +674,10 @@ function _address_form(&$form, $group = '', $values = array()) {
         '#default_value'  => isset($values['postal_code']) ? $values['postal_code'] : '',
         '#size'           => 16,
         '#maxlength'      => 16,
-        '#required'       => ($fields['postal_code'] == ADDRESS_FIELD_REQUIRED)
+        '#required'       => ($fields['postal_code'] == ADDRESSES_FIELD_REQUIRED)
       );
     }
   }
-
-  // Set a different layout for address forms
-//   $form['#theme'] = 'address_form';
 }
 
 /**
@@ -694,11 +691,11 @@ function _address_form(&$form, $group = '', $values = array()) {
  *   an array of countrys who have states, where each country contains
  *   an array of states.
  */
-function _address_province_get($country = NULL) {
+function _addresses_province_get($country = NULL) {
   static $provinces;
 
   // Get a list of countries
-  $countries_all = _address_country_get();
+  $countries_all = _addresses_country_get();
 
   // Test if its needed to update the province list
   if (empty($country) and empty($provinces)) {
@@ -714,11 +711,11 @@ function _address_province_get($country = NULL) {
   if (!empty($update)) {
     foreach ($countries as $country_code) {
       // Load country specifice code .inc file if it exists.
-      // For example, if country_code for U.S. == 'us', load 'address.us.inc'
-      include_once ADDRESS_PATH .'/countries/'. $country_code .'.inc';
+      // For example, if country_code for U.S. == 'us', load 'addresses.us.inc'
+      include_once ADDRESSES_PATH .'/countries/'. $country_code .'.inc';
 
       // If the country have a province list, load it
-      $function = 'address_province_list_'. $country_code;
+      $function = 'addresses_province_list_'. $country_code;
       if (function_exists($function)) {
         $provinces[$country_code] = $function();
       }
@@ -742,14 +739,14 @@ function _address_province_get($country = NULL) {
 /**
  * Validate the province field
  */
-function _address_province_validate($form, &$form_state) {
+function _addresses_province_validate($form, &$form_state) {
   // Check if its a valid province.
   // It should be the Province code listed on the
   // given COUNTRY.inc file
   $form_values = $form_state['values'];
 
   foreach (element_children($form_values['address']) as $a) {
-    if ($provinces = _address_province_get($form_values['address'][$a]['country']) and
+    if ($provinces = _addresses_province_get($form_values['address'][$a]['country']) and
         empty($provinces[strtoupper($form_values['address'][$a]['province'])])) {
       form_set_error("address][$a][province", t('Invalid province. Try to use the province code.'));
     }
@@ -821,7 +818,7 @@ function theme_address($address, $hide = array()) {
 
   // Country
   if (!empty($address['country'])) {
-    $countries = _address_country_get();
+    $countries = _addresses_country_get();
     $city_province_postal[] = '<span class="country-name">'. t($countries[$address['country']]) .'</span>';
   }
   // City, Province and Country are all placed on the same line,
@@ -847,7 +844,7 @@ function theme_address($address, $hide = array()) {
  * @param &$form
  *   Array. The form structure
  */
-function theme_address_form(&$form) {
+function theme_addresses_form(&$form) {
   // If the country and state fields are present,
   // enable the extra JS
 //   if (!empty($form['province'])
@@ -855,7 +852,7 @@ function theme_address_form(&$form) {
 //       and $form['country']['#type'] != 'hidden') {
 //     global $base_url;
 //     drupal_add_js(array('absPath' => $base_url), 'setting');
-//     drupal_add_js(drupal_get_path('module', 'address') .'/address.js');
+//     drupal_add_js(drupal_get_path('module', 'address') .'/addresses.js');
 //   }
 
   // The required field notation
@@ -907,7 +904,7 @@ function theme_address_form(&$form) {
  * @return
  *   String. The single line address
  */
-function theme_address_singleline($address) {
+function theme_addresses_singleline($address) {
   // Check if its a valied address
   if (empty($address)) {
     return '';

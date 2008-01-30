@@ -1,17 +1,18 @@
 /**
  * $Id$
- * @file address.js
+ * @author Bruno Massa
+ * @file addresses.js
  * Autocompletion for Province field.
  * This jQuery function will force the Province field
  * to autcomplete the pronvice for a given country.
  */
 
-Drupal.behaviors.address = function(context) {
+Drupal.behaviors.addresses = function(context) {
   // Use this ID to 'simplify' the callings
-  var id = '#edit-address-';
+  var id = '#edit-addresses-';
 
   // Record the original URL
-  var url = Drupal.settings.absPath + '/admin/settings/address/autocomplete/';
+  var url = Drupal.settings.absPath + '/admin/settings/addresses/autocomplete/';
 
   // Get all address
   for (var n = 0; true; n++) {
@@ -28,7 +29,6 @@ Drupal.behaviors.address = function(context) {
 
     // Change the country code everytime the country field changes
     $(id + n +'-country').change(function() {
-// alert(url + $(this).val());
       $(id + n +'-province-autocomplete').val(url + $(this).val());
 //       Drupal.behaviors.autocomplete();
     })

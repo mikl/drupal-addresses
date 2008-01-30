@@ -1,5 +1,5 @@
 ; $Id$
 core            = "6.x"
 description     = "Let your users add addresses to their profiles"
-dependencies[]  = address
+dependencies[]  = addresses
 name            = "User address"

@@ -2,38 +2,38 @@
 /**
  * $Id$
  * @author Bruno Massa
- * @file address.module
+ * @file addresses.module
  * You can associate a geographic address with content and users.
  */
 
-define('ADDRESS_PATH' , drupal_get_path('module', 'address'));
+define('ADDRESSES_PATH' , drupal_get_path('module', 'address'));
 
 /**
  * The address fields can be: displayed, required, hidden or not
  * used at all
  */
-define('ADDRESS_FIELD_NONE',      0);
-define('ADDRESS_FIELD_SHOW',      1);
-define('ADDRESS_FIELD_REQUIRED',  2);
-define('ADDRESS_FIELD_HIDDEN',    3);
+define('ADDRESSES_FIELD_NONE',      0);
+define('ADDRESSES_FIELD_SHOW',      1);
+define('ADDRESSES_FIELD_REQUIRED',  2);
+define('ADDRESSES_FIELD_HIDDEN',    3);
 
 /**
  * Implementation of hook_menu().
  */
-function address_menu() {
+function addresses_menu() {
   $items['admin/settings/address'] = array(
     'description'     => t('Settings for Address module'),
-    'file'            => 'address.inc',
+    'file'            => 'addresses.inc',
     'page callback'   => 'drupal_get_form',
-    'page arguments'  => array('_address_admin'),
-    'title'           => t('Address'),
+    'page arguments'  => array('_addresses_admin'),
+    'title'           => t('Addresses'),
   );
 
   /// @todo use the correct ACCESS PERMISSION
   $items['admin/settings/address/autocomplete'] = array(
     'access'          => TRUE,
-    'file'            => 'address.inc',
-    'page callback'   => '_address_autocomplete',
+    'file'            => 'addresses.inc',
+    'page callback'   => '_addresses_autocomplete',
     'type'            => MENU_CALLBACK
   );
 
@@ -43,19 +43,19 @@ function address_menu() {
 /**
  * Implementation of hook_theme().
  */
-function address_theme() {
+function addresses_theme() {
   return array(
-    'address' => array(
+    'addresses' => array(
       'arguments' => array('address', 'hide'),
-      'file'      => 'address.inc',
+      'file'      => 'addresses.inc',
     ),
-    'address_form' => array(
+    'addresses_form' => array(
       'arguments' => array('form'),
-      'file'      => 'address.inc',
+      'file'      => 'addresses.inc',
     ),
-    'address_address_singleline' => array(
+    'addresses_address_singleline' => array(
       'arguments' => array('addresses'),
-      'file'      => 'address.inc',
+      'file'      => 'addresses.inc',
     ),
   );
 }

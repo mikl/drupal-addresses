@@ -1,0 +1,68 @@
+<?php
+/**
+ * $Id$
+ * @author Bruno Massa
+ * @file addresses_user.module
+ * You can associate a geographic address with users.
+ */
+
+define('ADDRESSES_USER_PATH' , drupal_get_path('module', 'addresses_user'));
+
+/**
+ * Implementation of hook_addresses_fields_api().
+ */
+function addresses_user_addresses_fields_api($op) {
+  if ($op == 'field') {
+  }
+  elseif ($op == 'group') {
+    return array(
+      'user' => array(
+        'is_primary'  => ADDRESSES_FIELD_SHOW,
+        'aname'       => ADDRESSES_FIELD_SHOW,
+        'street'      => ADDRESSES_FIELD_SHOW,
+        'city'        => ADDRESSES_FIELD_SHOW,
+        'province'    => ADDRESSES_FIELD_SHOW,
+        'postal_code' => ADDRESSES_FIELD_SHOW,
+        'country'     => ADDRESSES_FIELD_SHOW
+      )
+    );
+  }
+}
+
+/**
+ * Implementation of hook_menu().
+ */
+function addresses_user_menu() {
+  // Add tab for address book.
+  $items['user/%user/address'] = array(
+    'page callback'   => '_addresses_user_address',
+    'file'            => 'addresses_user.inc',
+    'title'           => t('Address Book'),
+    'type'            => MENU_LOCAL_TASK,
+    'weight'          => 1,
+  );
+
+  return $items;
+}
+
+/**
+ * Implementation of hook_theme().
+ */
+function addresses_user_theme() {
+  return array(
+    'addresses_user_overview' => array(
+      'arguments' => array('uid', 'addresses'),
+      'file'      => 'addresses_user.inc',
+    ),
+  );
+}
+
+/**
+ * Implementation of hook_user().
+ */
+function addresses_user_user($op, &$edit, &$user) {
+  if ($op == 'delete') {
+    include_once ADDRESSES_PATH .'/addresses.inc';
+    _addresses_address_delete($user->uid, 'user');
+  }
+}

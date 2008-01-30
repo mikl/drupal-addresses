@@ -1,5 +1,5 @@
 ; $Id$
 core            = "6.x"
 description     = "Link addresses to contents"
-dependencies[]  = address
+dependencies[]  = addresses
 name            = "Node address"

@@ -2,7 +2,7 @@
 /**
  * $Id$
  * @author Bruno Massa
- * @file address_user.inc
+ * @file addresses_user.inc
  * You can associate a geographic address with users.
  */
 
@@ -18,8 +18,8 @@
  * @param aid
  *   Number (optional). The Address ID
  */
-function _address_user_address($op = NULL, $aid = NULL) {
-  include_once ADDRESS_PATH .'/address.inc';
+function _addresses_user_address($op = NULL, $aid = NULL) {
+  include_once ADDRESSES_PATH .'/addresses.inc';
 
   global $user;
   $uid = $user->uid;
@@ -38,7 +38,7 @@ function _address_user_address($op = NULL, $aid = NULL) {
 
       // If its a existing address, get the whole
       // address information
-      $edit = arg(4) ? _address_address_get(arg(4), 'address') : array();
+      $edit = arg(4) ? _addresses_address_get(arg(4), 'address') : array();
       $edit = $edit[0];
 
       if (empty($edit)) {
@@ -52,30 +52,30 @@ function _address_user_address($op = NULL, $aid = NULL) {
         return drupal_access_denied();
       }
 
-      return drupal_get_form('_address_user_form', array(), $edit);
+      return drupal_get_form('_addresses_user_form', array(), $edit);
 
     case 'delete':
       /// @todo Generates a confirm page before delete
-      _address_address_delete(arg(4));
+      _addresses_address_delete(arg(4));
 
       // Send the user to the address book
       drupal_goto("user/$uid/address");
       break;
 
     default:
-      $addresses = _address_address_get($user->uid, 'user');
-      return theme('address_user_overview', $uid, $addresses);
+      $addresses = _addresses_address_get($user->uid, 'user');
+      return theme('addresses_user_overview', $uid, $addresses);
   }
 }
 
 /**
  * Create a address form for users
  */
-function _address_user_form(&$form_state, $fields = array(), $values = array()) {
+function _addresses_user_form(&$form_state, $fields = array(), $values = array()) {
   $form = array();
 
   // Get the address form builder
-  _address_form($form, 'user', $values);
+  _addresses_form($form, 'user', $values);
 
   // Add the submit button
   if (empty($values['aid'])) {
@@ -97,9 +97,9 @@ function _address_user_form(&$form_state, $fields = array(), $values = array()) 
 /**
  * Submit the address
  */
-function _address_user_form_submit($form, &$form_state) {
+function _addresses_user_form_submit($form, &$form_state) {
   global $user;
-  _address_address_save($form_state['values']['address'][0], $user, 'user');
+  _addresses_address_save($form_state['values']['address'][0], $user, 'user');
 }
 
 /**
@@ -111,7 +111,7 @@ function _address_user_form_submit($form, &$form_state) {
  * @param &$addresses
  *   Array. A list of user addresses
  */
-function theme_address_user_overview($uid, &$addresses) {
+function theme_addresses_user_overview($uid, &$addresses) {
   // Get the current page URL, to force the forms
   // to return here.
   $destination = drupal_get_destination();
