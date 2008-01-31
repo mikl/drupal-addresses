@@ -74,7 +74,7 @@ function _addresses_user_form(&$form_state, $fields = array(), $values = array()
   $form = array();
 
   // Get the address form builder
-  _addresses_form($form, 'user', $values);
+  _addresses_form($form, 'addresses_user', $values);
 
   // Add the submit button
   if (empty($values['aid'])) {
