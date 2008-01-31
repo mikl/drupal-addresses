@@ -9,29 +9,6 @@
 define('ADDRESSES_NODE_PATH' , drupal_get_path('module', 'addresses_node'));
 
 /**
- * Implementation of hook_addresses_fields_api().
- */
-function addresses_node_addresses_fields_api($op) {
-  if ($op == 'field') {
-  }
-  elseif ($op == 'group') {
-    return array(
-      'node' => array(
-        'master_fieldset' => TRUE,
-        'local_fieldset'  => TRUE,
-
-        'aname'           => ADDRESSES_FIELD_SHOW,
-        'street'          => ADDRESSES_FIELD_SHOW,
-        'city'            => ADDRESSES_FIELD_SHOW,
-        'province'        => ADDRESSES_FIELD_SHOW,
-        'postal_code'     => ADDRESSES_FIELD_SHOW,
-        'country'         => ADDRESSES_FIELD_SHOW
-      )
-    );
-  }
-}
-
-/**
  * Implementation of hook_form_alter().
  *
  * It will modify the general behaviour of your node forms.
@@ -44,6 +21,9 @@ function addresses_node_form_alter(&$form, $form_state, $form_id) {
 
     // Get the address form builder
     _addresses_form($form, 'node', $form['#node']->addresses);
+  }
+  elseif ($form_id == 'node_type_delete_confirm') {
+    $form['#submit'][] = '_addresses_node_node_type_delete';
   }
 }
 
@@ -76,4 +56,13 @@ function addresses_node_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL) {
     case 'view':
       break;
   }
+}
+
+/**
+ * Delete all traces of this node type
+ *
+ * @ingroup form
+ */
+function _addresses_node_node_type_delete($form, &$form_state) {
+  variable_del('addresses_node_'. $form_state['values']['type']);
 }
