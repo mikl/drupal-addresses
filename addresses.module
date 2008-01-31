@@ -17,7 +17,6 @@ define('ADDRESSES_FIELD_SHOW',      1);
 define('ADDRESSES_FIELD_REQUIRED',  2);
 define('ADDRESSES_FIELD_HIDDEN',    3);
 
-
 /**
  * Load the full address from a given Address ID or User ID
  *
@@ -56,6 +55,162 @@ function _addresses_address_get($id, $type = 'address') {
   }
 
   return $addresses[$type][$id];
+}
+
+/**
+ * Implementation of hook_addressfieldapi().
+ *
+ * Its a specific Addresses module hook function, to
+ * allow other modules to add more fields to the addresses
+ */
+function addresses_addressesfieldapi(&$fields, &$form) {
+  // Let users select if the address is the primary
+  if ($fields['is_primary'] == ADDRESSES_FIELD_HIDDEN) {
+    $form['addresses'][$a]['is_primary'] = array(
+      '#type'           => 'hidden',
+      '#value'          => isset($values[$a]['is_primary']) ? $values[$a]['is_primarys'] : '',
+    );
+  }
+  elseif (!empty($fields['is_primary'])) {
+    $form['addresses'][$a]['is_primary'] = array(
+      '#type'           => 'checkbox',
+      '#title'          => t('Default address'),
+      '#default_value'  => isset($values[$a]['is_primary']) ? $values[$a]['is_primary'] : ''
+    );
+  }
+
+  // Adds the Address Name (Home, Office, Rio de Janeiro...)
+  if ($fields['aname'] == ADDRESSES_FIELD_HIDDEN) {
+    $form['addresses'][$a]['aname'] = array(
+      '#type'           => 'hidden',
+      '#value'          => isset($values[$a]['aname']) ? $values[$a]['aname'] : '',
+    );
+  }
+  elseif (!empty($fields['aname'])) {
+    $form['addresses'][$a]['aname'] = array(
+      '#type'           => 'textfield',
+      '#title'          => t('Address name'),
+      '#default_value'  => isset($values[$a]['aname']) ? $values[$a]['aname'] : '',
+      '#size'           => 64,
+      '#maxlength'      => 64,
+      '#description'    => t('e.g. a place of business, venue, meeting point'),
+      '#attributes'     => NULL,
+      '#required'       => ($fields['aname'] == ADDRESSES_FIELD_REQUIRED)
+    );
+  }
+
+  // Adds the Country
+  if ($fields['country'] == ADDRESSES_FIELD_HIDDEN) {
+    $form['addresses'][$a]['country'] = array(
+      '#type'           => 'hidden',
+      '#value'          => isset($values[$a]['country']) ? $values[$a]['country'] : '',
+    );
+  }
+  elseif (!empty($fields['country'])) {
+    // Get a list of enabled contries
+    $countries = array('' => '') +
+      _addresses_country_get(FALSE, variable_get('addresses_contry_list', array()));
+
+    $form['addresses'][$a]['country'] = array(
+      '#type'           => 'select',
+      '#title'          => t('Country'),
+      '#default_value'  => isset($values[$a]['country']) ? $values[$a]['country'] : '',
+      '#options'        => $countries,
+      '#description'    => NULL,
+      '#extra'          => 0,
+      '#multiple'       => FALSE,
+      '#required'       => ($fields['country'] == ADDRESSES_FIELD_REQUIRED)
+    );
+  }
+
+  // Adds the Province field
+  if ($fields['province'] == ADDRESSES_FIELD_HIDDEN) {
+    $form['addresses'][$a]['province'] = array(
+      '#type'           => 'hidden',
+      '#value'          => isset($values[$a]['province']) ? $values[$a]['province'] : '',
+    );
+  }
+  elseif (!empty($fields['province'])) {
+    $form['addresses'][$a]['province'] = array(
+//       '#autocomplete_path'  => 'admin/settings/address/autocomplete',
+      '#default_value'  => isset($values[$a]['province']) ? $values[$a]['province'] : '',
+      '#maxlength'      => 64,
+      '#required'       => ($fields['province'] == ADDRESSES_FIELD_REQUIRED),
+      '#size'           => 30,
+      '#title'          => t('State / Province'),
+      '#type'           => 'textfield',
+    );
+    $form['#validate'][] = '_addresses_province_validate';
+  }
+
+  // Adds the City
+  if ($fields['city'] == ADDRESSES_FIELD_HIDDEN) {
+    $form['addresses'][$a]['city'] = array(
+      '#type'           => 'hidden',
+      '#value'          => isset($values[$a]['city']) ? $values[$a]['city'] : '',
+    );
+  }
+  elseif (!empty($fields['city'])) {
+    $form['addresses'][$a]['city'] = array(
+      '#type'           => 'textfield',
+      '#title'          => t('City'),
+      '#default_value'  => isset($values[$a]['city']) ? $values[$a]['city'] : '',
+      '#size'           => 64,
+      '#maxlength'      => 64,
+      '#description'    => NULL,
+      '#attributes'     => NULL,
+      '#required'       => ($fields['city'] == ADDRESSES_FIELD_REQUIRED)
+    );
+  }
+
+  // Adds the Streets and the Additional fields
+  if ($fields['street'] == ADDRESSES_FIELD_HIDDEN) {
+    $form['addresses'][$a]['street'] = array(
+      '#type'           => 'hidden',
+      '#value'          => isset($values[$a]['street']) ? $values[$a]['street'] : '',
+    );
+    $form['addresses'][$a]['additional'] = array(
+      '#type'           => 'hidden',
+      '#value'          => isset($values[$a]['additional']) ? $values[$a]['additional'] : '',
+    );
+  }
+  elseif (!empty($fields['street'])) {
+    $form['addresses'][$a]['street'] = array(
+      '#type'           => 'textfield',
+      '#title'          => t('Street'),
+      '#default_value'  => isset($values[$a]['street']) ? $values[$a]['street'] : '',
+      '#size'           => 64,
+      '#maxlength'      => 64,
+      '#required'       => ($fields['street'] == ADDRESSES_FIELD_REQUIRED)
+    );
+    $form['addresses'][$a]['additional'] = array(
+      '#type'           => 'textfield',
+      '#title'          => t('Additional'),
+      '#default_value'  => isset($values[$a]['additional']) ? $values[$a]['additional'] : '',
+      '#size'           => 64,
+      '#maxlength'      => 64
+    );
+  }
+
+  // Adds the Postal Code
+  if ($fields['postal_code'] == ADDRESSES_FIELD_HIDDEN) {
+    $form['addresses'][$a]['postal_code'] = array(
+      '#type'           => 'hidden',
+      '#value'          => isset($values[$a]['postal_code']) ? $values[$a]['postal_code'] : '',
+    );
+  }
+  elseif (!empty($fields['postal_code'])) {
+    $form['addresses'][$a]['postal_code'] = array(
+      '#type'           => 'textfield',
+      '#title'          => t('Postal code'),
+      '#default_value'  => isset($values[$a]['postal_code']) ? $values[$a]['postal_code'] : '',
+      '#size'           => 16,
+      '#maxlength'      => 16,
+      '#required'       => ($fields['postal_code'] == ADDRESSES_FIELD_REQUIRED)
+    );
+  }
+
+  return $form;
 }
 
 /**
