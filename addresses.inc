@@ -481,7 +481,7 @@ function _addresses_form(&$form, $group, $values = array()) {
   }
   $form['addresses']['#tree'] = TRUE;
 
-  for ($a = 0; $a < 1; $a++) {
+  for ($a = 0; $a < $fields['qty']; $a++) {
     // Address fieldset
     if (!empty($fields['local_fieldset'])) {
       $form['addresses'][$a] = array(
@@ -502,7 +502,7 @@ function _addresses_form(&$form, $group, $values = array()) {
     }
 
     // Get other fields from hook_addressesfieldsapi
-    $form = module_invoke_all('addressesfieldapi', $fields, $form);
+    $form = module_invoke_all('addressesfieldapi', $form, $fields, $values);
   }
 }
 
