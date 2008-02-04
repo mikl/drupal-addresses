@@ -21,7 +21,7 @@ function addresses_province_list_cf() {
     'HMB' => t('Haut-Mbomou'),
     'KEM' => t('Kemo'),
     'LOB' => t('Lobaye'),
-    'MKD' => t('Mambere-Kade�'),
+    'MKD' => t('Mambere-Kadéï'),
     'MBO' => t('Mbomou'),
     'NMM' => t('Nana-Mambere'),
     'OMP' => t("Ombella-M'Poko"),

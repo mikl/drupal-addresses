@@ -39,7 +39,7 @@ function addresses_province_list_cn() {
     '51' => t('Sichuan'),
     '52' => t('Guizhou'),
     '53' => t('Yunnan'),
-    '54' => t('Xizang Z�zh�qu (Tibet)'),
+    '54' => t('Xizang Zizhiqu (Tibet)'),
     '61' => t('Shaanxi'),
     '62' => t('Gansu'),
     '63' => t('Qinghai'),
@@ -48,7 +48,7 @@ function addresses_province_list_cn() {
     '71' => t('Taiwan'),
     '91' => t('Xianggang'),
     '92' => t('Aomen'),
-    '97' => t('Chongq�ng'),
+    '97' => t('Chongqing'),
     '98' => t('Gaoxiong'),
     '99' => t('Taibei')
   );

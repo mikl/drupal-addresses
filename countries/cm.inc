@@ -15,15 +15,15 @@
  */
 function addresses_province_list_cm() {
   return array(
-    'ADA' => t('Adamawa Province (Adamaoua)'),
+    'ADA' => t('Adamawa Province'),
     'CEN' => t('Centre Province'),
-    'EST' => t('East Province (Est)'),
-    'EXN' => t('Extreme North Province (Extr�me-Nord)'),
+    'EST' => t('East Province'),
+    'EXN' => t('Extreme North Province'),
     'LIT' => t('Littoral Province'),
-    'NOR' => t('North Province (Nord)'),
-    'NOT' => t('Northwest Province (Nord-Ouest)'),
-    'OUE' => t('West Province (Ouest)'),
-    'SUD' => t('South Province (Sud)'),
-    'SOU' => t('Southwest Province (Sud-Ouest).')
+    'NOR' => t('North Province'),
+    'NOT' => t('Northwest Province'),
+    'OUE' => t('West Province'),
+    'SUD' => t('South Province'),
+    'SOU' => t('Southwest Province')
   );
 }

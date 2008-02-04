@@ -25,6 +25,6 @@ function addresses_province_list_md() {
     'SO' => t('Soroca'),
     'TI' => t('Tighina'),
     'UN' => t('Ungheni'),
-    'SN' => t('St�nga Nistrului')
+    'SN' => t('Stînga Nistrului')
   );
 }

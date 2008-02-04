@@ -38,7 +38,7 @@ function addresses_province_list_ch() {
     'TI' => t('Ticino'),
     'VD' => t('Vaud'),
     'VS' => t('Valais'),
-    'NE' => t('Neuch�tel'),
+    'NE' => t('Neuchâtel'),
     'GE' => t('Geneva'),
     'JU' => t('Jura')
   );
