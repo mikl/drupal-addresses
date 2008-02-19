@@ -63,7 +63,7 @@ function addresses_user_token_list($type = 'all') {
  *
  * It converts all token string into the real values.
  */
-function addresses_node_token_values($type, $object = NULL) {
+function addresses_user_token_values($type, $object = NULL) {
   if ($type == 'user') {
     global $user;
 
