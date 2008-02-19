@@ -1,0 +1,21 @@
+<?php
+/**
+ * $Id$
+ * @author Bruno Massa
+ * @file addresses_user.install
+ * Installation / uninstallation routines.
+ */
+
+/**
+ * Implementation of hook_install().
+ */
+function addresses_user_install() {
+
+}
+
+/**
+ * Implementation of hook_uninstall().
+ */
+function addresses_user_uninstall() {
+
+}
