@@ -69,15 +69,15 @@ function addresses_node_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL) {
  */
 function addresses_node_token_list($type = 'all') {
   if ($type == 'node' or $type == 'all') {
-    $tokens['addresses']['address-name_N']         = t('Address name (If there are multiple addresses per node, N is the iteration, starting with 0)'. $key);
-    $tokens['addresses']['address-street_N']       = t('Street (If there are multiple addresses per node, N is the iteration, starting with 0)'. $key);
-    $tokens['addresses']['address-additional_N']   = t('Additional (If there are multiple addresses per node, N is the iteration, starting with 0)'. $key);
-    $tokens['addresses']['address-city_N']         = t('City (If there are multiple addresses per node, N is the iteration, starting with 0)'. $key);
-    $tokens['addresses']['address-province_N']     = t('State/Province code (If there are multiple addresses per node, N is the iteration, starting with 0)'. $key);
-    $tokens['addresses']['address-provincename_N'] = t('State/Province name (If there are multiple addresses per node, N is the iteration, starting with 0)'. $key);
-    $tokens['addresses']['address-country_N']      = t('Country code (If there are multiple addresses per node, N is the iteration, starting with 0)'. $key);
-    $tokens['addresses']['address-countryname_N']  = t('Country name (If there are multiple addresses per node, N is the iteration, starting with 0)'. $key);
-    $tokens['addresses']['address-postal_code_N']  = t('Postal code (If there are multiple addresses per node, N is the iteration, starting with 0)'. $key);
+    $tokens['addresses']['address-name_N']         = t('Address name (If there are multiple addresses per node, N is the iteration, starting with 0)');
+    $tokens['addresses']['address-street_N']       = t('Street (If there are multiple addresses per node, N is the iteration, starting with 0)');
+    $tokens['addresses']['address-additional_N']   = t('Additional (If there are multiple addresses per node, N is the iteration, starting with 0)');
+    $tokens['addresses']['address-city_N']         = t('City (If there are multiple addresses per node, N is the iteration, starting with 0)');
+    $tokens['addresses']['address-province_N']     = t('State/Province code (If there are multiple addresses per node, N is the iteration, starting with 0)');
+    $tokens['addresses']['address-provincename_N'] = t('State/Province name (If there are multiple addresses per node, N is the iteration, starting with 0)');
+    $tokens['addresses']['address-country_N']      = t('Country code (If there are multiple addresses per node, N is the iteration, starting with 0)');
+    $tokens['addresses']['address-countryname_N']  = t('Country name (If there are multiple addresses per node, N is the iteration, starting with 0)');
+    $tokens['addresses']['address-postal_code_N']  = t('Postal code (If there are multiple addresses per node, N is the iteration, starting with 0)');
 
     return $tokens;
   }
