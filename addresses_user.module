@@ -37,6 +37,63 @@ function addresses_user_theme() {
 }
 
 /**
+ * Implementation of hook_token_list().
+ *
+ * It basicly list all token values that are allowed to
+ * be used. A brief description is also possible.
+ */
+function addresses_user_token_list($type = 'all') {
+  if ($type == 'node' or $type == 'all') {
+    $tokens['addresses']['address-name']         = t('Address name');
+    $tokens['addresses']['address-street']       = t('Street');
+    $tokens['addresses']['address-additional']   = t('Additional');
+    $tokens['addresses']['address-city']         = t('City');
+    $tokens['addresses']['address-province']     = t('State/Province code');
+    $tokens['addresses']['address-provincename'] = t('State/Province name');
+    $tokens['addresses']['address-country']      = t('Country code');
+    $tokens['addresses']['address-countryname']  = t('Country name');
+    $tokens['addresses']['address-postal_code']  = t('Postal code');
+
+    return $tokens;
+  }
+}
+
+/**
+ * Implementation of hook_token_values().
+ *
+ * It converts all token string into the real values.
+ */
+function addresses_node_token_values($type, $object = NULL) {
+  if ($type == 'user') {
+    global $user;
+
+    if ($address = _addresses_address_get($user->uid, 'user') and !empty($address[0])) {
+      // Include the propper .inc file
+      include_once ADDRESSES_PATH .'/addresses.inc';
+
+      // Get a list of contries
+      $countries = _addresses_country_get(FALSE, variable_get('addresses_contry_list', array()));
+
+      // Get a list of provinces of the given contry
+      $provincenames = _addresses_province_get(strtolower($address[0]['country']));
+
+      // Set a list of Token values
+      $values['address-name']         = check_plain($address[0]['name']);
+      $values['address-street']       = check_plain($address[0]['street']);
+      $values['address-additional']   = check_plain($address[0]['additional']);
+      $values['address-city']         = check_plain($address[0]['city']);
+      $values['address-province']     = check_plain($address[0]['province']);
+      $values['address-provincename'] = check_plain($provincenames[$address[0]['province']]);
+      $values['address-postal_code']  = check_plain($address[0]['postal_code']);
+      $values['address-country']      = check_plain($address[0]['country']);
+      $values['address-countryname']  = check_plain($countries[$address[0]['country']]);
+    }
+
+    return $values;
+  }
+}
+
+/**
  * Implementation of hook_user().
  */
 function addresses_user_user($op, &$edit, &$user) {
