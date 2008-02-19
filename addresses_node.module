@@ -25,6 +25,9 @@ function addresses_node_form_alter(&$form, $form_state, $form_id) {
   elseif ($form_id == 'node_type_delete_confirm') {
     $form['#submit'][] = '_addresses_node_node_type_delete';
   }
+  elseif ($form_id == 'node_type_form') {
+    $form = module_invoke_all('addressesfieldapi', 'settings', $form);
+  }
 }
 
 /**
