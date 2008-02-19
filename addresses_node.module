@@ -62,6 +62,68 @@ function addresses_node_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL) {
 }
 
 /**
+ * Implementation of hook_token_list().
+ *
+ * It basicly list all token values that are allowed to
+ * be used. A brief description is also possible.
+ */
+function addresses_node_token_list($type = 'all') {
+  if ($type == 'node' or $type == 'all') {
+    $tokens['addresses']['address-name_N']         = t('Address name (If there are multiple addresses per node, N is the iteration, starting with 0)'. $key);
+    $tokens['addresses']['address-street_N']       = t('Street (If there are multiple addresses per node, N is the iteration, starting with 0)'. $key);
+    $tokens['addresses']['address-additional_N']   = t('Additional (If there are multiple addresses per node, N is the iteration, starting with 0)'. $key);
+    $tokens['addresses']['address-city_N']         = t('City (If there are multiple addresses per node, N is the iteration, starting with 0)'. $key);
+    $tokens['addresses']['address-province_N']     = t('State/Province code (If there are multiple addresses per node, N is the iteration, starting with 0)'. $key);
+    $tokens['addresses']['address-provincename_N'] = t('State/Province name (If there are multiple addresses per node, N is the iteration, starting with 0)'. $key);
+    $tokens['addresses']['address-country_N']      = t('Country code (If there are multiple addresses per node, N is the iteration, starting with 0)'. $key);
+    $tokens['addresses']['address-countryname_N']  = t('Country name (If there are multiple addresses per node, N is the iteration, starting with 0)'. $key);
+    $tokens['addresses']['address-postal_code_N']  = t('Postal code (If there are multiple addresses per node, N is the iteration, starting with 0)'. $key);
+
+    return $tokens;
+  }
+}
+
+/**
+ * Implementation of hook_token_values().
+ *
+ * It converts all token string into the real values.
+ */
+function addresses_node_token_values($type, $object = NULL) {
+  if ($type == 'node') {
+    // For this case, object is the node.
+    // Its better to set like so to provide a easier
+    // understanding
+    $node = $object;
+
+    if (!empty($node->addresses)) {
+      // Include the propper .inc file
+      include_once ADDRESSES_PATH .'/addresses.inc';
+
+      // Get a list of contries
+      $countries = _addresses_country_get(FALSE, variable_get('addresses_contry_list', array()));
+
+      foreach ($node->addresses as $key => $address) {
+        // Get a list of provinces of the given contry
+        $provincenames = _addresses_province_get(strtolower($address['country']));
+
+        // Set a list of Token values
+        $values['address-name_'. $key]         = check_plain($address['name']);
+        $values['address-street_'. $key]       = check_plain($address['street']);
+        $values['address-additional_'. $key]   = check_plain($address['additional']);
+        $values['address-city_'. $key]         = check_plain($address['city']);
+        $values['address-province_'. $key]     = check_plain($address['province']);
+        $values['address-provincename_'. $key] = check_plain($provincenames[$address['province']]);
+        $values['address-postal_code_'. $key]  = check_plain($address['postal_code']);
+        $values['address-country_'. $key]      = check_plain($address['country']);
+        $values['address-countryname_'. $key]  = check_plain($countries[$address['country']]);
+      }
+    }
+
+    return $values;
+  }
+}
+
+/**
  * Delete all traces of this node type
  *
  * @ingroup form
