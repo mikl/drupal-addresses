@@ -502,7 +502,7 @@ function _addresses_form(&$form, $group, $values = array()) {
     }
 
     // Get other fields from hook_addressesfieldsapi
-    $form = module_invoke_all('addressesfieldapi', $form, $fields, $values);
+    $form = module_invoke_all('addressesfieldapi', 'form', $form, $fields, $values);
   }
 }
 
@@ -569,11 +569,9 @@ function _addresses_province_validate($form, &$form_state) {
   // Check if its a valid province.
   // It should be the Province code listed on the
   // given COUNTRY.inc file
-  $form_values = $form_state['values'];
-
-  foreach (element_children($form_values['addresses']) as $a) {
-    if ($provinces = _addresses_province_get($form_values['addresses'][$a]['country']) and
-        empty($provinces[strtoupper($form_values['addresses'][$a]['province'])])) {
+  foreach (element_children($form_state['values']['addresses']) as $a) {
+    if ($provinces = _addresses_province_get($form_state['values']['addresses'][$a]['country'])
+        and empty($provinces[strtoupper($form_state['values']['addresses'][$a]['province'])])) {
       form_set_error("address][$a][province", t('Invalid province. Try to use the province code.'));
     }
   }
@@ -725,8 +723,9 @@ function theme_addresses_form(&$form) {
 /**
  * Create a single line address. Usefull for some labels.
  *
+ * @ingroup themeable
  * @param $address
- *   Array. The address parts. @see theme_address()
+ *   Array. The address parts. see theme_address()
  * @return
  *   String. The single line address
  */
