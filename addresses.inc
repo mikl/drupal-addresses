@@ -163,18 +163,18 @@ function _addresses_autocomplete($country, $string = '') {
  * or http://www.iso.org/iso/country_codes/iso_3166_code_lists/english_country_names_and_code_elements.htm
  * for further info.
  *
+ * @param $available
+ *   String (optional). A list of contries that are allowed.
  * @param $upper
  *   Boolean (optional). When TRUE, the country codes will
  *   be totally in Upper Case. Its the default ISO code,
  *   but the files and function are all named with lower
  *   case, so its better to return lower case by default
- * @param $available
- *   String (optional). A list of contries that are allowed.
  * @return
  *   Array. 'COUNTRY CODE' => 'COUNTRY CODE' pairs as layed out in
  *   ISO 3166-1 alpha-2
  */
-function _addresses_country_get($upper = FALSE, $available = array()) {
+function _addresses_country_get($available = array(), $upper = FALSE) {
   $countries = array(
     'ad' => t('Andorra'),
     'ae' => t('United Arab Emirates'),

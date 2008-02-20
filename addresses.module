@@ -9,7 +9,7 @@
 define('ADDRESSES_PATH' , drupal_get_path('module', 'addresses'));
 
 /**
- * The address fields can be: displayed, required, hidden or not
+ * Each address field can be: displayed, required, hidden or not
  * used at all
  */
 define('ADDRESSES_FIELD_NONE',      0);
@@ -111,7 +111,7 @@ function addresses_addressesfieldapi($op, &$form, $fields = array(), $values = a
       elseif (!empty($fields['country'])) {
         // Get a list of enabled contries
         $countries = array('' => '') +
-          _addresses_country_get(FALSE, variable_get('addresses_contry_list', array()));
+          _addresses_country_get(variable_get('addresses_contry_list', array()));
 
         $form['addresses'][$a]['country'] = array(
           '#type'           => 'select',
@@ -299,14 +299,17 @@ function addresses_menu() {
  */
 function addresses_theme() {
   return array(
+    // Shows addresses normally
     'addresses' => array(
       'arguments' => array('address', 'hide'),
       'file'      => 'addresses.inc',
     ),
+    // Shows address forms
     'addresses_form' => array(
       'arguments' => array('form'),
       'file'      => 'addresses.inc',
     ),
+    // Shows addresses using a single line
     'addresses_address_singleline' => array(
       'arguments' => array('addresses'),
       'file'      => 'addresses.inc',

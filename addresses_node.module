@@ -103,7 +103,7 @@ function addresses_node_token_values($type, $object = NULL) {
       include_once ADDRESSES_PATH .'/addresses.inc';
 
       // Get a list of contries
-      $countries = _addresses_country_get(FALSE, variable_get('addresses_contry_list', array()));
+      $countries = _addresses_country_get(variable_get('addresses_contry_list', array()));
 
       foreach ($node->addresses as $key => $address) {
         // Get a list of provinces of the given contry
