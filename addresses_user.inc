@@ -73,8 +73,11 @@ function _addresses_user_address($op = NULL, $aid = NULL) {
 function _addresses_user_form(&$form_state, $fields = array(), $values = array()) {
   $form = array();
 
+  // Get the fields used on this address
+  $fields = variable_get('addresses_user', array());
+
   // Get the address form builder
-  _addresses_form($form, 'addresses_user', $values);
+  _addresses_form($form, $fields, $values);
 
   // Add the submit button
   if (empty($values['aid'])) {

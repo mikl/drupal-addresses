@@ -465,10 +465,7 @@ function _addresses_country_get($upper = FALSE, $available = array()) {
  * @see _addresses_form_validate()
  * @see _addresses_form_submit()
  */
-function _addresses_form(&$form, $group, $values = array()) {
-  // Get the fields used on this address
-  $fields = variable_get($group, array());
-
+function _addresses_form(&$form, $fields, $values = array()) {
   // Generate the Global Address fieldset or only the
   // form hierarchy
   if (!empty($fields['master_fieldset'])) {
