@@ -93,8 +93,8 @@ function addresses_addressesfieldapi($op, &$form, $fields = array(), $values = a
           '#type'           => 'textfield',
           '#title'          => t('Address name'),
           '#default_value'  => isset($values[$a]['aname']) ? $values[$a]['aname'] : '',
-          '#size'           => 64,
-          '#maxlength'      => 64,
+          '#size'           => 50,
+          '#maxlength'      => 75,
           '#description'    => t('e.g. a place of business, venue, meeting point'),
           '#attributes'     => NULL,
           '#required'       => ($fields['aname'] == ADDRESSES_FIELD_REQUIRED)
@@ -136,9 +136,9 @@ function addresses_addressesfieldapi($op, &$form, $fields = array(), $values = a
         $form['addresses'][$a]['province'] = array(
     //       '#autocomplete_path'  => 'admin/settings/address/autocomplete',
           '#default_value'  => isset($values[$a]['province']) ? $values[$a]['province'] : '',
-          '#maxlength'      => 64,
+          '#maxlength'      => 16,
           '#required'       => ($fields['province'] == ADDRESSES_FIELD_REQUIRED),
-          '#size'           => 30,
+          '#size'           => 16,
           '#title'          => t('State / Province'),
           '#type'           => 'textfield',
         );
@@ -157,8 +157,8 @@ function addresses_addressesfieldapi($op, &$form, $fields = array(), $values = a
           '#type'           => 'textfield',
           '#title'          => t('City'),
           '#default_value'  => isset($values[$a]['city']) ? $values[$a]['city'] : '',
-          '#size'           => 64,
-          '#maxlength'      => 64,
+          '#size'           => 50,
+          '#maxlength'      => 255,
           '#description'    => NULL,
           '#attributes'     => NULL,
           '#required'       => ($fields['city'] == ADDRESSES_FIELD_REQUIRED)
@@ -181,16 +181,16 @@ function addresses_addressesfieldapi($op, &$form, $fields = array(), $values = a
           '#type'           => 'textfield',
           '#title'          => t('Street'),
           '#default_value'  => isset($values[$a]['street']) ? $values[$a]['street'] : '',
-          '#size'           => 64,
-          '#maxlength'      => 64,
+          '#size'           => 50,
+          '#maxlength'      => 255,
           '#required'       => ($fields['street'] == ADDRESSES_FIELD_REQUIRED)
         );
         $form['addresses'][$a]['additional'] = array(
           '#type'           => 'textfield',
           '#title'          => t('Additional'),
           '#default_value'  => isset($values[$a]['additional']) ? $values[$a]['additional'] : '',
-          '#size'           => 64,
-          '#maxlength'      => 64
+          '#size'           => 50,
+          '#maxlength'      => 255
         );
       }
 
@@ -223,16 +223,23 @@ function addresses_addressesfieldapi($op, &$form, $fields = array(), $values = a
       ADDRESSES_FIELD_HIDDEN    => t('Hidden')
     );
 
+    // List of address fields
+    $form['addresses']['is_primary'] = array(
+      '#default_value'  => empty($fields['is_primary']) ? ADDRESSES_FIELD_NONE : $fields['is_primary'],
+      '#options'        => $options,
+      '#title'          => t('Primary Address Checkbox'),
+      '#type'           => 'radios',
+    );
+    $form['addresses']['aname'] = array(
+      '#default_value'  => empty($fields['aname']) ? ADDRESSES_FIELD_NONE : $fields['aname'],
+      '#options'        => $options,
+      '#title'          => t('Address Name'),
+      '#type'           => 'radios',
+    );
     $form['addresses']['country'] = array(
       '#default_value'  => empty($fields['country']) ? ADDRESSES_FIELD_SHOW : $fields['country'],
       '#options'        => $options,
       '#title'          => t('Country'),
-      '#type'           => 'radios',
-    );
-    $form['addresses']['postal_code'] = array(
-      '#default_value'  => empty($fields['postal_code']) ? ADDRESSES_FIELD_SHOW : $fields['postal_code'],
-      '#options'        => $options,
-      '#title'          => t('Postal code'),
       '#type'           => 'radios',
     );
     $form['addresses']['province'] = array(
@@ -245,6 +252,18 @@ function addresses_addressesfieldapi($op, &$form, $fields = array(), $values = a
       '#default_value'  => empty($fields['city']) ? ADDRESSES_FIELD_SHOW : $fields['city'],
       '#options'        => $options,
       '#title'          => t('City'),
+      '#type'           => 'radios',
+    );
+    $form['addresses']['street'] = array(
+      '#default_value'  => empty($fields['street']) ? ADDRESSES_FIELD_SHOW : $fields['street'],
+      '#options'        => $options,
+      '#title'          => t('Street'),
+      '#type'           => 'radios',
+    );
+    $form['addresses']['postal_code'] = array(
+      '#default_value'  => empty($fields['postal_code']) ? ADDRESSES_FIELD_SHOW : $fields['postal_code'],
+      '#options'        => $options,
+      '#title'          => t('Postal code'),
       '#type'           => 'radios',
     );
   }
