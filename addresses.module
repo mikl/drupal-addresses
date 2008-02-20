@@ -223,25 +223,29 @@ function addresses_addressesfieldapi($op, &$form, $fields = array(), $values = a
       ADDRESSES_FIELD_HIDDEN    => t('Hidden')
     );
 
-    $form['addresses']['contry'] = array(
-      '#options'  => $options,
-      '#title'    => t('Contry'),
-      '#type'     => 'radios',
+    $form['addresses']['country'] = array(
+      '#default_value'  => empty($fields['country']) ? ADDRESSES_FIELD_SHOW : $fields['country'],
+      '#options'        => $options,
+      '#title'          => t('Country'),
+      '#type'           => 'radios',
     );
     $form['addresses']['postal_code'] = array(
-      '#options'  => $options,
-      '#title'    => t('Postal code'),
-      '#type'     => 'radios',
+      '#default_value'  => empty($fields['postal_code']) ? ADDRESSES_FIELD_SHOW : $fields['postal_code'],
+      '#options'        => $options,
+      '#title'          => t('Postal code'),
+      '#type'           => 'radios',
     );
     $form['addresses']['province'] = array(
-      '#options'  => $options,
-      '#title'    => t('Province'),
-      '#type'     => 'radios',
+      '#default_value'  => empty($fields['province']) ? ADDRESSES_FIELD_SHOW : $fields['province'],
+      '#options'        => $options,
+      '#title'          => t('Province'),
+      '#type'           => 'radios',
     );
     $form['addresses']['city'] = array(
-      '#options'  => $options,
-      '#title'    => t('City'),
-      '#type'     => 'radios',
+      '#default_value'  => empty($fields['city']) ? ADDRESSES_FIELD_SHOW : $fields['city'],
+      '#options'        => $options,
+      '#title'          => t('City'),
+      '#type'           => 'radios',
     );
   }
 
