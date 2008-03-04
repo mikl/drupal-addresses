@@ -1,0 +1,605 @@
+<?php
+/**
+ * $Id$
+ * @author Bruno Massa
+ * @file addresses_node_cck.module
+ * You can associate a geographic address with content, using CCK.
+ *
+ * @todo Duscass about double recordsin db.
+ * @todo Implement AJAX for multiple values later.
+ * @todo Ensure this will work with the location API, Views, and GMap
+ * @todo Provide 3 formatters: Address (default), GMap, GMap + Address
+ * @todo Probably replace the 'old' method of adding fields to nodes and users (can use usernodes and/or nodeprofiles instead)
+ * @todo Probably remove the FAPI #theme for the location field--it sucks. Should look like any other field on the form. Let CCK and the Theme worry about anything else.
+ * @todo Remove the location.install stuff for the SQL tables--this is handled by CCK now
+ * BONUS: All the cool stuff you get with CCK widgets
+ * BONUS: Can pre-populate default values per-field
+ */
+
+/**
+ * Implementation of hook_field_info().
+ *
+ * Its a CCK hook to describe the CCK fields.
+ *
+ * @return
+ *   Array. Keyed by field type name. Each element of the array is an
+ *   array with these keys and values:
+ *   - "label": The human-readable label for the field type.
+ */
+function addresses_node_cck_field_info() {
+  return array(
+    'addresses_cck' => array('label' => 'Address'),
+  );
+}
+
+/**
+ * Implementation of hook_field().
+ *
+ * Validate the user's input. At present, only English alphabetic characters
+ * are valid. Would like to add support for other languages.
+ * Or present the data for viewing.
+ *
+ * @param $op
+ *   String. What kind of action is being performed.
+ * @param &$node
+ *   Object. The node the action is being performed on.
+ * @param $field
+ *   The field the action is being performed on.
+ * @param &$node_field
+ *   Array. The contents of the field in this node. Changes to this variable will
+ *   be saved back to the node object.
+ * @return
+ *   String. This varies depending on the operation.
+ *   - The "load" operation should return an object containing extra values
+ *     to be merged into the node object.
+ *   - The "view" operation should return a string containing an HTML
+ *     representation of the field data.
+ *   - The "insert", "update", "delete", "validate", and "submit" operations
+ *     have no return value.
+ */
+function addresses_node_cck_cck_field($op, &$node, $field, &$node_field) {
+  switch ($op) {
+    case 'view':
+      foreach ($node_field as $delta => $item) {
+        $node_field[$delta]['view'] = content_format($field, $item, 'default', $node);
+      }
+      return theme('field', $node, $field, $node_field, $teaser, $page);
+  }
+}
+
+/**
+ * Implementation of hook_field_settings().
+ *
+ * @param $op
+ *   String. The operation to be performed.
+ * @param $field
+ *   Array. The field on which the operation is to be performed.
+ * @return
+ *   Depends. This varies depending on the operation.
+ *   - "form": an array of form elements to add to
+ *     the settings page.
+ *   - "validate": no return value. Use form_set_error().
+ *   - "save": an array of names of form elements to
+ *     be saved in the database.
+ *   - "database columns": an array keyed by column name, with arrays of column
+ *     information as values.
+ *   - "filters": an array whose values are 'filters'
+ *     definitions as expected by views.module (see Views Documentation).
+ *   - "callbacks": an array describing the field's behaviour regarding hook_field
+ *     operations. The array is keyed by hook_field operations ('view', 'validate'...)
+ *     and has the following possible values :
+ *       CONTENT_CALLBACK_NONE     : do nothing for this operation
+ *       CONTENT_CALLBACK_CUSTOM   : use the behaviour in hook_field(operation)
+ *       CONTENT_CALLBACK_DEFAULT  : use content.module's default bahaviour
+ *     Note : currently only the 'view' operation implements this feature.
+ *     All other field operation implemented by the module _will_ be executed
+ *     no matter what.
+ */
+function addresses_node_cck_field_settings($op, $field) {
+  switch ($op) {
+    case 'form':
+      $form = module_invoke_all('addressesfieldapi', 'settings', array(), $field);
+
+      return $form;
+      break;
+
+    case 'save':
+      $form = module_invoke_all('addressesfieldapi', 'settings', array(), $field);
+      foreach (array_keys($form['addresses']) as $field) {
+        $fields[] = $field;
+      }
+      return $fields;
+
+    case 'callbacks':
+      return array(
+        'view' => CONTENT_CALLBACK_CUSTOM,
+      );
+      break;
+
+    case 'database columns':
+      return array(
+        'aname' => array(
+          'type'        => 'varchar',
+          'length'      => 75,
+          'description' => t('The nickname of this address, like "Home", "Office", "Annas appartment"'),
+        ),
+        'street' => array(
+          'type'        => 'varchar',
+          'length'      => 255,
+          'description' => t('Street, number...'),
+        ),
+        'additional' => array(
+          'type'        => 'varchar',
+          'length'      => 255,
+          'description' => t('More info like appartment block, number or address reference'),
+        ),
+        'city' => array(
+          'type'        => 'varchar',
+          'length'      => 255,
+          'description' => t('Name of the city'),
+        ),
+        'province' => array(
+          'type'        => 'varchar',
+          'length'      => 16,
+          'description' => t('Name of the state/province/county/territory'),
+        ),
+        'country' => array(
+          'type'        => 'varchar',
+          'length'      => 2,
+          'description' => t('The ISO alpha 3 code of each country (its a 2-digit code)'),
+        ),
+        'postal_code' => array(
+          'type'        => 'varchar',
+          'length'      => 16,
+          'description' => t('The address postal code (ZIP code for US people)'),
+        ),
+        'is_primary' => array(
+          'type'        => 'int',
+          'size'        => 'tiny',
+          'default'     => 0,
+          'description' => t('Mark it as the primary address or not (default is not)'),
+        )
+      );
+      break;
+  }
+}
+
+/**
+ * Declare information about a formatter.
+ *
+ * @return
+ *   An array keyed by formatter name. Each element of the array is an associative
+ *   array with these keys and values:
+ *   - "label": The human-readable label for the formatter.
+ *   - "field types": An array of field type names that can be displayed using
+ *     this formatter.
+ */
+function addresses_node_cck_field_formatter_info() {
+  return array(
+    'default' => array(
+      'label' => 'Default',
+      'field types' => array('addresses_cck'),
+    ),
+  );
+}
+
+/**
+ * Prepare an individual item for viewing in a browser.
+ *
+ * @param $field
+ *   The field the action is being performed on.
+ * @param $item
+ *   An array, keyed by column, of the data stored for this item in this field.
+ * @param $formatter
+ *   The name of the formatter being used to display the field.
+ * @param $node
+ *   The node object, for context. Will be NULL in some cases.
+ *   Warning : when displaying field retrieved by Views, $node will not
+ *   be a "full-fledged" node object, but an object containg the data returned
+ *   by the Views query (at least nid, vid, changed)
+ * @return
+ *   An HTML string containing the formatted item.
+ *
+ * In a multiple-value field scenario, this function will be called once per
+ * value currently stored in the field. This function is also used as the handler
+ * for viewing a field in a views.module tabular listing.
+ *
+ * It is important that this function at the minimum perform security
+ * transformations such as running check_plain() or check_markup().
+ */
+function addresses_node_cck_field_formatter($field, $item, $formatter, $node) {
+  return theme('address', $item);
+}
+
+/**
+ * Implementation of hook_widget_info().
+ *
+ * Its a CCK hook to describe the CCK widgets.
+ *
+ * @return
+ *   Array. Keyed by widget name. Each element of the array is an
+ *   array with these keys and values:
+ *   - "label": The human-readable label for the widget.
+ *   - "field types": An array of field type names that can be edited using
+ *     this widget.
+ */
+function addresses_node_cck_widget_info() {
+  return array(
+    'addresses_cck' => array(
+      'label'       => 'Address Field',
+      'field types' => array('addresses_cck'),
+    ),
+  );
+}
+
+/**
+ * Implementation of hook_widget_settings().
+ *
+ * @param $op
+ *   The operation to be performed.
+ * @param $widget
+ *   The widget on which the operation is to be performed.
+ * @return
+ *   This varies depending on the operation.
+ *   - "form": an array of form elements to add to the settings page.
+ *   - "validate": no return value. Use form_set_error().
+ *   - "save": an array of names of form elements to be saved in the database.
+ *   - "callbacks": an array describing the widget's behaviour regarding hook_widget
+ *     operations. The array is keyed by hook_widget operations ('form', 'validate'...)
+ *     and has the following possible values :
+ *       CONTENT_CALLBACK_NONE     : do nothing for this operation
+ *       CONTENT_CALLBACK_CUSTOM   : use the behaviour in hook_widget(operation)
+ *       CONTENT_CALLBACK_DEFAULT  : use content.module's default bahaviour
+ *     Note : currently only the 'default value' operation implements this feature.
+ *     All other widget operation implemented by the module _will_ be executed
+ *     no matter what.
+ */
+function addresses_node_cck_widget_settings($op, $widget) {
+}
+
+/**
+ * Implementation of hook_widget().
+ *
+ * @param $form
+ *   the entire form array, $form['#node'] holds node information
+ * @param $form_state
+ *   the form_state, $form_state['values'][$field['field_name']]
+ *   holds the field's form values.
+ * @param $field
+ *   the field array
+ * @param $items
+ *   array of default values for this field
+ * @param $delta
+ *   the order of this item in the array of subelements (0, 1, 2, etc)
+ * @return
+ *   the form item for a single element for this field
+ */
+function addresses_node_cck_widget(&$form, &$form_state, $field, $items, $delta = 0) {
+  // Include the main module file
+  include_once ADDRESSES_PATH .'/addresses.inc';
+
+  $form_fields = module_invoke_all('addressesfieldapi', 'settings', array(), $field);
+
+  foreach (array_keys($form_fields['addresses']) as $form_field) {
+    $fields[$form_field] = $field[$form_field];
+  }
+
+  // @todo Set the number of addresses that can be input
+  // as a variable
+  $fields['qty'] = 1;
+
+  // Show the Address master fieldset
+  $fields['master_fieldset'] = TRUE;
+
+  $form[$field['field_name']][0] = _addresses_form($form, $fields, $form_state['values']['addresses']);
+  $form[$field['field_name']][0]['lid'] = array(
+    '#type'   => 'hidden',
+    '#value'  => (int) $field['lid'],
+  );
+
+  return $form;
+
+  switch ($op) {
+    case 'form':
+      extract(_addresses_node_cck_form_prepare($field, $node_field));
+
+      // Render form.
+      $form = array();
+      $form[$field['field_name']] = array(
+        '#tree' => TRUE,
+        '#type' => 'fieldset',
+        '#title' => $field['widget']['label'],
+        '#weight' => $field['widget']['weight'],
+        '#description' => $field['widget']['description'],
+        '#collapsible' => TRUE,
+        '#collapsed' => FALSE,
+        '#attributes' => array('class' => 'location'),
+      );
+      $prefilled_values ['province'] = $prefilled_values ['country'] . '-' . $prefilled_values ['province'];
+
+      $form[$field['field_name']][0] = addresses_form($fields, $prefilled_values, $required_fields, $suppressed_values);
+      $form[$field['field_name']][0]['lid'] = array(
+        '#type' => 'hidden',
+        '#value' => (int) $field['lid'],
+      );
+
+      return $form;
+
+    case 'validate':
+      // For now, validation just makes sure that required fields have any value
+      // If syntax specific checks are implemented for locations in the future, they can be called as well.
+
+      foreach (addresses_field_names() as $field_name => $display_name) {
+        if ($field['addresses_'. $field_name] == 2 && !(isset($field['required']) && $field['required'] == FALSE)) { // Required
+          if (isset($node_field[0][$field_name]) && !strlen(trim($node_field[0][$field_name]))) {
+            form_set_error('locations][0]['. $field_name, t('The field %field is required.', array('%field' => $display_name)));
+          }
+        }
+
+        $node_field[0][$field_name] = trim($node_field[0][$field_name]);
+      }
+      // Check if the (province, country) pair is valid
+      if (isset($node_field[0]['province']) && !empty($node_field[0]['province']) && $node_field[0]['province'] != 'xx' &&
+          isset($node_field[0]['country']) && !empty($node_field[0]['country']) && $node_field[0]['country'] != 'xx') {
+        $province_list_function = 'addresses_province_list_'. $node_field[0]['country'];
+        if (function_exists($province_list_function)) {
+          $translated_location = addresses_form2api($node_field[0]);
+          if (!in_array($translated_location['province'], array_keys($province_list_function()))) {
+            form_set_error('locations][0][province', t('Please make sure to select a state/province from the country you have selected.'));
+          }
+        }
+        else{
+          form_set_error('locations][0][province', t('Please make sure to select a state/province from the country you have selected.'));
+        }
+      }
+
+      // Check if submitted lat/lon are valid
+      if (user_access('submit latitude/longitude')) {
+        if ((!strlen(trim($node_field[0]['latitude'])) && strlen(trim($node_field[0]['longitude']))) ||
+            (strlen(trim($node_field[0]['latitude'])) && !strlen(trim($node_field[0]['longitude'])))) {
+          form_set_error('locations][0][latitude', t('You must fill out both longitude and latitude or you must leave them both blank.'));
+          form_set_error('locations][0][longitude', NULL);
+        }
+        elseif (strlen(trim($node_field[0]['latitude'])) && strlen(trim($node_field[0]['longitude']))) {
+          if (!is_numeric($node_field[0]['latitude']) || $node_field[0]['latitude'] > 90.0 || $node_field[0]['latitude'] < -90.0) {
+            form_set_error('locations][0][latitude', t('Your latitude must be a numeric value between -90.0 and 90.0.'));
+          }
+
+          if (!is_numeric($node_field[0]['longitude']) || $node_field[0]['longitude'] > 180.0 || $node_field[0]['longitude'] < -180.0) {
+            form_set_error('locations][0][longitude', t('Your longitude must be a numeric value between -180.0 and 180.0.'));
+          }
+        }
+      }
+      return;
+      break;
+
+    case 'submit':
+      extract(_addresses_node_cck_form_prepare($field));
+
+      $node_field[0] = addresses_form2api($node_field[0]);
+
+      if (user_access('submit latitude/longitude')) {
+        $node_field[0]['latitude'] = trim($node_field[0]['latitude']);
+        $node_field[0]['longitude'] = trim($node_field[0]['longitude']);
+        // At this point, we know that the user has permission to submit lat/lons and that the
+        // submitted lat/lons are either blank or valid numbers.  Now, we need to find out determine
+        // the source of these lat/lons since they can either be prefilled from postalcode data
+        // or manually entered by the user.
+        if (!empty($node_field[0]['latitude']) && !empty($node_field[0]['longitude'])) {
+
+          if (($data = addresses_latlon_exact($node_field[0])) &&
+              _addresses_floats_are_equal(floatval($node_field[0]['latitude']), floatval($data['lat'])) &&
+              _addresses_floats_are_equal(floatval($node_field[0]['longitude']), floatval($data['lon']))) {
+            $node_field[0]['lat'] = $node_field[0]['latitude'];
+            $node_field[0]['lon'] = $node_field[0]['longitude'];
+            $node_field[0]['source'] = LOCATION_LATLON_GEOCODED_EXACT;
+          }
+          elseif (($data = addresses_get_postalcode_data($node_field[0])) &&
+              _addresses_floats_are_equal(floatval($node_field[0]['latitude']), floatval($data['lat'])) &&
+              _addresses_floats_are_equal(floatval($node_field[0]['longitude']), floatval($data['lon']))) {
+            $node_field[0]['lat'] = $node_field[0]['latitude'];
+            $node_field[0]['lon'] = $node_field[0]['longitude'];
+            $node_field[0]['source'] = LOCATION_LATLON_GEOCODED_APPROX;
+          }
+          else {
+            $node_field[0]['lat'] = $node_field[0]['latitude'];
+            $node_field[0]['lon'] = $node_field[0]['longitude'];
+            $node_field[0]['source'] = LOCATION_LATLON_USER_SUBMITTED;
+          }
+        }
+        else {
+          if ($data = addresses_latlon_exact($node_field[0])) {
+            $node_field[0]['latitude'] = $data['lat'];
+            $node_field[0]['longitude'] = $data['lon'];
+            $node_field[0]['lat'] = $data['lat'];
+            $node_field[0]['lon'] = $data['lon'];
+            $node_field[0]['source'] = LOCATION_LATLON_GEOCODED_EXACT;
+          }
+          elseif ($data = addresses_get_postalcode_data($node_field[0])) {
+            $node_field[0]['latitude'] = $data['lat'];
+            $node_field[0]['longitude'] = $data['lon'];
+            $node_field[0]['lat'] = $data['lat'];
+            $node_field[0]['lon'] = $data['lon'];
+            $node_field[0]['source'] = LOCATION_LATLON_GEOCODED_APPROX;
+          }
+          else {
+            unset($node_field[0]['latitude']);
+            unset($node_field[0]['longitude']);
+            unset($node_field[0]['lat']);
+            unset($node_field[0]['lon']);
+            $node_field[0]['source'] = LOCATION_LATLON_UNDEFINED;
+          }
+        }
+      }
+      else {
+        // If the user does NOT have permission to explicitly set a lat/lon for the given location, we still want to check
+        // whether this location was previously assigned a lat/lon manually or whether it was determined via geocoding.
+        // If the lat/lon was determined from geocoding, then we will want to update the lat/lon using postal codes.
+        // If the lat/lon was user-submitted, then we don't want to allow the current editor to change the lat/lon
+        if ($node->nid) {
+          $result = db_query("SELECT * FROM {location} WHERE type = 'node' AND eid = %d", $node->nid);
+          if ($location = db_fetch_object($result)) {
+            if ($location->source != LOCATION_LATLON_USER_SUBMITTED) {
+              if ($data = addresses_latlon_exact($node_field[0])) {
+                $node_field[0]['lat'] = $data['lat'];
+                $node_field[0]['lon'] = $data['lon'];
+                $node_field[0]['latitude'] = $data['lat'];
+                $node_field[0]['longitude'] = $data['lon'];
+                $node_field[0]['source'] = LOCATION_LATLON_GEOCODED_EXACT;
+              }
+              elseif ($data = addresses_get_postalcode_data($node->location)) {
+                $node_field[0]['lat'] = $data['lat'];
+                $node_field[0]['lon'] = $data['lon'];
+                $node_field[0]['latitude'] = $data['lat'];
+                $node_field[0]['longitude'] = $data['lon'];
+                $node_field[0]['source'] = LOCATION_LATLON_GEOCODED_APPROX;
+              }
+              else {
+                unset($node_field[0]['lat']);
+                unset($node_field[0]['lon']);
+                unset($node_field[0]['latitude']);
+                unset($node_field[0]['longitude']);
+                $node_field[0]['source'] = LOCATION_LATLON_UNDEFINED;
+              }
+            }
+          }
+        }
+        elseif ($data = addresses_latlon_exact($node_field[0])) {
+          $node_field[0]['lat'] = $data['lat'];
+          $node_field[0]['lon'] = $data['lon'];
+          $node_field[0]['latitude'] = $data['lat'];
+          $node_field[0]['longitude'] = $data['lon'];
+          $node_field[0]['source'] = LOCATION_LATLON_GEOCODED_EXACT;
+        }
+        elseif ($data = addresses_get_postalcode_data($node_field[0])) {
+          $node_field[0]['lat'] = $data['lat'];
+          $node_field[0]['lon'] = $data['lon'];
+          $node_field[0]['latitude'] = $data['lat'];
+          $node_field[0]['longitude'] = $data['lon'];
+          $node_field[0]['source'] = LOCATION_LATLON_GEOCODED_APPROX;
+        }
+        else {
+          unset($node_field[0]['lat']);
+          unset($node_field[0]['lon']);
+          unset($node_field[0]['latitude']);
+          unset($node_field[0]['longitude']);
+          $node_field[0]['source'] = LOCATION_LATLON_UNDEFINED;
+        }
+      }
+
+      // If no city and/or province were supplied in the address (whether the user left it blank or whether the user did not have the option
+      // of entering them) then we want to use the data we have based strictly on the postal code.
+      if ($data = addresses_get_postalcode_data($node_field[0])) {
+        $node_field[0]['city'] = (!isset($node_field[0]['city']) || strlen($node_field[0]['city']) == 0) ? $data['city'] : $node_field[0]['city'];
+        $node_field[0]['province'] = (!isset($node_field[0]['province']) || strlen($node_field[0]['province']) == 0) ? $data['province'] : $node_field[0]['province'];
+      }
+
+      // Finally, if there are multiple forms, it's possible for the default country to still be selected with all the other fields blank, and
+      // very possible that the user didn't intend to fill out that default country value.  So, we use the following rules to determine whether
+      // a location is bogus or not:
+      // IF $index == 0, then
+      //   --> if no other fields are enabled, we consider the country to be important and save the location
+      //   --> if other fields are enabled, but are all left blank, we consider the location empty and don't save
+      //   --> if latitude and longitude coordinates are entered then we save the location
+      // IF $index != 1, then
+      //   --> if country is default and no other fields are saved, we don't save
+      //   --> if latitude and longitude coordinates are entered then we save the location
+
+      $keep = FALSE;
+      if (!empty($node_field[0]['country']) || (!empty($node_field[0]['latitude']) && !empty($node_field[0]['longitude']))) {
+        if (0 == 0) {  // first location
+          if (in_array('country', $required_fields)) {
+            $keep = TRUE;
+          }
+          if (isset($node_field[0]['latitude']) && isset($node_field[0]['longitude'])) {
+            $keep = TRUE;
+          }
+          elseif (count($fields) == 1) {
+            $keep = TRUE;
+          }
+          else {
+            // Else we have to check all the other fields to make sure they're not empty
+            foreach ($fields as $field) {
+              if ($field != 'country' && !empty($node_field[0][$field])) {
+                $keep = TRUE;
+                break;
+              }
+            }
+          }
+        }
+        else {  // not first location
+          foreach ($fields as $field) {
+            if ($field == 'country' && $node_field[0][$field] != variable_get('addresses_default_country', 'us')) {
+              $keep = TRUE;
+              break;
+            }
+            elseif (!empty($node_field[0]['latitude']) && !empty($node_field[0]['longitude'])) {
+              $keep = TRUE;
+              break;
+            }
+            elseif ($field != 'country' && !empty($node_field[0][$field])) {
+              $keep = TRUE;
+              break;
+            }
+          }
+        }
+      }
+
+      if (!$keep) {
+        if ($node_field[0]['lid']) {
+          addresses_invoke_locationapi($node_field[0], 'delete');
+        }
+        $node_field[$delta] = array(); // reset (can't delete first field)
+      }
+      return;
+  }
+}
+
+/**
+ * Determine which fields to show based on hook_field_settings().
+ *
+ * @param Array $field
+ *   A Location CCK field.
+ * @return Array
+ *   An associative array containing $fields, $prefilled_values,
+ *   $required_fields, $suppressed_values for addresses_form().
+ */
+function _addresses_node_cck_form_prepare(&$field, &$node_field = array()) {
+  $fields = $prefilled_values = $required_fields = $suppressed_values = array();
+  foreach (array_keys(addresses_field_names()) as $field_name) {
+    if (!isset($field['addresses_'. $field_name])) {  continue; } // skip if no settings were saved
+    if ($field['addresses_'. $field_name]) { // Allowed
+      $fields[] = $field_name;
+      if ($field['addresses_'. $field_name] == 2 && !(isset($field['required']) && $field['required'] == FALSE)) { // Required
+        $required_fields[] = $field_name;
+      }
+    }
+    if (($value = $node_field[0][$field_name]) || ($value = $field['widget']['default_value'][0][$field_name])) { // Pre-filled
+      $prefilled_values[$field_name] = $value;
+      if ($field['addresses_'. $field_name] == 0) { // Suppressed
+        $suppressed_values[] = $field_name;
+      }
+    }
+  }
+  if (!count($fields)) $fields = array('none'); // default to show no fields
+  return compact('fields', 'prefilled_values', 'required_fields', 'suppressed_values');
+}
+
+/**
+ * Implementation of hook_form_alter().
+ *
+ * Used to hide the Required checkbox in field settings,
+ * since this is managed per location field.
+ */
+function addresses_node_cck_form_alter($form_id, &$form) {
+  if ($form_id == '_content_admin_field' && isset($form['field_type']) && $form['field_type']['#value'] == 'addresses_cck') {
+    $form['field']['multiple'] = array( // hide this until it is supported
+      '#type'   => 'hidden',
+      '#value'  => FALSE,
+    );
+    $form['field']['required'] = array(
+      '#type'   => 'hidden',
+      '#value'  => TRUE,
+    );
+  }
+}
