@@ -1,0 +1,5 @@
+; $Id$
+core            = "6.x"
+description     = "Link addresses to contents using CCK"
+dependencies[]  = addresses
+name            = "Addresses - CCK"
