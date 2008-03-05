@@ -6,8 +6,6 @@
  * You can associate a geographic address with content and users.
  */
 
-define('ADDRESSES_PATH' , drupal_get_path('module', 'addresses'));
-
 /**
  * Each address field can be: displayed, required, hidden or not
  * used at all
