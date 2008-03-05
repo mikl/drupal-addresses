@@ -1,0 +1,5 @@
+; $Id$
+core            = "6.x"
+description     = "Use phone and fax fields on addresses"
+dependencies[]  = addresses
+name            = "Addresses - Phone/Fax"
