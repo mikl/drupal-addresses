@@ -535,7 +535,7 @@ function _addresses_province_get($country = NULL) {
     foreach ($countries as $country_code) {
       // Load country specifice code .inc file if it exists.
       // For example, if country_code for U.S. == 'us', load 'addresses.us.inc'
-      include_once ADDRESSES_PATH .'/countries/'. $country_code .'.inc';
+      include_once drupal_get_path('module', 'addresses') .'/countries/'. $country_code .'.inc';
 
       // If the country have a province list, load it
       $function = 'addresses_province_list_'. $country_code;

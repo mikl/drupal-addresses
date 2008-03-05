@@ -19,7 +19,7 @@
  *   Number (optional). The Address ID
  */
 function _addresses_user_address($op = NULL, $aid = NULL) {
-  include_once ADDRESSES_PATH .'/addresses.inc';
+  include_once drupal_get_path('module', 'addresses') .'/addresses.inc';
 
   global $user;
   $uid = $user->uid;

@@ -69,7 +69,7 @@ function addresses_user_token_values($type, $object = NULL) {
 
     if ($address = _addresses_address_get($user->uid, 'user') and !empty($address[0])) {
       // Include the propper .inc file
-      include_once ADDRESSES_PATH .'/addresses.inc';
+      include_once drupal_get_path('module', 'addresses') .'/addresses.inc';
 
       // Get a list of contries
       $countries = _addresses_country_get(variable_get('addresses_contry_list', array()));
@@ -98,7 +98,7 @@ function addresses_user_token_values($type, $object = NULL) {
  */
 function addresses_user_user($op, &$edit, &$user) {
   if ($op == 'delete') {
-    include_once ADDRESSES_PATH .'/addresses.inc';
+    include_once drupal_get_path('module', 'addresses') .'/addresses.inc';
     _addresses_address_delete($user->uid, 'user');
   }
 }

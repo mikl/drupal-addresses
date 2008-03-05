@@ -17,7 +17,7 @@ function addresses_node_form_alter(&$form, $form_state, $form_id) {
   if (isset($form['type'])
       and isset($form['#node'])
       and $form['type']['#value'] .'_node_form' == $form_id) {
-    include_once ADDRESSES_PATH .'/addresses.inc';
+    include_once drupal_get_path('module', 'addresses') .'/addresses.inc';
 
     // Get the fields used on this address
     $fields = variable_get('node', array());
@@ -39,14 +39,14 @@ function addresses_node_form_alter(&$form, $form_state, $form_id) {
 function addresses_node_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL) {
   switch ($op) {
     case 'delete':
-      include_once ADDRESSES_PATH .'/addresses.inc';
+      include_once drupal_get_path('module', 'addresses') .'/addresses.inc';
 
       // Delete all addresses linked to this node
       _addresses_address_delete($node->nid, 'node');
       break;
     case 'update':
     case 'insert':
-      include_once ADDRESSES_PATH .'/addresses.inc';
+      include_once drupal_get_path('module', 'addresses') .'/addresses.inc';
 
       // Save each address
       foreach ($node->addresses as $address) {
@@ -54,7 +54,7 @@ function addresses_node_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL) {
       }
       break;
     case 'load':
-      include_once ADDRESSES_PATH .'/addresses.inc';
+      include_once drupal_get_path('module', 'addresses') .'/addresses.inc';
 
       // Load all all addresses linked to this node
       $output['addresses'] = _addresses_address_get($node->nid, 'node');
@@ -100,7 +100,7 @@ function addresses_node_token_values($type, $object = NULL) {
 
     if (!empty($node->addresses)) {
       // Include the propper .inc file
-      include_once ADDRESSES_PATH .'/addresses.inc';
+      include_once drupal_get_path('module', 'addresses') .'/addresses.inc';
 
       // Get a list of contries
       $countries = _addresses_country_get(variable_get('addresses_contry_list', array()));
