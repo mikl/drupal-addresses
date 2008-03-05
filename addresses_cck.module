@@ -35,10 +35,6 @@ function addresses_cck_field_info() {
     'addresses_cck' => array(
       'label'       => 'Address',
       'description' => t('Store addresses.'),
-      'callbacks'   => array(
-        'tables'      => CONTENT_CALLBACK_DEFAULT,
-        'arguments'   => CONTENT_CALLBACK_DEFAULT
-      ),
     ),
   );
 }
@@ -230,60 +226,46 @@ function addresses_cck_field_settings($op, $field) {
 function addresses_cck_field_formatter_info() {
   return array(
     'default' => array(
-      'label' => 'Default',
+      'label'       => 'Default',
+      'field types' => array('addresses_cck'),
+    ),
+    'single_line' => array(
+      'label'       => 'Single Line',
       'field types' => array('addresses_cck'),
     ),
   );
 }
 
 /**
- * Prepare an individual item for viewing in a browser.
+ * Implementation of hook_form_alter().
  *
- * In a multiple-value field scenario, this function will be called once per
- * value currently stored in the field. This function is also used as the handler
- * for viewing a field in a views.module tabular listing.
- *
- * It is important that this function at the minimum perform security
- * transformations such as running check_plain() or check_markup().
- *
- * @param $field
- *   Array. The field the action is being performed on.
- * @param $item
- *   Array. Keyed by column, of the data stored for this item in this field.
- * @param $formatter
- *   String. The name of the formatter being used to display the field.
- * @param $node
- *   Object or NULL. Warning : when displaying field retrieved by Views,
- *   $node will not be a "full-fledged" node object, but an object containg
- *   the data returned by the Views query (at least nid, vid, changed)
- * @return
- *   String. An HTML string containing the formatted item.
+ * Used to hide the Required checkbox in field settings,
+ * since this is managed per location field.
  */
-function addresses_cck_field_formatter($field, $item, $formatter, $node) {
-  return theme('address', $item);
+function addresses_cck_form_alter($form_id, &$form) {
+  if ($form_id == '_content_admin_field' and isset($form['field_type']) and $form['field_type']['#value'] == 'addresses_cck') {
+    // Hide this until it is supported
+    $form['field']['multiple'] = array(
+      '#type'   => 'hidden',
+      '#value'  => FALSE,
+    );
+    $form['field']['required'] = array(
+      '#type'   => 'hidden',
+      '#value'  => TRUE,
+    );
+  }
 }
 
 /**
- * Implementation of hook_widget_info().
- *
- * Its a CCK hook to describe the CCK widgets.
- *
- * @return
- *   Array. Keyed by widget name. Each element of the array is an
- *   array with these keys and values:
- *   - "label": The human-readable label for the widget.
- *   - "field types": An array of field type names that can be edited using
- *     this widget.
+ * Implementation of hook_theme().
  */
-function addresses_cck_widget_info() {
+function addresses_cck_theme() {
   return array(
-    'addresses_cck' => array(
-      'label'       => 'Address Field',
-      'field types' => array('addresses_cck'),
-      'multiple values' => CONTENT_HANDLE_CORE,
-      'callbacks' => array(
-        'default value' => CONTENT_CALLBACK_DEFAULT,
-        ),
+    'addresses_cck_formatter_default' => array(
+      'arguments' => array('element'),
+    ),
+    'addresses_cck_formatter_single_line' => array(
+      'arguments' => array('element'),
     ),
   );
 }
@@ -332,21 +314,46 @@ function addresses_cck_widget(&$form, &$form_state, $field, $items, $delta = 0) 
 }
 
 /**
- * Implementation of hook_form_alter().
+ * Implementation of hook_widget_info().
  *
- * Used to hide the Required checkbox in field settings,
- * since this is managed per location field.
+ * Its a CCK hook to describe the CCK widgets.
+ *
+ * @return
+ *   Array. Keyed by widget name. Each element of the array is an
+ *   array with these keys and values:
+ *   - "label": The human-readable label for the widget.
+ *   - "field types": An array of field type names that can be edited using
+ *     this widget.
  */
-function addresses_cck_form_alter($form_id, &$form) {
-  if ($form_id == '_content_admin_field' and isset($form['field_type']) and $form['field_type']['#value'] == 'addresses_cck') {
-    // Hide this until it is supported
-    $form['field']['multiple'] = array(
-      '#type'   => 'hidden',
-      '#value'  => FALSE,
-    );
-    $form['field']['required'] = array(
-      '#type'   => 'hidden',
-      '#value'  => TRUE,
-    );
-  }
+function addresses_cck_widget_info() {
+  return array(
+    'addresses_cck' => array(
+      'label'       => 'Address Field',
+      'field types' => array('addresses_cck'),
+    ),
+  );
+}
+
+/**
+ * Show the Address using the default view.
+ * @ingroup themable
+ */
+function theme_addresses_cck_formatter_default($element) {
+  // Include the important .inc file
+  include drupal_get_path('module', 'addresses') .'/addresses.inc';
+
+  // Print the address
+  return theme_addresses($element['#item']);
+}
+
+/**
+ * Show the Address using the Single Line view.
+ * @ingroup themable
+ */
+function theme_addresses_cck_formatter_single_line($element) {
+  // Include the important .inc file
+  include drupal_get_path('module', 'addresses') .'/addresses.inc';
+
+  // Print the address using the one-line only theme
+  return theme_addresses_singleline($element['#item']);
 }
