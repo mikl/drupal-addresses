@@ -61,18 +61,18 @@ function _addresses_address_get($id, $type = 'address') {
  * Its a specific Addresses module hook function, to
  * allow other modules to add more fields to the addresses
  */
-function addresses_addressesfieldapi($op, &$form, $fields = array(), $values = array()) {
+function addresses_addressesfieldapi($op, $fields = array(), $values = array()) {
   if ($op == 'form') {
     for ($a = 0; $a < $fields['qty']; $a++) {
       // Let users select if the address is the primary
       if ($fields['is_primary'] == ADDRESSES_FIELD_HIDDEN) {
-        $form['addresses'][$a]['is_primary'] = array(
+        $form[$a]['is_primary'] = array(
           '#type'           => 'hidden',
           '#value'          => isset($values[$a]['is_primary']) ? $values[$a]['is_primarys'] : '',
         );
       }
       elseif (!empty($fields['is_primary'])) {
-        $form['addresses'][$a]['is_primary'] = array(
+        $form[$a]['is_primary'] = array(
           '#type'           => 'checkbox',
           '#title'          => t('Default address'),
           '#default_value'  => isset($values[$a]['is_primary']) ? $values[$a]['is_primary'] : ''
@@ -81,13 +81,13 @@ function addresses_addressesfieldapi($op, &$form, $fields = array(), $values = a
 
       // Adds the Address Name (Home, Office, Rio de Janeiro...)
       if ($fields['aname'] == ADDRESSES_FIELD_HIDDEN) {
-        $form['addresses'][$a]['aname'] = array(
+        $form[$a]['aname'] = array(
           '#type'           => 'hidden',
           '#value'          => isset($values[$a]['aname']) ? $values[$a]['aname'] : '',
         );
       }
       elseif (!empty($fields['aname'])) {
-        $form['addresses'][$a]['aname'] = array(
+        $form[$a]['aname'] = array(
           '#type'           => 'textfield',
           '#title'          => t('Address name'),
           '#default_value'  => isset($values[$a]['aname']) ? $values[$a]['aname'] : '',
@@ -101,7 +101,7 @@ function addresses_addressesfieldapi($op, &$form, $fields = array(), $values = a
 
       // Adds the Country
       if ($fields['country'] == ADDRESSES_FIELD_HIDDEN) {
-        $form['addresses'][$a]['country'] = array(
+        $form[$a]['country'] = array(
           '#type'           => 'hidden',
           '#value'          => isset($values[$a]['country']) ? $values[$a]['country'] : '',
         );
@@ -111,7 +111,7 @@ function addresses_addressesfieldapi($op, &$form, $fields = array(), $values = a
         $countries = array('' => '') +
           _addresses_country_get(variable_get('addresses_contry_list', array()));
 
-        $form['addresses'][$a]['country'] = array(
+        $form[$a]['country'] = array(
           '#type'           => 'select',
           '#title'          => t('Country'),
           '#default_value'  => isset($values[$a]['country']) ? $values[$a]['country'] : '',
@@ -125,13 +125,13 @@ function addresses_addressesfieldapi($op, &$form, $fields = array(), $values = a
 
       // Adds the Province field
       if ($fields['province'] == ADDRESSES_FIELD_HIDDEN) {
-        $form['addresses'][$a]['province'] = array(
+        $form[$a]['province'] = array(
           '#type'           => 'hidden',
           '#value'          => isset($values[$a]['province']) ? $values[$a]['province'] : '',
         );
       }
       elseif (!empty($fields['province'])) {
-        $form['addresses'][$a]['province'] = array(
+        $form[$a]['province'] = array(
     //       '#autocomplete_path'  => 'admin/settings/address/autocomplete',
           '#default_value'  => isset($values[$a]['province']) ? $values[$a]['province'] : '',
           '#maxlength'      => 16,
@@ -145,13 +145,13 @@ function addresses_addressesfieldapi($op, &$form, $fields = array(), $values = a
 
       // Adds the City
       if ($fields['city'] == ADDRESSES_FIELD_HIDDEN) {
-        $form['addresses'][$a]['city'] = array(
+        $form[$a]['city'] = array(
           '#type'           => 'hidden',
           '#value'          => isset($values[$a]['city']) ? $values[$a]['city'] : '',
         );
       }
       elseif (!empty($fields['city'])) {
-        $form['addresses'][$a]['city'] = array(
+        $form[$a]['city'] = array(
           '#type'           => 'textfield',
           '#title'          => t('City'),
           '#default_value'  => isset($values[$a]['city']) ? $values[$a]['city'] : '',
@@ -165,17 +165,17 @@ function addresses_addressesfieldapi($op, &$form, $fields = array(), $values = a
 
       // Adds the Streets and the Additional fields
       if ($fields['street'] == ADDRESSES_FIELD_HIDDEN) {
-        $form['addresses'][$a]['street'] = array(
+        $form[$a]['street'] = array(
           '#type'           => 'hidden',
           '#value'          => isset($values[$a]['street']) ? $values[$a]['street'] : '',
         );
-        $form['addresses'][$a]['additional'] = array(
+        $form[$a]['additional'] = array(
           '#type'           => 'hidden',
           '#value'          => isset($values[$a]['additional']) ? $values[$a]['additional'] : '',
         );
       }
       elseif (!empty($fields['street'])) {
-        $form['addresses'][$a]['street'] = array(
+        $form[$a]['street'] = array(
           '#type'           => 'textfield',
           '#title'          => t('Street'),
           '#default_value'  => isset($values[$a]['street']) ? $values[$a]['street'] : '',
@@ -183,7 +183,7 @@ function addresses_addressesfieldapi($op, &$form, $fields = array(), $values = a
           '#maxlength'      => 255,
           '#required'       => ($fields['street'] == ADDRESSES_FIELD_REQUIRED)
         );
-        $form['addresses'][$a]['additional'] = array(
+        $form[$a]['additional'] = array(
           '#type'           => 'textfield',
           '#title'          => t('Additional'),
           '#default_value'  => isset($values[$a]['additional']) ? $values[$a]['additional'] : '',
@@ -194,13 +194,13 @@ function addresses_addressesfieldapi($op, &$form, $fields = array(), $values = a
 
       // Adds the Postal Code
       if ($fields['postal_code'] == ADDRESSES_FIELD_HIDDEN) {
-        $form['addresses'][$a]['postal_code'] = array(
+        $form[$a]['postal_code'] = array(
           '#type'           => 'hidden',
           '#value'          => isset($values[$a]['postal_code']) ? $values[$a]['postal_code'] : '',
         );
       }
       elseif (!empty($fields['postal_code'])) {
-        $form['addresses'][$a]['postal_code'] = array(
+        $form[$a]['postal_code'] = array(
           '#type'           => 'textfield',
           '#title'          => t('Postal code'),
           '#default_value'  => isset($values[$a]['postal_code']) ? $values[$a]['postal_code'] : '',
@@ -210,6 +210,7 @@ function addresses_addressesfieldapi($op, &$form, $fields = array(), $values = a
         );
       }
     }
+    return $form;
   }
   elseif ($op == 'settings') {
     // This list of options are used many times, so its

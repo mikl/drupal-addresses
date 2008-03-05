@@ -499,7 +499,10 @@ function _addresses_form(&$form, $fields, $values = array()) {
     }
 
     // Get other fields from hook_addressesfieldsapi
-    $form = module_invoke_all('addressesfieldapi', 'form', $form, $fields, $values);
+    $form['addresses'] = array_merge(
+      $form['addresses'],
+      module_invoke_all('addressesfieldapi', 'form', $fields, $values)
+    );
   }
 }
 

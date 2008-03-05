@@ -9,8 +9,11 @@
  * @todo Implement AJAX for multiple values later.
  * @todo Ensure this will work with the location API, Views, and GMap
  * @todo Provide 3 formatters: Address (default), GMap, GMap + Address
- * @todo Probably replace the 'old' method of adding fields to nodes and users (can use usernodes and/or nodeprofiles instead)
- * @todo Probably remove the FAPI #theme for the location field--it sucks. Should look like any other field on the form. Let CCK and the Theme worry about anything else.
+ * @todo Probably replace the 'old' method of adding fields to nodes and users
+ *   (can use usernodes and/or nodeprofiles instead)
+ * @todo Probably remove the FAPI #theme for the location field--it sucks.
+ *   Should look like any other field on the form. Let CCK and the
+ *   Theme worry about anything else.
  * @todo Remove the location.install stuff for the SQL tables--this is handled by CCK now
  * BONUS: All the cool stuff you get with CCK widgets
  * BONUS: Can pre-populate default values per-field
@@ -65,6 +68,7 @@ function addresses_cck_field_info() {
  *     have no return value.
  */
 function addresses_cck_cck_field($op, &$node, $field, &$node_field) {
+z('asdfasdf');
   switch ($op) {
     case 'view':
       foreach ($node_field as $delta => $item) {
@@ -102,6 +106,31 @@ function addresses_cck_field($op, &$node, $field, &$items, $teaser, $page) {
     case 'sanitize':
       break;
   }
+}
+
+/**
+ * Implementation of hook_formatter_info().
+ *
+ * Its a CCK hook to declare information about a formatter.
+ *
+ * @return
+ *   Array. Keyed by formatter name, each element of the array is an associative
+ *   array with these keys and values:
+ *   - "label": The human-readable label for the formatter.
+ *   - "field types": An array of field type names that can be displayed using
+ *     this formatter.
+ */
+function addresses_cck_field_formatter_info() {
+  return array(
+    'default' => array(
+      'label'       => 'Default',
+      'field types' => array('addresses_cck'),
+    ),
+    'single_line' => array(
+      'label'       => 'Single Line',
+      'field types' => array('addresses_cck'),
+    ),
+  );
 }
 
 /**
@@ -212,31 +241,6 @@ function addresses_cck_field_settings($op, $field) {
 }
 
 /**
- * Implementation of hook_formatter_info().
- *
- * Its a CCK hook to declare information about a formatter.
- *
- * @return
- *   Array. Keyed by formatter name, each element of the array is an associative
- *   array with these keys and values:
- *   - "label": The human-readable label for the formatter.
- *   - "field types": An array of field type names that can be displayed using
- *     this formatter.
- */
-function addresses_cck_field_formatter_info() {
-  return array(
-    'default' => array(
-      'label'       => 'Default',
-      'field types' => array('addresses_cck'),
-    ),
-    'single_line' => array(
-      'label'       => 'Single Line',
-      'field types' => array('addresses_cck'),
-    ),
-  );
-}
-
-/**
  * Implementation of hook_form_alter().
  *
  * Used to hide the Required checkbox in field settings,
@@ -289,7 +293,7 @@ function addresses_cck_theme() {
  */
 function addresses_cck_widget(&$form, &$form_state, $field, $items, $delta = 0) {
   // Include the main module file
-  include_once ADDRESSES_PATH .'/addresses.inc';
+  include_once drupal_get_path('module', 'addresses') .'/addresses.inc';
 
   $form_fields = module_invoke_all('addressesfieldapi', 'settings', array(), $field);
 
@@ -297,6 +301,7 @@ function addresses_cck_widget(&$form, &$form_state, $field, $items, $delta = 0) 
     $fields[$form_field] = $field[$form_field];
   }
 
+// z($fields);
   // @todo Set the number of addresses that can be input
   // as a variable
   $fields['qty'] = 1;
