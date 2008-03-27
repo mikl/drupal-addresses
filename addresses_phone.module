@@ -14,44 +14,42 @@
  */
 function addresses_phone_addressesfieldapi($op, $fields = array(), $values = array()) {
   if ($op == 'form') {
-    for ($a = 0; $a < $fields['qty']; $a++) {
-      // Telephone number
-      if ($fields['phone'] == ADDRESSES_FIELD_HIDDEN) {
-        $form[$a]['phone'] = array(
-          '#type'           => 'hidden',
-          '#value'          => isset($values[$a]['phone']) ? $values[$a]['phone'] : '',
-        );
-      }
-      elseif (!empty($fields['phone'])) {
-        $form[$a]['phone'] = array(
-          '#type'           => 'textfield',
-          '#title'          => t('Phone'),
-          '#default_value'  => isset($values[$a]['phone']) ? $values[$a]['phone'] : '',
-          '#size'           => 50,
-          '#maxlength'      => 75,
-          '#attributes'     => NULL,
-          '#required'       => ($fields['phone'] == ADDRESSES_FIELD_REQUIRED)
-        );
-      }
+    // Telephone number
+    if ($fields['phone'] == ADDRESSES_FIELD_HIDDEN) {
+      $form['phone'] = array(
+        '#type'           => 'hidden',
+        '#value'          => isset($values['phone']) ? $values['phone'] : '',
+      );
+    }
+    elseif (!empty($fields['phone'])) {
+      $form['phone'] = array(
+        '#type'           => 'textfield',
+        '#title'          => t('Phone'),
+        '#default_value'  => isset($values['phone']) ? $values['phone'] : '',
+        '#size'           => 50,
+        '#maxlength'      => 75,
+        '#attributes'     => NULL,
+        '#required'       => ($fields['phone'] == ADDRESSES_FIELD_REQUIRED)
+      );
+    }
 
-      // Fax number
-      if ($fields['fax'] == ADDRESSES_FIELD_HIDDEN) {
-        $form[$a]['fax'] = array(
-          '#type'           => 'hidden',
-          '#value'          => isset($values[$a]['fax']) ? $values[$a]['fax'] : '',
-        );
-      }
-      elseif (!empty($fields['fax'])) {
-        $form[$a]['fax'] = array(
-          '#type'           => 'textfield',
-          '#title'          => t('Fax'),
-          '#default_value'  => isset($values[$a]['fax']) ? $values[$a]['fax'] : '',
-          '#size'           => 50,
-          '#maxlength'      => 75,
-          '#attributes'     => NULL,
-          '#required'       => ($fields['fax'] == ADDRESSES_FIELD_REQUIRED)
-        );
-      }
+    // Fax number
+    if ($fields['fax'] == ADDRESSES_FIELD_HIDDEN) {
+      $form['fax'] = array(
+        '#type'           => 'hidden',
+        '#value'          => isset($values['fax']) ? $values['fax'] : '',
+      );
+    }
+    elseif (!empty($fields['fax'])) {
+      $form['fax'] = array(
+        '#type'           => 'textfield',
+        '#title'          => t('Fax'),
+        '#default_value'  => isset($values['fax']) ? $values['fax'] : '',
+        '#size'           => 50,
+        '#maxlength'      => 75,
+        '#attributes'     => NULL,
+        '#required'       => ($fields['fax'] == ADDRESSES_FIELD_REQUIRED)
+      );
     }
 
     return $form;
