@@ -51,7 +51,7 @@ function _addresses_user_address($op = NULL, $aid = NULL) {
         return drupal_access_denied();
       }
 
-      return drupal_get_form('_addresses_user_form', array(), $edit);
+      return drupal_get_form('_addresses_user_form', array(), $edit[0]);
 
     case 'delete':
       /// @todo Generates a confirm page before delete
@@ -76,8 +76,20 @@ function _addresses_user_form(&$form_state, $fields = array(), $values = array()
   // Get the fields used on this address
   $fields = variable_get('addresses_user', array());
 
+  // If its the very first time its loaded, use all fields
+  if (empty($fields)) {
+    $settings = module_invoke_all('addressesfieldapi', 'settings');
+    foreach (array_keys($settings['addresses']) as $index) {
+      $fields[$index] = ADDRESSES_FIELD_SHOW;
+    }
+  }
+
   // Get the address form builder
-  _addresses_form($form, $fields, $values);
+  $form['addresses'] = array(
+    '#default_value'  => $values,
+    '#fields'         => $fields,
+    '#type'           => 'addresses_elements',
+  );
 
   // Add the submit button
   if (empty($values['aid'])) {
@@ -103,7 +115,7 @@ function _addresses_user_form(&$form_state, $fields = array(), $values = array()
  */
 function _addresses_user_form_submit($form, &$form_state) {
   global $user;
-  _addresses_address_save($form_state['values']['addresses'][0], $user->uid, 'user');
+  _addresses_address_save($form_state['values']['addresses'], $user->uid, 'user');
 }
 
 /**
