@@ -478,7 +478,12 @@ function _addresses_form(&$form, $fields, $values = array()) {
   }
   $form['addresses']['#tree'] = TRUE;
 
-  for ($a = 0; $a < $fields['qty']; $a++) {
+  // At least one address form should exist
+  if (empty($fields['qty'])) {
+    $fields['qty'] = 1;
+  }
+
+  for ($a = 1; $a <= $fields['qty']; $a++) {
     // Address fieldset
     if (!empty($fields['local_fieldset'])) {
       $form['addresses'][$a] = array(
@@ -504,6 +509,8 @@ function _addresses_form(&$form, $fields, $values = array()) {
       module_invoke_all('addressesfieldapi', 'form', $fields, $values)
     );
   }
+
+  return $form;
 }
 
 /**
@@ -659,6 +666,21 @@ function theme_addresses($address, $hide = array()) {
   $output .= '</div>';
 
   return $output;
+}
+
+/**
+ * Format a date selection element.
+ *
+ * @param $element
+ *   An associative array containing the properties of the element.
+ *   Properties used: title, value, options, description, required and attributes.
+ * @return
+ *   A themed HTML string representing the date selection boxes.
+ *
+ * @ingroup themeable
+ */
+function theme_addresses_elements($element) {
+  return theme('form_element', $element, '<div class="container-inline">'. $element['#children'] .'</div>');
 }
 
 /**
