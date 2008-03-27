@@ -6,8 +6,6 @@
  * You can associate a geographic address with users.
  */
 
-define('ADDRESSES_USER_PATH' , drupal_get_path('module', 'addresses_user'));
-
 /**
  * Implementation of hook_menu().
  */
