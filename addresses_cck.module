@@ -5,19 +5,20 @@
  * @file addresses_cck.module
  * You can associate a geographic address with content, using CCK.
  *
- * @todo Duscass about double recordsin db.
- * @todo Implement AJAX for multiple values later.
- * @todo Ensure this will work with the location API, Views, and GMap
- * @todo Provide 3 formatters: Address (default), GMap, GMap + Address
+ * @todo Implement AJAX for multiple values.
+ * @todo Ensure this will work with the Addresses, Views, and GMap
  * @todo Probably replace the 'old' method of adding fields to nodes and users
  *   (can use usernodes and/or nodeprofiles instead)
- * @todo Probably remove the FAPI #theme for the location field--it sucks.
- *   Should look like any other field on the form. Let CCK and the
- *   Theme worry about anything else.
- * @todo Remove the location.install stuff for the SQL tables--this is handled by CCK now
- * BONUS: All the cool stuff you get with CCK widgets
- * BONUS: Can pre-populate default values per-field
+ * @todo All the cool stuff you get with CCK widgets
+ * @todo Can pre-populate default values per-field
  */
+
+/**
+ * Implementation of hook_content_is_empty().
+ */
+function addresses_cck_content_is_empty($item, $field) {
+  return FALSE;
+}
 
 /**
  * Implementation of hook_field_info().
@@ -38,74 +39,12 @@ function addresses_cck_field_info() {
     'addresses_cck' => array(
       'label'       => 'Address',
       'description' => t('Store addresses.'),
+      'callbacks'   => array(
+        'tables'    => CONTENT_CALLBACK_DEFAULT,
+        'arguments' => CONTENT_CALLBACK_DEFAULT,
+        ),
     ),
   );
-}
-
-/**
- * Implementation of hook_field().
- *
- * A CCK hook to validate the user's input. At present, only English
- * alphabetic characters are valid. Would like to add support for
- * other languages. Or present the data for viewing.
- *
- * @param $op
- *   String. What kind of action is being performed: "view"
- * @param &$node
- *   Object. The node the action is being performed on.
- * @param $field
- *   Array. The field the action is being performed on.
- * @param &$node_field
- *   Array. The contents of the field in this node. Changes to this variable
- *   will be saved back to the node object.
- * @return
- *   Depends. This varies depending on the operation.
- *   - The "load" operation should return an object containing extra values
- *     to be merged into the node object.
- *   - The "view" operation should return a string containing an HTML
- *     representation of the field data.
- *   - The "insert", "update", "delete", "validate", and "submit" operations
- *     have no return value.
- */
-function addresses_cck_cck_field($op, &$node, $field, &$node_field) {
-z('asdfasdf');
-  switch ($op) {
-    case 'view':
-      foreach ($node_field as $delta => $item) {
-        $node_field[$delta]['view'] = content_format($field, $item, 'default', $node);
-      }
-      return theme('field', $node, $field, $node_field, $teaser, $page);
-  }
-}
-
-/**
- * Implementation of hook_field().
- *
- * Its a CCK hook, used to control the validation of each type of field.
- * Remember that FIELD, in the CCK taxonomy, is the type of the data. Text
- * fields can be displayed like textareas, textfields, select box or whatsoever.
- *
- * @param $op
- *   String. The opration to be executed: "validate" to check if the
- *   data is valid and "sanitize" to fix the data
- * @param &$node
- *   Object. The node object.
- * @param $field
- *   Array. The field settings, including the allowed values, min and max,
- *   field title and description.
- * @param &$items
- *   Array. Each of the instances of the field (in case of multiple values).
- * @param $teaser
- * @param $page
- */
-function addresses_cck_field($op, &$node, $field, &$items, $teaser, $page) {
-  switch ($op) {
-    case 'validate':
-      // Call the validation callbacks for each Address field
-      break;
-    case 'sanitize':
-      break;
-  }
 }
 
 /**
@@ -123,12 +62,16 @@ function addresses_cck_field($op, &$node, $field, &$items, $teaser, $page) {
 function addresses_cck_field_formatter_info() {
   return array(
     'default' => array(
-      'label'       => 'Default',
-      'field types' => array('addresses_cck'),
+      'label'           => t('Default'),
+      'arguments'       => array('element'),
+      'multiple values' => CONTENT_HANDLE_CORE,
+      'field types'     => array('addresses_cck'),
     ),
     'single_line' => array(
-      'label'       => 'Single Line',
-      'field types' => array('addresses_cck'),
+      'label'           => t('Single Line'),
+      'arguments'       => array('element'),
+      'multiple values' => CONTENT_HANDLE_CORE,
+      'field types'     => array('addresses_cck'),
     ),
   );
 }
@@ -241,35 +184,15 @@ function addresses_cck_field_settings($op, $field) {
 }
 
 /**
- * Implementation of hook_form_alter().
- *
- * Used to hide the Required checkbox in field settings,
- * since this is managed per location field.
- */
-function addresses_cck_form_alter($form_id, &$form) {
-  if ($form_id == '_content_admin_field' and isset($form['field_type']) and $form['field_type']['#value'] == 'addresses_cck') {
-    // Hide this until it is supported
-    $form['field']['multiple'] = array(
-      '#type'   => 'hidden',
-      '#value'  => FALSE,
-    );
-    $form['field']['required'] = array(
-      '#type'   => 'hidden',
-      '#value'  => TRUE,
-    );
-  }
-}
-
-/**
  * Implementation of hook_theme().
  */
 function addresses_cck_theme() {
   return array(
     'addresses_cck_formatter_default' => array(
-      'arguments' => array('element'),
+      'arguments' => array('element')
     ),
     'addresses_cck_formatter_single_line' => array(
-      'arguments' => array('element'),
+      'arguments' => array('element')
     ),
   );
 }
@@ -295,27 +218,20 @@ function addresses_cck_widget(&$form, &$form_state, $field, $items, $delta = 0) 
   // Include the main module file
   include_once drupal_get_path('module', 'addresses') .'/addresses.inc';
 
-  $form_fields = module_invoke_all('addressesfieldapi', 'settings', array(), $field);
-
-  foreach (array_keys($form_fields['addresses']) as $form_field) {
+  // Get all form fields for building addresses
+  $form_fields = module_invoke_all('addressesfieldapi', 'fields');
+  foreach ($form_fields as $form_field) {
     $fields[$form_field] = $field[$form_field];
   }
 
-// z($fields);
-  // @todo Set the number of addresses that can be input
-  // as a variable
-  $fields['qty'] = 1;
-
-  // Show the Address master fieldset
-  $fields['master_fieldset'] = TRUE;
-
-  $form[$field['field_name']][0] = _addresses_form($form, $fields, $form_state['values']['addresses']);
-  $form[$field['field_name']][0]['lid'] = array(
-    '#type'   => 'hidden',
-    '#value'  => (int) $field['lid'],
+  // The Addresses field
+  $element = array(
+    '#type'           => 'addresses_elements',
+    '#fields'         => $fields,
+    '#default_value'  => $items[$delta],
   );
 
-  return $form;
+  return $element;
 }
 
 /**
@@ -332,9 +248,11 @@ function addresses_cck_widget(&$form, &$form_state, $field, $items, $delta = 0) 
  */
 function addresses_cck_widget_info() {
   return array(
-    'addresses_cck' => array(
-      'label'       => 'Address Field',
-      'field types' => array('addresses_cck'),
+    'addresses_elements' => array(
+      'label'           => t('Address Field'),
+      'field types'     => array('addresses_cck'),
+      'multiple values' => CONTENT_HANDLE_CORE,
+      'callbacks'       => array('default value' => CONTENT_CALLBACK_DEFAULT),
     ),
   );
 }
@@ -345,10 +263,10 @@ function addresses_cck_widget_info() {
  */
 function theme_addresses_cck_formatter_default($element) {
   // Include the important .inc file
-  include drupal_get_path('module', 'addresses') .'/addresses.inc';
+  include_once drupal_get_path('module', 'addresses') .'/addresses.inc';
 
   // Print the address
-  return theme_addresses($element['#item']);
+  return theme('addresses', $element['#item']);
 }
 
 /**
@@ -357,8 +275,8 @@ function theme_addresses_cck_formatter_default($element) {
  */
 function theme_addresses_cck_formatter_single_line($element) {
   // Include the important .inc file
-  include drupal_get_path('module', 'addresses') .'/addresses.inc';
+  include_once drupal_get_path('module', 'addresses') .'/addresses.inc';
 
   // Print the address using the one-line only theme
-  return theme_addresses_singleline($element['#item']);
+  return theme('addresses_singleline', $element['#item']);
 }
