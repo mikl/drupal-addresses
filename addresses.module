@@ -62,7 +62,11 @@ function _addresses_address_get($id, $type = 'address') {
  * allow other modules to add more fields to the addresses
  */
 function addresses_addressesfieldapi($op, $fields = array(), $values = array()) {
-  if ($op == 'form') {
+  if ($op == 'fields') {
+    return array('is_primary', 'aname', 'country', 'province', 'city',
+      'street', 'postal_code');
+  }
+  elseif ($op == 'form') {
     // Let users select if the address is the primary
     if ($fields['is_primary'] == ADDRESSES_FIELD_HIDDEN) {
       $form['is_primary'] = array(
@@ -131,7 +135,6 @@ function addresses_addressesfieldapi($op, $fields = array(), $values = array()) 
     }
     elseif (!empty($fields['province'])) {
       $form['province'] = array(
-  //       '#autocomplete_path'  => 'admin/settings/address/autocomplete',
         '#default_value'  => isset($values['province']) ? $values['province'] : '',
         '#maxlength'      => 16,
         '#required'       => ($fields['province'] == ADDRESSES_FIELD_REQUIRED),
@@ -139,7 +142,7 @@ function addresses_addressesfieldapi($op, $fields = array(), $values = array()) 
         '#title'          => t('State / Province'),
         '#type'           => 'textfield',
       );
-      $form['#validate'][] = '_addresses_province_validate';
+//       $form['#validate'][] = '_addresses_province_validate';
     }
 
     // Adds the City
@@ -282,11 +285,14 @@ function addresses_addressesfieldapi($op, $fields = array(), $values = array()) 
  * (see nodereference and userreference).
  */
 function addresses_elements() {
+  $fields = module_invoke_all('addressesfieldapi', 'fields');
+
   return array(
     'addresses_elements' => array(
+      '#columns'  => $fields,
+      '#delta'    => 0,
       '#input'    => TRUE,
       '#process'  => array('addresses_elements_process'),
-      '#tree'     => TRUE
     )
   );
 }
@@ -301,7 +307,9 @@ function addresses_elements_process($element) {
   $fields = $element['#fields'];
   $values = $element['#default_value'];
 
-  $element['#tree'] = TRUE;
+  // Reset unwanted attributes
+  $element['#title'] = '';
+  $element['#description'] = '';
 
   // If its a existing address, save the Address ID
   // for further processing
@@ -311,6 +319,9 @@ function addresses_elements_process($element) {
       '#value'  => $values['aid']
     );
   }
+
+  // Include the main module file
+  include_once drupal_get_path('module', 'addresses') .'/addresses.inc';
 
   // Get other fields from hook_addressesfieldsapi
   $element = array_merge(
