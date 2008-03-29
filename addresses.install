@@ -84,56 +84,6 @@ function addresses_schema() {
       'eid'   => array('eid'),
     ),
   );
-  $schema['addresses_zipcodes'] = array(
-  'description' => t('Products-specific fields'),
-    'fields' => array(
-      'country' => array(
-        'type'        => 'varchar',
-        'length'      => 2,
-        'not null'    => TRUE,
-        'description' => t('The ISO alpha 3 code of each country (its a 2-digit code)'),
-      ),
-      'postal_code' => array(
-        'type'        => 'varchar',
-        'length'      => 2,
-        'not null'    => TRUE,
-        'description' => t('The address postal code (ZIP code for US people)'),
-      ),
-      'city' => array(
-        'type'        => 'varchar',
-        'length'      => 255,
-        'description' => t('Name of the city'),
-      ),
-      'province' => array(
-        'type'        => 'varchar',
-        'length'      => 16,
-        'description' => t('Name of the state/province/county/territory'),
-      ),
-      'latitude' => array(
-        'type'        => 'float',
-        'description' => t('The place Latitute, if available'),
-      ),
-      'longitude' => array(
-        'type'        => 'float',
-        'description' => t('The place Longitude, if available'),
-      ),
-      'timezone' => array(
-        'type'        => 'int',
-        'size'        => 'small',
-        'description' => t('How much hours (more or less) than Greenwich time'),
-      ),
-      'dst' => array(
-        'type'        => 'int',
-        'size'        => 'small',
-        'description' => t('????'),
-      )
-    ),
-    'primary key' => array('country', 'postal_code'),
-    'indexes' => array(
-      'country'     => array('country'),
-      'postal_code' => array('postal_code'),
-    ),
-  );
   return $schema;
 }
 
