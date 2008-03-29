@@ -1,6 +1,6 @@
 <?php
+// $Id$
 /**
- * $Id$
  * @author Bruno Massa
  * @file addresses.install
  * Installation / uninstallation routines.

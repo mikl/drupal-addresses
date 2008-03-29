@@ -1,6 +1,6 @@
 <?php
+// $Id$
 /**
- * $Id$
  * @author Bruno Massa
  * @file addresses.inc
  * An implementation of a universal API for address manipulation.

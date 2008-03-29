@@ -1,6 +1,6 @@
 <?php
+// $Id$
 /**
- * $Id$
  * @author Bruno Massa
  * @file addresses_cck.module
  * You can associate a geographic address with content, using CCK.
@@ -188,9 +188,11 @@ function addresses_cck_field_settings($op, $field) {
  */
 function addresses_cck_theme() {
   return array(
+    // Shows address in the default view: Multilines
     'addresses_cck_formatter_default' => array(
       'arguments' => array('element')
     ),
+    // Shows address in only one line
     'addresses_cck_formatter_single_line' => array(
       'arguments' => array('element')
     ),

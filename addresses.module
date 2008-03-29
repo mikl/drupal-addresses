@@ -1,6 +1,6 @@
 <?php
+// $Id$
 /**
- * $Id$
  * @author Bruno Massa
  * @file addresses.module
  * You can associate a geographic address with content and users.
@@ -285,6 +285,7 @@ function addresses_addressesfieldapi($op, $fields = array(), $values = array()) 
  * (see nodereference and userreference).
  */
 function addresses_elements() {
+  // Get a list of all address-related fields
   $fields = module_invoke_all('addressesfieldapi', 'fields');
 
   return array(
