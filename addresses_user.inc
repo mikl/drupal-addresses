@@ -89,6 +89,7 @@ function _addresses_user_form(&$form_state, $fields = array(), $values = array()
     '#default_value'  => $values,
     '#fields'         => $fields,
     '#type'           => 'addresses_elements',
+    '#tree'           => TRUE
   );
 
   // Add the submit button
