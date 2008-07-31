@@ -383,5 +383,10 @@ function addresses_theme() {
       'arguments' => array('form'),
       'file'      => 'addresses.inc',
     ),
+    // Choose the addresses fields
+    'addresses_select_fields' => array(
+      'arguments' => array('form'),
+      'file'      => 'addresses.inc',
+    ),
   );
 }

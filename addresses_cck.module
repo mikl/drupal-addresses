@@ -109,6 +109,7 @@ function addresses_cck_field_settings($op, $field) {
     case 'form':
       // Get the form fields from the API addressesfieldapi
       $form = module_invoke_all('addressesfieldapi', 'settings', array(), $field);
+      $form['#theme'] = 'addresses_select_fields';
       return $form;
 
     case 'save':

@@ -745,11 +745,11 @@ function theme_addresses_form(&$form) {
 /**
  * Create a single line address. Usefull for some labels.
  *
- * @ingroup themeable
  * @param $address
  *   Array. The address parts. see theme_address()
  * @return
  *   String. The single line address
+ * @ingroup themeable
  */
 function theme_addresses_singleline($address) {
   // Check if its a valied address
@@ -794,4 +794,35 @@ function theme_addresses_singleline($address) {
   }
 
   return $address;
+}
+
+/**
+ * Print a nice settings table for selecting which address fields
+ * should be used.
+ *
+ * @param $form
+ *   Array. The address field settings.
+ * @return
+ *   String. The single line address
+ * @ingroup themeable
+ */
+function theme_addresses_select_fields($form) {
+  foreach (element_children($form['addresses']) as $ftype) {
+    $field = &$form['addresses'][$ftype];
+    $rows[] = array(
+      $field['#title'],
+      drupal_render($field[0]),
+      drupal_render($field[1]),
+      drupal_render($field[2]),
+      drupal_render($field[3]),
+    );
+    unset($form['addresses'][$ftype]);
+  }
+
+  $header = array(t('Field'), t('None'), t('Normal'), t('Required'), t('Hidden'));
+  $output = theme('table', $header, $rows);
+
+  $output .= drupal_render($form);
+
+  return $output;
 }
