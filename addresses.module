@@ -157,17 +157,18 @@ function addresses_elements_process($element) {
  */
 function addresses_menu() {
   $items['admin/settings/address'] = array(
-    'description'     => 'Settings for Address module',
-    'file'            => 'addresses.inc',
-    'page callback'   => 'drupal_get_form',
-    'page arguments'  => array('_addresses_admin'),
-    'title'           => 'Addresses',
+    'access arguments'  => array('access administration pages'),
+    'description'       => 'Settings for Address module',
+    'file'              => 'addresses.inc',
+    'page callback'     => 'drupal_get_form',
+    'page arguments'    => array('_addresses_admin'),
+    'title'             => 'Addresses',
   );
   $items['admin/settings/address/autocomplete'] = array(
-    'access callback' => TRUE,
-    'file'            => 'addresses.inc',
-    'page callback'   => '_addresses_autocomplete',
-    'type'            => MENU_CALLBACK
+    'access callback'   => TRUE,
+    'file'              => 'addresses.inc',
+    'page callback'     => '_addresses_autocomplete',
+    'type'              => MENU_CALLBACK
   );
 
   return $items;
