@@ -96,7 +96,7 @@ function addresses_user_token_values($type, $object = NULL) {
       module_load_include('inc', 'addresses');
 
       // Get a list of contries
-      $countries = _addresses_country_get(variable_get('addresses_contry_list', array()));
+      $countries = _addresses_country_get(variable_get('addresses_country_list', array()));
 
       // Get a list of provinces of the given contry
       $provincenames = _addresses_province_get(strtolower($address[0]['country']));

@@ -13,7 +13,22 @@
  * allow other modules to add more fields to the addresses
  */
 function addresses_phone_addressesfieldapi($op, $fields = array(), $values = array()) {
-  if ($op == 'form') {
+  if ($op == 'fields') {
+    return array(
+      'phone' => array(
+        'type'        => 'int',
+        'description' => t('Phone numbers, like cellphone, home, office'),
+        'display'     => ADDRESSES_FIELD_NONE,
+        'title'       => t('Phone'),
+      ),
+      'fax' => array(
+        'type'        => 'int',
+        'description' => t('Fax number'),
+        'display'     => ADDRESSES_FIELD_SHOW,
+        'title'       => t('Fax'),
+      ),
+  }
+  elseif ($op == 'form') {
     // Telephone number
     if ($fields['phone'] == ADDRESSES_FIELD_HIDDEN) {
       $form['phone'] = array(
@@ -54,30 +69,4 @@ function addresses_phone_addressesfieldapi($op, $fields = array(), $values = arr
 
     return $form;
   }
-  elseif ($op == 'settings') {
-    // This list of options are used many times, so its
-    // usefull to create it now an use it later
-    $options = array(
-      ADDRESSES_FIELD_NONE      => t('None'),
-      ADDRESSES_FIELD_SHOW      => t('Normal'),
-      ADDRESSES_FIELD_REQUIRED  => t('Required'),
-      ADDRESSES_FIELD_HIDDEN    => t('Hidden')
-    );
-
-    // List of address fields
-    $form['addresses']['phone'] = array(
-      '#default_value'  => empty($fields['phone']) ? ADDRESSES_FIELD_NONE : $fields['phone'],
-      '#options'        => $options,
-      '#title'          => t('Phone'),
-      '#type'           => 'radios',
-    );
-    $form['addresses']['fax'] = array(
-      '#default_value'  => empty($fields['fax']) ? ADDRESSES_FIELD_NONE : $fields['fax'],
-      '#options'        => $options,
-      '#title'          => t('Fax'),
-      '#type'           => 'radios',
-    );
-  }
-
-  return $form;
 }

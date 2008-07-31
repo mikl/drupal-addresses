@@ -129,7 +129,7 @@ function addresses_addressesfieldapi($op, $fields = array(), $values = array()) 
     elseif (!empty($fields['country'])) {
       // Get a list of enabled contries
       $countries = array('' => '') +
-        _addresses_country_get(variable_get('addresses_contry_list', array()));
+        _addresses_country_get(variable_get('addresses_country_list', array()));
 
       $form['country'] = array(
         '#type'           => 'select',
@@ -231,8 +231,6 @@ function addresses_addressesfieldapi($op, $fields = array(), $values = array()) 
 
     return $form;
   }
-
-  return $form;
 }
 
 /**

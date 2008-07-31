@@ -15,8 +15,8 @@ function _addresses_admin(&$form_state) {
   $form = array();
 
   // List of contries that the site allow
-  $form['addresses_contry_list'] = array(
-    '#default_value'  => variable_get('addresses_contry_list', array_keys(_addresses_country_get())),
+  $form['addresses_country_list'] = array(
+    '#default_value'  => variable_get('addresses_country_list', array_keys(_addresses_country_get())),
     '#description'    => t('You might want to limit the contry lists. Select the contries you want.'),
     '#multiple'       => TRUE,
     '#options'        => _addresses_country_get(),
