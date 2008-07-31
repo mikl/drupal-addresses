@@ -218,7 +218,7 @@ function addresses_cck_theme() {
  */
 function addresses_cck_widget(&$form, &$form_state, $field, $items, $delta = 0) {
   // Include the main module file
-  include_once drupal_get_path('module', 'addresses') .'/addresses.inc';
+  module_load_include('inc', 'addresses');
 
   // Get all form fields for building addresses
   $form_fields = module_invoke_all('addressesfieldapi', 'fields');
@@ -265,7 +265,7 @@ function addresses_cck_widget_info() {
  */
 function theme_addresses_cck_formatter_default($element) {
   // Include the important .inc file
-  include_once drupal_get_path('module', 'addresses') .'/addresses.inc';
+  module_load_include('inc', 'addresses');
 
   // Print the address
   return theme('addresses', $element['#item']);
@@ -277,7 +277,7 @@ function theme_addresses_cck_formatter_default($element) {
  */
 function theme_addresses_cck_formatter_single_line($element) {
   // Include the important .inc file
-  include_once drupal_get_path('module', 'addresses') .'/addresses.inc';
+  module_load_include('inc', 'addresses');
 
   // Print the address using the one-line only theme
   return theme('addresses_singleline', $element['#item']);

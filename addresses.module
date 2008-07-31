@@ -282,7 +282,7 @@ function addresses_elements_process($element) {
   }
 
   // Include the main module file
-  include_once drupal_get_path('module', 'addresses') .'/addresses.inc';
+  module_load_include('inc', 'addresses');
 
   // Get other fields from hook_addressesfieldsapi
   $element = array_merge(
