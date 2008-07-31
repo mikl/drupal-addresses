@@ -7,6 +7,21 @@
  */
 
 /**
+ * Check if user is allowed to have a address book.
+ *
+ * @param $account
+ *   Object. The current user account
+ * @return
+ *   Boolean. If the user can or canont access the page
+ */
+function _addresses_user_access($account) {
+  global $user;
+  if ($account->uid == $user->uid and user_access('create addess book', $account)) {
+    return TRUE;
+  }
+}
+
+/**
  * Load the full address from a given Address ID or User ID
  *
  * @param $id
@@ -52,14 +67,23 @@ function _addresses_user_address_get($id, $type = 'address') {
 function addresses_user_menu() {
   // Add tab for address book.
   $items['user/%user/address'] = array(
-    'page callback'   => '_addresses_user_address',
-    'file'            => 'addresses_user.inc',
-    'title'           => t('Address Book'),
-    'type'            => MENU_LOCAL_TASK,
-    'weight'          => 1,
+    'access callback'   => '_addresses_user_access',
+    'access arguments'  => array(1),
+    'page callback'     => '_addresses_user_address',
+    'file'              => 'addresses_user.inc',
+    'title'             => t('Address Book'),
+    'type'              => MENU_LOCAL_TASK,
+    'weight'            => 1,
   );
 
   return $items;
+}
+
+/**
+ * Implementation of hook_perm().
+ */
+function addresses_user_perm() {
+  return array('create addess book');
 }
 
 /**
