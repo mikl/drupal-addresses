@@ -1,0 +1,15 @@
+<?php
+// $Id$
+/**
+ * @author Bruno Massa
+ * @file addresses.install
+ * Installation / uninstallation routines.
+ */
+
+/**
+ * Implentation of hook_uninstall().
+ */
+function addresses_uninstall() {
+  // Delete variables
+  variable_del('addresses_country_list');
+}
