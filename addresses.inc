@@ -14,13 +14,7 @@
  */
 function _addresses_addressesfieldapi_form($fields = array(), $values = array()) {
   // Let users select if the address is the primary
-  if ($fields['is_primary'] == ADDRESSES_FIELD_HIDDEN) {
-    $form['is_primary'] = array(
-      '#type'           => 'hidden',
-      '#value'          => isset($values['is_primary']) ? $values['is_primarys'] : '',
-    );
-  }
-  elseif (!empty($fields['is_primary'])) {
+  if (!empty($fields['is_primary'])) {
     $form['is_primary'] = array(
       '#type'           => 'checkbox',
       '#title'          => t('Default address'),
@@ -29,13 +23,7 @@ function _addresses_addressesfieldapi_form($fields = array(), $values = array())
   }
 
   // Adds the Address Name (Home, Office, Rio de Janeiro...)
-  if ($fields['aname'] == ADDRESSES_FIELD_HIDDEN) {
-    $form['aname'] = array(
-      '#type'           => 'hidden',
-      '#value'          => isset($values['aname']) ? $values['aname'] : '',
-    );
-  }
-  elseif (!empty($fields['aname'])) {
+  if (!empty($fields['aname'])) {
     $form['aname'] = array(
       '#type'           => 'textfield',
       '#title'          => t('Address name'),
@@ -49,13 +37,7 @@ function _addresses_addressesfieldapi_form($fields = array(), $values = array())
   }
 
   // Adds the Country
-  if ($fields['country'] == ADDRESSES_FIELD_HIDDEN) {
-    $form['country'] = array(
-      '#type'           => 'hidden',
-      '#value'          => isset($values['country']) ? $values['country'] : '',
-    );
-  }
-  elseif (!empty($fields['country'])) {
+  if (!empty($fields['country'])) {
     // Get a list of enabled contries
     $countries = array('' => '') +
       _addresses_country_get(variable_get('addresses_country_list', array()));
@@ -73,13 +55,7 @@ function _addresses_addressesfieldapi_form($fields = array(), $values = array())
   }
 
   // Adds the Province field
-  if ($fields['province'] == ADDRESSES_FIELD_HIDDEN) {
-    $form['province'] = array(
-      '#type'           => 'hidden',
-      '#value'          => isset($values['province']) ? $values['province'] : '',
-    );
-  }
-  elseif (!empty($fields['province'])) {
+  if (!empty($fields['province'])) {
     $form['province'] = array(
       '#default_value'  => isset($values['province']) ? $values['province'] : '',
       '#maxlength'      => 16,
@@ -92,13 +68,7 @@ function _addresses_addressesfieldapi_form($fields = array(), $values = array())
   }
 
   // Adds the City
-  if ($fields['city'] == ADDRESSES_FIELD_HIDDEN) {
-    $form['city'] = array(
-      '#type'           => 'hidden',
-      '#value'          => isset($values['city']) ? $values['city'] : '',
-    );
-  }
-  elseif (!empty($fields['city'])) {
+  if (!empty($fields['city'])) {
     $form['city'] = array(
       '#type'           => 'textfield',
       '#title'          => t('City'),
@@ -112,17 +82,7 @@ function _addresses_addressesfieldapi_form($fields = array(), $values = array())
   }
 
   // Adds the Streets and the Additional fields
-  if ($fields['street'] == ADDRESSES_FIELD_HIDDEN) {
-    $form['street'] = array(
-      '#type'           => 'hidden',
-      '#value'          => isset($values['street']) ? $values['street'] : '',
-    );
-    $form['additional'] = array(
-      '#type'           => 'hidden',
-      '#value'          => isset($values['additional']) ? $values['additional'] : '',
-    );
-  }
-  elseif (!empty($fields['street'])) {
+  if (!empty($fields['street'])) {
     $form['street'] = array(
       '#type'           => 'textfield',
       '#title'          => t('Street'),
@@ -141,13 +101,7 @@ function _addresses_addressesfieldapi_form($fields = array(), $values = array())
   }
 
   // Adds the Postal Code
-  if ($fields['postal_code'] == ADDRESSES_FIELD_HIDDEN) {
-    $form['postal_code'] = array(
-      '#type'           => 'hidden',
-      '#value'          => isset($values['postal_code']) ? $values['postal_code'] : '',
-    );
-  }
-  elseif (!empty($fields['postal_code'])) {
+  if (!empty($fields['postal_code'])) {
     $form['postal_code'] = array(
       '#type'           => 'textfield',
       '#title'          => t('Postal code'),
@@ -156,6 +110,15 @@ function _addresses_addressesfieldapi_form($fields = array(), $values = array())
       '#maxlength'      => 16,
       '#required'       => ($fields['postal_code'] == ADDRESSES_FIELD_REQUIRED)
     );
+  }
+
+  foreach (array_keys($fields) as $ftype) {
+    if ($fields[$ftype] == ADDRESSES_FIELD_HIDDEN) {
+      $form[$ftype] = array(
+        '#type'           => 'hidden',
+        '#value'          => isset($values[$ftype]) ? $values[$ftype] : '',
+      );
+    }
   }
 
   return $form;
