@@ -132,54 +132,7 @@ function addresses_cck_field_settings($op, $field) {
     case 'database columns':
       // Return the table similar to those set on hook_schema.
       // It describes each database field that will be stored.
-
-      /// @todo instead hardcoding this, use a hook to allow other Addresses
-      /// fields to be loaded too, like phone, fax or geomap coordinates.
-       $fields = array(
-        'aname' => array(
-          'type'        => 'varchar',
-          'length'      => 75,
-          'description' => t('The nickname of this address, like "Home", "Office", "Anna\'s appartment"'),
-        ),
-        'street' => array(
-          'type'        => 'varchar',
-          'length'      => 255,
-          'description' => t('Street, number...'),
-        ),
-        'additional' => array(
-          'type'        => 'varchar',
-          'length'      => 255,
-          'description' => t('More info like appartment block, number or address reference'),
-        ),
-        'city' => array(
-          'type'        => 'varchar',
-          'length'      => 255,
-          'description' => t('Name of the city'),
-        ),
-        'province' => array(
-          'type'        => 'varchar',
-          'length'      => 16,
-          'description' => t('Name of the state/province/county/territory'),
-        ),
-        'country' => array(
-          'type'        => 'varchar',
-          'length'      => 2,
-          'description' => t('The ISO alpha 3 code of each country (its a 2-digit code)'),
-        ),
-        'postal_code' => array(
-          'type'        => 'varchar',
-          'length'      => 16,
-          'description' => t('The address postal code (ZIP code for US people)'),
-        ),
-        'is_primary' => array(
-          'type'        => 'int',
-          'size'        => 'tiny',
-          'default'     => 0,
-          'description' => t('Mark it as the primary address or not (default is not)'),
-        )
-      );
-
-      return $fields;
+      return module_invoke_all('addressesfieldapi', 'fields');
   }
 }
 
@@ -221,9 +174,9 @@ function addresses_cck_widget(&$form, &$form_state, $field, $items, $delta = 0) 
   module_load_include('inc', 'addresses');
 
   // Get all form fields for building addresses
-  $form_fields = module_invoke_all('addressesfieldapi', 'fields');
-  foreach ($form_fields as $form_field) {
-    $fields[$form_field] = $field[$form_field];
+  $ftypes = module_invoke_all('addressesfieldapi', 'fields');
+  foreach (array_keys($ftypes) as $ftype) {
+    $fields[$ftype] = $field[$ftype];
   }
 
   // The Addresses field

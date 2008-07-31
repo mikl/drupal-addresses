@@ -23,8 +23,49 @@ define('ADDRESSES_FIELD_HIDDEN',    3);
  */
 function addresses_addressesfieldapi($op, $fields = array(), $values = array()) {
   if ($op == 'fields') {
-    return array('is_primary', 'aname', 'country', 'province', 'city',
-      'street', 'postal_code');
+    return array(
+      'aname' => array(
+        'type'        => 'varchar',
+        'length'      => 75,
+        'description' => t('The nickname of this address, like "Home", "Office", "Anna\'s appartment"'),
+      ),
+      'street' => array(
+        'type'        => 'varchar',
+        'length'      => 255,
+        'description' => t('Street, number...'),
+      ),
+      'additional' => array(
+        'type'        => 'varchar',
+        'length'      => 255,
+        'description' => t('More info like appartment block, number or address reference'),
+      ),
+      'city' => array(
+        'type'        => 'varchar',
+        'length'      => 255,
+        'description' => t('Name of the city'),
+      ),
+      'province' => array(
+        'type'        => 'varchar',
+        'length'      => 16,
+        'description' => t('Name of the state/province/county/territory'),
+      ),
+      'country' => array(
+        'type'        => 'varchar',
+        'length'      => 2,
+        'description' => t('The ISO alpha 3 code of each country (its a 2-digit code)'),
+      ),
+      'postal_code' => array(
+        'type'        => 'varchar',
+        'length'      => 16,
+        'description' => t('The address postal code (ZIP code for US people)'),
+      ),
+      'is_primary' => array(
+        'type'        => 'int',
+        'size'        => 'tiny',
+        'default'     => 0,
+        'description' => t('Mark it as the primary address or not (default is not)'),
+      )
+    );
   }
   elseif ($op == 'form') {
     // Let users select if the address is the primary
@@ -246,7 +287,10 @@ function addresses_addressesfieldapi($op, $fields = array(), $values = array()) 
  */
 function addresses_elements() {
   // Get a list of all address-related fields
-  $fields = module_invoke_all('addressesfieldapi', 'fields');
+  $ftypes = module_invoke_all('addressesfieldapi', 'fields');
+  foreach (array_keys($ftypes) as $ftype) {
+    $fields[] = $ftype;
+  }
 
   return array(
     'addresses_elements' => array(
