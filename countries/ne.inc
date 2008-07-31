@@ -1,7 +1,10 @@
 <?php
 // $Id$
 
-// Niger
+/**
+ * @file
+ * "Niger" specific data
+ */
 
 /**
  * Implementation of hook_province_list().

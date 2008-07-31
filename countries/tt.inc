@@ -1,7 +1,10 @@
 <?php
 // $Id$
 
-// Trinidad and Tobago
+/**
+ * @file
+ * "Trinidad and Tobago" specific data
+ */
 
 /**
  * Implementation of hook_province_list().

@@ -1,7 +1,10 @@
 <?php
 // $Id$
 
-// Palestinian Territory, Occupied
+/**
+ * @file
+ * "Palestinian Territory, Occupied" specific data
+ */
 
 /**
  * Implementation of hook_province_list().

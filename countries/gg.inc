@@ -1,7 +1,10 @@
 <?php
 // $Id$
 
-// Guernsey
+/**
+ * @file
+ * "Guernsey" specific data
+ */
 
 /**
  * Implementation of hook_province_list().

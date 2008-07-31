@@ -1,7 +1,10 @@
 <?php
 // $Id$
 
-// Denmark
+/**
+ * @file
+ * "Denmark" specific data
+ */
 
 /**
  * Implementation of hook_province_list().

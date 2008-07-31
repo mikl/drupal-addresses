@@ -1,7 +1,10 @@
 <?php
 // $Id$
 
-// India
+/**
+ * @file
+ * "India" specific data
+ */
 
 /**
  * Implementation of hook_province_list().

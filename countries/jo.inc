@@ -1,7 +1,10 @@
 <?php
 // $Id$
 
-// Jordan
+/**
+ * @file
+ * "Jordan" specific data
+ */
 
 /**
  * Implementation of hook_province_list().

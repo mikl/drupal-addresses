@@ -1,7 +1,10 @@
 <?php
 // $Id$
 
-// Ascension Island
+/**
+ * @file
+ * "Ascension Island" specific data
+ */
 
 /**
  * Implementation of hook_province_list().

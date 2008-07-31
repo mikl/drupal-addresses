@@ -1,7 +1,10 @@
 <?php
 // $Id$
 
-// Kiribati
+/**
+ * @file
+ * "Kiribati" specific data
+ */
 
 /**
  * Implementation of hook_province_list().

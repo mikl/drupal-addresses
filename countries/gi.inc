@@ -1,7 +1,10 @@
 <?php
 // $Id$
 
-// Gibraltar
+/**
+ * @file
+ * "Gibraltar" specific data
+ */
 
 /**
  * Implementation of hook_province_list().

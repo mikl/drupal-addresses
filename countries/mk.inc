@@ -1,7 +1,10 @@
 <?php
 // $Id$
 
-// Macedonia, The Former Yugoslav Republic of
+/**
+ * @file
+ * "Macedonia, The Former Yugoslav Republic of" specific data
+ */
 
 /**
  * Implementation of hook_province_list().

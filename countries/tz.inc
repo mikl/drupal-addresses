@@ -1,7 +1,10 @@
 <?php
 // $Id$
 
-// Tanzania, United Republic of
+/**
+ * @file
+ * "Tanzania, United Republic of" specific data
+ */
 
 /**
  * Implementation of hook_province_list().

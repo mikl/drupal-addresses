@@ -1,7 +1,10 @@
 <?php
 // $Id$
 
-// Andorra
+/**
+ * @file
+ * "Andorra" specific data
+ */
 
 /**
  * Implementation of hook_province_list().

@@ -1,7 +1,10 @@
 <?php
 // $Id$
 
-// Australia
+/**
+ * @file
+ * "Australia" specific data
+ */
 
 /**
  * Returns an associative array of states/territories where

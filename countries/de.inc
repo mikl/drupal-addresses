@@ -1,7 +1,10 @@
 <?php
 // $Id$
 
-// Germany
+/**
+ * @file
+ * "Germany" specific data
+ */
 
 /**
  * Returns an associative array of states/territories where

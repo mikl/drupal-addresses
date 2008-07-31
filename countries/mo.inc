@@ -1,7 +1,10 @@
 <?php
 // $Id$
 
-// Macau
+/**
+ * @file
+ * "Macau" specific data
+ */
 
 /**
  * Implementation of hook_province_list().

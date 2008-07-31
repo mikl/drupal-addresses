@@ -1,7 +1,10 @@
 <?php
 // $Id$
 
-// Saint Vincent and the Grenadines
+/**
+ * @file
+ * "Saint Vincent and the Grenadines" specific data
+ */
 
 /**
  * Implementation of hook_province_list().

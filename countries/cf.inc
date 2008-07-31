@@ -1,7 +1,10 @@
 <?php
 // $Id$
 
-// Central African Republic
+/**
+ * @file
+ * "Central African Republic" specific data
+ */
 
 /**
  * Implementation of hook_province_list().

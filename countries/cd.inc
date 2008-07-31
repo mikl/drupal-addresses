@@ -1,7 +1,10 @@
 <?php
 // $Id$
 
-// Congo, The Democratic Republic of the
+/**
+ * @file
+ * "Congo, The Democratic Republic of the" specific data
+ */
 
 /**
  * Implementation of hook_province_list().

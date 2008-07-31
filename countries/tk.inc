@@ -1,7 +1,10 @@
 <?php
 // $Id$
 
-// Tokelau
+/**
+ * @file
+ * "Tokelau" specific data
+ */
 
 /**
  * Implementation of hook_province_list().

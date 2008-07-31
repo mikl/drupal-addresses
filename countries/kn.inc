@@ -1,7 +1,10 @@
 <?php
 // $Id$
 
-// Saint Kitts and Nevis
+/**
+ * @file
+ * "Saint Kitts and Nevis" specific data
+ */
 
 /**
  * Implementation of hook_province_list().

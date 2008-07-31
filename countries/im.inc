@@ -1,7 +1,10 @@
 <?php
 // $Id$
 
-// Isle of Man
+/**
+ * @file
+ * "Isle of Man" specific data
+ */
 
 /**
  * Implementation of hook_province_list().

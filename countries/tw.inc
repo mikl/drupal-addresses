@@ -1,7 +1,10 @@
 <?php
 // $Id$
 
-// Taiwan, Province of China
+/**
+ * @file
+ * "Taiwan, Province of China" specific data
+ */
 
 /**
  * Implementation of hook_province_list().

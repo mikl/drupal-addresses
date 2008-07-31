@@ -1,7 +1,10 @@
 <?php
 // $Id$
 
-// Jersey
+/**
+ * @file
+ * "Jersey" specific data
+ */
 
 /**
  * Implementation of hook_province_list().

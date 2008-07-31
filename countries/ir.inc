@@ -1,7 +1,10 @@
 <?php
 // $Id$
 
-// Iran, Islamic Republic Of
+/**
+ * @file
+ * "Iran, Islamic Republic Of" specific data
+ */
 
 /**
  * Implementation of hook_province_list().

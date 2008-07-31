@@ -1,7 +1,10 @@
 <?php
 // $Id$
 
-// Cameroon
+/**
+ * @file
+ * "Cameroon" specific data
+ */
 
 /**
  * Implementation of hook_province_list().

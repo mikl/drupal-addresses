@@ -1,7 +1,10 @@
 <?php
 // $Id$
 
-// New Caledonia
+/**
+ * @file
+ * "New Caledonia" specific data
+ */
 
 /**
  * Implementation of hook_province_list().

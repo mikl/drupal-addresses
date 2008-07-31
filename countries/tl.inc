@@ -1,7 +1,10 @@
 <?php
 // $Id$
 
-// Timor Leste
+/**
+ * @file
+ * "Timor Leste" specific data
+ */
 
 /**
  * Implementation of hook_province_list().

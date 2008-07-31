@@ -1,7 +1,10 @@
 <?php
 // $Id$
 
-// Western Sahara
+/**
+ * @file
+ * "Western Sahara" specific data
+ */
 
 /**
  * Implementation of hook_province_list().

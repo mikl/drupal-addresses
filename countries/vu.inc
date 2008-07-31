@@ -1,7 +1,10 @@
 <?php
 // $Id$
 
-// Vanuatu
+/**
+ * @file
+ * "Vanuatu" specific data
+ */
 
 /**
  * Implementation of hook_province_list().

@@ -1,7 +1,10 @@
 <?php
 // $Id$
 
-// Chad
+/**
+ * @file
+ * "Chad" specific data
+ */
 
 /**
  * Implementation of hook_province_list().

@@ -1,7 +1,10 @@
 <?php
 // $Id$
 
-// Bouvet Island
+/**
+ * @file
+ * "Bouvet Island" specific data
+ */
 
 /**
  * Implementation of hook_province_list().

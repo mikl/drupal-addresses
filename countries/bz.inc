@@ -1,7 +1,10 @@
 <?php
 // $Id$
 
-// Belize
+/**
+ * @file
+ * "Belize" specific data
+ */
 
 /**
  * Implementation of hook_province_list().

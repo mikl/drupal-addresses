@@ -1,7 +1,10 @@
 <?php
 // $Id$
 
-// Holy See (Vatican City State)
+/**
+ * @file
+ * "Holy See (Vatican City State)" specific data
+ */
 
 /**
  * Implementation of hook_province_list().

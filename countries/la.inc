@@ -1,7 +1,10 @@
 <?php
 // $Id$
 
-// Lao People's Democratic Republic
+/**
+ * @file
+ * "Lao People's Democratic Republic" specific data
+ */
 
 /**
  * Implementation of hook_province_list().

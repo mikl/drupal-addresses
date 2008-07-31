@@ -1,7 +1,10 @@
 <?php
 // $Id$
 
-// Cape Verde
+/**
+ * @file
+ * "Cape Verde" specific data
+ */
 
 /**
  * Implementation of hook_province_list().

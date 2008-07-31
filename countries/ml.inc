@@ -1,7 +1,10 @@
 <?php
 // $Id$
 
-// Mali
+/**
+ * @file
+ * "Mali" specific data
+ */
 
 /**
  * Implementation of hook_province_list().

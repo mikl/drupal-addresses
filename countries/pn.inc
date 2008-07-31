@@ -1,7 +1,10 @@
 <?php
 // $Id$
 
-// Pitcairn
+/**
+ * @file
+ * "Pitcairn" specific data
+ */
 
 /**
  * Implementation of hook_province_list().

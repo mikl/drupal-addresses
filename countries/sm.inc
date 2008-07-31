@@ -1,7 +1,10 @@
 <?php
 // $Id$
 
-// San Marino
+/**
+ * @file
+ * "San Marino" specific data
+ */
 
 /**
  * Implementation of hook_province_list().

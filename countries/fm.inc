@@ -1,7 +1,10 @@
 <?php
 // $Id$
 
-// Micronesia, Federated States of
+/**
+ * @file
+ * "Micronesia, Federated States of" specific data
+ */
 
 /**
  * Implementation of hook_province_list().

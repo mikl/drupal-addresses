@@ -1,7 +1,10 @@
 <?php
 // $Id$
 
-// Tuvalu
+/**
+ * @file
+ * "Tuvalu" specific data
+ */
 
 /**
  * Implementation of hook_province_list().

@@ -1,7 +1,10 @@
 <?php
 // $Id$
 
-// Solomon Islands
+/**
+ * @file
+ * "Solomon Islands" specific data
+ */
 
 /**
  * Implementation of hook_province_list().

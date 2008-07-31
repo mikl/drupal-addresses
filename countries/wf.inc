@@ -1,7 +1,10 @@
 <?php
 // $Id$
 
-// Wallis and Futuna
+/**
+ * @file
+ * "Wallis and Futuna" specific data
+ */
 
 /**
  * Implementation of hook_province_list().

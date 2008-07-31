@@ -1,7 +1,10 @@
 <?php
 // $Id$
 
-// El Salvador
+/**
+ * @file
+ * "El Salvador" specific data
+ */
 
 /**
  * Implementation of hook_province_list().

@@ -1,7 +1,10 @@
 <?php
 // $Id$
 
-// Cayman Islands
+/**
+ * @file
+ * "Cayman Islands" specific data
+ */
 
 /**
  * Implementation of hook_province_list().

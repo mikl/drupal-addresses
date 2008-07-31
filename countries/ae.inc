@@ -1,7 +1,10 @@
 <?php
 // $Id$
 
-// United Arab Emirates
+/**
+ * @file
+ * "United Arab Emirates" specific data
+ */
 
 /**
  * Implementation of hook_province_list().

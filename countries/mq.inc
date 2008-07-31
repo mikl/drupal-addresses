@@ -1,7 +1,10 @@
 <?php
 // $Id$
 
-// Martinique
+/**
+ * @file
+ * "Martinique" specific data
+ */
 
 /**
  * Implementation of hook_province_list().

@@ -1,7 +1,10 @@
 <?php
 // $Id$
 
-// Cocos (Keeling) Islands
+/**
+ * @file
+ * "Cocos (Keeling) Islands" specific data
+ */
 
 /**
  * Implementation of hook_province_list().

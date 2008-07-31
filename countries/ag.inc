@@ -1,7 +1,10 @@
 <?php
 // $Id$
 
-// Antigua and Barbuda
+/**
+ * @file
+ * "Antigua and Barbuda" specific data
+ */
 
 /**
  * Implementation of hook_province_list().

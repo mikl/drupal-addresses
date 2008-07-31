@@ -1,7 +1,10 @@
 <?php
 // $Id$
 
-// American Samoa
+/**
+ * @file
+ * "American Samoa" specific data
+ */
 
 /**
  * Implementation of hook_province_list().

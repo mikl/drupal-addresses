@@ -1,7 +1,10 @@
 <?php
 // $Id$
 
-// United States Minor Outlying Islands
+/**
+ * @file
+ * "United States Minor Outlying Islands" specific data
+ */
 
 /**
  * Implementation of hook_province_list().

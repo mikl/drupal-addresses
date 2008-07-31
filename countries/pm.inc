@@ -1,7 +1,10 @@
 <?php
 // $Id$
 
-// Saint Pierre and Miquelon
+/**
+ * @file
+ * "Saint Pierre and Miquelon" specific data
+ */
 
 /**
  * Implementation of hook_province_list().

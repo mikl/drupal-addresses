@@ -1,7 +1,10 @@
 <?php
 // $Id$
 
-// Reunion
+/**
+ * @file
+ * "Reunion" specific data
+ */
 
 /**
  * Implementation of hook_province_list().

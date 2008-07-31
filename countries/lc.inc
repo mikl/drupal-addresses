@@ -1,7 +1,10 @@
 <?php
 // $Id$
 
-// Saint Lucia
+/**
+ * @file
+ * "Saint Lucia" specific data
+ */
 
 /**
  * Implementation of hook_province_list().

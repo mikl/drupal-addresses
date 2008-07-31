@@ -1,7 +1,10 @@
 <?php
 // $Id$
 
-// Guinea-Bissau
+/**
+ * @file
+ * "Guinea-Bissau" specific data
+ */
 
 /**
  * Implementation of hook_province_list().

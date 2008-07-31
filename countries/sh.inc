@@ -1,7 +1,10 @@
 <?php
 // $Id$
 
-// Saint Helena
+/**
+ * @file
+ * "Saint Helena" specific data
+ */
 
 /**
  * Implementation of hook_province_list().

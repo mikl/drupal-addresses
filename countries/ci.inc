@@ -1,7 +1,10 @@
 <?php
 // $Id$
 
-// Cote D'Ivoire
+/**
+ * @file
+ * "Cote D'Ivoire" specific data
+ */
 
 /**
  * Implementation of hook_province_list().

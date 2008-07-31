@@ -1,7 +1,10 @@
 <?php
 // $Id$
 
-// Falkland Islands (Malvinas)
+/**
+ * @file
+ * "Falkland Islands (Malvinas)" specific data
+ */
 
 /**
  * Implementation of hook_province_list().

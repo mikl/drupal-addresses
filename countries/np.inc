@@ -1,7 +1,10 @@
 <?php
 // $Id$
 
-// Nepal
+/**
+ * @file
+ * "Nepal" specific data
+ */
 
 /**
  * Implementation of hook_province_list().

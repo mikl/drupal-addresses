@@ -1,7 +1,10 @@
 <?php
 // $Id$
 
-// Tonga
+/**
+ * @file
+ * "Tonga" specific data
+ */
 
 /**
  * Implementation of hook_province_list().

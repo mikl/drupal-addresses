@@ -1,7 +1,10 @@
 <?php
 // $Id$
 
-// Marshall Islands
+/**
+ * @file
+ * "Marshall Islands" specific data
+ */
 
 /**
  * Implementation of hook_province_list().

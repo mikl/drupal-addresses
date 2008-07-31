@@ -1,7 +1,10 @@
 <?php
 // $Id$
 
-// Korea, Republic Of (South Korea)
+/**
+ * @file
+ * "Korea, Republic Of (South Korea)" specific data
+ */
 
 /**
  * Implementation of hook_province_list().

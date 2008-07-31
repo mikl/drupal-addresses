@@ -1,7 +1,10 @@
 <?php
 // $Id$
 
-// Mauritius
+/**
+ * @file
+ * "Mauritius" specific data
+ */
 
 /**
  * Implementation of hook_province_list().

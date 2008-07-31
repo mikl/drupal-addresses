@@ -1,7 +1,10 @@
 <?php
 // $Id$
 
-// Canada
+/**
+ * @file
+ * "Canada" specific data
+ */
 
 /**
  * Returns an associative array of states/territories where

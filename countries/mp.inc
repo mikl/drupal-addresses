@@ -1,7 +1,10 @@
 <?php
 // $Id$
 
-// Northern Mariana Islands
+/**
+ * @file
+ * "Northern Mariana Islands" specific data
+ */
 
 /**
  * Implementation of hook_province_list().

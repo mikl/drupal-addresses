@@ -1,7 +1,10 @@
 <?php
 // $Id$
 
-// Fiji
+/**
+ * @file
+ * "Fiji" specific data
+ */
 
 /**
  * Implementation of hook_province_list().

@@ -1,7 +1,10 @@
 <?php
 // $Id$
 
-// Norfolk Island
+/**
+ * @file
+ * "Norfolk Island" specific data
+ */
 
 /**
  * Implementation of hook_province_list().

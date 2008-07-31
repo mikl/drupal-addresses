@@ -1,7 +1,10 @@
 <?php
 // $Id$
 
-// Faroe Islands
+/**
+ * @file
+ * "Faroe Islands" specific data
+ */
 
 /**
  * Implementation of hook_province_list().

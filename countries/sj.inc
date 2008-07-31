@@ -1,7 +1,10 @@
 <?php
 // $Id$
 
-// Svalbard and Jan Mayen
+/**
+ * @file
+ * "Svalbard and Jan Mayen" specific data
+ */
 
 /**
  * Implementation of hook_province_list().

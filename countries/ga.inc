@@ -1,7 +1,10 @@
 <?php
 // $Id$
 
-// Gabon
+/**
+ * @file
+ * "Gabon" specific data
+ */
 
 /**
  * Implementation of hook_province_list().

@@ -1,7 +1,10 @@
 <?php
 // $Id$
 
-// Mongolia
+/**
+ * @file
+ * "Mongolia" specific data
+ */
 
 /**
  * Implementation of hook_province_list().

@@ -1,7 +1,10 @@
 <?php
 // $Id$
 
-// British Indian Ocean Territory
+/**
+ * @file
+ * "British Indian Ocean Territory" specific data
+ */
 
 /**
  * Implementation of hook_province_list().

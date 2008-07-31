@@ -1,7 +1,10 @@
 <?php
 // $Id$
 
-// Virgin Islands, U. S.
+/**
+ * @file
+ * "Virgin Islands, U. S." specific data
+ */
 
 /**
  * Implementation of hook_province_list().

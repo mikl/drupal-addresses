@@ -1,7 +1,10 @@
 <?php
 // $Id$
 
-// Palau
+/**
+ * @file
+ * "Palau" specific data
+ */
 
 /**
  * Implementation of hook_province_list().

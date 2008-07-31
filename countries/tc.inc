@@ -1,7 +1,10 @@
 <?php
 // $Id$
 
-// Turks and Caicos Islands
+/**
+ * @file
+ * "Turks and Caicos Islands" specific data
+ */
 
 /**
  * Implementation of hook_province_list().

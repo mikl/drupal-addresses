@@ -1,7 +1,10 @@
 <?php
 // $Id$
 
-// French Southern Territories
+/**
+ * @file
+ * "French Southern Territories" specific data
+ */
 
 /**
  * Implementation of hook_province_list().

@@ -1,7 +1,10 @@
 <?php
 // $Id$
 
-// Chile
+/**
+ * @file
+ * "Chile" specific data
+ */
 
 /**
  * Implementation of hook_province_list().

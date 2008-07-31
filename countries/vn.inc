@@ -1,7 +1,10 @@
 <?php
 // $Id$
 
-// Vietnam
+/**
+ * @file
+ * "Vietnam" specific data
+ */
 
 /**
  * Implementation of hook_province_list().

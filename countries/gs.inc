@@ -1,7 +1,10 @@
 <?php
 // $Id$
 
-// South Georgia and the South Sandwich Islands
+/**
+ * @file
+ * "South Georgia and the South Sandwich Islands" specific data
+ */
 
 /**
  * Implementation of hook_province_list().

@@ -1,7 +1,10 @@
 <?php
 // $Id$
 
-// Togo
+/**
+ * @file
+ * "Togo" specific data
+ */
 
 /**
  * Implementation of hook_province_list().

@@ -1,7 +1,10 @@
 <?php
 // $Id$
 
-// Heard Island and McDonald Islands
+/**
+ * @file
+ * "Heard Island and McDonald Islands" specific data
+ */
 
 /**
  * Implementation of hook_province_list().
