@@ -15,6 +15,7 @@
  */
 function addresses_province_list_be() {
   return array(
+    'BRU' => t('Brussels'),
     'VAN' => t('Antwerpen'),
     'VBR' => t('Vlaams Brabant'),
     'VLI' => t('Limburg'),
