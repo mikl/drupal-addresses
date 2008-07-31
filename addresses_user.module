@@ -160,7 +160,7 @@ function addresses_user_token_values($type, $object = NULL) {
  */
 function addresses_user_user($op, &$edit, &$user) {
   if ($op == 'delete') {
-    module_load_include('inc', 'addresses');
-    _addresses_address_delete($user->uid, 'user');
+    module_load_include('inc', 'addresses_user');
+    _addresses_user_address_delete($user->uid, 'user');
   }
 }

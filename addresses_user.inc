@@ -7,6 +7,90 @@
  */
 
 /**
+ * Delete a given Address
+ *
+ * @param $id
+ *   Number. The Address ID that should be deleted
+ * @param $type
+ *   String (optional). It can be:
+ *   - 'address' (default): than search for a unique Address ID
+ *   - 'user': get all address from a user
+ *   - 'node: get all address from a node
+ */
+function _addresses_user_address_delete($id, $type = 'address') {
+  // Check what address should be deleted: a single one or
+  // all addresses related to a given Element (Node, User)
+  if ($type == 'address') {
+    db_query('DELETE FROM {addresses} WHERE aid = %d', $id);
+  }
+  else {
+    db_query("DELETE FROM {addresses} WHERE aid = %d AND atype = '%s'", $id, $type);
+  }
+
+  // Show an warning message
+  drupal_set_message(t('The address has been deleted.'), 'warning');
+}
+
+/**
+ * Saves a address and link it to its main object.
+ * Needs a $user or $node object.
+ *
+ * @param $address
+ *   Array. The address data to be saved.
+ * @param $id
+ *   Number. It might be the Node ID (nid) or the User ID (uid),
+ *   depending on the $type variable
+ * @param $type
+ *   String (optional). 'node' to link the address to a
+ *   node or 'user' to link it to a site user
+ */
+function _addresses_user_address_save($address, $id, $type = 'node') {
+  if (!empty($address)) {
+    if (empty($address['aid'])) {
+      $aid_sql = '';
+      $aid_sql2 = '';
+    }
+    else {
+      // Instead of create INSERT and UPDATE SQL
+      // instrauctions, we DELETE (if exists) the given
+      // Address and create another one in its place
+      db_query('DELETE FROM {addresses} WHERE aid = %d', $address['aid']);
+      $aid_sql = ', aid';
+      $aid_sql2 = ', %d';
+    }
+
+    // If this address is the Primary, change all other address
+    // to NOT primary
+    if (!empty($address['is_primary'])) {
+      db_query("UPDATE {addresses} SET is_primary = 0
+        WHERE is_primary = 1 AND eid = %d AND atype = '%s'",
+        $id, $type);
+    }
+
+    // Let other modules change the standard behaviour
+    module_invoke_all('addressapi', 'save', $address);
+
+    db_query("INSERT INTO {addresses}
+      (atype, eid, aname, street,
+      additional, city, province, postal_code, country, is_primary". $aid_sql .")
+      VALUES ('%s', %d, '%s', '%s',
+      '%s', '%s', '%s', '%s', '%s', %d". $aid_sql2 .")",
+      $type,
+      $id,
+      (empty($address['aname'])        ? '' : $address['aname']),
+      (empty($address['street'])       ? '' : $address['street']),
+      (empty($address['additional'])   ? '' : $address['additional']),
+      (empty($address['city'])         ? '' : $address['city']),
+      (empty($address['province'])     ? '' : strtoupper($address['province'])),
+      (empty($address['postal_code'])  ? '' : $address['postal_code']),
+      (empty($address['country'])      ? '' : $address['country']),
+      (empty($address['is_primary'])   ? 0  : $address['is_primary']),
+      (empty($address['aid'])          ? 0  : $address['aid'])
+    );
+  }
+}
+
+/**
  * Manage the user Addresses: list them, create and delete operaions
  *
  * @param $op
@@ -55,7 +139,7 @@ function _addresses_user_address($op = NULL, $aid = NULL) {
 
     case 'delete':
       /// @todo Generates a confirm page before delete
-      _addresses_address_delete(arg(4));
+      _addresses_user_address_delete(arg(4));
 
       // Send the user to the address book
       drupal_goto("user/$uid/address");
@@ -116,7 +200,7 @@ function _addresses_user_form(&$form_state, $fields = array(), $values = array()
  */
 function _addresses_user_form_submit($form, &$form_state) {
   global $user;
-  _addresses_address_save($form_state['values']['addresses'], $user->uid, 'user');
+  _addresses_user_address_save($form_state['values']['addresses'], $user->uid, 'user');
 }
 
 /**
