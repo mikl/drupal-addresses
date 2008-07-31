@@ -2,5 +2,5 @@
 core            = "6.x"
 description     = "Link addresses to contents using CCK"
 dependencies[]  = addresses
-dependencies[]  = cck
+dependencies[]  = content
 name            = "Addresses - CCK"
