@@ -38,7 +38,7 @@ function _addresses_user_address($op = NULL, $aid = NULL) {
 
       // If its a existing address, get the whole
       // address information
-      $edit = arg(4) ? _addresses_address_get(arg(4), 'address') : array();
+      $edit = arg(4) ? _addresses_user_address_get(arg(4), 'address') : array();
 
       if (empty($edit)) {
         // Set the Element ID as User ID form new addresses
@@ -62,7 +62,7 @@ function _addresses_user_address($op = NULL, $aid = NULL) {
       break;
 
     default:
-      $addresses = _addresses_address_get($user->uid, 'user');
+      $addresses = _addresses_user_address_get($user->uid, 'user');
       return theme('addresses_user_overview', $uid, $addresses);
   }
 }

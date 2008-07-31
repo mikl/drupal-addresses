@@ -615,7 +615,7 @@ function theme_addresses($address, $hide = array()) {
 
   // Besides being the Drupal Address info,
   // its possible to be used by VCard
-  $output = '<div class="address vcard">';
+  $output = '<div class="address vcard adr">';
 
   // Address name, if any
   if (!empty($address['aname'])) {
@@ -639,7 +639,7 @@ function theme_addresses($address, $hide = array()) {
 
   // City
   if (!empty($address['city'])) {
-    $city_province_postal[] = '<span class="city">'. $address['city'] .'</span>';
+    $city_province_postal[] = '<span class="city locality">'. $address['city'] .'</span>';
   }
 
   // Province

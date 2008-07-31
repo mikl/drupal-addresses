@@ -16,46 +16,6 @@ define('ADDRESSES_FIELD_REQUIRED',  2);
 define('ADDRESSES_FIELD_HIDDEN',    3);
 
 /**
- * Load the full address from a given Address ID or User ID
- *
- * @param $id
- *   Number. The ID to look into the table. Depends on $type variable:
- *   if it is 'address' (default), it should look for a unique address
- *   ID, on 'aid' column. For anything else, search on 'eid' column.
- * @param $type
- *   String (optional). It can be:
- *   - 'address' (default): than search for a unique Address ID
- *   - 'user': get all address from a user
- *   - 'node: get all address from a node
- * @return
- *   Array. The numeric list of addresses arrays
- */
-function _addresses_address_get($id, $type = 'address') {
-  static $addresses;
-
-  if (empty($addresses[$type][$id])) {
-    // Get the address based on Address ID or
-    // the (User/Node) ID and the given identification
-    if ($type == 'address') {
-      $adr = db_query('SELECT * FROM {addresses} WHERE aid = %d', $id);
-    }
-    else {
-      $adr = db_query("SELECT * FROM {addresses}
-        WHERE atype = '%s' AND eid = %d
-        ORDER BY is_primary DESC", $type, $id);
-    }
-
-    // Transform all SQL findings into arrays
-    $addresses[$type][$id] = array();
-    while ($address = db_fetch_array($adr)) {
-      $addresses[$type][$id][] = $address;
-    }
-  }
-
-  return $addresses[$type][$id];
-}
-
-/**
  * Implementation of hook_addressfieldapi().
  *
  * Its a specific Addresses module hook function, to
@@ -338,16 +298,14 @@ function addresses_elements_process($element) {
  */
 function addresses_menu() {
   $items['admin/settings/address'] = array(
-    'description'     => t('Settings for Address module'),
+    'description'     => 'Settings for Address module',
     'file'            => 'addresses.inc',
     'page callback'   => 'drupal_get_form',
     'page arguments'  => array('_addresses_admin'),
-    'title'           => t('Addresses'),
+    'title'           => 'Addresses',
   );
-
-  /// @todo use the correct ACCESS PERMISSION
   $items['admin/settings/address/autocomplete'] = array(
-    'access'          => TRUE,
+    'access callback' => TRUE,
     'file'            => 'addresses.inc',
     'page callback'   => '_addresses_autocomplete',
     'type'            => MENU_CALLBACK
