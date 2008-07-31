@@ -353,6 +353,16 @@ function addresses_theme() {
   );
 }
 
+/**
+ * Generate a settings form that will allow admins to choose
+ * which addresses fields shuold be used.
+ *
+ * @param field_values
+ *   Array. The default values for each field, if any
+ * @return
+ *   Array. A form with settings
+ * @ingroup form
+ */
 function _addresses_settings($field_values) {
   $ftypes = module_invoke_all('addressesfieldapi', 'fields');
   foreach ($ftypes as $ftype => $field) {
@@ -369,6 +379,8 @@ function _addresses_settings($field_values) {
       '#type'           => 'radios',
     );
   }
+
+  $form['#theme'] = 'addresses_select_fields';
 
   return $form;
 }
