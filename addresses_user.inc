@@ -32,6 +32,46 @@ function _addresses_user_address_delete($id, $type = 'address') {
 }
 
 /**
+ * Load the full address from a given Address ID or User ID
+ *
+ * @param $id
+ *   Number. The ID to look into the table. Depends on $type variable:
+ *   if it is 'address' (default), it should look for a unique address
+ *   ID, on 'aid' column. For anything else, search on 'eid' column.
+ * @param $type
+ *   String (optional). It can be:
+ *   - 'address' (default): than search for a unique Address ID
+ *   - 'user': get all address from a user
+ *   - 'node: get all address from a node
+ * @return
+ *   Array. The numeric list of addresses arrays
+ */
+function _addresses_user_address_get($id, $type = 'address') {
+  static $addresses;
+
+  if (empty($addresses[$type][$id])) {
+    // Get the address based on Address ID or
+    // the (User/Node) ID and the given identification
+    if ($type == 'address') {
+      $adr = db_query('SELECT * FROM {addresses} WHERE aid = %d', $id);
+    }
+    else {
+      $adr = db_query("SELECT * FROM {addresses}
+        WHERE atype = '%s' AND eid = %d
+        ORDER BY is_primary DESC", $type, $id);
+    }
+
+    // Transform all SQL findings into arrays
+    $addresses[$type][$id] = array();
+    while ($address = db_fetch_array($adr)) {
+      $addresses[$type][$id][] = $address;
+    }
+  }
+
+  return $addresses[$type][$id];
+}
+
+/**
  * Saves a address and link it to its main object.
  * Needs a $user or $node object.
  *
@@ -103,8 +143,6 @@ function _addresses_user_address_save($address, $id, $type = 'node') {
  *   Number (optional). The Address ID
  */
 function _addresses_user_address($op = NULL, $aid = NULL) {
-  module_load_include('inc', 'addresses');
-
   global $user;
   $uid = $user->uid;
 
