@@ -358,12 +358,12 @@ function addresses_theme() {
  * which addresses fields shuold be used.
  *
  * @param field_values
- *   Array. The default values for each field, if any
+ *   Array (optional). The default values for each field, if any
  * @return
  *   Array. A form with settings
  * @ingroup form
  */
-function _addresses_settings($field_values) {
+function _addresses_settings($field_values = array()) {
   $ftypes = module_invoke_all('addressesfieldapi', 'fields');
   foreach ($ftypes as $ftype => $field) {
     // List of address fields
