@@ -7,6 +7,161 @@
  */
 
 /**
+ * It splits the _addresses_addressesfieldapi_form into more pieces,
+ * reducing the memory consumption on non related pages.
+ *
+ * @ingroup form
+ */
+function _addresses_addressesfieldapi_form($fields = array(), $values = array()) {
+  // Let users select if the address is the primary
+  if ($fields['is_primary'] == ADDRESSES_FIELD_HIDDEN) {
+    $form['is_primary'] = array(
+      '#type'           => 'hidden',
+      '#value'          => isset($values['is_primary']) ? $values['is_primarys'] : '',
+    );
+  }
+  elseif (!empty($fields['is_primary'])) {
+    $form['is_primary'] = array(
+      '#type'           => 'checkbox',
+      '#title'          => t('Default address'),
+      '#default_value'  => isset($values['is_primary']) ? $values['is_primary'] : ''
+    );
+  }
+
+  // Adds the Address Name (Home, Office, Rio de Janeiro...)
+  if ($fields['aname'] == ADDRESSES_FIELD_HIDDEN) {
+    $form['aname'] = array(
+      '#type'           => 'hidden',
+      '#value'          => isset($values['aname']) ? $values['aname'] : '',
+    );
+  }
+  elseif (!empty($fields['aname'])) {
+    $form['aname'] = array(
+      '#type'           => 'textfield',
+      '#title'          => t('Address name'),
+      '#default_value'  => isset($values['aname']) ? $values['aname'] : '',
+      '#size'           => 50,
+      '#maxlength'      => 75,
+      '#description'    => t('e.g. a place of business, venue, meeting point'),
+      '#attributes'     => NULL,
+      '#required'       => ($fields['aname'] == ADDRESSES_FIELD_REQUIRED)
+    );
+  }
+
+  // Adds the Country
+  if ($fields['country'] == ADDRESSES_FIELD_HIDDEN) {
+    $form['country'] = array(
+      '#type'           => 'hidden',
+      '#value'          => isset($values['country']) ? $values['country'] : '',
+    );
+  }
+  elseif (!empty($fields['country'])) {
+    // Get a list of enabled contries
+    $countries = array('' => '') +
+      _addresses_country_get(variable_get('addresses_country_list', array()));
+
+    $form['country'] = array(
+      '#type'           => 'select',
+      '#title'          => t('Country'),
+      '#default_value'  => isset($values['country']) ? $values['country'] : '',
+      '#options'        => $countries,
+      '#description'    => NULL,
+      '#extra'          => 0,
+      '#multiple'       => FALSE,
+      '#required'       => ($fields['country'] == ADDRESSES_FIELD_REQUIRED)
+    );
+  }
+
+  // Adds the Province field
+  if ($fields['province'] == ADDRESSES_FIELD_HIDDEN) {
+    $form['province'] = array(
+      '#type'           => 'hidden',
+      '#value'          => isset($values['province']) ? $values['province'] : '',
+    );
+  }
+  elseif (!empty($fields['province'])) {
+    $form['province'] = array(
+      '#default_value'  => isset($values['province']) ? $values['province'] : '',
+      '#maxlength'      => 16,
+      '#required'       => ($fields['province'] == ADDRESSES_FIELD_REQUIRED),
+      '#size'           => 16,
+      '#title'          => t('State / Province'),
+      '#type'           => 'textfield',
+    );
+    $form['#validate'][] = '_addresses_province_validate';
+  }
+
+  // Adds the City
+  if ($fields['city'] == ADDRESSES_FIELD_HIDDEN) {
+    $form['city'] = array(
+      '#type'           => 'hidden',
+      '#value'          => isset($values['city']) ? $values['city'] : '',
+    );
+  }
+  elseif (!empty($fields['city'])) {
+    $form['city'] = array(
+      '#type'           => 'textfield',
+      '#title'          => t('City'),
+      '#default_value'  => isset($values['city']) ? $values['city'] : '',
+      '#size'           => 50,
+      '#maxlength'      => 255,
+      '#description'    => NULL,
+      '#attributes'     => NULL,
+      '#required'       => ($fields['city'] == ADDRESSES_FIELD_REQUIRED)
+    );
+  }
+
+  // Adds the Streets and the Additional fields
+  if ($fields['street'] == ADDRESSES_FIELD_HIDDEN) {
+    $form['street'] = array(
+      '#type'           => 'hidden',
+      '#value'          => isset($values['street']) ? $values['street'] : '',
+    );
+    $form['additional'] = array(
+      '#type'           => 'hidden',
+      '#value'          => isset($values['additional']) ? $values['additional'] : '',
+    );
+  }
+  elseif (!empty($fields['street'])) {
+    $form['street'] = array(
+      '#type'           => 'textfield',
+      '#title'          => t('Street'),
+      '#default_value'  => isset($values['street']) ? $values['street'] : '',
+      '#size'           => 50,
+      '#maxlength'      => 255,
+      '#required'       => ($fields['street'] == ADDRESSES_FIELD_REQUIRED)
+    );
+    $form['additional'] = array(
+      '#type'           => 'textfield',
+      '#title'          => t('Additional'),
+      '#default_value'  => isset($values['additional']) ? $values['additional'] : '',
+      '#size'           => 50,
+      '#maxlength'      => 255
+    );
+  }
+
+  // Adds the Postal Code
+  if ($fields['postal_code'] == ADDRESSES_FIELD_HIDDEN) {
+    $form['postal_code'] = array(
+      '#type'           => 'hidden',
+      '#value'          => isset($values['postal_code']) ? $values['postal_code'] : '',
+    );
+  }
+  elseif (!empty($fields['postal_code'])) {
+    $form['postal_code'] = array(
+      '#type'           => 'textfield',
+      '#title'          => t('Postal code'),
+      '#default_value'  => isset($values['postal_code']) ? $values['postal_code'] : '',
+      '#size'           => 16,
+      '#maxlength'      => 16,
+      '#required'       => ($fields['postal_code'] == ADDRESSES_FIELD_REQUIRED)
+    );
+  }
+
+  return $form;
+}
+
+/**
  * Modules settings page
  *
  * @ingroup form
