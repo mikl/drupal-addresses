@@ -2,22 +2,22 @@
 // $Id$
 /**
  * @author Bruno Massa
- * @file addresses.install
+ * @file addresses_user.install
  * Installation / uninstallation routines.
  */
 
 /**
  * Implementation of hook_install().
  */
-function addresses_install() {
+function addresses_user_install() {
   // Install the necessary Database tables
-  drupal_install_schema('addresses');
+  drupal_install_schema('addresses_user');
 }
 
 /**
  * Implementation of hook_schema().
  */
-function addresses_schema() {
+function addresses_user_schema() {
   $schema['addresses'] = array(
   'description' => t('Products-specific fields'),
     'fields' => array(
@@ -90,7 +90,7 @@ function addresses_schema() {
 /**
  * Implentation of hook_uninstall().
  */
-function addresses_uninstall() {
+function addresses_user_uninstall() {
   // Delete tables
-  drupal_uninstall_schema('addresses');
+  drupal_uninstall_schema('addresses_user');
 }
