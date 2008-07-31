@@ -28,42 +28,58 @@ function addresses_addressesfieldapi($op, $fields = array(), $values = array()) 
         'type'        => 'varchar',
         'length'      => 75,
         'description' => t('The nickname of this address, like "Home", "Office", "Anna\'s appartment"'),
+        'display'     => ADDRESSES_FIELD_NONE,
+        'title'       => t('Address Name'),
       ),
       'street' => array(
         'type'        => 'varchar',
         'length'      => 255,
         'description' => t('Street, number...'),
+        'display'     => ADDRESSES_FIELD_SHOW,
+        'title'       => t('Street'),
       ),
       'additional' => array(
         'type'        => 'varchar',
         'length'      => 255,
         'description' => t('More info like appartment block, number or address reference'),
+        'display'     => ADDRESSES_FIELD_SHOW,
+        'title'       => t('Additional'),
       ),
       'city' => array(
         'type'        => 'varchar',
         'length'      => 255,
         'description' => t('Name of the city'),
+        'display'     => ADDRESSES_FIELD_SHOW,
+        'title'       => t('City'),
       ),
       'province' => array(
         'type'        => 'varchar',
         'length'      => 16,
         'description' => t('Name of the state/province/county/territory'),
+        'display'     => ADDRESSES_FIELD_SHOW,
+        'title'       => t('Province'),
       ),
       'country' => array(
         'type'        => 'varchar',
         'length'      => 2,
         'description' => t('The ISO alpha 3 code of each country (its a 2-digit code)'),
+        'display'     => ADDRESSES_FIELD_SHOW,
+        'title'       => t('Country'),
       ),
       'postal_code' => array(
         'type'        => 'varchar',
         'length'      => 16,
         'description' => t('The address postal code (ZIP code for US people)'),
+        'display'     => ADDRESSES_FIELD_SHOW,
+        'title'       => t('Postal code'),
       ),
       'is_primary' => array(
         'type'        => 'int',
         'size'        => 'tiny',
         'default'     => 0,
         'description' => t('Mark it as the primary address or not (default is not)'),
+        'display'     => ADDRESSES_FIELD_NONE,
+        'title'       => t('Primary Address Checkbox'),
       )
     );
   }
@@ -215,60 +231,6 @@ function addresses_addressesfieldapi($op, $fields = array(), $values = array()) 
 
     return $form;
   }
-  elseif ($op == 'settings') {
-    // This list of options are used many times, so its
-    // usefull to create it now an use it later
-    $options = array(
-      ADDRESSES_FIELD_NONE      => t('None'),
-      ADDRESSES_FIELD_SHOW      => t('Normal'),
-      ADDRESSES_FIELD_REQUIRED  => t('Required'),
-      ADDRESSES_FIELD_HIDDEN    => t('Hidden')
-    );
-
-    // List of address fields
-    $form['addresses']['is_primary'] = array(
-      '#default_value'  => empty($fields['is_primary']) ? ADDRESSES_FIELD_NONE : $fields['is_primary'],
-      '#options'        => $options,
-      '#title'          => t('Primary Address Checkbox'),
-      '#type'           => 'radios',
-    );
-    $form['addresses']['aname'] = array(
-      '#default_value'  => empty($fields['aname']) ? ADDRESSES_FIELD_NONE : $fields['aname'],
-      '#options'        => $options,
-      '#title'          => t('Address Name'),
-      '#type'           => 'radios',
-    );
-    $form['addresses']['country'] = array(
-      '#default_value'  => empty($fields['country']) ? ADDRESSES_FIELD_SHOW : $fields['country'],
-      '#options'        => $options,
-      '#title'          => t('Country'),
-      '#type'           => 'radios',
-    );
-    $form['addresses']['province'] = array(
-      '#default_value'  => empty($fields['province']) ? ADDRESSES_FIELD_SHOW : $fields['province'],
-      '#options'        => $options,
-      '#title'          => t('Province'),
-      '#type'           => 'radios',
-    );
-    $form['addresses']['city'] = array(
-      '#default_value'  => empty($fields['city']) ? ADDRESSES_FIELD_SHOW : $fields['city'],
-      '#options'        => $options,
-      '#title'          => t('City'),
-      '#type'           => 'radios',
-    );
-    $form['addresses']['street'] = array(
-      '#default_value'  => empty($fields['street']) ? ADDRESSES_FIELD_SHOW : $fields['street'],
-      '#options'        => $options,
-      '#title'          => t('Street'),
-      '#type'           => 'radios',
-    );
-    $form['addresses']['postal_code'] = array(
-      '#default_value'  => empty($fields['postal_code']) ? ADDRESSES_FIELD_SHOW : $fields['postal_code'],
-      '#options'        => $options,
-      '#title'          => t('Postal code'),
-      '#type'           => 'radios',
-    );
-  }
 
   return $form;
 }
@@ -389,4 +351,24 @@ function addresses_theme() {
       'file'      => 'addresses.inc',
     ),
   );
+}
+
+function _addresses_settings($field_values) {
+  $ftypes = module_invoke_all('addressesfieldapi', 'fields');
+  foreach ($ftypes as $ftype => $field) {
+    // List of address fields
+    $form['addresses'][$ftype] = array(
+      '#default_value'  => empty($field_values[$ftype]) ? $field['display'] : $field_values[$ftype],
+      '#options'        => array(
+        ADDRESSES_FIELD_NONE      => '',
+        ADDRESSES_FIELD_SHOW      => '',
+        ADDRESSES_FIELD_REQUIRED  => '',
+        ADDRESSES_FIELD_HIDDEN    => '',
+      ),
+      '#title'          => $field['title'],
+      '#type'           => 'radios',
+    );
+  }
+
+  return $form;
 }
