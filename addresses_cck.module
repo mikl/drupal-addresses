@@ -143,11 +143,13 @@ function addresses_cck_theme() {
   return array(
     // Shows address in the default view: Multilines
     'addresses_cck_formatter_default' => array(
-      'arguments' => array('element')
+      'arguments' => array('element'),
+      'file'      => 'addresses_cck.inc',
     ),
     // Shows address in only one line
     'addresses_cck_formatter_single_line' => array(
-      'arguments' => array('element')
+      'arguments' => array('element'),
+      'file'      => 'addresses_cck.inc',
     ),
   );
 }
