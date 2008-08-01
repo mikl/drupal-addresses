@@ -200,6 +200,7 @@ function _addresses_user_form(&$form_state, $fields = array(), $values = array()
 
   // If its the very first time its loaded, use all fields
   if (empty($fields)) {
+    module_load_include('inc', 'addresses');
     $settings = _addresses_settings();
     foreach (array_keys($settings['addresses']) as $index) {
       $fields[$index] = ADDRESSES_FIELD_SHOW;

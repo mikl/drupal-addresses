@@ -619,6 +619,38 @@ function _addresses_province_validate($form, &$form_state) {
 }
 
 /**
+ * Generate a settings form that will allow admins to choose
+ * which addresses fields shuold be used.
+ *
+ * @param field_values
+ *   Array (optional). The default values for each field, if any
+ * @return
+ *   Array. A form with settings
+ * @ingroup form
+ */
+function _addresses_settings($field_values = array()) {
+  $ftypes = module_invoke_all('addressesfieldapi', 'fields');
+  foreach ($ftypes as $ftype => $field) {
+    // List of address fields
+    $form['addresses'][$ftype] = array(
+      '#default_value'  => empty($field_values[$ftype]) ? $field['display'] : $field_values[$ftype],
+      '#options'        => array(
+        ADDRESSES_FIELD_NONE      => '',
+        ADDRESSES_FIELD_SHOW      => '',
+        ADDRESSES_FIELD_REQUIRED  => '',
+        ADDRESSES_FIELD_HIDDEN    => '',
+      ),
+      '#title'          => $field['title'],
+      '#type'           => 'radios',
+    );
+  }
+
+  $form['#theme'] = 'addresses_select_fields';
+
+  return $form;
+}
+
+/**
  * Generates HTML for the passed address.
  *
  * @ingroup themeable

@@ -7,8 +7,6 @@
  *
  * @todo Implement AJAX for multiple values.
  * @todo Ensure this will work with the Addresses, Views, and GMap
- * @todo Probably replace the 'old' method of adding fields to nodes and users
- *   (can use usernodes and/or nodeprofiles instead)
  * @todo All the cool stuff you get with CCK widgets
  * @todo Can pre-populate default values per-field
  */
@@ -108,11 +106,13 @@ function addresses_cck_field_settings($op, $field) {
   switch ($op) {
     case 'form':
       // Get the form fields from the API addressesfieldapi
+      module_load_include('inc', 'addresses');
       $form = _addresses_settings($field);
       return $form;
 
     case 'save':
       // First, get the form fields from the API addressesfieldapi
+      module_load_include('inc', 'addresses');
       $form = _addresses_settings($field);
 
       // With the fields and their values correctly assigned,
