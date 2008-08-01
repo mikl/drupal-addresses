@@ -1,6 +1,6 @@
 <?php
+// $Id$
 /**
- * $Id$
  * @author Bruno Massa
  * @file addresses_user.module
  * You can associate a geographic address with users.

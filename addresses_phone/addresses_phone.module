@@ -1,6 +1,6 @@
 <?php
+// $Id$
 /**
- * $Id$
  * @author Bruno Massa
  * @file addresses_phone.module
  * Use phone and fax fields on .
