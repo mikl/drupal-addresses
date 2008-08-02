@@ -123,9 +123,19 @@ function addresses_elements() {
  * @return
  *   Array. Form fields
  */
-function addresses_elements_process($element) {
+function addresses_elements_process($element, $edit, $form_state, $form) {
   $fields = $element['#fields'];
   $values = $element['#default_value'];
+
+  // Reset the required fields based on the general required value,
+  // important when the
+  if (empty($element['#required'])) {
+    foreach ($fields as $field => $required) {
+      if ($required == ADDRESSES_FIELD_REQUIRED) {
+        $fields[$field] = ADDRESSES_FIELD_SHOW;
+      }
+    }
+  }
 
   // Reset unwanted attributes
   $element['#title'] = '';
