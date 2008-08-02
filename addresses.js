@@ -6,6 +6,7 @@
  * This jQuery function will force the Province field
  * to autcomplete the pronvice for a given country.
  */
+/*global Drupal, $ */
 
 Drupal.behaviors.addresses = function(context) {
   // Use this ID to 'simplify' the callings
@@ -31,6 +32,6 @@ Drupal.behaviors.addresses = function(context) {
     $(id + n +'-country').change(function() {
       $(id + n +'-province-autocomplete').val(url + $(this).val());
 //       Drupal.behaviors.autocomplete();
-    })
+    });
   }
 };
