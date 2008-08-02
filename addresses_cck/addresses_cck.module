@@ -108,6 +108,10 @@ function addresses_cck_field_settings($op, $field) {
       // Get the form fields from the API addressesfieldapi
       module_load_include('inc', 'addresses');
       $form = _addresses_settings($field);
+//       $form['required'] = array(
+//         '#type'   => 'hidden',
+//         '#value'  => $field['required'],
+//       );
       return $form;
 
     case 'save':
@@ -134,6 +138,22 @@ function addresses_cck_field_settings($op, $field) {
       // It describes each database field that will be stored.
       return module_invoke_all('addressesfieldapi', 'fields');
   }
+}
+
+function addresses_cck_form__content_admin_field_alter(&$form, &$form_state) {
+  if ($form['field_name']['#value'] == 'field_addresses') {
+    $form['#validate'][] = 'addresses_cck_field_validate';
+  }
+}
+
+function addresses_cck_field_validate(&$form, &$form_state) {
+  foreach (array_keys($form_state['values']['columns']) as $ftype) {
+    if ($form_state['values'][$ftype] == ADDRESSES_FIELD_REQUIRED) {
+      form_set_value($form['field']['required'], TRUE, $form_state);
+      return;
+    }
+  }
+  form_set_value($form['field']['required'], FALSE, $form_state);
 }
 
 /**
