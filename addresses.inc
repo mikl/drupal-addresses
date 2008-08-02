@@ -576,7 +576,7 @@ function _addresses_settings($field_values = array()) {
     );
   }
 
-  $form['#theme'] = 'addresses_select_fields';
+  $form['addresses']['#theme'] = 'addresses_select_fields';
 
   return $form;
 }
@@ -804,8 +804,8 @@ function theme_addresses_singleline($address) {
  * @ingroup themeable
  */
 function theme_addresses_select_fields($form) {
-  foreach (element_children($form['addresses']) as $ftype) {
-    $field = &$form['addresses'][$ftype];
+  foreach (element_children($form) as $ftype) {
+    $field = &$form[$ftype];
     $rows[] = array(
       $field['#title'],
       drupal_render($field[0]),
@@ -813,7 +813,7 @@ function theme_addresses_select_fields($form) {
       drupal_render($field[2]),
       drupal_render($field[3]),
     );
-    unset($form['addresses'][$ftype]);
+    unset($form[$ftype]);
   }
 
   $header = array(t('Field'), t('None'), t('Normal'), t('Required'), t('Hidden'));
