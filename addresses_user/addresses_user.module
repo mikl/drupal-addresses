@@ -23,6 +23,27 @@ function _addresses_user_access($account) {
 
 /**
  * Implementation of hook_menu().
+ *
+ * Let admin select what addresses fields are relevant.
+ */
+function addresses_user_form__addresses_admin_alter(&$form, &$form_state) {
+  module_load_include('inc', 'addresses');
+  $form += _addresses_settings(variable_get('addresses_user', array()));
+
+  // Set the 'addresses' as a fieldset
+  $form['addresses_user'] = array(
+    '#description'  => t('Choose what fields user addresses might have'),
+    '#title'        => t('User addresses fields'),
+    '#tree'         => TRUE,
+    '#type'         => 'fieldset',
+    '#weight'       => -9
+  ) + $form['addresses'];
+
+  unset($form['addresses']);
+}
+
+/**
+ * Implementation of hook_menu().
  */
 function addresses_user_menu() {
   // Add tab for address book.
