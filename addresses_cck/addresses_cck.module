@@ -108,10 +108,10 @@ function addresses_cck_field_settings($op, $field) {
       // Get the form fields from the API addressesfieldapi
       module_load_include('inc', 'addresses');
       $form = _addresses_settings($field);
-//       $form['required'] = array(
-//         '#type'   => 'hidden',
-//         '#value'  => $field['required'],
-//       );
+      $form['required'] = array(
+        '#type'   => 'hidden',
+        '#value'  => $field['required'],
+      );
       return $form;
 
     case 'save':
@@ -140,12 +140,22 @@ function addresses_cck_field_settings($op, $field) {
   }
 }
 
+/**
+ * Implementation of hook_field_settings().
+ *
+ * @ingroup form
+ */
 function addresses_cck_form__content_admin_field_alter(&$form, &$form_state) {
   if ($form['field_name']['#value'] == 'field_addresses') {
     $form['#validate'][] = 'addresses_cck_field_validate';
   }
 }
 
+/**
+ * Reset the general 'required' value based on each address field.
+ *
+ * @ingroup form
+ */
 function addresses_cck_field_validate(&$form, &$form_state) {
   foreach (array_keys($form_state['values']['columns']) as $ftype) {
     if ($form_state['values'][$ftype] == ADDRESSES_FIELD_REQUIRED) {
