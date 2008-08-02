@@ -611,12 +611,12 @@ function theme_addresses($address, $hide = array()) {
   }
 
   // Besides being the Drupal Address info,
-  // its possible to be used by VCard
-  $output = '<div class="address vcard adr">';
+  // its possible to be used by hCard and VCard (if a address name was provided)
+  $output = '<div class="address adr'. (!empty($address['aname']) ? ' vcard' : '') .'">';
 
   // Address name, if any
   if (!empty($address['aname'])) {
-    $output .= '<div>'. theme('placeholder', $address['aname']);
+    $output .= '<div class="fn org">'. theme('placeholder', $address['aname']);
 
     // If its the default address, point it
     if (!empty($address['is_primary'])) {
