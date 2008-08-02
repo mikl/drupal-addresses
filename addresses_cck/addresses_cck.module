@@ -5,10 +5,7 @@
  * @file addresses_cck.module
  * You can associate a geographic address with content, using CCK.
  *
- * @todo Implement AJAX for multiple values.
- * @todo Ensure this will work with the Addresses, Views, and GMap
- * @todo All the cool stuff you get with CCK widgets
- * @todo Can pre-populate default values per-field
+ * @todo Ensure this will work with the Views and GMap
  */
 
 /**
