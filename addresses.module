@@ -224,11 +224,11 @@ function addresses_theme() {
  * Implementation of hook_token_list().
  */
 function addresses_token_list($type = 'all') {
-  if ($type == 'addresses' or $type == 'all') {
+  if ($type == 'addresses') {
     $tokens['addresses']['aname']         = t('Address name.');
-    $tokens['addresses']['street']        = t('Street.');
-    $tokens['addresses']['additional']    = t('The order ID.');
-    $tokens['addresses']['province_name'] = t('State/Province name.');
+    $tokens['addresses']['street']        = t('Street and number.');
+    $tokens['addresses']['additional']    = t('Street complement, like apartment number.');
+    $tokens['addresses']['province_name'] = t('State/Province full name.');
     $tokens['addresses']['province_code'] = t('State/Province code.');
     $tokens['addresses']['country_name']  = t('Country name.');
     $tokens['addresses']['country_code2'] = t('Country 2-digits code.');
