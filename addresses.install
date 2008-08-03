@@ -12,4 +12,10 @@
 function addresses_uninstall() {
   // Delete variables
   variable_del('addresses_country_list');
+
+  $countries = _addresses_country_get();
+  foreach (array_keys($countries) as $country) {
+    variable_del('addresses_format_'. $country);
+  }
+  variable_del('addresses_format_default');
 }
