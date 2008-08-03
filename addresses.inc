@@ -636,10 +636,20 @@ function theme_addresses($address, $hide = array()) {
   // Call token module to replace all tokens to their right value
   $format_address = token_replace($format_address, 'addresses', $address, '!', '');
 
+  // Replace the new lines for HTML line breaks AND remove
+  // all empty lines
+  $format_address = explode("\n", $format_address);
+  foreach ($format_address as $line => $line_data) {
+    if (empty($line_data)) {
+      unset($format_address[$line]);
+    }
+  }
+  $format_address = implode('<br/>', $format_address);
+
   // Besides being the Drupal Address info,
   // its possible to be used by hCard and VCard (if a address name was provided)
   return '<div class="address adr'. (!empty($address['aname']) ? ' vcard' : '') .'">'.
-    str_replace("\n", '<br/>', $format_address) .'</div>';
+     $format_address .'</div>';
 }
 
 /**

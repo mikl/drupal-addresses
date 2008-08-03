@@ -240,22 +240,26 @@ function addresses_token_values($type, $object = NULL) {
   if ($type == 'addresses') {
     $countries = _addresses_country_get();
 
-    $values['aname']          = '<span class="fn org">'. theme('placeholder', $object['aname']);
-    // If its the default address, point it
-    if (!empty($object['is_primary'])) {
-      $$values['aname'] .= ' ('. t('default') .')';
-    }
-    $values['aname'] .= '</span>';
-
-    $values['street']         = '<span class="street-address">'. $object['street'] .'</span>';
-    $values['additional']     = $object['additional'];
-
-    $values['city']           = '<span class="city locality">'. $object['city'] .'</span>';
-    $values['province_name']  = '<span class="region">'.        $object['province'] .'</span>';
-    $values['province_code']  = '<span class="region">'.        $object['province'] .'</span>';
-    $values['country_name']   = '<span class="country-name">'.  t($countries[$object['country']]) .'</span>';
-    $values['country_code2']  = '<span class="country-code">'.  $object['country'] .'</span>';
-    $values['postal_code']    = '<span class="postal-code">'.    $object['postal_code'] .'</span>';
+    $values['primary']        = empty($object['primary'])     ? '' :
+      ' ('. t('default') .')';
+    $values['aname']          = empty($object['aname'])       ? '' :
+      '<span class="fn org">'. theme('placeholder', $object['aname']) . $values['primary'] .'</span>';
+    $values['street']         = empty($object['street'])      ? '' :
+      '<span class="street-address">'. $object['street'] .'</span>';
+    $values['additional']     = empty($object['additional'])  ? '' :
+      $object['additional'];
+    $values['city']           = empty($object['city'])        ? '' :
+      '<span class="city locality">'. $object['city'] .'</span>';
+    $values['province_name']  = empty($object['province'])    ? '' :
+      '<span class="region">'.        $object['province'] .'</span>';
+    $values['province_code']  = empty($object['province'])    ? '' :
+      '<span class="region">'.        $object['province'] .'</span>';
+    $values['country_name']   = empty($object['country'])     ? '' :
+      '<span class="country-name">'.  t($countries[$object['country']]) .'</span>';
+    $values['country_code2']  = empty($object['country'])     ? '' :
+      '<span class="country-code">'.  $object['country'] .'</span>';
+    $values['postal_code']    = empty($object['postal_code']) ? '' :
+      '<span class="postal-code">'.    $object['postal_code'] .'</span>';
     return $values;
   }
 }
