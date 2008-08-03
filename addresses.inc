@@ -634,7 +634,7 @@ function theme_addresses($address, $hide = array()) {
   }
 
   // Call token module to replace all tokens to their right value
-  $format_address = token_replace($format_address, 'addresses', $address);
+  $format_address = token_replace($format_address, 'addresses', $address, '!', '');
 
   // Besides being the Drupal Address info,
   // its possible to be used by hCard and VCard (if a address name was provided)
