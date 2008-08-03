@@ -610,10 +610,28 @@ function theme_addresses($address, $hide = array()) {
     return '';
   }
 
-  // Besides being the Drupal Address info,
-  // its possible to be used by hCard and VCard (if a address name was provided)
-  $output = '<div class="address adr'. (!empty($address['aname']) ? ' vcard' : '') .'">';
+  // Get the proper address format
+  if (!empty($address['country'])
+      and !$format_address = variable_get('addresses_format_'. $address['country'], '')) {
 
+    // Load country specifice code .inc file if it exists.
+    // For example, if country_code for U.S. == 'us', load 'addresses.us.inc'
+    include_once drupal_get_path('module', 'addresses') .'/countries/'. $address['country'] .'.inc';
+
+    // If the country has an preset address format
+    $function = 'addresses_address_format_'. $address['country'];
+    if (function_exists($function)) {
+      $format_address = $function();
+      variable_set('addresses_format_'. $address['country'], $format_address);
+    }
+  }
+
+  // If still the proper address format, use the US one
+  if (empty($format_address)) {
+    include_once drupal_get_path('module', 'addresses') .'/countries/us.inc';
+    $format_address = addresses_address_format_us();
+    variable_set('addresses_format_'. $address['country'], $format_address);
+  }
   // Address name, if any
   if (!empty($address['aname'])) {
     $output .= '<div class="fn org">'. theme('placeholder', $address['aname']);
@@ -660,9 +678,11 @@ function theme_addresses($address, $hide = array()) {
     $output .= $city_province_postal[] = '<div class="postal-code">'. $address['postal_code'] .'</div>';
   }
 
-  $output .= '</div>';
 
-  return $output;
+  // Besides being the Drupal Address info,
+  // its possible to be used by hCard and VCard (if a address name was provided)
+  return '<div class="address adr'. (!empty($address['aname']) ? ' vcard' : '') .'">'.
+    str_replace("\n", '<br/>', $format_address) .'</div>';
 }
 
 /**
