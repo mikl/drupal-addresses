@@ -215,3 +215,48 @@ function addresses_theme() {
     ),
   );
 }
+
+/**
+ * Implementation of hook_token_values().
+ */
+function addresses_token_values($type, $object = NULL) {
+  if ($type == 'addresses') {
+    $countries = _addresses_country_get();
+
+    $values['aname']          = '<div class="fn org">'. theme('placeholder', $address['aname']);
+    // If its the default address, point it
+    if (!empty($address['is_primary'])) {
+      $$values['aname'] .= ' ('. t('default') .')';
+    }
+    $values['aname'] .= '</div>';
+
+    $values['street']         = '<div class="street-address">'. $address['street'];
+    if (!empty($address['additional']) and !in_array('street', $hide)) {
+      $values['street']         .= ' '. $address['additional'];
+    }
+    $values['street']         .='</div>';
+
+    $values['city']           = '<span class="city locality">'. $address['city'] .'</span>';
+    $values['province_name']  = '<span class="region">'. $address['province'] .'</span>';
+    $values['country_name']   = '<span class="country-name">'. t($countries[$address['country']]) .'</span>';
+    $values['postal_code']    = '<div class="postal-code">'. $address['postal_code'] .'</div>';
+    return $values;
+  }
+}
+
+/**
+ * Implementation of hook_token_list().
+ */
+function addresses_token_list($type = 'all') {
+  if ($type == 'addresses' or $type == 'all') {
+    $tokens['addresses']['aname']         = t('Address name.');
+    $tokens['addresses']['street']        = t('Street.');
+    $tokens['addresses']['additional']    = t('The order ID.');
+    $tokens['addresses']['province_name'] = t('State/Province name.');
+    $tokens['addresses']['province_code'] = t('State/Province code.');
+    $tokens['addresses']['country_name']  = t('Country name');
+    $tokens['addresses']['country_code2'] = t('Country 2-digits code');
+    $tokens['addresses']['postal_code']   = t('Postal code.');
+    return $tokens;
+  }
+}
