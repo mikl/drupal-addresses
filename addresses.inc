@@ -144,7 +144,10 @@ function _addresses_admin(&$form_state) {
 
   // We will use the this function that automatically
   // save all form fields into global variables
-  return system_settings_form($form);
+  $form = system_settings_form($form);
+
+  $form['buttons']['#weight'] = 10;
+  return $form;
 }
 
 /**
