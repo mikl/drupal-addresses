@@ -639,8 +639,9 @@ function theme_addresses($address, $hide = array()) {
   // Replace the new lines for HTML line breaks AND remove
   // all empty lines
   $format_address = explode("\n", $format_address);
-  foreach ($format_address as $line => $line_data) {
-    if (empty($line_data)) {
+  foreach (array_keys($format_address) as $line) {
+    $format_address[$line] = trim($format_address[$line]);
+    if (empty($format_address[$line])) {
       unset($format_address[$line]);
     }
   }
