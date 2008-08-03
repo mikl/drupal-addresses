@@ -12,7 +12,12 @@
  * Implementation of hook_content_is_empty().
  */
 function addresses_cck_content_is_empty($item, $field) {
-  return FALSE;
+  foreach (array_keys($field['columns']) as $ftype) {
+    if (!empty($item[$ftype])) {
+      return FALSE;
+    }
+  }
+  return TRUE;
 }
 
 /**
