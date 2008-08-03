@@ -173,6 +173,15 @@ function addresses_menu() {
     'page arguments'    => array('_addresses_admin'),
     'title'             => 'Addresses',
   );
+  $items['admin/settings/address/format'] = array(
+    'access arguments'  => array('access administration pages'),
+    'description'       => 'Format addresses',
+    'file'              => 'addresses.inc',
+    'page callback'     => 'drupal_get_form',
+    'page arguments'    => array('_addresses_settings_format', 4),
+    'title'             => 'Addresses Format',
+    'type'              => MENU_CALLBACK
+  );
   $items['admin/settings/address/autocomplete'] = array(
     'access callback'   => TRUE,
     'file'              => 'addresses.inc',
@@ -221,8 +230,8 @@ function addresses_token_list($type = 'all') {
     $tokens['addresses']['additional']    = t('The order ID.');
     $tokens['addresses']['province_name'] = t('State/Province name.');
     $tokens['addresses']['province_code'] = t('State/Province code.');
-    $tokens['addresses']['country_name']  = t('Country name');
-    $tokens['addresses']['country_code2'] = t('Country 2-digits code');
+    $tokens['addresses']['country_name']  = t('Country name.');
+    $tokens['addresses']['country_code2'] = t('Country 2-digits code.');
     $tokens['addresses']['postal_code']   = t('Postal code.');
     return $tokens;
   }
