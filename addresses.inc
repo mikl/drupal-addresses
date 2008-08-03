@@ -627,10 +627,10 @@ function theme_addresses($address, $hide = array()) {
   }
 
   // If still the proper address format, use the United States format
-  if (empty($format_address)) {
+  if (empty($format_address) and !$format_address = variable_get('addresses_format_default', '')) {
     include_once drupal_get_path('module', 'addresses') .'/countries/us.inc';
     $format_address = addresses_address_format_us();
-    variable_set('addresses_format_'. $address['country'], $format_address);
+    variable_set('addresses_format_default', $format_address);
   }
 
   // Call token module to replace all tokens to their right value
