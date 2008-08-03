@@ -253,9 +253,9 @@ function addresses_token_values($type, $object = NULL) {
     $values['city']           = empty($object['city']) ? '' :
       '<span class="city locality">'. $object['city'] .'</span>';
     $values['province_code']  = empty($object['province']) ? '' :
-      '<span class="region">'. $object['province'] .'</span>';
+      '<span class="region">'. strtoupper($object['province']) .'</span>';
     $values['country_code2']  = empty($object['country']) ? '' :
-      '<span class="country-code">'. $object['country'] .'</span>';
+      '<span class="country-code">'. strtoupper($object['country'] ).'</span>';
     $values['postal_code']    = empty($object['postal_code']) ? '' :
       '<span class="postal-code">'. $object['postal_code'] .'</span>';
 
