@@ -626,58 +626,15 @@ function theme_addresses($address, $hide = array()) {
     }
   }
 
-  // If still the proper address format, use the US one
+  // If still the proper address format, use the United States format
   if (empty($format_address)) {
     include_once drupal_get_path('module', 'addresses') .'/countries/us.inc';
     $format_address = addresses_address_format_us();
     variable_set('addresses_format_'. $address['country'], $format_address);
   }
-  // Address name, if any
-  if (!empty($address['aname'])) {
-    $output .= '<div class="fn org">'. theme('placeholder', $address['aname']);
 
-    // If its the default address, point it
-    if (!empty($address['is_primary'])) {
-      $output .= ' ('. t('default') .')';
-    }
-    $output .='</div>';
-  }
-
-  // Street and Addicional info
-  if (!empty($address['street'])) {
-    $output .= '<div class="street-address">'. $address['street'];
-    if (!empty($address['additional']) and !in_array('street', $hide)) {
-      $output .= ' '. $address['additional'];
-    }
-    $output .='</div>';
-  }
-
-  // City
-  if (!empty($address['city'])) {
-    $city_province_postal[] = '<span class="city locality">'. $address['city'] .'</span>';
-  }
-
-  // Province
-  if (!empty($address['province'])) {
-    $city_province_postal[] = '<span class="region">'. $address['province'] .'</span>';
-  }
-
-  // Country
-  if (!empty($address['country'])) {
-    $countries = _addresses_country_get();
-    $city_province_postal[] = '<span class="country-name">'. t($countries[$address['country']]) .'</span>';
-  }
-  // City, Province and Country are all placed on the same line,
-  // separated by commas.
-  if (!empty($city_province_postal)) {
-    $output .= implode(', ', $city_province_postal);
-  }
-
-  // Postal code
-  if (!empty($address['postal_code']) and !in_array('postal_code', $hide)) {
-    $output .= $city_province_postal[] = '<div class="postal-code">'. $address['postal_code'] .'</div>';
-  }
-
+  // Call token module to replace all tokens to their right value
+  $format_address = token_replace($format_address, 'addresses', $address);
 
   // Besides being the Drupal Address info,
   // its possible to be used by hCard and VCard (if a address name was provided)
