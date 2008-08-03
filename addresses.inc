@@ -615,13 +615,13 @@ function _addresses_settings_format(&$form_state, $country) {
     $country  = 'default';
   }
 
-  if (!$format_address = variable_get('address_format_'. $country, '')) {
+  if (!$format_address = variable_get('addresses_format_'. $country, '')) {
     include_once drupal_get_path('module', 'addresses') .'/countries/us.inc';
     $format_address = addresses_address_format_us();
     variable_set('addresses_format_default', $format_address);
   }
 
-  $form['address_format_'. $country] = array(
+  $form['addresses_format_'. $country] = array(
     '#default_value'  => $format_address,
     '#title'          => t('Address Format: %country', array('%country' => $cname)),
     '#type'           => 'textarea',
