@@ -669,65 +669,6 @@ function theme_addresses_elements($element) {
 }
 
 /**
- * Theme the Address form
- *
- * @ingroup themeable
- * @param &$form
- *   Array. The form structure
- */
-function theme_addresses_form(&$form) {
-  // If the country and state fields are present,
-  // enable the extra JS
-//   if (!empty($form['province'])
-//       and $form['province']['#type'] != 'hidden'
-//       and $form['country']['#type'] != 'hidden') {
-//     global $base_url;
-//     drupal_add_js(array('absPath' => $base_url), 'setting');
-//     drupal_add_js(drupal_get_path('module', 'address') .'/addresses.js');
-//   }
-
-  // The required field notation
-  $req_str = '<span class="form-required" title="'. t('This field is required.') .'">*</span>';
-
-  foreach (element_children($form) as $field_name) {
-    $col = array();
-    if ($form[$field_name]['#type'] == 'markup') {
-      $col[] = array('data' => $form[$field_name]['#value'], 'colspan' => 2);
-    }
-    elseif ($form[$field_name]['#type'] != 'hidden') {
-      $required = !empty($form[$field_name]['#required']) ? $req_str : '';
-
-      // Check if the element has a title
-      if (!empty($form[$field_name]['#title'])) {
-        $col[] = array(
-          'align' => 'right',
-          'data'  => '<div class="form-item"><label'. ($form[$field_name]['#id'] ?
-          ' for="'. $form[$field_name]['#id'] .'" ' : '') .'>'.
-          filter_xss_admin($form[$field_name]['#title']) .": $required</label></div>"
-        );
-        unset($form[$field_name]['#title']);
-      }
-      else {
-        $col[] = array('');
-      }
-
-      // The field itselt
-      $col[] = array(
-        'align' => 'left',
-        'data' => drupal_render($form[$field_name])
-      );
-
-      $rows[] = array('data' => $col);
-    }
-  }
-
-  $output = theme('table', NULL, $rows);
-  $output .= drupal_render($form);
-
-  return $output;
-}
-
-/**
  * Create a single line address. Usefull for some labels.
  *
  * @param $address

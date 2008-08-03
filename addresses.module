@@ -193,11 +193,6 @@ function addresses_theme() {
       'arguments' => array('address', 'hide'),
       'file'      => 'addresses.inc',
     ),
-    // Shows address forms
-    'addresses_form' => array(
-      'arguments' => array('form'),
-      'file'      => 'addresses.inc',
-    ),
     // Shows addresses using a single line
     'addresses_address_singleline' => array(
       'arguments' => array('addresses'),
