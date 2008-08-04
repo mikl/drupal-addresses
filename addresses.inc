@@ -680,10 +680,12 @@ function theme_addresses($address, $hide = array()) {
   }
   $format_address = implode('<br/>', $format_address);
 
+  // Use adr microformat
+  $format_address = '<div class="address adr">'. $format_address .'</div>';
+
   // Besides being the Drupal Address info,
   // its possible to be used by hCard and VCard (if a address name was provided)
-  return '<div class="address adr'. (!empty($address['aname']) ? ' vcard' : '') .'">'.
-     $format_address .'</div>';
+  return (!empty($address['aname']) ? '<div class="vcard">'. $format_address .'</div>' : $format_address);
 }
 
 /**
