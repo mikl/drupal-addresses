@@ -10,7 +10,7 @@
  * Implementation of hook_province_list().
  *
  * Its a hook from Addresses module to list all
- * states/provinces/teritories of a given contry
+ * states/provinces/teritories of a given country
  *
  * @return
  *   Array. states where the keys are the state
@@ -94,6 +94,6 @@ function addresses_address_format_us() {
   return "!aname
 !street
 !additional
-!city, !province_code !postal_code
+!city, !province_name !postal_code
 !country_name";
 }

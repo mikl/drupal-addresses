@@ -10,7 +10,7 @@
  * Implementation of hook_province_list().
  *
  * Its a hook from äddresses module to list all
- * states/provinces/teritories of a given contry
+ * states/provinces/teritories of a given country
  *
  * @return
  *   ärray. states where the keys are the state
