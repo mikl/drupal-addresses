@@ -299,8 +299,7 @@ function _addresses_country_get($available = array(), $upper = FALSE) {
  * 3-diget code of all countries on Planet! :)
  *
  * It uses the ISO notation.
- * See http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2
- * or http://www.iso.org/iso/country_codes/iso_3166_code_lists/english_country_names_and_code_elements.htm
+ * See http://en.wikipedia.org/wiki/ISO_3166-1_alpha-3
  * for further info.
  *
  * @return
