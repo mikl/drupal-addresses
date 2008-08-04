@@ -288,3 +288,49 @@ function _addresses_settings_format(&$form_state, $country) {
 
   return system_settings_form($form);
 }
+
+/**
+ * Format a date selection element.
+ *
+ * @param $element
+ *   An associative array containing the properties of the element.
+ *   Properties used: title, value, options, description, required and attributes.
+ * @return
+ *   A themed HTML string representing the date selection boxes.
+ *
+ * @ingroup themeable
+ */
+function theme_addresses_elements($element) {
+  return theme('form_element', $element, '<div class="container-inline">'. $element['#children'] .'</div>');
+}
+
+/**
+ * Print a nice settings table for selecting which address fields
+ * should be used.
+ *
+ * @param $form
+ *   Array. The address field settings.
+ * @return
+ *   String. The single line address
+ * @ingroup themeable
+ */
+function theme_addresses_settings_fields($form) {
+  foreach (element_children($form) as $ftype) {
+    $field = &$form[$ftype];
+    $rows[] = array(
+      $field['#title'],
+      drupal_render($field[0]),
+      drupal_render($field[1]),
+      drupal_render($field[2]),
+      drupal_render($field[3]),
+    );
+    unset($form[$ftype]);
+  }
+
+  $header = array(t('Field'), t('None'), t('Normal'), t('Required'), t('Hidden'));
+  $output = theme('table', $header, $rows);
+
+  $output .= drupal_render($form);
+
+  return $output;
+}

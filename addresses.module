@@ -211,12 +211,12 @@ function addresses_theme() {
     // Shows address elements
     'addresses_elements' => array(
       'arguments' => array('form'),
-      'file'      => 'addresses.inc',
+      'file'      => 'addresses.settings..inc',
     ),
     // Choose the addresses fields
     'addresses_settings_fields' => array(
       'arguments' => array('form'),
-      'file'      => 'addresses.inc',
+      'file'      => 'addresses.settings.inc',
     ),
   );
 }
