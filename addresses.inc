@@ -668,13 +668,13 @@ function theme_addresses($address, $hide = array()) {
 
   // Call token module to replace all tokens to their right value. Also,
   // use 'adr' microformat
-  $format_address = "<dl class=\"adr\">\n".
-    token_replace($format_address, 'addresses_adr', $address, '!', '') ."\n</dl>";
+  $format_address = '<dl class="adr">'.
+    token_replace($format_address, 'addresses_adr', $address, '!', '') .'</dl>  ';
 
   // Besides being the Drupal Address info,
   // its possible to be used by hCard and VCard (if a address name was provided)
-  $format_address = "<div class=\"vcard\">\n".
-    token_replace($format_address, 'addresses_general', $address, '!', '') ."\n</div>";
+  $format_address = '<div class="vcard">'.
+    token_replace($format_address, 'addresses_general', $address, '!', '') .'</div>';
 
   // Replace the new lines for HTML line breaks AND remove
   // all empty lines

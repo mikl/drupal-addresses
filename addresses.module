@@ -262,8 +262,11 @@ function addresses_theme() {
  * Implementation of hook_token_list().
  */
 function addresses_token_list($type = 'all') {
-  if ($type == 'addresses') {
+  if ($type == 'addresses_general') {
     $tokens['addresses']['aname']         = t('Address name.');
+    return $tokens;
+  }
+  elseif ($type == 'addresses_adr') {
     $tokens['addresses']['street']        = t('Street and number.');
     $tokens['addresses']['additional']    = t('Street complement, like apartment number.');
     $tokens['addresses']['province_name'] = t('State/Province full name.');
@@ -280,7 +283,14 @@ function addresses_token_list($type = 'all') {
  * Implementation of hook_token_values().
  */
 function addresses_token_values($type, $object = NULL) {
-  if ($type == 'addresses') {
+  if ($type == 'addresses_general') {
+    $values['primary']        = empty($object['primary']) ? '' :
+      ' ('. t('default') .')';
+    $values['aname']          = empty($object['aname']) ? '' :
+      '<span class="fn org">'. theme('placeholder', $object['aname']) . $values['primary'] .'</span>';
+    return $values;
+  }
+  elseif ($type == 'addresses_adr') {
     $values['primary']        = empty($object['primary']) ? '' :
       ' ('. t('default') .')';
     $values['aname']          = empty($object['aname']) ? '' :
