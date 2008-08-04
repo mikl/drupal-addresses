@@ -666,8 +666,15 @@ function theme_addresses($address, $hide = array()) {
     variable_set('addresses_format_default', $format_address);
   }
 
-  // Call token module to replace all tokens to their right value
-  $format_address = token_replace($format_address, 'addresses', $address, '!', '');
+  // Call token module to replace all tokens to their right value. Also,
+  // use 'adr' microformat
+  $format_address = "<dl class=\"adr\">\n".
+    token_replace($format_address, 'addresses_adr', $address, '!', '') ."\n</dl>";
+
+  // Besides being the Drupal Address info,
+  // its possible to be used by hCard and VCard (if a address name was provided)
+  $format_address = "<div class=\"vcard\">\n".
+    token_replace($format_address, 'addresses_general', $address, '!', '') ."\n</div>";
 
   // Replace the new lines for HTML line breaks AND remove
   // all empty lines
@@ -683,12 +690,7 @@ function theme_addresses($address, $hide = array()) {
   // Add the CCS
   drupal_add_css(drupal_get_path('module', 'addresses') .'/addresses.css');
 
-  // Use adr microformat
-  $format_address = '<dl class="address adr">'. $format_address .'</dl>';
-
-  // Besides being the Drupal Address info,
-  // its possible to be used by hCard and VCard (if a address name was provided)
-  return (!empty($address['aname']) ? '<div class="vcard">'. $format_address .'</div>' : $format_address);
+  return $format_address;
 }
 
 /**
