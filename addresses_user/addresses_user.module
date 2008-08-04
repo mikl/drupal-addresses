@@ -26,7 +26,7 @@ function _addresses_user_access($account) {
  *
  * Let admin select what addresses fields are relevant.
  */
-function addresses_user_form__addresses_admin_alter(&$form, &$form_state) {
+function addresses_user_form__addresses_settings_alter(&$form, &$form_state) {
   module_load_include('settings.inc', 'addresses');
   $form += _addresses_settings_fields(variable_get('addresses_user', array()));
 
