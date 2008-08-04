@@ -1,0 +1,6 @@
+dl.adr dt {
+  display: none;
+}
+dl.adr dt.show, dl.adr dd {
+  display: inline;
+}
