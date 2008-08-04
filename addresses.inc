@@ -597,7 +597,7 @@ function _addresses_settings_fields($field_values = array()) {
     );
   }
 
-  $form['addresses']['#theme'] = 'addresses_select_fields';
+  $form['addresses']['#theme'] = 'addresses_settings_fields';
 
   return $form;
 }
@@ -785,7 +785,7 @@ function theme_addresses_singleline($address) {
  *   String. The single line address
  * @ingroup themeable
  */
-function theme_addresses_select_fields($form) {
+function theme_addresses_settings_fields($form) {
   foreach (element_children($form) as $ftype) {
     $field = &$form[$ftype];
     $rows[] = array(
