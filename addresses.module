@@ -177,7 +177,7 @@ function addresses_menu() {
   $items['admin/settings/address/format'] = array(
     'access arguments'  => array('access administration pages'),
     'description'       => 'Format addresses',
-    'file'              => 'addresses.inc',
+    'file'              => 'addresses.settings.inc',
     'page callback'     => 'drupal_get_form',
     'page arguments'    => array('_addresses_settings_format', 4),
     'title'             => 'Addresses Format',

@@ -108,7 +108,7 @@ function addresses_cck_field_settings($op, $field) {
   switch ($op) {
     case 'form':
       // Get the form fields from the API addressesfieldapi
-      module_load_include('inc', 'addresses');
+      module_load_include('settings.inc', 'addresses');
       $form = _addresses_settings_fields($field);
       $form['required'] = array(
         '#type'   => 'hidden',
@@ -119,7 +119,7 @@ function addresses_cck_field_settings($op, $field) {
 
     case 'save':
       // First, get the form fields from the API addressesfieldapi
-      module_load_include('inc', 'addresses');
+      module_load_include('settings.inc', 'addresses');
       $form = _addresses_settings_fields($field);
 
       // With the fields and their values correctly assigned,
