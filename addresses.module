@@ -233,6 +233,7 @@ function addresses_token_list($type = 'all') {
     $tokens['addresses']['province_code'] = t('State/Province code.');
     $tokens['addresses']['country_name']  = t('Country name.');
     $tokens['addresses']['country_code2'] = t('Country 2-digits code.');
+    $tokens['addresses']['country_code3'] = t('Country 3-digits code.');
     $tokens['addresses']['postal_code']   = t('Postal code.');
     return $tokens;
   }
@@ -269,6 +270,11 @@ function addresses_token_values($type, $object = NULL) {
     $values['country_name']   = '';
     if (!empty($object['country']) and $countries = _addresses_country_get()) {
       $values['country_name']   = '<span class="country-name">'. $countries[$object['country']] .'</span>';
+    }
+
+    $values['country_code3']   = '';
+    if (!empty($object['country']) and $countries = _addresses_country_get_code3()) {
+      $values['country_code3']  = '<span class="country-code">'. strtoupper($countries[$object['country']]).'</span>';
     }
 
     return $values;
