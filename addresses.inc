@@ -38,7 +38,7 @@ function _addresses_addressesfieldapi_form($fields = array(), $values = array())
 
   // Adds the Country
   if (!empty($fields['country'])) {
-    // Get a list of enabled contries
+    // Get a list of enabled countries
     $countries = array('' => '') +
       _addresses_country_get(variable_get('addresses_country_list', array()));
 
@@ -132,10 +132,10 @@ function _addresses_addressesfieldapi_form($fields = array(), $values = array())
 function _addresses_admin(&$form_state) {
   $countries = _addresses_country_get();
 
-  // List of contries that the site allow
+  // List of countries that the site allow
   $form['addresses_country_list'] = array(
     '#default_value'  => variable_get('addresses_country_list', array_keys(_addresses_country_get())),
-    '#description'    => t('You might want to limit the contry lists. Select the contries you want.'),
+    '#description'    => t('You might want to limit the country lists. Select the countries you want.'),
     '#multiple'       => TRUE,
     '#options'        => $countries,
     '#type'           => 'select',
@@ -219,7 +219,7 @@ function _addresses_autocomplete($country, $string = '') {
  * for further info.
  *
  * @param $available
- *   String (optional). A list of contries that are allowed.
+ *   String (optional). A list of countries that are allowed.
  * @param $upper
  *   Boolean (optional). When TRUE, the country codes will
  *   be totally in Upper Case. Its the default ISO code,
@@ -580,7 +580,7 @@ function _addresses_province_validate($form, &$form_state) {
  *   Array. A form with settings
  * @ingroup form
  */
-function _addresses_settings($field_values = array()) {
+function _addresses_settings_fields($field_values = array()) {
   $ftypes = module_invoke_all('addressesfieldapi', 'fields');
   foreach ($ftypes as $ftype => $field) {
     // List of address fields

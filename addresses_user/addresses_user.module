@@ -28,7 +28,7 @@ function _addresses_user_access($account) {
  */
 function addresses_user_form__addresses_admin_alter(&$form, &$form_state) {
   module_load_include('inc', 'addresses');
-  $form += _addresses_settings(variable_get('addresses_user', array()));
+  $form += _addresses_settings_fields(variable_get('addresses_user', array()));
 
   // Set the 'addresses' as a fieldset
   $form['addresses_user'] = array(
@@ -115,10 +115,10 @@ function addresses_user_token_values($type, $object = NULL) {
       // Include the propper .inc file
       module_load_include('inc', 'addresses');
 
-      // Get a list of contries
+      // Get a list of countries
       $countries = _addresses_country_get(variable_get('addresses_country_list', array()));
 
-      // Get a list of provinces of the given contry
+      // Get a list of provinces of the given country
       $provincenames = _addresses_province_get(strtolower($address[0]['country']));
 
       // Set a list of Token values

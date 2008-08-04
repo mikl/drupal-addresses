@@ -109,7 +109,7 @@ function addresses_cck_field_settings($op, $field) {
     case 'form':
       // Get the form fields from the API addressesfieldapi
       module_load_include('inc', 'addresses');
-      $form = _addresses_settings($field);
+      $form = _addresses_settings_fields($field);
       $form['required'] = array(
         '#type'   => 'hidden',
         '#value'  => $field['required'],
@@ -120,7 +120,7 @@ function addresses_cck_field_settings($op, $field) {
     case 'save':
       // First, get the form fields from the API addressesfieldapi
       module_load_include('inc', 'addresses');
-      $form = _addresses_settings($field);
+      $form = _addresses_settings_fields($field);
 
       // With the fields and their values correctly assigned,
       // its time to recover only the field name and its value
@@ -140,6 +140,30 @@ function addresses_cck_field_settings($op, $field) {
       // Return the table similar to those set on hook_schema.
       // It describes each database field that will be stored.
       return module_invoke_all('addressesfieldapi', 'fields');
+
+    case 'views data':
+      // Rerebuild the Views integration, since the address field is,
+      // in fact, a bundle of fields.
+      $db_info      = content_database_info($field);
+      $table_alias  = content_views_tablename($field);
+      $cck_default  = content_views_field_views_data($field);
+      $data[$table_alias]['table'] = $cck_default[$table_alias]['table'];
+      unset($cck_default[$table_alias]['table']);
+
+      $cck_default = array_shift($cck_default[$table_alias]);
+
+      $ftypes = module_invoke_all('addressesfieldapi', 'fields');
+      foreach ($ftypes as $ftype => $field_data) {
+        $field_cck = $cck_default;
+        $field_cck['title'] .= ' '. $field_data['title'];
+        $field_cck['field']['field'] = $field['field_name'] .'_'. $ftype;
+        $field_cck['argument']['field'] = $field['field_name'] .'_'. $ftype;
+        $field_cck['filter']['field'] = $field['field_name'] .'_'. $ftype;
+        $field_cck['filter']['title'] .= ' '. $field_data['title'];
+        $data[$table_alias][$field['field_name'] .'_'. $ftype] = $field_cck;
+      }
+
+      return $data;
   }
 }
 
