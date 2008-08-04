@@ -187,6 +187,7 @@ function _addresses_province_validate($form, &$form_state) {
  * @ingroup form
  */
 function _addresses_settings(&$form_state) {
+  module_load_include('inc', 'addresses');
   $countries = _addresses_country_get();
 
   // List of countries that the site allow
@@ -263,6 +264,7 @@ function _addresses_settings_fields($field_values = array()) {
  * @ingroup form
  */
 function _addresses_settings_format(&$form_state, $country) {
+  module_load_include('inc', 'addresses');
   $countries = _addresses_country_get();
 
   if (!$cname = $countries[$country]) {
