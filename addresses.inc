@@ -681,11 +681,119 @@ function theme_addresses($address, $hide = array()) {
   $format_address = implode('<br/>', $format_address);
 
   // Use adr microformat
-  $format_address = '<div class="address adr">'. $format_address .'</div>';
+  $format_address = '<dl class="address adr">'. $format_address .'</dl>';
 
   // Besides being the Drupal Address info,
   // its possible to be used by hCard and VCard (if a address name was provided)
   return (!empty($address['aname']) ? '<div class="vcard">'. $format_address .'</div>' : $format_address);
+}
+
+/**
+ * Print the field City.
+ *
+ * @param $fields
+ *   Array. All field values
+ * @ingroup themeable
+ */
+function theme_addresses_field_city($fields) {
+  return '<dt>'. t('City') .': </dt><dd class="city locality">'. $fields['city'] .'</dd>';
+}
+
+/**
+ * Print the field Street.
+ *
+ * @param $fields
+ *   Array. All field values
+ * @ingroup themeable
+ */
+function theme_addresses_field_street($fields) {
+  return '<dt>'. t('Address') .': </dt><dd class="street-address">'. $fields['street'] .'</dd>';
+}
+
+/**
+ * Print the field Additional.
+ *
+ * @param $fields
+ *   Array. All field values
+ * @ingroup themeable
+ */
+function theme_addresses_field_additional($fields) {
+  return '<dt>'. t('Additional') .': </dt><dd class="extended-address">'. $fields['additional'] .'</dd>';
+}
+
+/**
+ * Print the field Country 3-digit code.
+ *
+ * @param $fields
+ *   Array. All field values
+ * @ingroup themeable
+ */
+function theme_addresses_field_country_name($fields) {
+  $countries = _addresses_country_get();
+  return '<dt>'. t('Country') .': </dt><dd class="country-name">'. $countries[$fields['country']] .'</dd>';
+}
+
+/**
+ * Print the field Country 2-digit code.
+ *
+ * @param $fields
+ *   Array. All field values
+ * @ingroup themeable
+ */
+function theme_addresses_field_country_code2($fields) {
+  $countries = _addresses_country_get();
+  return '<dt>'. t('Country') .': </dt><dd><abbr class="country-name" title="'.
+    $countries[$fields['country']] .'">'. strtoupper($fields['country']) .'</abbr></dd>';
+}
+
+/**
+ * Print the field Country name.
+ *
+ * @param $fields
+ *   Array. All field values
+ * @ingroup themeable
+ */
+function theme_addresses_field_country_code3($fields) {
+  $countries = _addresses_country_get();
+  $country_code3 = _addresses_country_get_code3();
+  return '<dt>'. t('Country') .': </dt><dd><abbr class="country-name" title="'.
+    $countries[$fields['country']] .'">'. strtoupper($country_code3[$fields['country']]) .'</abbr></dd>';
+}
+
+/**
+ * Print the field Postal Code.
+ *
+ * @param $fields
+ *   Array. All field values
+ * @ingroup themeable
+ */
+function theme_addresses_field_postal_code($fields) {
+  return '<dt>'. t('Postal Code') .': </dt><dd class="region">'. $fields['postal_code'] .'</dd>';
+}
+
+/**
+ * Print the field Province name.
+ *
+ * @param $fields
+ *   Array. All field values
+ * @ingroup themeable
+ */
+function theme_addresses_field_province_name($fields) {
+  $provinces = _addresses_province_get($object['country']);
+  return '<dt>'. t('Province') .': </dt><dd class="region">'. $provinces[$fields['province']] .'</dd>';
+}
+
+/**
+ * Print the field Province code.
+ *
+ * @param $fields
+ *   Array. All field values
+ * @ingroup themeable
+ */
+function theme_addresses_field_province_code($fields) {
+    $provinces = _addresses_province_get($object['country']);
+    return '<dt>'. t('Province') .': </dt><dd><abbr class="region" title="'.
+      $provinces[$fields['province']] .'">'. strtoupper($fields['province']) .'</abbr></dd>';
 }
 
 /**

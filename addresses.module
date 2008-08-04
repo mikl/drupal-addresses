@@ -208,6 +208,43 @@ function addresses_theme() {
       'arguments' => array('form'),
       'file'      => 'addresses.settings.inc',
     ),
+    // Shows address fields
+    'addresses_field_city' => array(
+      'arguments' => array('form'),
+      'file'      => 'addresses.inc',
+    ),
+    'addresses_field_street' => array(
+      'arguments' => array('form'),
+      'file'      => 'addresses.inc',
+    ),
+    'addresses_field_additional' => array(
+      'arguments' => array('form'),
+      'file'      => 'addresses.inc',
+    ),
+    'addresses_field_country_name' => array(
+      'arguments' => array('form'),
+      'file'      => 'addresses.inc',
+    ),
+    'addresses_field_country_code2' => array(
+      'arguments' => array('form'),
+      'file'      => 'addresses.inc',
+    ),
+    'addresses_field_country_code3' => array(
+      'arguments' => array('form'),
+      'file'      => 'addresses.inc',
+    ),
+    'addresses_field_postal_code' => array(
+      'arguments' => array('form'),
+      'file'      => 'addresses.inc',
+    ),
+    'addresses_field_province_name' => array(
+      'arguments' => array('form'),
+      'file'      => 'addresses.inc',
+    ),
+    'addresses_field_province_code' => array(
+      'arguments' => array('form'),
+      'file'      => 'addresses.inc',
+    ),
     // Shows addresses using a single line
     'addresses_address_singleline' => array(
       'arguments' => array('addresses'),
@@ -244,42 +281,22 @@ function addresses_token_list($type = 'all') {
  */
 function addresses_token_values($type, $object = NULL) {
   if ($type == 'addresses') {
-    if (empty($object['country'])
-        or !$countries = _addresses_country_get()
-        or !$country_name = $countries[$object['country']]
-        or !$country_code3 = _addresses_country_get_code3()) {
-      $country_name = '';
-    }
-    elseif (empty($object['province'])
-        or !$provinces = _addresses_province_get($object['country'])
-        or !$province_name = $provinces[$object['province']]) {
-      $province_name = '';
-    }
-
     $values['primary']        = empty($object['primary']) ? '' :
       ' ('. t('default') .')';
     $values['aname']          = empty($object['aname']) ? '' :
       '<span class="fn org">'. theme('placeholder', $object['aname']) . $values['primary'] .'</span>';
-    $values['street']         = empty($object['street']) ? '' :
-      '<span class="street-address">'. $object['street'] .'</span>';
-    $values['additional']     = empty($object['additional']) ? '' :
-       '<span class="extended-address">'. $object['additional'] .'</span>';
-    $values['city']           = empty($object['city']) ? '' :
-      '<span class="city locality">'. $object['city'] .'</span>';
-    $values['postal_code']    = empty($object['postal_code']) ? '' :
-      '<span class="postal-code">'. $object['postal_code'] .'</span>';
+    $values['street']         = empty($object['street']) ? '' : theme('addresses_field_street', $object);
+    $values['additional']     = empty($object['additional']) ? '' : theme('addresses_field_additional', $object);
+    $values['city']           = empty($object['city']) ? '' : theme('addresses_field_city', $object);
+    $values['postal_code']    = empty($object['postal_code']) ? '' : theme('addresses_field_postal_code', $object);
 
-    $values['province_code']  = empty($object['province']) ? '' :
-      '<abbr class="region" title="'. $province_name .'">'. strtoupper($object['province']) .'</abbr>';
-    $values['province_name']  = empty($province_name) ? '' :
-      '<span class="region">'. $province_name .'</span>';
+    $values['province_code']  = empty($object['province_code']) ? '' : theme('addresses_field_province_code', $object);
+    $values['province_name']  = (empty($object['province_code']) and empty($object['country'])) ? '' :
+      theme('addresses_field_province_name', $object);
 
-    $values['country_code2']  = empty($country_name) ? '' :
-      '<abbr class="country-name" title="'. $country_name .'">'. strtoupper($object['country']) .'</abbr>';
-    $values['country_code3']  = empty($country_name) ? '' :
-      '<abbr class="country-name" title="'. $country_name .'">'. strtoupper($country_code3[$object['country']]) .'</abbr>';
-    $values['country_name']   = empty($country_name) ? '' :
-      '<span class="country-name">'. $country_name .'</span>';
+    $values['country_code2']  = empty($object['country']) ? '' : theme('addresses_field_country_code2', $object);
+    $values['country_code3']  = empty($object['country']) ? '' : theme('addresses_field_country_code3', $object);
+    $values['country_name']   = empty($object['country']) ? '' : theme('addresses_field_country_name', $object);
 
     return $values;
   }
