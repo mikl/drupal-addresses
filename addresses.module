@@ -203,15 +203,15 @@ function addresses_theme() {
       'arguments' => array('address', 'hide'),
       'file'      => 'addresses.inc',
     ),
+    // Shows address form elements
+    'addresses_elements' => array(
+      'arguments' => array('form'),
+      'file'      => 'addresses.settings.inc',
+    ),
     // Shows addresses using a single line
     'addresses_address_singleline' => array(
       'arguments' => array('addresses'),
       'file'      => 'addresses.inc',
-    ),
-    // Shows address elements
-    'addresses_elements' => array(
-      'arguments' => array('form'),
-      'file'      => 'addresses.settings..inc',
     ),
     // Choose the addresses fields
     'addresses_settings_fields' => array(
