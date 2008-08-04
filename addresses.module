@@ -285,13 +285,15 @@ function addresses_token_values($type, $object = NULL) {
       ' ('. t('default') .')';
     $values['aname']          = empty($object['aname']) ? '' :
       '<span class="fn org">'. theme('placeholder', $object['aname']) . $values['primary'] .'</span>';
+
     $values['street']         = empty($object['street']) ? '' : theme('addresses_field_street', $object);
     $values['additional']     = empty($object['additional']) ? '' : theme('addresses_field_additional', $object);
     $values['city']           = empty($object['city']) ? '' : theme('addresses_field_city', $object);
     $values['postal_code']    = empty($object['postal_code']) ? '' : theme('addresses_field_postal_code', $object);
 
-    $values['province_code']  = empty($object['province_code']) ? '' : theme('addresses_field_province_code', $object);
-    $values['province_name']  = (empty($object['province_code']) and empty($object['country'])) ? '' :
+    $values['province_code']  = (empty($object['province']) and empty($object['country'])) ? '' :
+      theme('addresses_field_province_code', $object);
+    $values['province_name']  = (empty($object['province']) and empty($object['country'])) ? '' :
       theme('addresses_field_province_name', $object);
 
     $values['country_code2']  = empty($object['country']) ? '' : theme('addresses_field_country_code2', $object);

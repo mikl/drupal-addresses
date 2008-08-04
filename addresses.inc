@@ -680,6 +680,9 @@ function theme_addresses($address, $hide = array()) {
   }
   $format_address = implode('<br/>', $format_address);
 
+  // Add the CCS
+  drupal_add_css(drupal_get_path('module', 'addresses') .'/addresses.css');
+
   // Use adr microformat
   $format_address = '<dl class="address adr">'. $format_address .'</dl>';
 
@@ -779,7 +782,7 @@ function theme_addresses_field_postal_code($fields) {
  * @ingroup themeable
  */
 function theme_addresses_field_province_name($fields) {
-  $provinces = _addresses_province_get($object['country']);
+  $provinces = _addresses_province_get($fields['country']);
   return '<dt>'. t('Province') .': </dt><dd class="region">'. $provinces[$fields['province']] .'</dd>';
 }
 
@@ -791,7 +794,7 @@ function theme_addresses_field_province_name($fields) {
  * @ingroup themeable
  */
 function theme_addresses_field_province_code($fields) {
-    $provinces = _addresses_province_get($object['country']);
+    $provinces = _addresses_province_get($fields['country']);
     return '<dt>'. t('Province') .': </dt><dd><abbr class="region" title="'.
       $provinces[$fields['province']] .'">'. strtoupper($fields['province']) .'</abbr></dd>';
 }
