@@ -84,6 +84,7 @@ function addresses_addressesfieldapi($op, $fields = array(), $values = array()) 
     );
   }
   elseif ($op == 'form') {
+    module_load_include('settings.inc', 'addresses');
     return _addresses_addressesfieldapi_form($fields, $values);
   }
 }
@@ -168,7 +169,7 @@ function addresses_menu() {
   $items['admin/settings/address'] = array(
     'access arguments'  => array('access administration pages'),
     'description'       => 'Settings for Address module',
-    'file'              => 'addresses.inc',
+    'file'              => 'addresses.settings.inc',
     'page callback'     => 'drupal_get_form',
     'page arguments'    => array('_addresses_admin'),
     'title'             => 'Addresses',
