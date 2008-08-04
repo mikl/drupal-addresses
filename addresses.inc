@@ -7,48 +7,6 @@
  */
 
 /**
- * Create a list of states from a given country.
- *
- * @param $country
- *   String. The country code
- * @param $string
- *   String (optional). The state name typed by user
- * @return
- *   Javascript array. List of states
- */
-function _addresses_autocomplete($country, $string = '') {
-  $matches  = array();
-
-  // Check if the country code is there
-  if ($country) {
-
-    $string   = strtolower($string);
-    $string   = '/^'. $string .'/';
-
-    $provinces   = _addresses_province_get($country);
-
-    // Get only the first 5 provinces that matches
-    // partially with the given piece of text
-    if (!empty($provinces)) {
-      while (list($code, $name) = each($provinces)) {
-        if ($counter < 5) {
-          if (preg_match($string, strtolower($name))) {
-            $matches[$code] = strtolower($name);
-            ++$counter;
-          }
-        }
-      }
-    }
-  }
-  // Print the results as a JS array.
-  echo drupal_to_js($matches);
-
-  // Finish the page. Its necessary to not continue
-  // to build a regular page
-  exit();
-}
-
-/**
  * List all countries on Planet! :)
  *
  * It uses the ISO notation.
@@ -390,21 +348,6 @@ function _addresses_province_get($country = NULL) {
   }
   else {
     return $provinces;
-  }
-}
-
-/**
- * Validate the province field
- */
-function _addresses_province_validate($form, &$form_state) {
-  // Check if its a valid province.
-  // It should be the Province code listed on the
-  // given COUNTRY.inc file
-  foreach (element_children($form_state['values']['addresses']) as $a) {
-    if ($provinces = _addresses_province_get($form_state['values']['addresses'][$a]['country'])
-        and empty($provinces[strtoupper($form_state['values']['addresses'][$a]['province'])])) {
-      form_set_error("address][$a][province", t('Invalid province. Try to use the province code.'));
-    }
   }
 }
 
