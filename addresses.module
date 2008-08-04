@@ -263,18 +263,18 @@ function addresses_theme() {
  */
 function addresses_token_list($type = 'all') {
   if ($type == 'addresses_general') {
-    $tokens['addresses']['aname']         = t('Address name.');
+    $tokens[t('Addresses: General')]['aname']         = t('Address name.');
     return $tokens;
   }
   elseif ($type == 'addresses_adr') {
-    $tokens['addresses']['street']        = t('Street and number.');
-    $tokens['addresses']['additional']    = t('Street complement, like apartment number.');
-    $tokens['addresses']['province_name'] = t('State/Province full name.');
-    $tokens['addresses']['province_code'] = t('State/Province code.');
-    $tokens['addresses']['country_name']  = t('Country name.');
-    $tokens['addresses']['country_code2'] = t('Country 2-digits code.');
-    $tokens['addresses']['country_code3'] = t('Country 3-digits code.');
-    $tokens['addresses']['postal_code']   = t('Postal code.');
+    $tokens[t('Addresses: Address')]['street']        = t('Street and number.');
+    $tokens[t('Addresses: Address')]['additional']    = t('Street complement, like apartment number.');
+    $tokens[t('Addresses: Address')]['province_name'] = t('State/Province full name.');
+    $tokens[t('Addresses: Address')]['province_code'] = t('State/Province code.');
+    $tokens[t('Addresses: Address')]['country_name']  = t('Country name.');
+    $tokens[t('Addresses: Address')]['country_code2'] = t('Country 2-digits code.');
+    $tokens[t('Addresses: Address')]['country_code3'] = t('Country 3-digits code.');
+    $tokens[t('Addresses: Address')]['postal_code']   = t('Postal code.');
     return $tokens;
   }
 }

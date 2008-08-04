@@ -284,8 +284,26 @@ function _addresses_settings_format(&$form_state, $country) {
     '#type'           => 'textarea',
   );
 
+  // Simulate theme('token_help'), but include two types and
+  // erase the global types
+  $full_list = token_get_list('addresses_general') + token_get_list('addresses_adr');
+  unset($full_list['global']);
+  $headers = array(t('Token'), t('Replacement value'));
+  $rows = array();
+  foreach ($full_list as $key => $category) {
+    $rows[] = array(array('data' => drupal_ucfirst($key) .' '. t('tokens'), 'class' => 'region', 'colspan' => 2));
+    foreach ($category as $token => $description) {
+      $row = array();
+      $row[] = '!' . $token . '';
+      $row[] = $description;
+      $rows[] = $row;
+    }
+  }
+
+  $output = theme('table', $headers, $rows, array('class' => 'description'));
+
   $form['token_help'] = array(
-    '#value'       => theme('token_help', 'addresses', '!', ''),
+    '#value'       => $output,
   );
 
   return system_settings_form($form);
