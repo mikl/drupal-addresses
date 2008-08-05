@@ -626,10 +626,8 @@ function _addresses_province_get($country = NULL) {
  *   - 'province'     => The standard postal abbreviation for the province
  *   - 'country'      => The two-letter ISO code for the country of the address (REQUIRED)
  *   - 'postal_code'  => The international postal code for the address
- * @param $hide
- *   Array (optional). The values are the address fields to suppress in the themed display.
  */
-function theme_addresses($address, $hide = array()) {
+function theme_addresses($address) {
   // Check if it have at least one field to be displayed.
   // If not, return '' and stop everything
   foreach ($hide as $field) {
