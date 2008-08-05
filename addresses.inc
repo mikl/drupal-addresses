@@ -628,14 +628,6 @@ function _addresses_province_get($country = NULL) {
  *   - 'postal_code'  => The international postal code for the address
  */
 function theme_addresses($afields) {
-  // Check if it have at least one field to be displayed.
-  // If not, return '' and stop everything
-  foreach ($hide as $field) {
-    if (!empty($afields[$field])) {
-      unset($afields[$field]);
-    }
-  }
-
   // If all fields are hidden, return ''
   if (empty($afields)) {
     return '';
