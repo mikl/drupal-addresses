@@ -64,7 +64,7 @@ function _addresses_addressesfieldapi_form($fields = array(), $values = array())
       '#title'          => t('State / Province'),
       '#type'           => 'textfield',
     );
-    $form['#validate'][] = '_addresses_province_validate';
+    $form['#element_validate'][] = '_addresses_province_validate';
   }
 
   // Adds the City
@@ -170,14 +170,18 @@ function _addresses_autocomplete($country, $string = '') {
  * Validate the province field
  */
 function _addresses_province_validate($form, &$form_state) {
+  // Get the province fieldname
+  $field_name = $form['province']['#name'];
+  $field_name = substr($field_name, 0, -1);
+  $field_name = preg_replace('/([^]])\[/', '\1][', $field_name);
+
   // Check if its a valid province.
   // It should be the Province code listed on the
   // given COUNTRY.inc file
-  foreach (element_children($form_state['values']['addresses']) as $a) {
-    if ($provinces = _addresses_province_get($form_state['values']['addresses'][$a]['country'])
-        and empty($provinces[strtoupper($form_state['values']['addresses'][$a]['province'])])) {
-      form_set_error("address][$a][province", t('Invalid province. Try to use the province code.'));
-    }
+  if ($country = $form['country']['#value']
+      and $provinces = _addresses_province_get($country)
+      and empty($provinces[strtoupper($form['province']['#value'])])) {
+    form_set_error($field_name, t('Invalid province. Try to use the province code.'));
   }
 }
 
