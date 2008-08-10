@@ -42,7 +42,7 @@ function addresses_cck_field_info() {
       'callbacks'   => array(
         'tables'    => CONTENT_CALLBACK_DEFAULT,
         'arguments' => CONTENT_CALLBACK_DEFAULT,
-        ),
+      ),
     ),
   );
 }
@@ -60,20 +60,37 @@ function addresses_cck_field_info() {
  *     this formatter.
  */
 function addresses_cck_field_formatter_info() {
-  return array(
-    'default' => array(
+  $default = array(
+    'arguments'       => array('element'),
+    'multiple values' => CONTENT_HANDLE_CORE,
+    'field types'     => array('addresses_cck'),
+  );
+  $formatters = array(
+    'addresses' => array(
       'label'           => t('Default'),
       'arguments'       => array('element'),
       'multiple values' => CONTENT_HANDLE_CORE,
       'field types'     => array('addresses_cck'),
     ),
-    'single_line' => array(
-      'label'           => t('Single Line'),
-      'arguments'       => array('element'),
-      'multiple values' => CONTENT_HANDLE_CORE,
-      'field types'     => array('addresses_cck'),
-    ),
+//     'single_line' => array(
+//       'label'           => t('Single Line'),
+//       'arguments'       => array('element'),
+//       'multiple values' => CONTENT_HANDLE_CORE,
+//       'field types'     => array('addresses_cck'),
+//     ),
   );
+
+  $afields = module_invoke_all('addressesfieldapi', 'fields');
+  foreach ($afields as $ftype => $field) {
+    if (!empty($field['theme'])) {
+      foreach ($field['theme'] as $theme => $description) {
+        $formatters['addresses_field_'. $theme] = $default;
+        $formatters['addresses_field_'. $theme]['label'] = $description;
+      }
+    }
+  }
+dpm($formatters);
+  return $formatters;
 }
 
 /**
@@ -157,12 +174,12 @@ function addresses_cck_field_settings($op, $field) {
         $field_cck = $cck_default;
         $field_cck['title'] .= ' '. $field_data['title'];
         $field_cck['field']['field'] = $field['field_name'] .'_'. $ftype;
-        $field_cck['argument']['field'] = $field['field_name'] .'_'. $ftype;
-        $field_cck['filter']['field'] = $field['field_name'] .'_'. $ftype;
         $field_cck['filter']['title'] .= ' '. $field_data['title'];
+
+//         unset($field_cck['field']['additional fields']);
         $data[$table_alias][$field['field_name'] .'_'. $ftype] = $field_cck;
       }
-
+dpm($data['node_data_field_addresses']['field_addresses_aname']);
       return $data;
   }
 }
