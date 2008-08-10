@@ -2,7 +2,7 @@
 // $Id$
 /**
  * @author Bruno Massa
- * @file addresses_user.install
+ * @file
  * Installation / uninstallation routines.
  */
 
@@ -88,7 +88,7 @@ function addresses_user_schema() {
 }
 
 /**
- * Implentation of hook_uninstall().
+ * Implementation of hook_uninstall().
  */
 function addresses_user_uninstall() {
   // Delete tables

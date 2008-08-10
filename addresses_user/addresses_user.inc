@@ -2,7 +2,7 @@
 // $Id$
 /**
  * @author Bruno Massa
- * @file addresses_user.inc
+ * @file
  * You can associate a geographic address with users.
  */
 
@@ -121,7 +121,7 @@ function _addresses_user_address_save($address, $id, $type = 'node') {
       (empty($address['street'])       ? '' : $address['street']),
       (empty($address['additional'])   ? '' : $address['additional']),
       (empty($address['city'])         ? '' : $address['city']),
-      (empty($address['province'])     ? '' : strtoupper($address['province'])),
+      (empty($address['province'])     ? '' : drupal_strtoupper($address['province'])),
       (empty($address['postal_code'])  ? '' : $address['postal_code']),
       (empty($address['country'])      ? '' : $address['country']),
       (empty($address['is_primary'])   ? 0  : $address['is_primary']),

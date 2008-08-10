@@ -140,7 +140,7 @@ function _addresses_autocomplete($country, $string = '') {
   // Check if the country code is there
   if ($country) {
 
-    $string   = strtolower($string);
+    $string   = drupal_strtolower($string);
     $string   = '/^'. $string .'/';
 
     $provinces   = _addresses_province_get($country);
@@ -150,8 +150,8 @@ function _addresses_autocomplete($country, $string = '') {
     if (!empty($provinces)) {
       while (list($code, $name) = each($provinces)) {
         if ($counter < 5) {
-          if (preg_match($string, strtolower($name))) {
-            $matches[$code] = strtolower($name);
+          if (preg_match($string, drupal_strtolower($name))) {
+            $matches[$code] = drupal_strtolower($name);
             ++$counter;
           }
         }
@@ -172,7 +172,7 @@ function _addresses_autocomplete($country, $string = '') {
 function _addresses_province_validate($form, &$form_state) {
   // Get the province fieldname
   $field_name = $form['province']['#name'];
-  $field_name = substr($field_name, 0, -1);
+  $field_name = drupal_substr($field_name, 0, -1);
   $field_name = preg_replace('/([^]])\[/', '\1][', $field_name);
 
   // Check if its a valid province.
@@ -180,7 +180,7 @@ function _addresses_province_validate($form, &$form_state) {
   // given COUNTRY.inc file
   if ($country = $form['country']['#value']
       and $provinces = _addresses_province_get($country)
-      and empty($provinces[strtoupper($form['province']['#value'])])) {
+      and empty($provinces[drupal_strtoupper($form['province']['#value'])])) {
     form_set_error($field_name, t('Invalid province. Try to use the province code.'));
   }
 }
@@ -298,7 +298,7 @@ function _addresses_settings_format(&$form_state, $country) {
     $rows[] = array(array('data' => drupal_ucfirst($key) .' '. t('tokens'), 'class' => 'region', 'colspan' => 2));
     foreach ($category as $token => $description) {
       $row = array();
-      $row[] = '!' . $token . '';
+      $row[] = '!'. $token .'';
       $row[] = $description;
       $rows[] = $row;
     }
