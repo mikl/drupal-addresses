@@ -2,7 +2,7 @@
 // $Id$
 /**
  * @author Bruno Massa
- * @file addresses.module
+ * @file
  * You can associate a geographic address with content and users.
  */
 
@@ -30,6 +30,7 @@ function addresses_addressesfieldapi($op, $fields = array(), $values = array()) 
         'description' => t('The nickname of this address, like "Home", "Office", "Anna\'s appartment"'),
         'display'     => ADDRESSES_FIELD_NONE,
         'title'       => t('Address Name'),
+        'theme'       => array('aname'),
       ),
       'street' => array(
         'type'        => 'varchar',
@@ -37,6 +38,9 @@ function addresses_addressesfieldapi($op, $fields = array(), $values = array()) 
         'description' => t('Street, number...'),
         'display'     => ADDRESSES_FIELD_SHOW,
         'title'       => t('Street'),
+        'theme'       => array(
+          'street'        => t('Street and number.'),
+        ),
       ),
       'additional' => array(
         'type'        => 'varchar',
@@ -44,6 +48,7 @@ function addresses_addressesfieldapi($op, $fields = array(), $values = array()) 
         'description' => t('More info like appartment block, number or address reference'),
         'display'     => ADDRESSES_FIELD_SHOW,
         'title'       => t('Additional'),
+        'theme'       => array('additional'),
       ),
       'city' => array(
         'type'        => 'varchar',
@@ -51,6 +56,9 @@ function addresses_addressesfieldapi($op, $fields = array(), $values = array()) 
         'description' => t('Name of the city'),
         'display'     => ADDRESSES_FIELD_SHOW,
         'title'       => t('City'),
+        'theme'       => array(
+          'city'          => t('City name'),
+        ),
       ),
       'province' => array(
         'type'        => 'varchar',
@@ -58,6 +66,10 @@ function addresses_addressesfieldapi($op, $fields = array(), $values = array()) 
         'description' => t('Name of the state/province/county/territory'),
         'display'     => ADDRESSES_FIELD_SHOW,
         'title'       => t('Province'),
+        'theme'       => array(
+          'province_name' => t('State/Province name.'),
+          'province_code' => t('State/Province code.'),
+        ),
       ),
       'country' => array(
         'type'        => 'varchar',
@@ -65,6 +77,11 @@ function addresses_addressesfieldapi($op, $fields = array(), $values = array()) 
         'description' => t('The ISO alpha 3 code of each country (its a 2-digit code)'),
         'display'     => ADDRESSES_FIELD_SHOW,
         'title'       => t('Country'),
+        'theme'       => array(
+          'country_name'  => t('Country name.'),
+          'country_code2' => t('Country 2-digits code.'),
+          'country_code3' => t('Country 3-digits code.'),
+        ),
       ),
       'postal_code' => array(
         'type'        => 'varchar',
@@ -72,6 +89,9 @@ function addresses_addressesfieldapi($op, $fields = array(), $values = array()) 
         'description' => t('The address postal code (ZIP code for US people)'),
         'display'     => ADDRESSES_FIELD_SHOW,
         'title'       => t('Postal code'),
+        'theme'       => array(
+          'postal_code'   => t('Postal code.'),
+        ),
       ),
       'is_primary' => array(
         'type'        => 'int',

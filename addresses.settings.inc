@@ -2,7 +2,7 @@
 // $Id$
 /**
  * @author Bruno Massa
- * @file addresses.settings.inc
+ * @file
  * All settings functions for Addresses module.
  */
 

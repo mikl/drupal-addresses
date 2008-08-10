@@ -7,7 +7,7 @@
  */
 
 /**
- * Implentation of hook_uninstall().
+ * Implementation of hook_uninstall().
  */
 function addresses_uninstall() {
   // Delete variables

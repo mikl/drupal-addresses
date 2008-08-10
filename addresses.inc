@@ -2,7 +2,7 @@
 // $Id$
 /**
  * @author Bruno Massa
- * @file addresses.inc
+ * @file
  * An implementation of a universal API for address manipulation.
  */
 
@@ -738,7 +738,7 @@ function theme_addresses_field_country_name($afields) {
 function theme_addresses_field_country_code2($afields) {
   $countries = _addresses_country_get();
   return '<dt>'. t('Country') .': </dt><dd><abbr class="country-name" title="'.
-    $countries[$afields['country']] .'">'. strtoupper($afields['country']) .'</abbr></dd>';
+    $countries[$afields['country']] .'">'. drupal_strtoupper($afields['country']) .'</abbr></dd>';
 }
 
 /**
@@ -752,7 +752,7 @@ function theme_addresses_field_country_code3($afields) {
   $countries = _addresses_country_get();
   $country_code3 = _addresses_country_get_code3();
   return '<dt>'. t('Country') .': </dt><dd><abbr class="country-name" title="'.
-    $countries[$afields['country']] .'">'. strtoupper($country_code3[$afields['country']]) .'</abbr></dd>';
+    $countries[$afields['country']] .'">'. drupal_strtoupper($country_code3[$afields['country']]) .'</abbr></dd>';
 }
 
 /**
@@ -788,7 +788,7 @@ function theme_addresses_field_province_name($afields) {
 function theme_addresses_field_province_code($afields) {
     $provinces = _addresses_province_get($afields['country']);
     return '<dt>'. t('Province') .': </dt><dd><abbr class="region" title="'.
-      $provinces[$afields['province']] .'">'. strtoupper($afields['province']) .'</abbr></dd>';
+      $provinces[$afields['province']] .'">'. drupal_strtoupper($afields['province']) .'</abbr></dd>';
 }
 
 /**
