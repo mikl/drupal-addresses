@@ -11,21 +11,9 @@
  *
  * @param $id
  *   Number. The Address ID that should be deleted
- * @param $type
- *   String (optional). It can be:
- *   - 'address' (default): than search for a unique Address ID
- *   - 'user': get all address from a user
- *   - 'node: get all address from a node
  */
-function _addresses_user_address_delete($id, $type = 'address') {
-  // Check what address should be deleted: a single one or
-  // all addresses related to a given Element (Node, User)
-  if ($type == 'address') {
-    db_query('DELETE FROM {addresses_user} WHERE aid = %d', $id);
-  }
-  else {
-    db_query("DELETE FROM {addresses_user} WHERE aid = %d AND atype = '%s'", $id, $type);
-  }
+function _addresses_user_address_delete($id) {
+  db_query('DELETE FROM {addresses_user} WHERE aid = %d', $id);
 
   // Show an warning message
   drupal_set_message(t('The address has been deleted.'), 'warning');
@@ -38,28 +26,16 @@ function _addresses_user_address_delete($id, $type = 'address') {
  *   Number. The ID to look into the table. Depends on $type variable:
  *   if it is 'address' (default), it should look for a unique address
  *   ID, on 'aid' column. For anything else, search on 'eid' column.
- * @param $type
- *   String (optional). It can be:
- *   - 'address' (default): than search for a unique Address ID
- *   - 'user': get all address from a user
- *   - 'node: get all address from a node
  * @return
  *   Array. The numeric list of addresses arrays
  */
-function _addresses_user_address_get($id, $type = 'address') {
+function _addresses_user_address_get($id) {
   static $addresses;
 
   if (empty($addresses[$type][$id])) {
-    // Get the address based on Address ID or
-    // the (User/Node) ID and the given identification
-    if ($type == 'address') {
-      $adr = db_query('SELECT * FROM {addresses_user} WHERE aid = %d', $id);
-    }
-    else {
-      $adr = db_query("SELECT * FROM {addresses_user}
-        WHERE atype = '%s' AND eid = %d
-        ORDER BY is_primary DESC", $type, $id);
-    }
+    $adr = db_query("SELECT * FROM {addresses_user}
+      WHERE eid = %d
+      ORDER BY is_primary DESC", $id);
 
     // Transform all SQL findings into arrays
     $addresses[$type][$id] = array();
@@ -80,53 +56,28 @@ function _addresses_user_address_get($id, $type = 'address') {
  * @param $id
  *   Number. It might be the Node ID (nid) or the User ID (uid),
  *   depending on the $type variable
- * @param $type
- *   String (optional). 'node' to link the address to a
- *   node or 'user' to link it to a site user
  */
-function _addresses_user_address_save($address, $id, $type = 'node') {
+function _addresses_user_address_save($address, $id) {
   if (!empty($address)) {
-    if (empty($address['aid'])) {
-      $aid_sql = '';
-      $aid_sql2 = '';
-    }
-    else {
-      // Instead of create INSERT and UPDATE SQL
-      // instrauctions, we DELETE (if exists) the given
-      // Address and create another one in its place
-      db_query('DELETE FROM {addresses_user} WHERE aid = %d', $address['aid']);
-      $aid_sql = ', aid';
-      $aid_sql2 = ', %d';
-    }
-
     // If this address is the Primary, change all other address
     // to NOT primary
     if (!empty($address['is_primary'])) {
       db_query("UPDATE {addresses_user} SET is_primary = 0
-        WHERE is_primary = 1 AND eid = %d AND atype = '%s'",
-        $id, $type);
+        WHERE is_primary = 1 AND eid = %d",
+        $id);
     }
 
     // Let other modules change the standard behaviour
     module_invoke_all('addressapi', 'save', $address);
 
-    db_query("INSERT INTO {addresses_user}
-      (atype, eid, aname, street,
-      additional, city, province, postal_code, country, is_primary". $aid_sql .")
-      VALUES ('%s', %d, '%s', '%s',
-      '%s', '%s', '%s', '%s', '%s', %d". $aid_sql2 .")",
-      $type,
-      $id,
-      (empty($address['aname'])        ? '' : $address['aname']),
-      (empty($address['street'])       ? '' : $address['street']),
-      (empty($address['additional'])   ? '' : $address['additional']),
-      (empty($address['city'])         ? '' : $address['city']),
-      (empty($address['province'])     ? '' : drupal_strtoupper($address['province'])),
-      (empty($address['postal_code'])  ? '' : $address['postal_code']),
-      (empty($address['country'])      ? '' : $address['country']),
-      (empty($address['is_primary'])   ? 0  : $address['is_primary']),
-      (empty($address['aid'])          ? 0  : $address['aid'])
-    );
+    // Save it on DB
+    $address['eid'] = $id;
+    if (empty($address['aid'])) {
+      module_record('addresses_user', $address);
+    }
+    else {
+      module_record('addresses_user', $address, 'aid');
+    }
   }
 }
 
