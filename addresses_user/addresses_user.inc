@@ -73,10 +73,10 @@ function _addresses_user_address_save($address, $id) {
     // Save it on DB
     $address['eid'] = $id;
     if (empty($address['aid'])) {
-      module_record('addresses_user', $address);
+      drupal_write_record('addresses_user', $address);
     }
     else {
-      module_record('addresses_user', $address, 'aid');
+      drupal_write_record('addresses_user', $address, 'aid');
     }
   }
 }
