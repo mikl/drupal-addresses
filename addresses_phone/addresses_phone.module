@@ -21,6 +21,10 @@ function addresses_phone_addressesfieldapi($op, $fields = array(), $values = arr
         'description' => t('Phone numbers, like cellphone, home, office'),
         'display'     => ADDRESSES_FIELD_NONE,
         'title'       => t('Phone'),
+        'theme'       => array(
+          'phone'         => t('Phone number.'),
+        ),
+        'token'       => 'addresses_general',
       ),
       'fax' => array(
         'type'        => 'varchar',
@@ -28,6 +32,10 @@ function addresses_phone_addressesfieldapi($op, $fields = array(), $values = arr
         'description' => t('Fax number'),
         'display'     => ADDRESSES_FIELD_SHOW,
         'title'       => t('Fax'),
+        'theme'       => array(
+          'fax'           => t('Fax.'),
+        ),
+        'token'       => 'addresses_general',
       ),
     );
   }
