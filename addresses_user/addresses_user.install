@@ -12,14 +12,21 @@
 function addresses_user_install() {
   // Install the necessary Database tables
   drupal_install_schema('addresses_user');
+
+  // Save the list of the installed fields
+  $fields = module_invoke_all('addressesfieldapi', 'fields');
+  foreach (array_keys($fields) as $field) {
+    $fields_installed[$field] = TRUE;
+  }
+  variable_set('addresses_user_fields', $fields_installed);
 }
 
 /**
  * Implementation of hook_schema().
  */
 function addresses_user_schema() {
-  $schema['addresses'] = array(
-  'description' => t('Products-specific fields'),
+  $schema['addresses_user'] = array(
+    'description' => t('Products-specific fields'),
     'fields' => array(
       'aid' => array(
         'type'        => 'serial',
@@ -31,52 +38,6 @@ function addresses_user_schema() {
         'unsigned'    => TRUE,
         'not null'    => TRUE,
         'description' => t('Element ID can be the User ID from {user}.uid or Node ID from {node}.nid'),
-      ),
-      'atype' => array(
-        'type'        => 'varchar',
-        'length'      => 5,
-        'description' => t('Identify what type of address is this: "user" and "node" addresses are the most common'),
-      ),
-      'aname' => array(
-        'type'        => 'varchar',
-        'length'      => 75,
-        'description' => t('The nickname of this address, like "Home", "Office", "Annas appartment"'),
-      ),
-      'street' => array(
-        'type'        => 'varchar',
-        'length'      => 255,
-        'description' => t('Street, number...'),
-      ),
-      'additional' => array(
-        'type'        => 'varchar',
-        'length'      => 255,
-        'description' => t('More info like appartment block, number or address reference'),
-      ),
-      'city' => array(
-        'type'        => 'varchar',
-        'length'      => 255,
-        'description' => t('Name of the city'),
-      ),
-      'province' => array(
-        'type'        => 'varchar',
-        'length'      => 16,
-        'description' => t('Name of the state/province/county/territory'),
-      ),
-      'country' => array(
-        'type'        => 'varchar',
-        'length'      => 2,
-        'description' => t('The ISO alpha 3 code of each country (its a 2-digit code)'),
-      ),
-      'postal_code' => array(
-        'type'        => 'varchar',
-        'length'      => 16,
-        'description' => t('The address postal code (ZIP code for US people)'),
-      ),
-      'is_primary' => array(
-        'type'        => 'int',
-        'size'        => 'tiny',
-        'default'     => 0,
-        'description' => t('Mark it as the primary address or not (default is not)'),
       )
     ),
     'primary key' => array('aid'),
@@ -84,6 +45,43 @@ function addresses_user_schema() {
       'eid'   => array('eid'),
     ),
   );
+
+  // Get all addresses fields from addressesfieldapi and include them on the schema
+  $fields = module_invoke_all('addressesfieldapi', 'fields');
+  $schema['addresses_user']['fields'] += $fields;
+
+  // Insert new fields on the addresses_user table if the when
+  // new modules are installed. Its placed here in order to be ready
+  // during the install process
+  if (db_table_exists('addresses_user')) {
+    $update = array();
+
+    // Get all addresses fields from addressesfieldapi and include them on the schema
+    $fields_new = module_invoke_all('addressesfieldapi', 'fields');
+    $fields_existing = variable_get('addresses_user_fields', array());
+    foreach (array_keys($fields_existing) as $field) {
+      if (!empty($fields_new[$field])) {
+        unset($fields_new[$field]);
+      }
+      else {
+        db_drop_field($update, 'addresses_user', $field);
+        unset($fields_existing[$field]);
+      }
+    }
+
+    // If there is any field remaing, add it
+    if (!empty($fields_new)) {
+      foreach ($fields_new as $field => $field_data) {
+        db_add_field($update, 'addresses_user', $field, $field_data);
+        $fields_existing[$field] = TRUE;
+      }
+    }
+
+    if (!empty($update)) {
+      variable_set('addresses_user_fields', $fields_existing);
+    }
+  }
+
   return $schema;
 }
 
