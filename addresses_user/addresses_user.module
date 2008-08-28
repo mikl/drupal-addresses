@@ -42,13 +42,6 @@ function addresses_user_form__addresses_settings_alter(&$form, &$form_state) {
 }
 
 /**
- * Implementation of hook_flush_caches().
- */
-function addresses_user_flush_caches() {
-
-}
-
-/**
  * Implementation of hook_menu().
  */
 function addresses_user_menu() {
