@@ -31,6 +31,7 @@ function addresses_addressesfieldapi($op, $fields = array(), $values = array()) 
         'display'     => ADDRESSES_FIELD_NONE,
         'title'       => t('Address Name'),
         'theme'       => array('aname'),
+        'token'       => 'addresses_general',
       ),
       'street' => array(
         'type'        => 'varchar',
@@ -41,6 +42,7 @@ function addresses_addressesfieldapi($op, $fields = array(), $values = array()) 
         'theme'       => array(
           'street'        => t('Street and number.'),
         ),
+        'token'       => 'addresses_adr',
       ),
       'additional' => array(
         'type'        => 'varchar',
@@ -49,6 +51,7 @@ function addresses_addressesfieldapi($op, $fields = array(), $values = array()) 
         'display'     => ADDRESSES_FIELD_SHOW,
         'title'       => t('Additional'),
         'theme'       => array('additional'),
+        'token'       => 'addresses_adr',
       ),
       'city' => array(
         'type'        => 'varchar',
@@ -59,6 +62,7 @@ function addresses_addressesfieldapi($op, $fields = array(), $values = array()) 
         'theme'       => array(
           'city'          => t('City name'),
         ),
+        'token'       => 'addresses_adr',
       ),
       'province' => array(
         'type'        => 'varchar',
@@ -70,6 +74,7 @@ function addresses_addressesfieldapi($op, $fields = array(), $values = array()) 
           'province_name' => t('State/Province name.'),
           'province_code' => t('State/Province code.'),
         ),
+        'token'       => 'addresses_adr',
       ),
       'country' => array(
         'type'        => 'varchar',
@@ -82,6 +87,7 @@ function addresses_addressesfieldapi($op, $fields = array(), $values = array()) 
           'country_code2' => t('Country 2-digits code.'),
           'country_code3' => t('Country 3-digits code.'),
         ),
+        'token'       => 'addresses_adr',
       ),
       'postal_code' => array(
         'type'        => 'varchar',
@@ -92,6 +98,7 @@ function addresses_addressesfieldapi($op, $fields = array(), $values = array()) 
         'theme'       => array(
           'postal_code'   => t('Postal code.'),
         ),
+        'token'       => 'addresses_adr',
       ),
       'is_primary' => array(
         'type'        => 'int',
@@ -100,6 +107,7 @@ function addresses_addressesfieldapi($op, $fields = array(), $values = array()) 
         'description' => t('Mark it as the primary address or not (default is not)'),
         'display'     => ADDRESSES_FIELD_NONE,
         'title'       => t('Primary Address Checkbox'),
+        'token'       => 'addresses_general',
       )
     );
   }
@@ -283,18 +291,21 @@ function addresses_theme() {
  */
 function addresses_token_list($type = 'all') {
   if ($type == 'addresses_general') {
-    $tokens[t('Addresses: General')]['aname']         = t('Address name.');
+    $ftypes = module_invoke_all('addressesfieldapi', 'fields');
+    foreach ($ftypes as $ftype => $field) {
+      if ($field['token'] == 'addresses_general') {
+        $tokens[t('Addresses: General')][$ftype] = $field['title'];
+      }
+    }
     return $tokens;
   }
   elseif ($type == 'addresses_adr') {
-    $tokens[t('Addresses: Address')]['street']        = t('Street and number.');
-    $tokens[t('Addresses: Address')]['additional']    = t('Street complement, like apartment number.');
-    $tokens[t('Addresses: Address')]['province_name'] = t('State/Province full name.');
-    $tokens[t('Addresses: Address')]['province_code'] = t('State/Province code.');
-    $tokens[t('Addresses: Address')]['country_name']  = t('Country name.');
-    $tokens[t('Addresses: Address')]['country_code2'] = t('Country 2-digits code.');
-    $tokens[t('Addresses: Address')]['country_code3'] = t('Country 3-digits code.');
-    $tokens[t('Addresses: Address')]['postal_code']   = t('Postal code.');
+    $ftypes = module_invoke_all('addressesfieldapi', 'fields');
+    foreach ($ftypes as $ftype => $field) {
+      if ($field['token'] == 'addresses_adr') {
+        $tokens[t('Addresses: Address')][$ftype] = $field['title'];
+      }
+    }
     return $tokens;
   }
 }
