@@ -91,4 +91,7 @@ function addresses_user_schema() {
 function addresses_user_uninstall() {
   // Delete tables
   drupal_uninstall_schema('addresses_user');
+
+  // Delete global variables
+  variable_del('addresses_user_book');
 }

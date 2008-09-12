@@ -16,13 +16,15 @@
  */
 function _addresses_user_access($account) {
   global $user;
-  if ($account->uid == $user->uid and user_access('create addess book', $account)) {
+  if ($account->uid == $user->uid
+      and variable_get('addresses_user_book', FALSE)
+      and user_access('create addess book', $account)) {
     return TRUE;
   }
 }
 
 /**
- * Implementation of hook_menu().
+ * Implementation of hook_form_alter().
  *
  * Let admin select what addresses fields are relevant.
  */
@@ -39,6 +41,52 @@ function addresses_user_form__addresses_settings_alter(&$form, &$form_state) {
   ) + $form['addresses'];
 
   unset($form['addresses']);
+
+  // Other options
+  $form['addresses_user_book'] = array(
+    '#default_value'  => variable_get('addresses_user_book', FALSE),
+    '#description'    => t('Users might have several addresses, like a address book.'),
+    '#title'          => t('Address book'),
+    '#type'           => 'checkbox',
+  );
+  $form['addresses_user_register'] = array(
+    '#default_value'  => variable_get('addresses_user_register', FALSE),
+    '#title'          => t('Address form on registration'),
+    '#tree'           => FALSE,
+    '#type'           => 'checkbox',
+  );
+}
+
+/**
+ * Implementation of hook_form_alter().
+ *
+ * Put the address form into the registration form.
+ */
+function addresses_user_form_user_register_alter(&$form, &$form_state) {
+  if (!variable_get('addresses_user_book', FALSE) and variable_get('addresses_user_register', FALSE)) {
+    // Get the fields used on this address
+    $fields = variable_get('addresses_user', array());
+
+    // If its the very first time its loaded, use all fields
+    if (empty($fields)) {
+      $ftypes = module_invoke_all('addressesfieldapi', 'fields');
+      foreach ($ftypes as $ftype => $field) {
+        // List of address fields
+        $fields[$index] = empty($field_values[$ftype]) ? $field['display'] : $field_values[$ftype];
+      }
+    }
+
+    // Get the address form builder
+    $form['addresses'] = array(
+      '#default_value'  => $values,
+      '#fields'         => $fields,
+      '#required'       => TRUE,
+      '#type'           => 'addresses_elements',
+      '#tree'           => TRUE
+    );
+
+    $form['#submit'][] = '_addresses_user_form_submit';
+  }
 }
 
 /**
@@ -144,5 +192,16 @@ function addresses_user_user($op, &$edit, &$user) {
   if ($op == 'delete') {
     module_load_include('inc', 'addresses_user');
     _addresses_user_address_delete($user->uid, 'user');
+  }
+  elseif ($op == 'view' and !variable_get('addresses_user_book', FALSE)) {
+    module_load_include('inc', 'addresses_user');
+    $addresses = _addresses_user_address_get($user->uid, 'user');
+    foreach ($addresses as $address) {
+      $user->content['addresses'][] =  array(
+        '#type' => 'user_profile_item',
+        '#title' => t('Address'),
+        '#value' => theme('addresses', $address),
+      );
+    }
   }
 }
