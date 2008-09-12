@@ -191,7 +191,6 @@ function _addresses_user_form(&$form_state, $fields = array(), $values = array()
  */
 function _addresses_user_form_submit($form, &$form_state) {
   global $user;
-dpm($user);
   _addresses_user_address_save($form_state['values']['addresses'], $user->uid, 'user');
 }
 
