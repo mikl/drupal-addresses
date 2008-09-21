@@ -325,7 +325,7 @@ function _addresses_settings_format(&$form_state, $country) {
  * @ingroup themeable
  */
 function theme_addresses_elements($element) {
-  return theme('form_element', $element, '<div class="container-inline">'. $element['#children'] .'</div>');
+  return theme('form_element', $element, '<div class="addresses-form">'. $element['#children'] .'</div>');
 }
 
 /**
