@@ -91,13 +91,15 @@ function _addresses_addressesfieldapi_form($fields = array(), $values = array())
       '#maxlength'      => 255,
       '#required'       => ($fields['street'] == ADDRESSES_FIELD_REQUIRED)
     );
-    $form['additional'] = array(
-      '#type'           => 'textfield',
-      '#title'          => t('Additional'),
-      '#default_value'  => isset($values['additional']) ? $values['additional'] : '',
-      '#size'           => 50,
-      '#maxlength'      => 255
-    );
+    if (!empty($fields['additional'])) {
+      $form['additional'] = array(
+        '#type'           => 'textfield',
+        '#title'          => t('Additional'),
+        '#default_value'  => isset($values['additional']) ? $values['additional'] : '',
+        '#size'           => 50,
+        '#maxlength'      => 255
+      );
+    }
   }
 
   // Adds the Postal Code
