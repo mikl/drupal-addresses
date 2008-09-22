@@ -23,28 +23,26 @@ function _addresses_user_address_delete($id) {
  * Load the full address from a given Address ID or User ID
  *
  * @param $id
- *   Number. The ID to look into the table. Depends on $type variable:
- *   if it is 'address' (default), it should look for a unique address
- *   ID, on 'aid' column. For anything else, search on 'eid' column.
+ *   Number. The external ID to look into the table.
  * @return
  *   Array. The numeric list of addresses arrays
  */
 function _addresses_user_address_get($id) {
   static $addresses;
 
-  if (empty($addresses[$type][$id])) {
+  if (empty($addresses[$id])) {
     $adr = db_query("SELECT * FROM {addresses_user}
       WHERE eid = %d
       ORDER BY is_primary DESC", $id);
 
     // Transform all SQL findings into arrays
-    $addresses[$type][$id] = array();
+    $addresses[$id] = array();
     while ($address = db_fetch_array($adr)) {
-      $addresses[$type][$id][] = $address;
+      $addresses[$id][] = $address;
     }
   }
 
-  return $addresses[$type][$id];
+  return $addresses[$id];
 }
 
 /**
