@@ -188,8 +188,7 @@ function _addresses_user_form(&$form_state, $fields = array(), $values = array()
  * @ingroup form
  */
 function _addresses_user_form_submit($form, &$form_state) {
-  global $user;
-  _addresses_user_address_save($form_state['values']['addresses'], $user->uid, 'user');
+  _addresses_user_address_save($form_state['values']['addresses'], $form['#uid'], 'user');
 }
 
 /**
