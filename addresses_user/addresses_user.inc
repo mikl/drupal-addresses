@@ -66,7 +66,7 @@ function _addresses_user_address_save($address, $id) {
     }
 
     // Let other modules change the standard behaviour
-    module_invoke_all('addressapi', 'save', $address);
+    module_invoke_all('addressesapi', 'save', $address);
 
     // Save it on DB
     $address['eid'] = $id;
