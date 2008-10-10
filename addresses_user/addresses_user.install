@@ -15,6 +15,7 @@ function addresses_user_install() {
 
   // Save the list of the installed fields
   $fields = module_invoke_all('addressesfieldapi', 'fields');
+  $fields_installed = array();
   foreach (array_keys($fields) as $field) {
     $fields_installed[$field] = TRUE;
   }
