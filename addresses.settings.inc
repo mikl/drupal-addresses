@@ -211,6 +211,7 @@ function _addresses_settings(&$form_state) {
   // Let users to change the address formats
   array_unshift($countries,  t('Default'));
   $countries_max = count($countries) / 4;
+  $country_num = 0;
   foreach ($countries as $country_code => $country) {
     $columns[++$country_num / $countries_max][] = l($country, 'admin/settings/address/format/'. $country_code);
   }
