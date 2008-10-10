@@ -78,8 +78,9 @@ function addresses_user_form_user_profile_form_alter(&$form, &$form_state, $regi
       and ($register or $form['_category']['#value'] == 'account')) {
     if (empty($register)) {
       module_load_include('inc', 'addresses_user');
-      $addresses = _addresses_user_address_get($form['#uid'], 'user');
-      $address = $addresses[0];
+      if ($addresses = _addresses_user_address_get($form['#uid'], 'user')) {
+        $address = $addresses[0];
+      }
     }
 
     // Get the fields used on this address
@@ -90,7 +91,7 @@ function addresses_user_form_user_profile_form_alter(&$form, &$form_state, $regi
       $ftypes = module_invoke_all('addressesfieldapi', 'fields');
       foreach ($ftypes as $ftype => $field) {
         // List of address fields
-        $fields[$index] = empty($field_values[$ftype]) ? $field['display'] : $field_values[$ftype];
+        $fields[$ftype] = empty($field_values[$ftype]) ? $field['display'] : $field_values[$ftype];
       }
     }
 
@@ -154,12 +155,13 @@ function addresses_user_user($op, &$edit, &$user) {
   }
   elseif ($op == 'view' and !variable_get('addresses_user_book', FALSE)) {
     module_load_include('inc', 'addresses_user');
-    $addresses = _addresses_user_address_get($user->uid, 'user');
-    $address = $addresses[0];
-    $user->content['addresses'][] =  array(
-      '#type' => 'user_profile_item',
-      '#title' => t('Address'),
-      '#value' => theme('addresses', $address),
-    );
+    if ($addresses = _addresses_user_address_get($user->uid, 'user')) {
+      $address = $addresses[0];
+      $user->content['addresses'][] =  array(
+        '#type' => 'user_profile_item',
+        '#title' => t('Address'),
+        '#value' => theme('addresses', $address),
+      );
+    }
   }
 }
