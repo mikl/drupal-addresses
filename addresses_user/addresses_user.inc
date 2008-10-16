@@ -66,7 +66,7 @@ function _addresses_user_address_save($address, $id) {
     }
 
     // Let other modules change the standard behaviour
-    module_invoke_all('addressesapi', 'save', $address);
+    $address = module_invoke_all('addressesapi', 'save', $address);
 
     // Save it on DB
     $address['eid'] = $id;
@@ -180,15 +180,6 @@ function _addresses_user_form(&$form_state, $fields = array(), $values = array()
   }
 
   return $form;
-}
-
-/**
- * Submit the address
- *
- * @ingroup form
- */
-function _addresses_user_form_submit($form, &$form_state) {
-  _addresses_user_address_save($form_state['values']['addresses'], $form['#uid']);
 }
 
 /**
