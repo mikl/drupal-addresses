@@ -34,7 +34,7 @@ function addresses_user_form__addresses_settings_alter(&$form, &$form_state) {
 
   // Set the 'addresses' as a fieldset
   $form['addresses_user'] = array(
-    '#description'  => t('Choose what fields user addresses might have'),
+    '#description'  => t('Choose what fields user addresses may have'),
     '#title'        => t('User addresses fields'),
     '#tree'         => TRUE,
     '#type'         => 'fieldset',
@@ -45,7 +45,7 @@ function addresses_user_form__addresses_settings_alter(&$form, &$form_state) {
   // Other options
   $form['addresses_user_book'] = array(
     '#default_value'  => variable_get('addresses_user_book', FALSE),
-    '#description'    => t('Users might have several addresses, like a address book.'),
+    '#description'    => t('Users may have several addresses, like an address book.'),
     '#title'          => t('Address book'),
     '#type'           => 'checkbox',
   );
