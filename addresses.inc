@@ -649,7 +649,7 @@ function theme_addresses($afields) {
     }
   }
 
-  // If still the proper address format, use the United States format
+  // If still no proper address format, use the United States format
   if (empty($format_address) and !$format_address = variable_get('addresses_format_default', '')) {
     include_once drupal_get_path('module', 'addresses') .'/countries/us.inc';
     $format_address = addresses_address_format_us();
