@@ -7,12 +7,12 @@
  */
 
 /**
- * Check if user is allowed to have a address book.
+ * Check if user is allowed to have an address book.
  *
  * @param $account
  *   Object. The current user account
  * @return
- *   Boolean. If the user can or canont access the page
+ *   Boolean. If the user can or cannot access the page
  */
 function _addresses_user_access($account) {
   global $user;
