@@ -80,7 +80,7 @@ function _addresses_user_address_save($address, $id) {
 }
 
 /**
- * Manage the user Addresses: list them, create and delete operaions
+ * Manage the user Addresses: list them, create and delete operations
  *
  * @param $op
  *   String (optional). The action that should be executed:
