@@ -22,7 +22,7 @@
  *   but the files and function are all named with lower
  *   case, so its better to return lower case by default
  * @return
- *   Array. 'COUNTRY CODE' => 'COUNTRY CODE' pairs as layed out in
+ *   Array. 'COUNTRY CODE' => 'COUNTRY NAME' pairs as layed out in
  *   ISO 3166-1 alpha-2
  */
 function _addresses_country_get($available = array(), $upper = FALSE) {
