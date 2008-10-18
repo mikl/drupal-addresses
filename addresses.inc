@@ -806,41 +806,41 @@ function theme_addresses_singleline($afields) {
     return '';
   }
 
-  $afields = '';
+  $output = '';
 
   // Add the streets
   if (!empty($afields['street'])) {
-    $afields .= $afields['street'];
+    $output .= $afields['street'];
   }
 
   // Add the city
   if (!empty($afields['city'])) {
     if (!empty($afields['street'])) {
-      $afields .= ', ';
+      $output .= ', ';
     }
-    $afields .= $afields['city'];
+    $output .= $afields['city'];
   }
 
   // Add the state / province
   if (!empty($afields['province'])) {
     if (!empty($afields['street']) or !empty($afields['city'])) {
-      $afields .= ', ';
+      $output .= ', ';
     }
-    $afields .= $afields['province'];
+    $output .= $afields['province'];
   }
 
   // Add the Postal code
   if (!empty($afields['postal_code'])) {
     if (!empty($afields)) {
-      $afields .= ' ';
+      $output .= ' ';
     }
-    $afields .= $afields['postal_code'];
+    $output .= $afields['postal_code'];
   }
 
   // Add the country
   if (!empty($afields['country'])) {
-    $afields .= ', '. $afields['country'];
+    $output .= ', '. $afields['country'];
   }
 
-  return $afields;
+  return $output;
 }
