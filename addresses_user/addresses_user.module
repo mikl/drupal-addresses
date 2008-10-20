@@ -79,7 +79,10 @@ function addresses_user_form_user_profile_form_alter(&$form, &$form_state, $regi
     if (empty($register)) {
       module_load_include('inc', 'addresses_user');
       if ($addresses = _addresses_user_address_get($form['#uid'], 'user')) {
-        $address = $addresses[0];
+        // first the first element (may not be [0])
+        foreach($addresses as $address) {
+          break;
+        }
       }
     }
 
