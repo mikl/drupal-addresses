@@ -56,13 +56,12 @@ function _addresses_user_address_get($id) {
  *   depending on the $type variable
  */
 function _addresses_user_address_save($address, $id) {
-  if (!empty($address)) {
+  if (!empty($address) and is_array($address)) {
     // If this address is the Primary, change all other address
     // to NOT primary
     if (!empty($address['is_primary'])) {
-      db_query("UPDATE {addresses_user} SET is_primary = 0
-        WHERE is_primary = 1 AND eid = %d",
-        $id);
+      db_query('UPDATE {addresses_user} SET is_primary = 0
+        WHERE is_primary = 1 AND eid = %d', $id);
     }
 
     // Let other modules change the standard behaviour
@@ -71,11 +70,13 @@ function _addresses_user_address_save($address, $id) {
     // Save it on DB
     $address['eid'] = $id;
     if (empty($address['aid'])) {
-      drupal_write_record('addresses_user', $address);
+      $update = NULL;
     }
     else {
-      drupal_write_record('addresses_user', $address, 'aid');
+      $update = array('aid');
     }
+
+    drupal_write_record('addresses_user', $address, $update);
   }
 }
 
