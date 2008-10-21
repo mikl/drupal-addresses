@@ -43,15 +43,25 @@ function addresses_user_form__addresses_settings_alter(&$form, &$form_state) {
   unset($form['addresses']);
 
   // Other options
-  $form['addresses_user_book'] = array(
+  $form['addresses_user_settings'] = array(
+    '#title'        => t('User addresses settings'),
+    '#type'         => 'fieldset',
+  );
+  $form['addresses_user_settings']['addresses_user_book'] = array(
     '#default_value'  => variable_get('addresses_user_book', FALSE),
     '#description'    => t('Users may have several addresses, like an address book.'),
     '#title'          => t('Address book'),
     '#type'           => 'checkbox',
   );
-  $form['addresses_user_register'] = array(
+  $form['addresses_user_settings']['addresses_user_register'] = array(
     '#default_value'  => variable_get('addresses_user_register', FALSE),
-    '#title'          => t('Address form on registration'),
+    '#title'          => t('Address fields on the user registration form'),
+    '#tree'           => FALSE,
+    '#type'           => 'checkbox',
+  );
+  $form['addresses_user_settings']['addresses_user_register_collapsed'] = array(
+    '#default_value'  => variable_get('addresses_user_register_collapsed', FALSE),
+    '#title'          => t('Address fieldset collapsed by default'),
     '#tree'           => FALSE,
     '#type'           => 'checkbox',
   );
@@ -190,7 +200,13 @@ function addresses_user_user($op, &$edit, &$account) {
     case 'update':
       if (!variable_get('addresses_user_book', FALSE)) {
         if (isset($edit['addresses'])) {
-          $address =& $edit['addresses'];
+          if (isset($edit['addresses']['address_information'])) {
+            $address =& $edit['addresses']['address_information'][0];
+            $address['aid'] = $edit['addresses']['aid'];
+          }
+          else {
+            $address =& $edit['addresses'];
+          }
         }
         elseif (isset($account->addresses)) {
           $address =& $account->addresses;

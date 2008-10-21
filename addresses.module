@@ -184,7 +184,16 @@ function addresses_elements_process($element, $edit, $form_state, $form) {
   // Get other fields from hook_addressesfieldsapi
   $element = array_merge(
     $element,
-    module_invoke_all('addressesfieldapi', 'form', $fields, $values)
+    array(
+      'address_information' => array(
+      '#type'               => 'fieldset',
+      '#title'              => t('Address'),
+      '#description'        => 'Enter your address below so we can contact you by mail.',
+      '#collapsible'        => TRUE,
+      '#collapsed'          => variable_get('addresses_user_register_collapsed', FALSE),
+        module_invoke_all('addressesfieldapi', 'form', $fields, $values)
+      )
+    )
   );
 
   return $element;

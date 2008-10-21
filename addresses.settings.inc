@@ -75,8 +75,6 @@ function _addresses_addressesfieldapi_form($fields = array(), $values = array())
       '#default_value'  => isset($values['city']) ? $values['city'] : '',
       '#size'           => 50,
       '#maxlength'      => 255,
-      '#description'    => NULL,
-      '#attributes'     => NULL,
       '#required'       => ($fields['city'] == ADDRESSES_FIELD_REQUIRED)
     );
   }

@@ -64,9 +64,6 @@ function _addresses_user_address_save($address, $id) {
         WHERE is_primary = 1 AND eid = %d', $id);
     }
 
-    // Let other modules change the standard behaviour
-    $address = module_invoke_all('addressesapi', 'save', $address);
-
     // Save it on DB
     $address['eid'] = $id;
     if (empty($address['aid'])) {

@@ -89,7 +89,7 @@ function addresses_cck_field_formatter_info() {
       }
     }
   }
-dpm($formatters);
+
   return $formatters;
 }
 
