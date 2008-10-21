@@ -2,7 +2,7 @@
 // $Id$
 /**
  * @author Bruno Massa
- * @file addresses_cck.module
+ * @file
  * You can associate a geographic address with content, using CCK.
  *
  * @todo Ensure this will work with the Views and GMap
