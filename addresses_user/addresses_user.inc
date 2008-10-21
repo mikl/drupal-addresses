@@ -23,26 +23,33 @@ function _addresses_user_address_delete($id) {
  * Load the full address from a given Address ID or User ID
  *
  * @param $id
- *   Number. The external ID to look into the table.
+ *   Number. The external ID (eid) to look into the addresses_user table.
  * @return
  *   Array. The numeric list of addresses arrays
  */
-function _addresses_user_address_get($id) {
+function _addresses_user_address_get($id, $id_type = 'eid') {
   static $addresses;
+  static $addresses_user;
 
   if (empty($addresses[$id])) {
     $adr = db_query("SELECT * FROM {addresses_user}
-      WHERE eid = %d
-      ORDER BY is_primary DESC", $id);
+      WHERE %s = %d
+      ORDER BY is_primary DESC", $id_type, $id);
 
     // Transform all SQL findings into arrays
     $addresses[$id] = array();
     while ($address = db_fetch_array($adr)) {
-      $addresses[$id][] = $address;
+      $addresses[$address['aid']] = $address;
+      $addresses_user[$address['eid']][$address['aid']] = $address;
     }
   }
 
-  return $addresses[$id];
+  if ($id_type == 'eid') {
+    return $addresses_user[$id];
+  }
+  else {
+    return $addresses[$id];
+  }
 }
 
 /**
@@ -107,20 +114,20 @@ function _addresses_user_address($op = NULL, $aid = NULL) {
 
       // If its a existing address, get the whole
       // address information
-      $edit = arg(4) ? _addresses_user_address_get(arg(4), 'address') : array();
+      $edit = arg(4) ? _addresses_user_address_get(arg(4), 'aid') : array();
 
       if (empty($edit)) {
         // Set the Element ID as User ID form new addresses
         $edit[0]['eid'] = $uid;
       }
-      elseif (empty($access) or $edit[0]['eid'] != $uid) {
+      elseif (empty($access) or $edit['eid'] != $uid) {
         // If the user has no permission or the user from
         // address is not the same as the user that are
         // accessing, deny the access
         return drupal_access_denied();
       }
 
-      return drupal_get_form('_addresses_user_form', array(), $edit[0]);
+      return drupal_get_form('_addresses_user_form', array(), $edit);
 
     case 'delete':
       /// @todo Generates a confirm page before delete
@@ -131,7 +138,7 @@ function _addresses_user_address($op = NULL, $aid = NULL) {
       break;
 
     default:
-      $addresses = _addresses_user_address_get($user->uid, 'user');
+      $addresses = _addresses_user_address_get($user->uid);
       return theme('addresses_user_overview', $uid, $addresses);
   }
 }

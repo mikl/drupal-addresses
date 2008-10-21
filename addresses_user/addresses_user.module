@@ -134,7 +134,9 @@ function _addresses_user_form_submit($form, &$form_state) {
     $uid = $form_state['user']->uid; // register form has that one
   }
 
-  _addresses_user_address_save($form_state['values']['addresses'], $uid);
+  $address =& $form_state['values']['addresses']['address_information'][0];
+  $address['aid'] = $form_state['values']['addresses']['aid'];
+  _addresses_user_address_save($address, $uid);
 }
 
 /**
