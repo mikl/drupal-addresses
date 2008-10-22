@@ -170,20 +170,24 @@ function _addresses_autocomplete($country, $string = '') {
  * Validate the province field
  */
 function _addresses_province_validate($form, &$form_state) {
-  $province = $form['province']['#value'];
-
   // Check if its a valid province.
   // It should be the Province code listed on the
   // given COUNTRY.inc file
-  if ($province
+  if ($province = $form['province']['#value']
       and $country = $form['country']['#value']
       and $provinces = _addresses_province_get($country)
       and empty($provinces[drupal_strtoupper($province)])) {
+
     // Get the province fieldname
     $field_name = $form['province']['#name'];
     $field_name = drupal_substr($field_name, 0, -1);
     $field_name = preg_replace('/([^]])\[/', '\1][', $field_name);
-    form_set_error($field_name, t('Invalid province. Try to use the province code.'));
+
+    $countries = _addresses_country_get();
+    form_set_error($field_name, t('Could not find "!province" in "!country" provinces. Try to use the province abbreviation or number.',
+      array('!province' => $form['province']['#value'],
+      '!country' => $countries[$country])));
+
   }
 }
 
