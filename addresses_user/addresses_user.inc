@@ -118,7 +118,7 @@ function _addresses_user_address($op = NULL, $aid = NULL) {
 
       if (empty($edit)) {
         // Set the Element ID as User ID form new addresses
-        $edit[0]['eid'] = $uid;
+        $edit['eid'] = $uid;
       }
       elseif (empty($access) or $edit['eid'] != $uid) {
         // If the user has no permission or the user from
