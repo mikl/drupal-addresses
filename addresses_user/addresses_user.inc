@@ -71,6 +71,10 @@ function _addresses_user_address_save($address, $id) {
         WHERE is_primary = 1 AND eid = %d', $id);
     }
 
+    // Correct some values
+    $address['country']   = drupal_strtolower($address['country']);
+    $address['province']  = drupal_strtoupper($address['province']);
+
     // Save it on DB
     $address['eid'] = $id;
     if (empty($address['aid'])) {

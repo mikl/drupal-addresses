@@ -184,7 +184,7 @@ function _addresses_province_validate($form, &$form_state) {
     $field_name = preg_replace('/([^]])\[/', '\1][', $field_name);
 
     $countries = _addresses_country_get();
-    form_set_error($field_name, t('Could not find %province as a %country province. Try to use the province abbreviation or number.',
+    form_set_error($field_name, t('Could not find %province as a province from %country. Try to use the province abbreviation or number.',
       array('%province' => $form['province']['#value'],
       '%country' => $countries[$country])));
 
