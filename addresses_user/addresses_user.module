@@ -88,7 +88,7 @@ function addresses_user_form_user_profile_form_alter(&$form, &$form_state, $regi
       ($register or $form['_category']['#value'] == 'account')) {
     if (empty($register)) {
       module_load_include('inc', 'addresses_user');
-      if ($addresses = _addresses_user_address_get($form['#uid'], 'user')) {
+      if ($addresses = _addresses_user_address_get($form['#uid'])) {
         // first the first element (may not be [0])
         foreach($addresses as $address) {
           break;
@@ -109,15 +109,19 @@ function addresses_user_form_user_profile_form_alter(&$form, &$form_state, $regi
     }
 
     // Get the address form builder
-    $form['addresses'] = array(
+    $form['address_information'] =  array(
+      '#collapsible'        => TRUE,
+      '#collapsed'          => variable_get('addresses_user_register_collapsed', FALSE),
+      '#title'              => t('Address'),
+      '#type'               => 'fieldset',
+    );
+    $form['address_information']['addresses'] = array(
       '#default_value'  => empty($address) ? array() : $address,
       '#fields'         => $fields,
       '#required'       => TRUE,
       '#type'           => 'addresses_elements',
       '#tree'           => TRUE
     );
-
-//     $form['#submit'][] = '_addresses_user_form_submit';
   }
 }
 
@@ -134,8 +138,8 @@ function _addresses_user_form_submit($form, &$form_state) {
     $uid = $form_state['user']->uid; // register form has that one
   }
 
-  $address =& $form_state['values']['addresses']['address_information'][0];
-  $address['aid'] = $form_state['values']['addresses']['aid'];
+  $address =& $form_state['values']['addresses'];
+//   $address['aid'] = $form_state['values']['addresses']['aid'];
   _addresses_user_address_save($address, $uid);
 }
 
@@ -183,17 +187,17 @@ function addresses_user_user($op, &$edit, &$account) {
   switch ($op) {
     case 'delete':
       module_load_include('inc', 'addresses_user');
-      _addresses_user_address_delete($account->uid, 'user');
+      _addresses_user_address_delete($account->uid);
       break;
     case 'view':
       if (!variable_get('addresses_user_book', FALSE)) {
         module_load_include('inc', 'addresses_user');
-        if ($addresses = _addresses_user_address_get($account->uid, 'user')) {
-          $address = $addresses[0];
+        if ($addresses = _addresses_user_address_get($account->uid)) {
+          $addresses = array_pop($addresses);
           $account->content['addresses'][] =  array(
             '#type' => 'user_profile_item',
             '#title' => t('Address'),
-            '#value' => theme('addresses', $address),
+            '#value' => theme('addresses', $addresses),
           );
         }
       }
@@ -202,9 +206,9 @@ function addresses_user_user($op, &$edit, &$account) {
     case 'update':
       if (!variable_get('addresses_user_book', FALSE)) {
         if (isset($edit['addresses'])) {
-          if (isset($edit['addresses']['address_information'])) {
-            $address =& $edit['addresses']['address_information'][0];
-            $address['aid'] = $edit['addresses']['aid'];
+          if (isset($edit['address_information']['addresses'])) {
+            $address =& $edit['address_information']['addresses'];
+//             $address['aid'] = $edit['addresses']['aid'];
           }
           else {
             $address =& $edit['addresses'];
