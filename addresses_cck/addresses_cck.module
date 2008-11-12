@@ -179,7 +179,7 @@ function addresses_cck_field_settings($op, $field) {
 //         unset($field_cck['field']['additional fields']);
         $data[$table_alias][$field['field_name'] .'_'. $ftype] = $field_cck;
       }
-dpm($data['node_data_field_addresses']['field_addresses_aname']);
+
       return $data;
   }
 }
