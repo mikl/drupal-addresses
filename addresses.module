@@ -291,23 +291,30 @@ function addresses_theme() {
  */
 function addresses_token_list($type = 'all') {
   if ($type == 'addresses_general') {
-    $ftypes = module_invoke_all('addressesfieldapi', 'fields');
-    foreach ($ftypes as $ftype => $field) {
-      if ($field['token'] == 'addresses_general') {
-        $tokens[t('Addresses: General')][$ftype] = $field['title'];
-      }
-    }
-    return $tokens;
+    $category = t('Addresses: General');
   }
   elseif ($type == 'addresses_adr') {
-    $ftypes = module_invoke_all('addressesfieldapi', 'fields');
-    foreach ($ftypes as $ftype => $field) {
-      if ($field['token'] == 'addresses_adr') {
-        $tokens[t('Addresses: Address')][$ftype] = $field['title'];
+    $category = t('Addresses: Address');
+  }
+  else {
+    return;
+  }
+
+  $ftypes = module_invoke_all('addressesfieldapi', 'fields');
+  foreach ($ftypes as $ftype => $field) {
+    if (empty($field['theme'])) {
+      continue;
+    }
+    foreach ($field['theme'] as $theme => $theme_name) {
+      if (is_numeric($theme)) {
+        $tokens[$category][$theme_name] = $field['title'];
+      }
+      else {
+        $tokens[$category][$theme] = $theme_name;
       }
     }
-    return $tokens;
   }
+  return $tokens;
 }
 
 /**
