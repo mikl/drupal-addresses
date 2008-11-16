@@ -844,3 +844,4 @@ function theme_addresses_singleline($afields) {
 
   return $output;
 }
+?>
