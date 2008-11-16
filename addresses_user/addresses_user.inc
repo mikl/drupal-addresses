@@ -24,6 +24,9 @@ function _addresses_user_address_delete($id) {
  *
  * @param $id
  *   Number. The external ID (eid) to look into the addresses_user table.
+ * @param $id_type
+ *   The type (name) of the identifier used to search the addresses_user
+ *   table. Default to 'eid'. Can be set to 'aid' although.
  * @return
  *   Array. The numeric list of addresses arrays
  */
