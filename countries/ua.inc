@@ -46,3 +46,4 @@ function addresses_province_list_ua() {
     'ZH' => t('Zhytomyr')
   );
 }
+?>

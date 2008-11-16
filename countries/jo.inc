@@ -32,3 +32,4 @@ function addresses_province_list_jo() {
     'MD' => t('Madaba')
   );
 }
+?>

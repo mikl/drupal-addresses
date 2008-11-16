@@ -35,3 +35,4 @@ function addresses_province_list_ck() {
     'MG' => t('Mangaia')
   );
 }
+?>

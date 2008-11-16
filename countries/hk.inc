@@ -38,3 +38,4 @@ function addresses_province_list_hk() {
     'NYL' => t('Yuen Long New Territories')
   );
 }
+?>

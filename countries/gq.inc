@@ -27,3 +27,4 @@ function addresses_province_list_gq() {
     'WN' => t('Provincia Wele-Nzas')
   );
 }
+?>

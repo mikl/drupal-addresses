@@ -40,3 +40,4 @@ function addresses_province_list_au() {
     'WA' => t('Western Australia')
   );
 }
+?>

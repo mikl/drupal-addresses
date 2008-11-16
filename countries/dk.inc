@@ -38,3 +38,4 @@ function addresses_province_list_dk() {
     'FO' => t('Faroe Islands')
   );
 }
+?>

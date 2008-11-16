@@ -36,3 +36,4 @@ function addresses_province_list_kz() {
     'ZHA' => t('Zhambyl')
   );
 }
+?>

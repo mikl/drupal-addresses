@@ -32,3 +32,4 @@ function addresses_province_list_lu() {
     'LM' => t('Mersch')
   );
 }
+?>

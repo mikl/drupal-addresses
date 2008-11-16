@@ -23,3 +23,4 @@ function addresses_province_list_ms() {
     'P' => t('Saint Peter')
   );
 }
+?>

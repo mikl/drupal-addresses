@@ -97,3 +97,4 @@ function addresses_address_format_us() {
 !city, !province_name !postal_code
 !country_name";
 }
+?>

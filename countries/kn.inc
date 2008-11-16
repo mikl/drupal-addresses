@@ -34,3 +34,4 @@ function addresses_province_list_kn() {
     'TPP' => t('Trinity Palmetto Point')
   );
 }
+?>

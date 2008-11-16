@@ -33,3 +33,4 @@ function addresses_province_list_gr() {
     'WM' => t('West Macedonia')
   );
 }
+?>

@@ -28,3 +28,4 @@ function addresses_province_list_sk() {
     'ZI' => t('Zilinsky')
   );
 }
+?>

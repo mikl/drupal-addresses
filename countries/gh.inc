@@ -30,3 +30,4 @@ function addresses_province_list_gh() {
     'WE' => t('Western Region')
   );
 }
+?>

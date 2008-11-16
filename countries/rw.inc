@@ -32,3 +32,4 @@ function addresses_province_list_rw() {
     'UM' => t('Umutara')
   );
 }
+?>

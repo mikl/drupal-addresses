@@ -29,3 +29,4 @@ function theme_addresses_cck_formatter_single_line($element) {
   // Print the address using the one-line only theme
   return theme('addresses_singleline', $element['#item']);
 }
+?>

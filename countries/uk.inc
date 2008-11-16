@@ -252,3 +252,4 @@ function addresses_province_list_uk() {
     'WRX' => t('Wrexham')
   );
 }
+?>

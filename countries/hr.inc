@@ -41,3 +41,4 @@ function addresses_province_list_hr() {
     '21' => t('Zagreb (city)')
   );
 }
+?>

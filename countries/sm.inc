@@ -29,3 +29,4 @@ function addresses_province_list_sm() {
     'SE' => t('Serravalle')
   );
 }
+?>

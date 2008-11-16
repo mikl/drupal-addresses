@@ -31,3 +31,4 @@ function addresses_province_list_lc() {
     'VF' => t('Vieux-Fort')
   );
 }
+?>

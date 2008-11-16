@@ -144,3 +144,4 @@ function addresses_province_list_fr() {
 //  'Provence-Alpes-Côte d'Azur',
 //  'Corse',
 }
+?>

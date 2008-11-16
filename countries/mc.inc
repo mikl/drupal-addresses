@@ -24,3 +24,4 @@ function addresses_province_list_mc() {
     'MC' => t('Monte-Carlo')
   );
 }
+?>

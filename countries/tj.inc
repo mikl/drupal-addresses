@@ -23,3 +23,4 @@ function addresses_province_list_tj() {
     'SU' => t('Sughd')
   );
 }
+?>

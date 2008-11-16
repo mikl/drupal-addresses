@@ -40,3 +40,4 @@ function addresses_province_list_pg() {
     'WB' => t('West New Britain')
   );
 }
+?>

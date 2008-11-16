@@ -34,3 +34,4 @@ function addresses_province_list_cz() {
     'ZL' => t('Zlin Region (Zlinsky kraj)')
   );
 }
+?>

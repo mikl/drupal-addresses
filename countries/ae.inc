@@ -27,3 +27,4 @@ function addresses_province_list_ae() {
     'UQ' => t('Umm al Qaywayn')
   );
 }
+?>

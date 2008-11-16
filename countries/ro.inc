@@ -62,3 +62,4 @@ function addresses_province_list_ro() {
     'VR' => t('Vrancea')
   );
 }
+?>

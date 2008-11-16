@@ -29,3 +29,4 @@ function addresses_province_list_ml() {
     'CD' => t('Bamako Capital District')
   );
 }
+?>

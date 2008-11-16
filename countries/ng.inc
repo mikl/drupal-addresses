@@ -57,3 +57,4 @@ function addresses_province_list_ng() {
     'ZA' => t('Zamfara')
   );
 }
+?>

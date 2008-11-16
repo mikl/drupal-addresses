@@ -25,3 +25,4 @@ function addresses_province_list_tg() {
     'M' => t('Maritime')
   );
 }
+?>

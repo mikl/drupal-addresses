@@ -62,3 +62,4 @@ function addresses_province_list_ma() {
     'ESM' => t('Es Smara')
   );
 }
+?>

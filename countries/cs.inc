@@ -24,3 +24,4 @@ function addresses_province_list_cs() {
     'VOJ' => t('Vojvodina')
   );
 }
+?>

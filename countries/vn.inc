@@ -52,3 +52,4 @@ function addresses_province_list_vn() {
     'HY' => t('Hung Yen')
   );
 }
+?>

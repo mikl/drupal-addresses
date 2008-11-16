@@ -37,3 +37,4 @@ function addresses_province_list_cv() {
     'TA' => t('Tarrafal')
   );
 }
+?>

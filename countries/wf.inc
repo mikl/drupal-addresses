@@ -23,3 +23,4 @@ function addresses_province_list_wf() {
     'W' => t('Wallis')
   );
 }
+?>

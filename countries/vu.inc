@@ -26,3 +26,4 @@ function addresses_province_list_vu() {
     'TO' => t('Torba')
   );
 }
+?>

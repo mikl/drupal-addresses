@@ -56,3 +56,4 @@ function addresses_province_list_al() {
     'VL' => t('Vlore')
   );
 }
+?>

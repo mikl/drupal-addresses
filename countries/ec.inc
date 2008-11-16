@@ -42,3 +42,4 @@ function addresses_province_list_ec() {
     'Z' => t('Zamora-Chinchipe')
   );
 }
+?>

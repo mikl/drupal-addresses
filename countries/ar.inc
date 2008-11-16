@@ -44,3 +44,4 @@ function addresses_province_list_ar() {
     'Z' => t('Santa Cruz')
   );
 }
+?>

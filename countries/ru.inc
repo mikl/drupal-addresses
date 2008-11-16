@@ -109,3 +109,4 @@ function addresses_province_list_ru() {
     'YAN' => t('Yamalia')
   );
 }
+?>

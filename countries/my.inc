@@ -36,3 +36,4 @@ function addresses_province_list_my() {
     'SR' => t('Sarawak')
   );
 }
+?>

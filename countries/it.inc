@@ -130,3 +130,4 @@ function addresses_province_list_it() {
     'VT' => t('Viterbo')
   );
 }
+?>
