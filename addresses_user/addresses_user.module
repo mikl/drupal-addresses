@@ -223,6 +223,7 @@ function addresses_user_user($op, &$edit, &$account) {
           _addresses_user_address_save($address, $account->uid);
         }
       }
+      break;
   }
 }
 ?>
