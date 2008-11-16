@@ -119,7 +119,7 @@ function _addresses_user_address($op = NULL, $aid = NULL) {
     case 'edit':
       // Its time to include the address form!
 
-      // If its a existing address, get the whole
+      // If it's an existing address, get the whole
       // address information
       $edit = arg(4) ? _addresses_user_address_get(arg(4), 'aid') : array();
 
