@@ -32,4 +32,3 @@ function addresses_province_list_nl() {
     'ZH' => t('Zuid Holland')
   );
 }
-?>

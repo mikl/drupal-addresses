@@ -56,4 +56,3 @@ function addresses_province_list_cn() {
     '99' => t('Taibei')
   );
 }
-?>

@@ -35,4 +35,3 @@ function addresses_province_list_ee() {
     '86' => t('Võru County')
   );
 }
-?>

@@ -37,4 +37,3 @@ function addresses_province_list_mu() {
     'SA' => t('Savanne')
   );
 }
-?>

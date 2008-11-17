@@ -65,4 +65,3 @@ function addresses_province_list_bf() {
     'ZOW' => t('Zoundweogo')
   );
 }
-?>

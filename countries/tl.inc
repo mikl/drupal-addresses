@@ -33,4 +33,3 @@ function addresses_province_list_tl() {
     'VI' => t('Viqueque')
   );
 }
-?>

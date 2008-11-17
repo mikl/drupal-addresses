@@ -68,4 +68,3 @@ function addresses_province_list_dz() {
     'TLE' => t('Tlemcen')
   );
 }
-?>

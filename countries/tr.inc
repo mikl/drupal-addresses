@@ -101,4 +101,3 @@ function addresses_province_list_tr() {
     'ZON' => t('Zonguldak')
   );
 }
-?>

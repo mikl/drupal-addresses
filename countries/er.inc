@@ -26,4 +26,3 @@ function addresses_province_list_er() {
     'BR' => t('Gash-Barka (Barentu)')
   );
 }
-?>

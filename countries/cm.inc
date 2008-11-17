@@ -30,4 +30,3 @@ function addresses_province_list_cm() {
     'SOU' => t('Southwest Province')
   );
 }
-?>

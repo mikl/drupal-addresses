@@ -53,4 +53,3 @@ function addresses_province_list_co() {
     'BDC' => t('Bogota D.C.')
   );
 }
-?>

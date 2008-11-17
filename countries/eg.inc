@@ -46,4 +46,3 @@ function addresses_province_list_eg() {
     'SUH' => t('Suhaj')
   );
 }
-?>

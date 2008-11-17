@@ -45,4 +45,3 @@ function addresses_province_list_ly() {
     'ZL' => t('Zlitan')
   );
 }
-?>

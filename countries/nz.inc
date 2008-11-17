@@ -36,4 +36,3 @@ function addresses_province_list_nz() {
     'WTC' => t('West Coast')
   );
 }
-?>

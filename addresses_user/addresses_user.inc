@@ -242,4 +242,3 @@ function theme_addresses_user_overview($uid, &$addresses) {
   // Show the resulting output
   return $output;
 }
-?>

@@ -29,4 +29,3 @@ function addresses_province_list_at() {
     'WIE' => t('Wien')
   );
 }
-?>

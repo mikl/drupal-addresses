@@ -36,4 +36,3 @@ function addresses_province_list_kr() {
     '49' => t('Jeju-do')
   );
 }
-?>

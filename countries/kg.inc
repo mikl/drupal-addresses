@@ -28,4 +28,3 @@ function addresses_province_list_kg() {
     'Y' => t('Ysyk-Kol')
   );
 }
-?>

@@ -276,4 +276,3 @@ function addresses_cck_widget_info() {
     ),
   );
 }
-?>

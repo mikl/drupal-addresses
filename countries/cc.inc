@@ -25,4 +25,3 @@ function addresses_province_list_cc() {
     'W' => t('West Island')
   );
 }
-?>

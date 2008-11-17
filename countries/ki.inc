@@ -41,4 +41,3 @@ function addresses_province_list_ki() {
     'TE' => t('Teraina')
   );
 }
-?>

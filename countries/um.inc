@@ -29,4 +29,3 @@ function addresses_province_list_um() {
     'WI' => t('Wake Island')
   );
 }
-?>

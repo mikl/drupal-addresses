@@ -47,4 +47,3 @@ function addresses_province_list_br() {
     'TO' => t('Tocantins')
   );
 }
-?>

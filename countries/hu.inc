@@ -59,4 +59,3 @@ function addresses_province_list_hu() {
     'ZA' => t('Zala')
   );
 }
-?>

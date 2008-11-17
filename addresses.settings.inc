@@ -365,4 +365,3 @@ function theme_addresses_settings_fields($form) {
 
   return $output;
 }
-?>

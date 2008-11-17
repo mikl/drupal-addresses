@@ -45,4 +45,3 @@ function addresses_province_list_pe() {
     'UC' => t('Ucayali')
   );
 }
-?>

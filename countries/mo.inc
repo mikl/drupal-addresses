@@ -25,4 +25,3 @@ function addresses_province_list_mo() {
     'LAW' => t('St. Lawrence Parish')
   );
 }
-?>

@@ -48,4 +48,3 @@ function addresses_province_list_bg() {
     '28' => t('Yambol')
   );
 }
-?>

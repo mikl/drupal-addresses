@@ -34,4 +34,3 @@ function addresses_province_list_uz() {
     'XO' => t('Xorazm')
   );
 }
-?>

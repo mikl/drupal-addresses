@@ -26,4 +26,3 @@ function addresses_province_list_by() {
     'VI' => t('Vitsebsk voblast')
   );
 }
-?>

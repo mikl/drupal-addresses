@@ -34,4 +34,3 @@ function addresses_province_list_tc() {
     'WC' => t('West Caicos')
   );
 }
-?>

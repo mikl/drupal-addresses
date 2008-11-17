@@ -33,4 +33,3 @@ function addresses_province_list_sa() {
     'TB' => t('Tabuk')
   );
 }
-?>

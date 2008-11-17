@@ -54,4 +54,3 @@ function addresses_province_list_gn() {
     'YOM' => t('Yomou')
   );
 }
-?>

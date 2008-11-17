@@ -37,4 +37,3 @@ function addresses_province_list_cf() {
     'BAN' => t('Bangui')
   );
 }
-?>

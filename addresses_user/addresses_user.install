@@ -96,4 +96,3 @@ function addresses_user_uninstall() {
   // Delete global variables
   variable_del('addresses_user_book');
 }
-?>

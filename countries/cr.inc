@@ -27,4 +27,3 @@ function addresses_province_list_cr() {
     'SJ' => t('San Jose')
   );
 }
-?>

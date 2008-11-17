@@ -30,4 +30,3 @@ function addresses_province_list_sr() {
     'WA' => t('Wanica')
   );
 }
-?>

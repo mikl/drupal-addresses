@@ -21,4 +21,3 @@ function addresses_uninstall() {
   }
   variable_del('addresses_format_default');
 }
-?>

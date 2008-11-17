@@ -55,4 +55,3 @@ function addresses_province_list_in() {
     'PY' => t('Pondicherry')
   );
 }
-?>

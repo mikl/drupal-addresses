@@ -30,4 +30,3 @@ function addresses_province_list_qa() {
     'UL' => t('Umm Salal')
   );
 }
-?>

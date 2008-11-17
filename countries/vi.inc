@@ -23,4 +23,3 @@ function addresses_province_list_vi() {
     'T' => t('Saint Thomas')
   );
 }
-?>

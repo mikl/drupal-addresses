@@ -39,4 +39,3 @@ function addresses_province_list_no() {
     'VF' => t('Vestfold')
   );
 }
-?>

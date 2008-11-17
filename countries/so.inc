@@ -38,4 +38,3 @@ function addresses_province_list_so() {
     'WG' => t('Woqooyi Galbeed')
   );
 }
-?>

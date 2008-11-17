@@ -48,4 +48,3 @@ function addresses_province_list_de() {
     'TH' => t('Thüringen')
   );
 }
-?>

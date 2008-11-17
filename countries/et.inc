@@ -31,4 +31,3 @@ function addresses_province_list_et() {
     'DD' => t('Dire Dawa')
   );
 }
-?>

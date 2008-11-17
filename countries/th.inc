@@ -97,4 +97,3 @@ function addresses_province_list_th() {
     'S' => t('Pattaya')
   );
 }
-?>

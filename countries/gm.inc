@@ -33,4 +33,3 @@ function addresses_province_list_gm() {
     'WE' => t('Western')
   );
 }
-?>

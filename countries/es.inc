@@ -70,4 +70,3 @@ function addresses_province_list_es() {
     'ZR' => t('Zaragoza')
   );
 }
-?>

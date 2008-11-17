@@ -226,4 +226,3 @@ function addresses_user_user($op, &$edit, &$account) {
       break;
   }
 }
-?>

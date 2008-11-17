@@ -35,4 +35,3 @@ function addresses_province_list_cu() {
     'GUA' => t('Guantanamo')
   );
 }
-?>

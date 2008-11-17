@@ -31,4 +31,3 @@ function addresses_province_list_kp() {
     'PYO' => t("P'yongyang Special City")
   );
 }
-?>

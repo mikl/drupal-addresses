@@ -27,4 +27,3 @@ function addresses_province_list_ad() {
     'SJL' => t('Sant Julia de Loria')
   );
 }
-?>

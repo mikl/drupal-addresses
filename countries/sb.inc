@@ -30,4 +30,3 @@ function addresses_province_list_sb() {
     'WE' => t('Western')
   );
 }
-?>

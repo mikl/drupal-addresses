@@ -51,4 +51,3 @@ function addresses_province_list_bs() {
     'WGB' => t('West Grand Bahama')
   );
 }
-?>

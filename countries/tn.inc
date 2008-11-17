@@ -44,4 +44,3 @@ function addresses_province_list_tn() {
     'ZA' => t('Zaghouan')
   );
 }
-?>

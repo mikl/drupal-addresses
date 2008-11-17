@@ -28,4 +28,3 @@ function addresses_province_list_gd() {
     'Q' => t('Petit Martinique')
   );
 }
-?>

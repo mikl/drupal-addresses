@@ -26,4 +26,3 @@ function addresses_province_list_il() {
     'T' => t('Tel Aviv')
   );
 }
-?>

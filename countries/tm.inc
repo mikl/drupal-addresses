@@ -25,4 +25,3 @@ function addresses_province_list_tm() {
     'M' => t('Mary Welayaty')
   );
 }
-?>

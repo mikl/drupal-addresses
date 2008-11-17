@@ -42,4 +42,3 @@ function addresses_province_list_mn() {
     '073' => t('Arhangay')
   );
 }
-?>

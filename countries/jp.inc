@@ -67,4 +67,3 @@ function addresses_province_list_jp() {
     '47' => t('Okinawa')
   );
 }
-?>

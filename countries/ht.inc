@@ -29,4 +29,3 @@ function addresses_province_list_ht() {
     'SE' => t('Sud-Est')
   );
 }
-?>

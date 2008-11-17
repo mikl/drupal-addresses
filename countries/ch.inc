@@ -46,4 +46,3 @@ function addresses_province_list_ch() {
     'JU' => t('Jura')
   );
 }
-?>

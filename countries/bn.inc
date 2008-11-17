@@ -24,4 +24,3 @@ function addresses_province_list_bn() {
     'TUT' => t('Tutong')
   );
 }
-?>

@@ -40,4 +40,3 @@ function addresses_province_list_bt() {
     'ZHE' => t('Zhemgang')
   );
 }
-?>

@@ -31,4 +31,3 @@ function addresses_province_list_ws() {
     'VS' => t('Vaisigano')
   );
 }
-?>

@@ -34,4 +34,3 @@ function addresses_province_list_sy() {
     'TA' => t('Tartus')
   );
 }
-?>

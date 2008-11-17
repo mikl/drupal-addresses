@@ -30,4 +30,3 @@ function addresses_province_list_dm() {
     'PET' => t('Saint Peter Parish')
   );
 }
-?>

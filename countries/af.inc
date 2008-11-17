@@ -52,4 +52,3 @@ function addresses_province_list_af() {
     'ZAB' => t('Zabol province')
   );
 }
-?>

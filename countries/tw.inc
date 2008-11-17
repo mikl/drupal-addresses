@@ -45,4 +45,3 @@ function addresses_province_list_tw() {
     'TC' => t("T'ai-pei city")
   );
 }
-?>
