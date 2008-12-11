@@ -37,7 +37,7 @@ function addresses_cck_content_is_empty($item, $field) {
 function addresses_cck_field_info() {
   return array(
     'addresses_cck' => array(
-      'label'       => 'Address',
+      'label'       => t('Address'),
       'description' => t('Store addresses.'),
       'callbacks'   => array(
         'tables'    => CONTENT_CALLBACK_DEFAULT,
