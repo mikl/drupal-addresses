@@ -321,6 +321,11 @@ function addresses_token_list($type = 'all') {
  * Implementation of hook_token_values().
  */
 function addresses_token_values($type, $object = NULL) {
+  // Grant that all values are plain text (Avoiding code injection)
+  foreach ($object as $index => $value) {
+    $object[$index] = check_plain($value);
+  }
+
   if ($type == 'addresses_general') {
     $values['primary']        = empty($object['primary']) ? '' :
       ' ('. t('default') .')';
