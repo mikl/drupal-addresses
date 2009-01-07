@@ -7,18 +7,6 @@
  */
 
 /**
- * Returns an associative array of states/territories where
- *   -> the keys are integers starting from 1
- *   -> the values are the English names for those states/territories
- *
- * The states are grouped together at the beginning of the array and sorted
- * alphabetically.
- *
- * The territories are grouped together at the end of the array and sorted
- * alphabetically.
- *
- */
-/**
  * Implementation of hook_province_list().
  *
  * Its a hook from Addresses module to list all
@@ -39,4 +27,21 @@ function addresses_province_list_au() {
     'VIC' => t('Victoria'),
     'WA' => t('Western Australia')
   );
+}
+
+/**
+ * Implementation of hook_address_format().
+ *
+ * Format the address using local preferences. It uses
+ * Token module to convert this tokens to their real values.
+ *
+ * @return
+ *   String. The address field tokens
+ */
+function addresses_address_format_au() {
+  return '!aname
+!additional
+!street
+!city !province_name !postal_code
+!country_name';
 }

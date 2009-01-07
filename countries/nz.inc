@@ -36,3 +36,20 @@ function addresses_province_list_nz() {
     'WTC' => t('West Coast')
   );
 }
+
+/**
+ * Implementation of hook_address_format().
+ *
+ * Format the address using local preferences. It uses
+ * Token module to convert this tokens to their real values.
+ *
+ * @return
+ *   String. The address field tokens
+ */
+function addresses_address_format_nz() {
+  return '!aname
+!additional
+!street
+!city !postal_code
+!country_name';
+}

@@ -91,9 +91,9 @@ function addresses_province_list_us() {
  *   String. The address field tokens
  */
 function addresses_address_format_us() {
-  return "!aname
+  return '!aname
 !street
 !additional
 !city, !province_name !postal_code
-!country_name";
+!country_name';
 }
