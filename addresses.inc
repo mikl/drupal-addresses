@@ -684,6 +684,28 @@ function theme_addresses($afields) {
 }
 
 /**
+ * Print the field Primary.
+ *
+ * @param $afields
+ *   Array. All field values
+ * @ingroup themeable
+ */
+function theme_addresses_field_primary($afields) {
+  return ' ('. t('default') .')';
+}
+
+/**
+ * Print the field Address name.
+ *
+ * @param $afields
+ *   Array. All field values
+ * @ingroup themeable
+ */
+function theme_addresses_field_aname($afields) {
+  return '<span class="fn org">'. theme('placeholder', $object['aname']) . $values['primary'] .'</span>';
+}
+
+/**
  * Print the field City.
  *
  * @param $afields

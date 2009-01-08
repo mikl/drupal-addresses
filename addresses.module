@@ -30,7 +30,9 @@ function addresses_addressesfieldapi($op, $fields = array(), $values = array()) 
         'description' => t('The nickname of this address, like "Home", "Office", "Anna\'s appartment"'),
         'display'     => ADDRESSES_FIELD_NONE,
         'title'       => t('Address Name'),
-        'theme'       => array('aname'),
+        'theme'       => array(
+          'aname' => ''
+        ),
         'token'       => 'addresses_general',
       ),
       'street' => array(
@@ -50,7 +52,9 @@ function addresses_addressesfieldapi($op, $fields = array(), $values = array()) 
         'description' => t('More info like appartment block, number or address reference'),
         'display'     => ADDRESSES_FIELD_SHOW,
         'title'       => t('Additional'),
-        'theme'       => array('additional'),
+        'theme'       => array(
+          'additional' => ''
+        ),
         'token'       => 'addresses_adr',
       ),
       'city' => array(
@@ -237,6 +241,14 @@ function addresses_theme() {
       'file'      => 'addresses.settings.inc',
     ),
     // Shows address fields
+    'addresses_field_primary' => array(
+      'arguments' => array('form'),
+      'file'      => 'addresses.inc',
+    ),
+    'addresses_field_aname' => array(
+      'arguments' => array('form'),
+      'file'      => 'addresses.inc',
+    ),
     'addresses_field_city' => array(
       'arguments' => array('form'),
       'file'      => 'addresses.inc',
@@ -326,35 +338,19 @@ function addresses_token_values($type, $object = NULL) {
     foreach ($object as $index => $value) {
       $object[$index] = check_plain($value);
     }
-  }
 
-  if ($type == 'addresses_general') {
-    $values['primary']        = empty($object['primary']) ? '' :
-      ' ('. t('default') .')';
-    $values['aname']          = empty($object['aname']) ? '' :
-      '<span class="fn org">'. theme('placeholder', $object['aname']) . $values['primary'] .'</span>';
-    return $values;
-  }
-  elseif ($type == 'addresses_adr') {
-    $values['primary']        = empty($object['primary']) ? '' :
-      ' ('. t('default') .')';
-    $values['aname']          = empty($object['aname']) ? '' :
-      '<span class="fn org">'. theme('placeholder', $object['aname']) . $values['primary'] .'</span>';
+    $fields = module_invoke_all('addressesfieldapi', 'fields');
 
-    $values['street']         = empty($object['street']) ? '' : theme('addresses_field_street', $object);
-    $values['additional']     = empty($object['additional']) ? '' : theme('addresses_field_additional', $object);
-    $values['city']           = empty($object['city']) ? '' : theme('addresses_field_city', $object);
-    $values['postal_code']    = empty($object['postal_code']) ? '' : theme('addresses_field_postal_code', $object);
-
-    $values['province_code']  = (empty($object['province']) and empty($object['country'])) ? '' :
-      theme('addresses_field_province_code', $object);
-    $values['province_name']  = (empty($object['province']) and empty($object['country'])) ? '' :
-      theme('addresses_field_province_name', $object);
-
-    $values['country_code2']  = empty($object['country']) ? '' : theme('addresses_field_country_code2', $object);
-    $values['country_code3']  = empty($object['country']) ? '' : theme('addresses_field_country_code3', $object);
-    $values['country_name']   = empty($object['country']) ? '' : theme('addresses_field_country_name', $object);
-
-    return $values;
+    if ($type == 'addresses_general' or $type == 'addresses_adr') {
+      foreach ($fields as $field => $field_data) {
+        if ($field_data['token'] != $type or empty($field_data['theme'])) {
+          continue;
+        }
+        foreach (array_keys($field_data['theme']) as $theme_function) {
+          $values[$theme_function] = empty($object[$field]) ? '' : theme('addresses_field_'. $theme_function, $object);
+        }
+      }
+      return $values;
+    }
   }
 }
