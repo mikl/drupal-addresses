@@ -198,11 +198,12 @@ function _addresses_province_validate($form, &$form_state) {
  */
 function _addresses_settings(&$form_state) {
   module_load_include('inc', 'addresses');
-  $countries = _addresses_country_get();
+  $countries    = _addresses_country_get();
+  $country_list = variable_get('addresses_country_list', array_keys(_addresses_country_get()));
 
   // List of countries that the site allow
   $form['addresses_country_list'] = array(
-    '#default_value'  => variable_get('addresses_country_list', array_keys(_addresses_country_get())),
+    '#default_value'  => $country_list,
     '#description'    => t('You might want to limit the country lists. Select the countries you want.'),
     '#multiple'       => TRUE,
     '#options'        => $countries,
@@ -211,11 +212,12 @@ function _addresses_settings(&$form_state) {
   );
 
   // Let users to change the address formats
+  $countries = array_intersect_key($countries, $country_list);
   array_unshift($countries,  t('Default'));
-  $countries_max = count($countries) / 4;
+  $countries_max = ceil(count($countries) / 4);
   $country_num = 0;
   foreach ($countries as $country_code => $country) {
-    $columns[++$country_num / $countries_max][] = l($country, 'admin/settings/address/format/'. $country_code);
+    $columns[$country_num++ / $countries_max][] = l($country, 'admin/settings/address/format/'. $country_code);
   }
   foreach (array_keys($columns[0]) as $row) {
     $rows[] = array($columns[0][$row], $columns[1][$row], $columns[2][$row], $columns[3][$row]);
