@@ -81,3 +81,42 @@ function addresses_phone_addressesfieldapi($op, $fields = array(), $values = arr
     return $form;
   }
 }
+
+/**
+ * Implementation of hook_theme().
+ */
+function addresses_phone_theme() {
+  return array(
+    // Shows address fields
+    'addresses_field_phone' => array(
+      'arguments' => array('form'),
+//       'file'      => 'addresses_phone.theme.inc',
+    ),
+    'addresses_field_fax' => array(
+      'arguments' => array('form'),
+//       'file'      => 'addresses_phone.theme.inc',
+    ),
+  );
+}
+
+/**
+ * Print the field Phone.
+ *
+ * @param $afields
+ *   Array. All field values
+ * @ingroup themeable
+ */
+function theme_addresses_field_phone($afields) {
+  return '<dt>'. t('Phone') .': </dt><dd class="phone">'. $afields['phone'] .'</dd>';
+}
+
+/**
+ * Print the field Fax.
+ *
+ * @param $afields
+ *   Array. All field values
+ * @ingroup themeable
+ */
+function theme_addresses_field_fax($afields) {
+  return '<dt>'. t('Fax') .': </dt><dd class="fax">'. $afields['phone'] .'</dd>';
+}
