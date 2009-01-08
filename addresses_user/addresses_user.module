@@ -139,7 +139,7 @@ function _addresses_user_form_submit($form, &$form_state) {
   }
 
   $address =& $form_state['values']['addresses'];
-//   $address['aid'] = $form_state['values']['addresses']['aid'];
+
   _addresses_user_address_save($address, $uid);
 }
 

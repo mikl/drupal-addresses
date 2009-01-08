@@ -176,6 +176,7 @@ function _addresses_user_form(&$form_state, $fields = array(), $values = array()
     '#type'           => 'addresses_elements',
     '#tree'           => TRUE
   );
+  $form['#uid'] = $values['eid'];
 
   // Add the submit button
   if (empty($values['aid'])) {
