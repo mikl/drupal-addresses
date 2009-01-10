@@ -118,5 +118,5 @@ function theme_addresses_field_phone($afields) {
  * @ingroup themeable
  */
 function theme_addresses_field_fax($afields) {
-  return '<dt>'. t('Fax') .': </dt><dd class="fax">'. $afields['phone'] .'</dd>';
+  return '<dt>'. t('Fax') .': </dt><dd class="fax">'. $afields['fax'] .'</dd>';
 }
