@@ -18,47 +18,64 @@
  */
 function addresses_province_list_ro() {
   return array(
-    'AL' => t('Alba'),
-    'AD' => t('Arad'),
+    'AB' => t('Alba'),
+    'AR' => t('Arad'),
     'AG' => t('Arges'),
-    'BA' => t('Bacau'),
+    'BC' => t('Bacau'),
     'BH' => t('Bihor'),
     'BN' => t('Bistrita-Nasaud'),
-    'BO' => t('Botosani'),
-    'BL' => t('Braila'),
-    'BS' => t('Brasov'),
-    'BC' => t('Bucuresti'),
+    'BT' => t('Botosani'),
+    'BR' => t('Braila'),
+    'BV' => t('Brasov'),
+    'B'  => t('Bucuresti'),
     'BZ' => t('Buzau'),
     'CR' => t('Calarasi'),
     'CS' => t('Caras-Severin'),
     'CJ' => t('Cluj'),
     'CT' => t('Constanta'),
     'CV' => t('Covasna'),
-    'DI' => t('Dimbovita'),
-    'DO' => t('Dolj'),
+    'DB' => t('Dambovita'),
+    'DJ' => t('Dolj'),
     'GL' => t('Galati'),
+    'GR' => t('Giurgiu'),
     'GJ' => t('Gorj'),
-    'GG' => t('Giurgiu'),
-    'HA' => t('Harghita'),
-    'HU' => t('Hunedoara'),
-    'IM' => t('Ialomita'),
+    'HR' => t('Harghita'),
+    'HD' => t('Hunedoara'),
+    'IL' => t('Ialomita'),
     'IS' => t('Iasi'),
     'IF' => t('Ilfov'),
-    'MA' => t('Maramures'),
-    'ME' => t('Mehedinti'),
-    'MU' => t('Mures'),
-    'NE' => t('Neamt'),
-    'OL' => t('Olt'),
-    'PR' => t('Prahova'),
+    'MM' => t('Maramures'),
+    'MH' => t('Mehedinti'),
+    'MS' => t('Mures'),
+    'NT' => t('Neamt'),
+    'OT' => t('Olt'),
+    'PH' => t('Prahova'),
     'SJ' => t('Salaj'),
     'SM' => t('Satu Mare'),
-    'SO' => t('Sibiu'),
-    'SU' => t('Suceava'),
-    'TE' => t('Teleorman'),
-    'SI' => t('Timis'),
-    'TU' => t('Tulcea'),
-    'VA' => t('Vaslui'),
-    'VI' => t('Vilcea'),
-    'VR' => t('Vrancea')
+    'SB' => t('Sibiu'),
+    'SV' => t('Suceava'),
+    'TR' => t('Teleorman'),
+    'TM' => t('Timis'),
+    'TL' => t('Tulcea'),
+    'VS' => t('Vaslui'),
+    'VL' => t('Valcea'),
+    'VN' => t('Vrancea')
   );
+}
+
+/**
+ * Implementation of hook_address_format().
+ *
+ * Format the address using local preferences. It uses
+ * Token module to convert this tokens to their real values.
+ *
+ * @return
+ *   String. The address field tokens
+ */
+function addresses_address_format_ro() {
+  return '!aname
+!street
+!additional
+!postal_code !city, !province_name
+!country_name';
 }
