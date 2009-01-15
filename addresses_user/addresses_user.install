@@ -58,11 +58,10 @@ function addresses_user_schema() {
     $update = array();
 
     // Get all addresses fields from addressesfieldapi and include them on the schema
-    $fields_new = module_invoke_all('addressesfieldapi', 'fields');
     $fields_existing = variable_get('addresses_user_fields', array());
     foreach (array_keys($fields_existing) as $field) {
-      if (!empty($fields_new[$field])) {
-        unset($fields_new[$field]);
+      if (!empty($fields[$field])) {
+        unset($fields[$field]);
       }
       else {
         db_drop_field($update, 'addresses_user', $field);
@@ -71,8 +70,8 @@ function addresses_user_schema() {
     }
 
     // If there is any field remaing, add it
-    if (!empty($fields_new)) {
-      foreach ($fields_new as $field => $field_data) {
+    if (!empty($fields)) {
+      foreach ($fields as $field => $field_data) {
         db_add_field($update, 'addresses_user', $field, $field_data);
         $fields_existing[$field] = TRUE;
       }
@@ -81,6 +80,12 @@ function addresses_user_schema() {
     if (!empty($update)) {
       variable_set('addresses_user_fields', $fields_existing);
     }
+  }
+  else {
+    foreach (array_keys($fields) as $field) {
+      $fields_existing[$field] = TRUE;
+    }
+    variable_set('addresses_user_fields', $fields_existing);
   }
 
   return $schema;
