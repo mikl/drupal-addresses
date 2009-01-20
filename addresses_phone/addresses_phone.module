@@ -40,14 +40,10 @@ function addresses_phone_addressesfieldapi($op, $fields = array(), $values = arr
     );
   }
   elseif ($op == 'form') {
+    $field_weights = variable_get('addresses_field_weight', array());
+
     // Telephone number
-    if ($fields['phone'] == ADDRESSES_FIELD_HIDDEN) {
-      $form['phone'] = array(
-        '#type'           => 'hidden',
-        '#value'          => isset($values['phone']) ? $values['phone'] : '',
-      );
-    }
-    elseif (!empty($fields['phone'])) {
+    if (!empty($fields['phone'])) {
       $form['phone'] = array(
         '#type'           => 'textfield',
         '#title'          => t('Phone'),
@@ -55,18 +51,14 @@ function addresses_phone_addressesfieldapi($op, $fields = array(), $values = arr
         '#size'           => 50,
         '#maxlength'      => 75,
         '#attributes'     => NULL,
-        '#required'       => ($fields['phone'] == ADDRESSES_FIELD_REQUIRED)
+        '#required'       => ($fields['phone'] == ADDRESSES_FIELD_REQUIRED),
+        '#weight'         => empty($field_weights['phone']['weight']) ? 0 :
+          $field_weights['phone']['weight'],
       );
     }
 
     // Fax number
-    if ($fields['fax'] == ADDRESSES_FIELD_HIDDEN) {
-      $form['fax'] = array(
-        '#type'           => 'hidden',
-        '#value'          => isset($values['fax']) ? $values['fax'] : '',
-      );
-    }
-    elseif (!empty($fields['fax'])) {
+    if (!empty($fields['fax'])) {
       $form['fax'] = array(
         '#type'           => 'textfield',
         '#title'          => t('Fax'),
@@ -74,8 +66,19 @@ function addresses_phone_addressesfieldapi($op, $fields = array(), $values = arr
         '#size'           => 50,
         '#maxlength'      => 75,
         '#attributes'     => NULL,
-        '#required'       => ($fields['fax'] == ADDRESSES_FIELD_REQUIRED)
+        '#required'       => ($fields['fax'] == ADDRESSES_FIELD_REQUIRED),
+        '#weight'         => empty($field_weights['fax']['weight']) ? 0 :
+          $field_weights['fax']['weight'],
       );
+    }
+
+    foreach (array_keys($fields) as $ftype) {
+      if ($fields[$ftype] == ADDRESSES_FIELD_HIDDEN) {
+        $form[$ftype] = array(
+          '#type'           => 'hidden',
+          '#value'          => isset($values[$ftype]) ? $values[$ftype] : '',
+        );
+      }
     }
 
     return $form;

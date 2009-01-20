@@ -240,6 +240,11 @@ function addresses_theme() {
       'arguments' => array('form'),
       'file'      => 'addresses.settings.inc',
     ),
+    // Shows address weight on settings page
+    'addresses_field_weight' => array(
+      'arguments' => array('form'),
+      'file'      => 'addresses.settings.inc',
+    ),
     // Shows address fields
     'addresses_field_primary' => array(
       'arguments' => array('form'),
