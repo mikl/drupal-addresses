@@ -45,8 +45,10 @@ function _addresses_addressesfieldapi_form($fields = array(), $values = array())
   // Adds the Country
   if (!empty($fields['country'])) {
     // Get a list of enabled countries
-    $countries = array('' => '') +
-      _addresses_country_get(variable_get('addresses_country_list', array()));
+    $countries = _addresses_country_get(variable_get('addresses_country_list', array()));
+    if (count($countries) > 1) {
+      $countries = array('' => '') + $countries;
+    }
 
     $form['country'] = array(
       '#type'           => 'select',
