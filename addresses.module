@@ -163,7 +163,8 @@ function addresses_elements_process($element, $edit, $form_state, $form) {
   // Reset the required fields based on the general required value
   if (empty($element['#required'])) {
     foreach ($fields as $field => $required) {
-      if ($required == ADDRESSES_FIELD_REQUIRED) {
+      if ($required == ADDRESSES_FIELD_REQUIRED
+          and $form['#id'] == 'content-field-edit-form') {
         $fields[$field] = ADDRESSES_FIELD_SHOW;
       }
     }
