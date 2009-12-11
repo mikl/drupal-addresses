@@ -302,7 +302,7 @@ function _addresses_settings_fields($field_values = array()) {
   foreach ($ftypes as $ftype => $field) {
     // List of address fields
     $form['addresses'][$ftype] = array(
-      '#default_value'  => empty($field_values[$ftype]) ? $field['display'] : $field_values[$ftype],
+      '#default_value'  => !isset($field_values[$ftype]) ? $field['display'] : $field_values[$ftype],
       '#options'        => array(
         ADDRESSES_FIELD_NONE      => '',
         ADDRESSES_FIELD_SHOW      => '',
