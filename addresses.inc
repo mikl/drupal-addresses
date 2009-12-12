@@ -702,7 +702,7 @@ function theme_addresses_field_primary($afields) {
  * @ingroup themeable
  */
 function theme_addresses_field_aname($afields) {
-  return '<span class="fn org">'. theme('placeholder', $object['aname']) . $values['primary'] .'</span>';
+  return '<span class="fn org">'. theme('placeholder', $afields['aname']) .'</span>';
 }
 
 /**
