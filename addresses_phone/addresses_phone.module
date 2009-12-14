@@ -16,26 +16,30 @@ function addresses_phone_addressesfieldapi($op, $fields = array(), $values = arr
   if ($op == 'fields') {
     return array(
       'phone' => array(
-        'type'        => 'varchar',
-        'length'      => 16,
-        'description' => t('Phone numbers, like cellphone, home, office'),
-        'display'     => ADDRESSES_FIELD_NONE,
-        'title'       => t('Phone'),
-        'theme'       => array(
-          'phone'         => t('Phone number.'),
+        'type' => 'varchar',
+        'length' => 16,
+        'title' => t('Phone'),
+        'description' => t('Phone numbers, like cellphone, home, office.'),
+        'default' => '',
+        'display' => ADDRESSES_FIELD_NONE,
+        'theme' => array(
+          'plain' => t('The phone number.'),
+          'hcard' => t('An hcard/vcard html representation of the phone number.'),
         ),
-        'token'       => 'addresses_general',
+        'token' => 'addresses_general',
       ),
       'fax' => array(
-        'type'        => 'varchar',
-        'length'      => 16,
-        'description' => t('Fax number'),
-        'display'     => ADDRESSES_FIELD_SHOW,
-        'title'       => t('Fax'),
-        'theme'       => array(
-          'fax'           => t('Fax.'),
+        'type' => 'varchar',
+        'length' => 16,
+        'title' => t('Fax'),
+        'description' => t('Fax number.'),
+        'default' => '',
+        'display' => ADDRESSES_FIELD_SHOW,
+        'theme' => array(
+          'plain' => t('The fax number.'),
+          'hcard' => t('An hcard/vcard html representation of the fax number.'),
         ),
-        'token'       => 'addresses_general',
+        'token' => 'addresses_general',
       ),
     );
   }
@@ -91,35 +95,61 @@ function addresses_phone_addressesfieldapi($op, $fields = array(), $values = arr
 function addresses_phone_theme() {
   return array(
     // Shows address fields
-    'addresses_field_phone' => array(
-      'arguments' => array('form'),
-//       'file'      => 'addresses_phone.theme.inc',
+    'addresses_phone' => array(
+      'arguments' => array(
+        'form',
+        'format' => 'plain',
+      ),
     ),
-    'addresses_field_fax' => array(
-      'arguments' => array('form'),
-//       'file'      => 'addresses_phone.theme.inc',
+    'addresses_fax' => array(
+      'arguments' => array(
+        'form',
+        'format' => 'plain',
+      ),
     ),
   );
 }
 
 /**
- * Print the field Phone.
- *
+ * Print a formatted phone field.
+ * 
  * @param $afields
- *   Array. All field values
- * @ingroup themeable
+ *   All address fields values.
+ * @param $format
+ *   The format to return the field in.
+ * @return
+ *   A formatted phone field.
  */
-function theme_addresses_field_phone($afields) {
-  return '<dt>'. t('Phone') .': </dt><dd class="phone">'. $afields['phone'] .'</dd>';
+function theme_addresses_phone($afields, $format = 'plain') {
+  $phone = check_plain($afields['phone']);
+  if (!empty($phone)) {
+    switch ($format) {
+      case 'plain':
+        return $phone;
+      case 'hcard':
+        return '<dt>'. t('Phone') .': </dt><dd class="phone">'. $phone .'</dd>';
+    }
+  }
 }
 
 /**
- * Print the field Fax.
- *
+ * Print a formatted fax field.
+ * 
  * @param $afields
- *   Array. All field values
- * @ingroup themeable
+ *   All address fields values.
+ * @param $format
+ *   The format to return the field in.
+ * @return
+ *   A formatted fax field.
  */
-function theme_addresses_field_fax($afields) {
-  return '<dt>'. t('Fax') .': </dt><dd class="fax">'. $afields['fax'] .'</dd>';
+function theme_addresses_fax($afields, $format = 'plain') {
+  $fax = check_plain($afields['fax']);
+  if (!empty($fax)) {
+    switch ($format) {
+      case 'plain':
+        return $fax;
+      case 'hcard':
+        return '<dt>'. t('Phone') .': </dt><dd class="fax">'. $fax .'</dd>';
+    }
+  }
 }

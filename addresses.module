@@ -18,101 +18,121 @@ define('ADDRESSES_FIELD_HIDDEN',    3);
 /**
  * Implementation of hook_addressfieldapi().
  *
- * Its a specific Addresses module hook function, to
- * allow other modules to add more fields to the addresses
+ * Create the base address fields.
  */
 function addresses_addressesfieldapi($op, $fields = array(), $values = array()) {
   if ($op == 'fields') {
     return array(
-      'aname' => array(
-        'type'        => 'varchar',
-        'length'      => 75,
-        'description' => t('The nickname of this address, like "Home", "Office", "Anna\'s appartment"'),
-        'display'     => ADDRESSES_FIELD_NONE,
-        'title'       => t('Address Name'),
-        'theme'       => array(
-          'aname' => ''
+      'is_primary' => array(
+        'type' => 'int',
+        'size' => 'tiny',
+        'title' => t('Primary Address Checkbox'),
+        'description' => t('Mark it as the primary address or not (default is not)'),
+        'default' => FALSE,
+        'display' => ADDRESSES_FIELD_NONE,
+        'theme' => array(
+          'plain' => t('"False" if the checkbox is not checked, otherwise "True".'),
+          'hcard' => t('An hcard/vcard html representation of the primary checkbox.'),
         ),
-        'token'       => 'addresses_general',
+        'token' => 'addresses_general',
+      ),
+      'aname' => array(
+        'type' => 'varchar',
+        'length' => 75,
+        'title' => t('Address Name'),
+        'description' => t('The nickname of this address, like "Home", "Office", "Anna\'s appartment."'),
+        'default' => '',
+        'display' => ADDRESSES_FIELD_NONE,
+        'theme' => array(
+          'plain' => t('The address name.'),
+          'hcard' => t('An hcard/vcard html representation of the address name.'),
+        ),
+        'token' => 'addresses_general',
+      ),
+      'country' => array(
+        'type' => 'varchar',
+        'length' => 2,
+        'title' => t('Country'),
+        'description' => t('The ISO alpha 3 code of each country (its a 2-digit code).'),
+        'default' => variable_get('addresses_country_default', 'us'),
+        'display' => ADDRESSES_FIELD_SHOW,
+        'theme' => array(
+          'name' => t('The name of the country.'),
+          'code2' => t('The 2-digit country code.'),
+          'code3' => t('The 3-digit country code.'),
+          'name_hcard'  => t('An hcard/vcard representation of the country name.'),
+          'code2_hcard' => t('An hcard/vcard representation of the 2-digit country code.'),
+          'code3_hcard' => t('An hcard/vcard representation of the 3-digit country code.'),
+        ),
+        'token' => 'addresses_adr',
+      ),
+      'province' => array(
+        'type' => 'varchar',
+        'length' => 16,
+        'title' => t('Province'),
+        'description' => t('The name of the state, province, county or territory.'),
+        'default' => '',
+        'display' => ADDRESSES_FIELD_SHOW,
+        'theme' => array(
+          'name' => t('The province name.'),
+          'code' => t('The province code.'),
+          'name_hcard' => t('An hcard/vcard representation of the province name.'),
+          'code_hcard' => t('An hcard/vcard representation of the province code.'),
+        ),
+        'token' => 'addresses_adr',
+      ),
+      'city' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'title' => t('City'),
+        'description' => t('The name of the city.'),
+        'default' => '',
+        'display' => ADDRESSES_FIELD_SHOW,
+        'theme' => array(
+          'plain' => t('The city.'),
+          'hcard' => t('An hcard/vcard representation of the city.'),
+        ),
+        'token' => 'addresses_adr',
       ),
       'street' => array(
-        'type'        => 'varchar',
-        'length'      => 255,
+        'type' => 'varchar',
+        'length' => 255,
+        'title' => t('Street'),
         'description' => t('Street, number...'),
-        'display'     => ADDRESSES_FIELD_SHOW,
-        'title'       => t('Street'),
-        'theme'       => array(
-          'street'        => t('Street and number.'),
+        'default' => '',
+        'display' => ADDRESSES_FIELD_SHOW,
+        'theme' => array(
+          'plain' => t('The street, number, etc.'),
+          'hcard' => t('An hcard/vcard representation of the street.'),
         ),
         'token'       => 'addresses_adr',
       ),
       'additional' => array(
-        'type'        => 'varchar',
-        'length'      => 255,
-        'description' => t('More info like appartment block, number or address reference'),
-        'display'     => ADDRESSES_FIELD_SHOW,
-        'title'       => t('Additional'),
-        'theme'       => array(
-          'additional' => ''
+        'type' => 'varchar',
+        'length' => 255,
+        'title' => t('Additional'),
+        'description' => t('Additional address information like appartment block, number or address reference.'),
+        'default' => '',
+        'display' => ADDRESSES_FIELD_SHOW,
+        'theme' => array(
+          'plain' => t('Additional address information.'),
+          'hcard' => t('An hcard/vcard representation of the additional address information.'),
         ),
-        'token'       => 'addresses_adr',
-      ),
-      'city' => array(
-        'type'        => 'varchar',
-        'length'      => 255,
-        'description' => t('Name of the city'),
-        'display'     => ADDRESSES_FIELD_SHOW,
-        'title'       => t('City'),
-        'theme'       => array(
-          'city'          => t('City name'),
-        ),
-        'token'       => 'addresses_adr',
-      ),
-      'province' => array(
-        'type'        => 'varchar',
-        'length'      => 16,
-        'description' => t('Name of the state/province/county/territory'),
-        'display'     => ADDRESSES_FIELD_SHOW,
-        'title'       => t('Province'),
-        'theme'       => array(
-          'province_name' => t('State/Province name.'),
-          'province_code' => t('State/Province code.'),
-        ),
-        'token'       => 'addresses_adr',
-      ),
-      'country' => array(
-        'type'        => 'varchar',
-        'length'      => 2,
-        'description' => t('The ISO alpha 3 code of each country (its a 2-digit code)'),
-        'display'     => ADDRESSES_FIELD_SHOW,
-        'title'       => t('Country'),
-        'theme'       => array(
-          'country_name'  => t('Country name.'),
-          'country_code2' => t('Country 2-digits code.'),
-          'country_code3' => t('Country 3-digits code.'),
-        ),
-        'token'       => 'addresses_adr',
+        'token' => 'addresses_adr',
       ),
       'postal_code' => array(
-        'type'        => 'varchar',
-        'length'      => 16,
-        'description' => t('The address postal code (ZIP code for US people)'),
-        'display'     => ADDRESSES_FIELD_SHOW,
-        'title'       => t('Postal code'),
-        'theme'       => array(
-          'postal_code'   => t('Postal code.'),
+        'type' => 'varchar',
+        'length' => 16,
+        'title' => t('Postal code'),
+        'description' => t('The address postal code (ZIP code for US people).'),
+        'default' => '',
+        'display' => ADDRESSES_FIELD_SHOW,
+        'theme' => array(
+          'plain' => t('The postal code.'),
+          'hcard' => t('An hcard/vcard representation of the postal code.'),
         ),
-        'token'       => 'addresses_adr',
+        'token' => 'addresses_adr',
       ),
-      'is_primary' => array(
-        'type'        => 'int',
-        'size'        => 'tiny',
-        'default'     => 0,
-        'description' => t('Mark it as the primary address or not (default is not)'),
-        'display'     => ADDRESSES_FIELD_NONE,
-        'title'       => t('Primary Address Checkbox'),
-        'token'       => 'addresses_general',
-      )
     );
   }
   elseif ($op == 'form') {
@@ -233,73 +253,87 @@ function addresses_theme() {
   return array(
     // Shows addresses normally
     'addresses' => array(
-      'arguments' => array('address', 'hide'),
-      'file'      => 'addresses.inc',
+      'arguments' => array(
+        'afields',
+      ),
+      'file' => 'addresses.inc',
+    ),
+    // Shows individual address fields
+    'addresses_is_primary' => array(
+      'arguments' => array(
+        'afields',
+        'format' => 'plain',
+      ),
+      'file' => 'addresses.inc',
+    ),
+    'addresses_aname' => array(
+      'arguments' => array(
+        'afields',
+        'format' => 'plain',
+      ),
+      'file' => 'addresses.inc',
+    ),
+    'addresses_country' => array(
+      'arguments' => array(
+        'afields',
+        'format' => 'plain',
+      ),
+      'file' => 'addresses.inc',
+    ),
+    'addresses_province' => array(
+      'arguments' => array(
+        'afields',
+        'format' => 'plain',
+      ),
+      'file' => 'addresses.inc',
+    ),
+    'addresses_city' => array(
+      'arguments' => array(
+        'afields',
+        'format' => 'plain',
+      ),
+      'file' => 'addresses.inc',
+    ),
+    'addresses_street' => array(
+      'arguments' => array(
+        'afields',
+        'format' => 'plain',
+      ),
+      'file' => 'addresses.inc',
+    ),
+    'addresses_additional' => array(
+      'arguments' => array(
+        'afields',
+        'format' => 'plain',
+      ),
+      'file' => 'addresses.inc',
+    ),
+    'addresses_postal_code' => array(
+      'arguments' => array(
+        'afields',
+        'format' => 'plain',
+      ),
+      'file' => 'addresses.inc',
     ),
     // Shows address form elements
     'addresses_elements' => array(
       'arguments' => array('form'),
-      'file'      => 'addresses.settings.inc',
+      'file' => 'addresses.settings.inc',
     ),
     // Shows address weight on settings page
     'addresses_field_weight' => array(
       'arguments' => array('form'),
-      'file'      => 'addresses.settings.inc',
-    ),
-    // Shows address fields
-    'addresses_field_primary' => array(
-      'arguments' => array('form'),
-      'file'      => 'addresses.inc',
-    ),
-    'addresses_field_aname' => array(
-      'arguments' => array('form'),
-      'file'      => 'addresses.inc',
-    ),
-    'addresses_field_city' => array(
-      'arguments' => array('form'),
-      'file'      => 'addresses.inc',
-    ),
-    'addresses_field_street' => array(
-      'arguments' => array('form'),
-      'file'      => 'addresses.inc',
-    ),
-    'addresses_field_additional' => array(
-      'arguments' => array('form'),
-      'file'      => 'addresses.inc',
-    ),
-    'addresses_field_country_name' => array(
-      'arguments' => array('form'),
-      'file'      => 'addresses.inc',
-    ),
-    'addresses_field_country_code2' => array(
-      'arguments' => array('form'),
-      'file'      => 'addresses.inc',
-    ),
-    'addresses_field_country_code3' => array(
-      'arguments' => array('form'),
-      'file'      => 'addresses.inc',
-    ),
-    'addresses_field_postal_code' => array(
-      'arguments' => array('form'),
-      'file'      => 'addresses.inc',
-    ),
-    'addresses_field_province_name' => array(
-      'arguments' => array('form'),
-      'file'      => 'addresses.inc',
-    ),
-    'addresses_field_province_code' => array(
-      'arguments' => array('form'),
-      'file'      => 'addresses.inc',
+      'file' => 'addresses.settings.inc',
     ),
     // Shows addresses using a single line
-    'addresses_address_singleline' => array(
+    'addresses_address_single_line' => array(
       'arguments' => array('addresses'),
-      'file'      => 'addresses.inc',
+      'file' => 'addresses.inc',
     ),
     // Choose the addresses fields
     'addresses_settings_fields' => array(
       'arguments' => array('form'),
-      'file'      => 'addresses.settings.inc',
+      'file' => 'addresses.settings.inc',
     ),
   );
 }
@@ -308,55 +342,43 @@ function addresses_theme() {
  * Implementation of hook_token_list().
  */
 function addresses_token_list($type = 'all') {
-  if ($type == 'addresses_general') {
-    $category = t('Addresses: General');
-  }
-  elseif ($type == 'addresses_adr') {
-    $category = t('Addresses: Address');
-  }
-  else {
-    return;
-  }
-
-  $ftypes = module_invoke_all('addressesfieldapi', 'fields');
-  foreach ($ftypes as $ftype => $field) {
-    if (empty($field['theme'])) {
-      continue;
-    }
-    foreach ($field['theme'] as $theme => $theme_name) {
-      if (is_numeric($theme)) {
-        $tokens[$category][$theme_name] = $field['title'];
-      }
-      else {
-        $tokens[$category][$theme] = $theme_name;
+  if ($type == 'addresses_general' || $type == 'addresses_adr' || $type == 'all') {
+    $fields = module_invoke_all('addressesfieldapi', 'fields');
+    foreach ($fields as $field => $field_data) {
+      if (isset($field_data['theme'])) {
+        if(($type == 'addresses_general' || $type == 'all') && $field_data['token'] == 'addresses_general') {
+          $category = 'Addresses: General';
+        }
+        elseif (($type == 'addresses_adr' || $type == 'all') && $field_data['token'] == 'addresses_adr') {
+          $category = 'Addresses: Address';
+        }
+        else {
+          continue;
+        }
+        foreach ($field_data['theme'] as $theme => $theme_title) {
+          $tokens[$category]['addresses_'. $field .'_'. $theme] = $theme_title;
+        }
       }
     }
+    return $tokens;
   }
-  return $tokens;
 }
 
 /**
  * Implementation of hook_token_values().
  */
 function addresses_token_values($type, $object = NULL) {
-  // Grant that all values are plain text (Avoiding code injection)
-  if (is_array($object)) {
-    foreach ($object as $index => $value) {
-      $object[$index] = check_plain($value);
-    }
-
-    $fields = module_invoke_all('addressesfieldapi', 'fields');
-
-    if ($type == 'addresses_general' or $type == 'addresses_adr') {
+  switch ($type) {
+    case 'addresses_general':
+    case 'addresses_adr':
+      $fields = module_invoke_all('addressesfieldapi', 'fields');
       foreach ($fields as $field => $field_data) {
-        if ($field_data['token'] != $type or empty($field_data['theme'])) {
-          continue;
-        }
-        foreach (array_keys($field_data['theme']) as $theme_function) {
-          $values[$theme_function] = empty($object[$field]) ? '' : theme('addresses_field_'. $theme_function, $object);
+        if ($field_data['token'] == $type && isset($field_data['theme'])) {
+          foreach (array_keys($field_data['theme']) as $format) {
+            $values['addresses_'. $field .'_'. $format] = theme('addresses_'. $field, $object, $format);
+          }
         }
       }
       return $values;
-    }
   }
 }

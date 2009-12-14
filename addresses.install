@@ -21,3 +21,12 @@ function addresses_uninstall() {
   }
   variable_del('addresses_format_default');
 }
+
+/**
+ * Implementation of hook_update_N().
+ */
+function addresses_update_6106() {
+  // Clear address format's as tokens have changed
+  $ret[] = update_sql("DELETE FROM variable WHERE name LIKE 'addresses_format_%'");
+  return $ret;
+}

@@ -49,9 +49,9 @@ function addresses_province_list_dk() {
  *   String. The address field tokens
  */
 function addresses_address_format_dk() {
-  return '!aname
-!additional
-!street
-!postal_code !city
-!country_name';
+  return '[addresses_aname_hcard] [addresses_is_primary_hcard]
+[addresses_additional_hcard]
+[addresses_street_hcard]
+[addresses_postal_code_hcard] [addresses_city_hcard]
+[addresses_country_name_hcard]';
 }

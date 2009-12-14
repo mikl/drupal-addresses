@@ -628,189 +628,270 @@ function _addresses_province_get($country = NULL) {
  *   - 'postal_code'  => The international postal code for the address
  */
 function theme_addresses($afields) {
+  drupal_add_css(drupal_get_path('module', 'addresses') .'/addresses.css');
+
   // If all fields are hidden, return ''
   if (empty($afields)) {
     return '';
   }
 
-  // Get the proper address format
-  if (!empty($afields['country'])
-      and !$format_address = variable_get('addresses_format_'. $afields['country'], '')) {
-
-    // Load country specifice code .inc file if it exists.
-    // For example, if country_code for U.S. == 'us', load 'addresses.us.inc'
-    include_once drupal_get_path('module', 'addresses') .'/countries/'. $afields['country'] .'.inc';
-
-    // If the country has an preset address format
-    $function = 'addresses_address_format_'. $afields['country'];
-    if (function_exists($function)) {
-      $format_address = $function();
-      variable_set('addresses_format_'. $afields['country'], $format_address);
+  if (!empty($afields['country'])) {
+    // Get the countries address format from a variable
+    $address_format = variable_get('addresses_format_'. $afields['country'], '');
+    // If there is still no address format
+    if (empty($address_format)) {
+      // Load the country code specific .inc file if it exists
+      module_load_include('inc', 'addresses', '/countries/'. $afields['country']);
+      $function = 'addresses_address_format_'. $afields['country'];
+      // If the country code specific .inc file provides an address format
+      if (function_exists($function)) {
+        $address_format = $function();
+        variable_set('addresses_format_'. $afields['country'], $address_format);
+      }
     }
   }
 
-  // If still no proper address format, use the United States format
-  if (empty($format_address) and !$format_address = variable_get('addresses_format_default', '')) {
-    include_once drupal_get_path('module', 'addresses') .'/countries/us.inc';
-    $format_address = addresses_address_format_us();
-    variable_set('addresses_format_default', $format_address);
-  }
-
-  // Call token module to replace all tokens to their right value. Also,
-  // use 'adr' microformat
-  $format_address = '<dl class="adr">'.
-    token_replace($format_address, 'addresses_adr', $afields, '!', '') .'</dl>  ';
-
-  // Besides being the Drupal Address info,
-  // its possible to be used by hCard and VCard (if a address name was provided)
-  $format_address = '<div class="vcard">'.
-    token_replace($format_address, 'addresses_general', $afields, '!', '') .'</div>';
-
-  // Replace the new lines for HTML line breaks AND remove
-  // all empty lines
-  $format_address = explode("\n", $format_address);
-  foreach (array_keys($format_address) as $line) {
-    $format_address[$line] = trim($format_address[$line]);
-    if (empty($format_address[$line])) {
-      unset($format_address[$line]);
+  // If there is still no address format, use the default countries format
+  if (empty($address_format)) {
+    $default_country = variable_get('addresss_country_default', 'us');
+    // Get the countries address format from a variable
+    $address_format = variable_get('addresses_format_'. $default_country, '');
+    // If there is still no address format
+    if (empty($address_format)) {
+      // Load the country code specific .inc file if it exists.
+      module_load_include('inc', 'addresses', '/countries/'. $default_country);
+      $function = 'addresses_address_format_'. $default_country;
+      // If the country code specific .inc file provides an address format
+      if (function_exists($function)) {
+        $address_format = $function();
+        variable_set('addresses_format_'. $default_country, $addres_format);
+      }
     }
   }
-  $format_address = implode('<br/>', $format_address);
 
-  // Add the CCS
-  drupal_add_css(drupal_get_path('module', 'addresses') .'/addresses.css');
+  // If there is still no address format, use the U.S. format
+  if(empty($address_format)) {
+    // Get the U.S. format from a variable
+    $address_format = variable_get('addresses_format_us', '');
+    // If there is still no address format
+    if (empty($address_format)) {
+      module_load_include('inc', 'addresses', '/countries/us');
+      $address_format = addresses_address_format_us();
+      variable_set('addresses_format_us', $address_format);
+    }
+  }
 
-  return $format_address;
+  // Replace all addresses_adr tokens with their values
+  $address_format = token_replace($address_format, 'addresses_adr', $afields);
+
+  // Replace al addresses_general tokens with their values
+  $address_format = token_replace($address_format, 'addresses_general', $afields);
+
+  // Replace new lines with the HTML <br /> tag and remove empty lines
+  $address_format = explode("\n", $address_format);
+  foreach (array_keys($address_format) as $line) {
+    $address_format[$line] = trim($address_format[$line]);
+    if (empty($address_format[$line])) {
+      unset($address_format[$line]);
+    }
+  }
+  $address_format = implode('<br/>', $address_format);
+
+  // Return the address with adr microformatting and hcard and vcard formatting
+  return '<div class="vcard"><dl class="adr">'. $address_format .'</dl></div>';
+  }
+
+/**
+ * Print a formatted is_primary field.
+ * 
+ * @param $afields
+ *   All address fields values.
+ * @param $format
+ *   The format to return the field in.
+ * @return
+ *   A formatted is_primary field.
+ */
+function theme_addresses_is_primary($afields, $format = 'plain') {
+  switch ($format) {
+    case 'plain':
+      return ($afields == FALSE) ? 'False' : 'True';
+    case 'hcard':
+      if ($afields['is_primary']) {
+        return '<span class="primary">'. theme('placeholder', '('. t('default') .')') .'</span>';
+      }
+      break;
+  }
 }
 
 /**
- * Print the field Primary.
- *
+ * Print a formatted aname field.
+ * 
  * @param $afields
- *   Array. All field values
- * @ingroup themeable
+ *   All address fields values.
+ * @param $format
+ *   The format to return the field in.
+ * @return
+ *   A formatted aname field.
  */
-function theme_addresses_field_primary($afields) {
-  return ' ('. t('default') .')';
+function theme_addresses_aname($afields, $format = 'plain') {
+  $aname = check_plain($afields['aname']);
+  if (!empty($aname)) {
+    switch ($format) {
+      case 'plain':
+        return $aname;
+      case 'hcard':
+        return '<span class="fn org">'. theme('placeholder', $aname) .'</span>';
+    }
+  }
 }
 
 /**
- * Print the field Address name.
- *
+ * Print a formatted country field.
+ * 
  * @param $afields
- *   Array. All field values
- * @ingroup themeable
+ *   All address fields values.
+ * @param $format
+ *   The format to return the field in.
+ * @return
+ *   A formatted country field.
  */
-function theme_addresses_field_aname($afields) {
-  return '<span class="fn org">'. theme('placeholder', $afields['aname']) .'</span>';
+function theme_addresses_country($afields, $format = 'name') {
+  $country = check_plain($afields['country']);
+  if (!empty($country)) {
+    $countries = _addresses_country_get();
+    switch($format) {
+      case 'name':
+        return $countries[$country];
+      case 'code2':
+        return drupal_strtoupper($country);
+      case 'code3':
+        $countries_code3 = _addresses_country_get_code3();
+        return drupal_strtoupper($countries_code3[$country]);
+      case 'name_hcard':
+        return '<dt>'. t('Country') .': </dt><dd class="country-name">'. $countries[$country] .'</dd>';
+      case 'code2_hcard':
+        return '<dt>'. t('Country') .': </dt><dd><abbr class="country-name" title="'. $countries[$country] .'">'. drupal_strtoupper($country) .'</abbr></dd>';
+      case 'code3_hcard':
+        $countries_code3 = _addresses_country_get_code3();
+        return '<dt>'. t('Country') .': </dt><dd><abbr class="country-name" title="'. $countries[$country] .'">'. drupal_strtoupper($countries_code3[$country]) .'</abbr></dd>';
+    }
+  }
 }
 
 /**
- * Print the field City.
- *
+ * Print a formatted province field.
+ * 
  * @param $afields
- *   Array. All field values
- * @ingroup themeable
+ *   All address fields values.
+ * @param $format
+ *   The format to return the field in.
+ * @return
+ *   A formatted province field.
  */
-function theme_addresses_field_city($afields) {
-  return '<dt>'. t('City') .': </dt><dd class="city locality">'. $afields['city'] .'</dd>';
+function theme_addresses_province($afields, $format = 'name') {
+  $province = check_plain($afields['province']);
+  if (!empty($province)) {
+    $country = check_plain($afields['country']);
+    $provinces = _addresses_province_get($country);
+    switch ($format) {
+      case 'name':
+        return $provinces[$province];
+      case 'code':
+        return drupal_strtoupper($province);
+      case 'name_hcard':
+        return '<dt>'. t('Province') .': </dt><dd class="region">'. $provinces[$province] .'</dd>';
+      case 'code_hcard':
+        return '<dt>'. t('Province') .': </dt><dd><abbr class="region" title="'. $provinces[$province] .'">'. drupal_strtoupper($province) .'</abbr></dd>';
+    }
+  }
 }
 
 /**
- * Print the field Street.
- *
+ * Print a formatted city field.
+ * 
  * @param $afields
- *   Array. All field values
- * @ingroup themeable
+ *   All address fields values.
+ * @param $format
+ *   The format to return the field in.
+ * @return
+ *   A formatted city field.
  */
-function theme_addresses_field_street($afields) {
-  return '<dt>'. t('Address') .': </dt><dd class="street-address">'. $afields['street'] .'</dd>';
+function theme_addresses_city($afields, $format = 'plain') {
+  $city = check_plain($afields['city']);
+  if (!empty($city)) {
+    switch ($format) {
+      case 'plain':
+        return $city;
+      case 'hcard':
+        return '<dt>'. t('City') .': </dt><dd class="city locality">'. $city .'</dd>';
+    }
+  }
 }
 
 /**
- * Print the field Additional.
- *
+ * Print a formatted street field.
+ * 
  * @param $afields
- *   Array. All field values
- * @ingroup themeable
+ *   All address fields values.
+ * @param $format
+ *   The format to return the field in.
+ * @return
+ *   A formatted street field.
  */
-function theme_addresses_field_additional($afields) {
-  return '<dt>'. t('Additional') .': </dt><dd class="extended-address">'. $afields['additional'] .'</dd>';
+function theme_addresses_street($afields, $format = 'plain') {
+  $street = check_plain($afields['street']);
+  if (!empty($street)) {
+    switch ($format) {
+      case 'plain':
+        return $street;
+      case 'hcard':
+        return '<dt>'. t('Street') .': </dt><dd class="street-address">'. $street .'</dd>';
+    }
+  }
 }
 
 /**
- * Print the field Country 3-digit code.
- *
+ * Print a formatted additional field.
+ * 
  * @param $afields
- *   Array. All field values
- * @ingroup themeable
+ *   All address fields values.
+ * @param $format
+ *   The format to return the field in.
+ * @return
+ *   A formatted additional field.
  */
-function theme_addresses_field_country_name($afields) {
-  $countries = _addresses_country_get();
-  return '<dt>'. t('Country') .': </dt><dd class="country-name">'. $countries[$afields['country']] .'</dd>';
+function theme_addresses_additional($afields, $format = 'plain') {
+  $additional = check_plain($afields['additional']);
+  if (!empty($additional)) {
+    switch ($format) {
+      case 'plain':
+        return $additional;
+      case 'hcard':
+        return '<dt>'. t('Additional') .': </dt><dd class="extended-address">'. $additional .'</dd>';
+    }
+  }
 }
 
 /**
- * Print the field Country 2-digit code.
- *
+ * Print a formatted postal_code field.
+ * 
  * @param $afields
- *   Array. All field values
- * @ingroup themeable
+ *   All address fields values.
+ * @param $format
+ *   The format to return the field in.
+ * @return
+ *   A formatted postal_code field.
  */
-function theme_addresses_field_country_code2($afields) {
-  $countries = _addresses_country_get();
-  return '<dt>'. t('Country') .': </dt><dd><abbr class="country-name" title="'.
-    $countries[$afields['country']] .'">'. drupal_strtoupper($afields['country']) .'</abbr></dd>';
-}
-
-/**
- * Print the field Country name.
- *
- * @param $afields
- *   Array. All field values
- * @ingroup themeable
- */
-function theme_addresses_field_country_code3($afields) {
-  $countries = _addresses_country_get();
-  $country_code3 = _addresses_country_get_code3();
-  return '<dt>'. t('Country') .': </dt><dd><abbr class="country-name" title="'.
-    $countries[$afields['country']] .'">'. drupal_strtoupper($country_code3[$afields['country']]) .'</abbr></dd>';
-}
-
-/**
- * Print the field Postal Code.
- *
- * @param $afields
- *   Array. All field values
- * @ingroup themeable
- */
-function theme_addresses_field_postal_code($afields) {
-  return '<dt>'. t('Postal Code') .': </dt><dd class="region">'. $afields['postal_code'] .'</dd>';
-}
-
-/**
- * Print the field Province name.
- *
- * @param $afields
- *   Array. All field values
- * @ingroup themeable
- */
-function theme_addresses_field_province_name($afields) {
-  $provinces = _addresses_province_get($afields['country']);
-  return '<dt>'. t('Province') .': </dt><dd class="region">'. $provinces[$afields['province']] .'</dd>';
-}
-
-/**
- * Print the field Province code.
- *
- * @param $afields
- *   Array. All field values
- * @ingroup themeable
- */
-function theme_addresses_field_province_code($afields) {
-    $provinces = _addresses_province_get($afields['country']);
-    return '<dt>'. t('Province') .': </dt><dd><abbr class="region" title="'.
-      $provinces[$afields['province']] .'">'. drupal_strtoupper($afields['province']) .'</abbr></dd>';
+function theme_addresses_postal_code($afields, $format = 'plain') {
+  $postal_code = check_plain($afields['postal_code']);
+  if (!empty($postal_code)) {
+    switch ($format) {
+      case 'plain':
+        return $postal_code;
+      case 'hcard':
+        return '<dt>'. t('Postal Code') .': </dt><dd class="postal-code">'. $postal_code .'</dd>';
+    }
+  }
 }
 
 /**
