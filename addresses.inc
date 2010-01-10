@@ -695,7 +695,7 @@ function theme_addresses($afields) {
       unset($address_format[$line]);
     }
   }
-  $address_format = implode('<br/>', $address_format);
+  $address_format = implode("\n", $address_format);
 
   // Return the address with adr microformatting and hcard and vcard formatting
   return '<div class="vcard"><dl class="adr">'. $address_format .'</dl></div>';
@@ -703,7 +703,7 @@ function theme_addresses($afields) {
 
 /**
  * Print a formatted is_primary field.
- * 
+ *
  * @param $afields
  *   All address fields values.
  * @param $format
@@ -725,7 +725,7 @@ function theme_addresses_is_primary($afields, $format = 'plain') {
 
 /**
  * Print a formatted aname field.
- * 
+ *
  * @param $afields
  *   All address fields values.
  * @param $format
@@ -747,7 +747,7 @@ function theme_addresses_aname($afields, $format = 'plain') {
 
 /**
  * Print a formatted country field.
- * 
+ *
  * @param $afields
  *   All address fields values.
  * @param $format
@@ -780,7 +780,7 @@ function theme_addresses_country($afields, $format = 'name') {
 
 /**
  * Print a formatted province field.
- * 
+ *
  * @param $afields
  *   All address fields values.
  * @param $format
@@ -808,7 +808,7 @@ function theme_addresses_province($afields, $format = 'name') {
 
 /**
  * Print a formatted city field.
- * 
+ *
  * @param $afields
  *   All address fields values.
  * @param $format
@@ -830,7 +830,7 @@ function theme_addresses_city($afields, $format = 'plain') {
 
 /**
  * Print a formatted street field.
- * 
+ *
  * @param $afields
  *   All address fields values.
  * @param $format
@@ -852,7 +852,7 @@ function theme_addresses_street($afields, $format = 'plain') {
 
 /**
  * Print a formatted additional field.
- * 
+ *
  * @param $afields
  *   All address fields values.
  * @param $format
@@ -874,7 +874,7 @@ function theme_addresses_additional($afields, $format = 'plain') {
 
 /**
  * Print a formatted postal_code field.
- * 
+ *
  * @param $afields
  *   All address fields values.
  * @param $format
