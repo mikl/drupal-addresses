@@ -27,7 +27,7 @@ function addresses_user_install() {
  */
 function addresses_user_schema() {
   $schema['addresses_user'] = array(
-    'description' => t('Products-specific fields'),
+    'description' => t('Addresses functionality for users'),
     'fields' => array(
       'aid' => array(
         'type'        => 'serial',
