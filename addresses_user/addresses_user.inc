@@ -127,7 +127,7 @@ function _addresses_user_address($op = NULL, $aid = NULL) {
         // Set the Element ID as User ID form new addresses
         $edit['eid'] = $uid;
       }
-      elseif (empty($access) or $edit['eid'] != $uid) {
+      elseif (empty($access) && $edit['eid'] != $uid) {
         // If the user has no permission or the user from
         // address is not the same as the user that are
         // accessing, deny the access
