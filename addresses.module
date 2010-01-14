@@ -28,7 +28,7 @@ function addresses_addressesfieldapi($op, $fields = array(), $values = array()) 
         'size' => 'tiny',
         'title' => t('Primary Address Checkbox'),
         'description' => t('Mark it as the primary address or not (default is not)'),
-        'default' => FALSE,
+        'default' => 0,
         'display' => ADDRESSES_FIELD_NONE,
         'theme' => array(
           'plain' => t('"False" if the checkbox is not checked, otherwise "True".'),
