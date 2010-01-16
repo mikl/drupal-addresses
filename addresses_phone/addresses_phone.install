@@ -1,0 +1,23 @@
+<?php
+// $Id$
+
+/**
+ * @file
+ * Module installation/uninstallation hooks.
+ */
+
+/**
+ * Implementation of hook_install().
+ */
+function addresses_phone_install() {
+  drupal_set_message(t('To display phone and fax numbers with Addresses, you need to add them to your formatting options in the <a href="!addresses_admin">Addresses configuration area</a>.',
+    array('!addresses_admin' => url('admin/settings/address'))), 'status');
+}
+
+/**
+ * Implementation of hook_uninstall().
+ */
+function addresses_phone_uninstall() {
+  drupal_set_message(t('To remove phone and fax numbers from Addresses, you need to remove them from your formatting options in the <a href="!addresses_admin">Addresses configuration area</a>.',
+    array('!addresses_admin' => url('admin/settings/address'))), 'status');
+}

@@ -112,7 +112,7 @@ function addresses_phone_theme() {
 
 /**
  * Print a formatted phone field.
- * 
+ *
  * @param $afields
  *   All address fields values.
  * @param $format
@@ -134,7 +134,7 @@ function theme_addresses_phone($afields, $format = 'plain') {
 
 /**
  * Print a formatted fax field.
- * 
+ *
  * @param $afields
  *   All address fields values.
  * @param $format
@@ -149,7 +149,7 @@ function theme_addresses_fax($afields, $format = 'plain') {
       case 'plain':
         return $fax;
       case 'hcard':
-        return '<dt>'. t('Phone') .': </dt><dd class="fax">'. $fax .'</dd>';
+        return '<dt>'. t('Fax') .': </dt><dd class="fax">'. $fax .'</dd>';
     }
   }
 }
