@@ -18,27 +18,25 @@ function _addresses_addressesfieldapi_form($fields = array(), $values = array())
   // Let users select if the address is the primary
   if (!empty($fields['is_primary'])) {
     $form['is_primary'] = array(
-      '#type'           => 'checkbox',
-      '#title'          => t('Default address'),
-      '#default_value'  => isset($values['is_primary']) ? $values['is_primary'] : '',
-      '#weight'         => empty($field_weights['is_primary']['weight']) ? 0 :
-        $field_weights['is_primary']['weight'],
+      '#type' => 'checkbox',
+      '#title' => t('Default address'),
+      '#default_value' => isset($values['is_primary']) ? $values['is_primary'] : '',
+      '#weight' => empty($field_weights['is_primary']['weight']) ? 0 : $field_weights['is_primary']['weight'],
     );
   }
 
   // Adds the Address Name (Home, Office, Rio de Janeiro...)
   if (!empty($fields['aname'])) {
     $form['aname'] = array(
-      '#type'           => 'textfield',
-      '#title'          => t('Address name'),
-      '#default_value'  => isset($values['aname']) ? $values['aname'] : '',
-      '#size'           => 50,
-      '#maxlength'      => 75,
-      '#description'    => t('e.g. a place of business, venue, meeting point'),
-      '#attributes'     => NULL,
-      '#required'       => ($fields['aname'] == ADDRESSES_FIELD_REQUIRED),
-      '#weight'         => empty($field_weights['aname']['weight']) ? 0 :
-        $field_weights['aname']['weight'],
+      '#type' => 'textfield',
+      '#title' => t('Address name'),
+      '#default_value' => isset($values['aname']) ? $values['aname'] : '',
+      '#size' => 50,
+      '#maxlength' => 75,
+      '#description' => t('e.g. a place of business, venue, meeting point'),
+      '#attributes' => NULL,
+      '#required' => ($fields['aname'] == ADDRESSES_FIELD_REQUIRED),
+      '#weight' => empty($field_weights['aname']['weight']) ? 0 : $field_weights['aname']['weight'],
     );
   }
 
@@ -51,30 +49,28 @@ function _addresses_addressesfieldapi_form($fields = array(), $values = array())
     }
 
     $form['country'] = array(
-      '#type'           => 'select',
-      '#title'          => t('Country'),
-      '#default_value'  => isset($values['country']) ? $values['country'] : '',
-      '#options'        => $countries,
-      '#description'    => NULL,
-      '#extra'          => 0,
-      '#multiple'       => FALSE,
-      '#required'       => ($fields['country'] == ADDRESSES_FIELD_REQUIRED),
-      '#weight'         => empty($field_weights['country']['weight']) ? 0 :
-        $field_weights['country']['weight'],
+      '#type' => 'select',
+      '#title' => t('Country'),
+      '#default_value' => isset($values['country']) ? $values['country'] : '',
+      '#options' => $countries,
+      '#description' => NULL,
+      '#extra' => 0,
+      '#multiple' => FALSE,
+      '#required' => ($fields['country'] == ADDRESSES_FIELD_REQUIRED),
+      '#weight' => empty($field_weights['country']['weight']) ? 0 : $field_weights['country']['weight'],
     );
   }
 
   // Adds the Province field
   if (!empty($fields['province'])) {
     $form['province'] = array(
-      '#default_value'  => isset($values['province']) ? $values['province'] : '',
-      '#maxlength'      => 16,
-      '#required'       => ($fields['province'] == ADDRESSES_FIELD_REQUIRED),
-      '#size'           => 16,
-      '#title'          => t('State / Province'),
-      '#type'           => 'textfield',
-      '#weight'         => empty($field_weights['province']['weight']) ? 0 :
-        $field_weights['province']['weight'],
+      '#default_value' => isset($values['province']) ? $values['province'] : '',
+      '#maxlength' => 16,
+      '#required' => ($fields['province'] == ADDRESSES_FIELD_REQUIRED),
+      '#size' => 16,
+      '#title' => t('State / Province'),
+      '#type' => 'textfield',
+      '#weight' => empty($field_weights['province']['weight']) ? 0 : $field_weights['province']['weight'],
     );
     $form['#element_validate'][] = '_addresses_province_validate';
   }
@@ -82,38 +78,35 @@ function _addresses_addressesfieldapi_form($fields = array(), $values = array())
   // Adds the City
   if (!empty($fields['city'])) {
     $form['city'] = array(
-      '#type'           => 'textfield',
-      '#title'          => t('City'),
-      '#default_value'  => isset($values['city']) ? $values['city'] : '',
-      '#size'           => 50,
-      '#maxlength'      => 255,
-      '#required'       => ($fields['city'] == ADDRESSES_FIELD_REQUIRED),
-      '#weight'         => empty($field_weights['city']['weight']) ? 0 :
-        $field_weights['city']['weight'],
+      '#type' => 'textfield',
+      '#title' => t('City'),
+      '#default_value' => isset($values['city']) ? $values['city'] : '',
+      '#size' => 50,
+      '#maxlength' => 255,
+      '#required' => ($fields['city'] == ADDRESSES_FIELD_REQUIRED),
+      '#weight' => empty($field_weights['city']['weight']) ? 0 : $field_weights['city']['weight'],
     );
   }
 
   // Adds the Streets and the Additional fields
   if (!empty($fields['street'])) {
     $form['street'] = array(
-      '#type'           => 'textfield',
-      '#title'          => t('Street'),
-      '#default_value'  => isset($values['street']) ? $values['street'] : '',
-      '#size'           => 50,
-      '#maxlength'      => 255,
-      '#required'       => ($fields['street'] == ADDRESSES_FIELD_REQUIRED),
-      '#weight'         => empty($field_weights['street']['weight']) ? 0 :
-        $field_weights['street']['weight'],
+      '#type' => 'textfield',
+      '#title' => t('Street'),
+      '#default_value' => isset($values['street']) ? $values['street'] : '',
+      '#size' => 50,
+      '#maxlength' => 255,
+      '#required' => ($fields['street'] == ADDRESSES_FIELD_REQUIRED),
+      '#weight' => empty($field_weights['street']['weight']) ? 0 : $field_weights['street']['weight'],
     );
     if (!empty($fields['additional'])) {
       $form['additional'] = array(
-        '#type'           => 'textfield',
-        '#title'          => t('Additional'),
-        '#default_value'  => isset($values['additional']) ? $values['additional'] : '',
-        '#size'           => 50,
-        '#maxlength'      => 255,
-        '#weight'         => empty($field_weights['additional']['weight']) ? 0 :
-          $field_weights['additional']['weight'],
+        '#type' => 'textfield',
+        '#title' => t('Additional'),
+        '#default_value' => isset($values['additional']) ? $values['additional'] : '',
+        '#size' => 50,
+        '#maxlength' => 255,
+        '#weight' => empty($field_weights['additional']['weight']) ? 0 : $field_weights['additional']['weight'],
       );
     }
   }
@@ -121,22 +114,22 @@ function _addresses_addressesfieldapi_form($fields = array(), $values = array())
   // Adds the Postal Code
   if (!empty($fields['postal_code'])) {
     $form['postal_code'] = array(
-      '#type'           => 'textfield',
-      '#title'          => t('Postal code'),
-      '#default_value'  => isset($values['postal_code']) ? $values['postal_code'] : '',
-      '#size'           => 16,
-      '#maxlength'      => 16,
-      '#required'       => ($fields['postal_code'] == ADDRESSES_FIELD_REQUIRED),
-      '#weight'         => empty($field_weights['postal_code']['weight']) ? 0 :
-        $field_weights['postal_code']['weight'],
+      '#type' => 'textfield',
+      '#title' => t('Postal code'),
+
+    '#default_value' => isset($values['postal_code']) ? $values['postal_code'] : '',
+      '#size' => 16,
+      '#maxlength' => 16,
+      '#required' => ($fields['postal_code'] == ADDRESSES_FIELD_REQUIRED),
+      '#weight' => empty($field_weights['postal_code']['weight']) ? 0 : $field_weights['postal_code']['weight'],
     );
   }
 
   foreach (array_keys($fields) as $ftype) {
     if ($fields[$ftype] == ADDRESSES_FIELD_HIDDEN) {
       $form[$ftype] = array(
-        '#type'           => 'hidden',
-        '#value'          => isset($values[$ftype]) ? $values[$ftype] : '',
+        '#type' => 'hidden',
+        '#value' => isset($values[$ftype]) ? $values[$ftype] : '',
       );
     }
   }
@@ -155,15 +148,14 @@ function _addresses_addressesfieldapi_form($fields = array(), $values = array())
  *   Javascript array. List of states
  */
 function _addresses_autocomplete($country, $string = '') {
-  $matches  = array();
+  $matches = array();
 
   // Check if the country code is there
   if ($country) {
+    $string = drupal_strtolower($string);
+    $string = '/^'. $string .'/';
 
-    $string   = drupal_strtolower($string);
-    $string   = '/^'. $string .'/';
-
-    $provinces   = _addresses_province_get($country);
+    $provinces = _addresses_province_get($country);
 
     // Get only the first 5 provinces that matches
     // partially with the given piece of text
@@ -194,9 +186,9 @@ function _addresses_province_validate($form, &$form_state) {
   // It should be the Province code listed on the
   // given COUNTRY.inc file
   if ($province = $form['province']['#value']
-      && $country = $form['country']['#value']
-      && $provinces = _addresses_province_get($country)
-      && empty($provinces[drupal_strtoupper($province)])) {
+    && $country = $form['country']['#value']
+    && $provinces = _addresses_province_get($country)
+    && empty($provinces[drupal_strtoupper($province)])) {
 
     // Get the province fieldname
     $field_name = $form['province']['#name'];
@@ -204,10 +196,9 @@ function _addresses_province_validate($form, &$form_state) {
     $field_name = preg_replace('/([^]])\[/', '\1][', $field_name);
 
     $countries = _addresses_country_get();
-    form_set_error($field_name, t('Could not find %province as a province from %country. Try to use the province abbreviation or number.',
-      array('%province' => $form['province']['#value'],
+    form_set_error($field_name, t('Could not find %province as a province from %country. Try to use the province abbreviation or number.', array(
+      '%province' => $form['province']['#value'],
       '%country' => $countries[$country])));
-
   }
 }
 
@@ -218,65 +209,69 @@ function _addresses_province_validate($form, &$form_state) {
  */
 function _addresses_settings(&$form_state) {
   module_load_include('inc', 'addresses');
-  $countries    = _addresses_country_get();
+  $countries = _addresses_country_get();
   $country_list = variable_get('addresses_country_list', array_keys(_addresses_country_get()));
 
   // List of countries that the site allow
   $form['addresses_country_list'] = array(
-    '#default_value'  => $country_list,
-    '#description'    => t('You might want to limit the country lists. Select the countries you want.'),
-    '#multiple'       => TRUE,
-    '#options'        => $countries,
-    '#type'           => 'select',
-    '#title'          => t('Possible country'),
+    '#default_value' => $country_list,
+    '#description' => t('You might want to limit the country lists. Select the countries you want.'),
+    '#multiple' => TRUE,
+    '#options' => $countries,
+    '#type' => 'select',
+    '#title' => t('Possible country'),
   );
 
-  // Let users to change the address formats
+  // Allow users to change address formats
   $countries = array_intersect_key($countries, $country_list);
-  array_unshift($countries,  t('Default'));
+  array_unshift($countries, t('Default'));
   $countries_max = ceil(count($countries) / 4);
   $country_num = 0;
+
   foreach ($countries as $country_code => $country) {
     $columns[$country_num++ / $countries_max][] = l($country, 'admin/settings/address/format/'. $country_code);
   }
+
   foreach (array_keys($columns[0]) as $row) {
     $rows[] = array($columns[0][$row], $columns[1][$row], $columns[2][$row], $columns[3][$row]);
   }
+
   $form['addresses_format'] = array(
-    '#children'       => theme('table', array(), $rows),
-    '#collapsed'      => TRUE,
-    '#collapsible'    => TRUE,
-    '#description'    => t('Change how the addresses are displayed, for each country. The Default is used if the country doesnt have a preset address format.'),
-    '#type'           => 'fieldset',
-    '#title'          => t('Address formats'),
+    '#children' => theme('table', array(), $rows),
+    '#collapsed' => TRUE,
+    '#collapsible' => TRUE,
+    '#description' => t('Change how the addresses are displayed, for each country. The Default is used if the country doesnt have a preset address format.'),
+    '#type' => 'fieldset',
+    '#title' => t('Address formats'),
   );
 
-  // Field weight
-  $fields        = module_invoke_all('addressesfieldapi', 'fields');
+  // Field weights
+  $fields = module_invoke_all('addressesfieldapi', 'fields');
   $field_weights = variable_get('addresses_field_weight', array());
   $form['addresses_field_weight'] = array(
-    '#collapsed'      => $field_weights,
-    '#collapsible'    => TRUE,
-    '#description'    => t('Choose what fields should appear first.'),
-    '#theme'          => 'addresses_field_weight',
-    '#title'          => t('Field Order'),
-    '#type'           => 'fieldset',
-    '#tree'           => TRUE,
+    '#collapsed' => $field_weights,
+    '#collapsible' => TRUE,
+    '#description' => t('Choose what fields should appear first.'),
+    '#theme' => 'addresses_field_weight',
+    '#title' => t('Field Order'),
+    '#type' => 'fieldset',
+    '#tree' => TRUE,
   );
+
   foreach ($fields as $field_code => $field) {
     $form['addresses_field_weight'][$field_code] = array(
-      '#tree'   => TRUE,
+      '#tree' => TRUE,
       '#weight' => empty($field_weights[$field_code]['weight']) ? 0 : $field_weights[$field_code]['weight'],
     );
     $form['addresses_field_weight'][$field_code]['field'] = array(
       '#attributes' => array('class' => 'field'),
-      '#type'       => 'markup',
-      '#value'      => $field['title'],
+      '#type' => 'markup',
+      '#value' => $field['title'],
     );
     $form['addresses_field_weight'][$field_code]['weight'] = array(
-      '#attributes'    => array('class' => 'field'),
+      '#attributes' => array('class' => 'field'),
       '#default_value' => $field_weights[$field_code]['weight'],
-      '#type'          => 'weight',
+      '#type' => 'weight',
     );
   }
 
@@ -290,7 +285,7 @@ function _addresses_settings(&$form_state) {
 
 /**
  * Generate a settings form that will allow admins to choose
- * which addresses fields shuold be used.
+ * which addresses fields should be used.
  *
  * @param field_values
  *   Array (optional). The default values for each field, if any
@@ -300,18 +295,19 @@ function _addresses_settings(&$form_state) {
  */
 function _addresses_settings_fields($field_values = array()) {
   $ftypes = module_invoke_all('addressesfieldapi', 'fields');
+
   foreach ($ftypes as $ftype => $field) {
     // List of address fields
     $form['addresses'][$ftype] = array(
       '#default_value'  => !isset($field_values[$ftype]) ? $field['display'] : $field_values[$ftype],
-      '#options'        => array(
+      '#options' => array(
         ADDRESSES_FIELD_NONE      => '',
         ADDRESSES_FIELD_SHOW      => '',
         ADDRESSES_FIELD_REQUIRED  => '',
         ADDRESSES_FIELD_HIDDEN    => '',
       ),
-      '#title'          => $field['title'],
-      '#type'           => 'radios',
+      '#title' => $field['title'],
+      '#type' => 'radios',
     );
   }
 
@@ -330,7 +326,7 @@ function _addresses_settings_format(&$form_state, $country) {
   $countries = _addresses_country_get();
 
   if (!$cname = $countries[$country]) {
-    $cname    = t('Default');
+    $cname = t('Default');
     $country  = 'default';
   }
 
@@ -341,9 +337,9 @@ function _addresses_settings_format(&$form_state, $country) {
   }
 
   $form['addresses_format_'. $country] = array(
-    '#default_value'  => $format_address,
-    '#title'          => t('Address Format: %country', array('%country' => $cname)),
-    '#type'           => 'textarea',
+    '#default_value' => $format_address,
+    '#title' => t('Address Format: %country', array('%country' => $cname)),
+    '#type' => 'textarea',
   );
 
   // Simulate theme('token_help'), but include two types and
@@ -352,8 +348,15 @@ function _addresses_settings_format(&$form_state, $country) {
   unset($full_list['global']);
   $headers = array(t('Token'), t('Replacement value'));
   $rows = array();
+
   foreach ($full_list as $key => $category) {
-    $rows[] = array(array('data' => drupal_ucfirst($key) .' '. t('tokens'), 'class' => 'region', 'colspan' => 2));
+    $rows[] = array(
+      array(
+        'data' => drupal_ucfirst($key) .' '. t('tokens'),
+        'class' => 'region', 'colspan' => 2
+      )
+    );
+
     foreach ($category as $token => $description) {
       $row = array();
       $row[] = '!'. $token .'';
@@ -365,7 +368,7 @@ function _addresses_settings_format(&$form_state, $country) {
   $output = theme('table', $headers, $rows, array('class' => 'description'));
 
   $form['token_help'] = array(
-    '#value'       => $output,
+    '#value' => $output,
   );
 
   return system_settings_form($form);
@@ -428,6 +431,7 @@ function theme_addresses_settings_fields(&$form) {
  */
 function theme_addresses_field_weight(&$form) {
   drupal_add_tabledrag('addresses-field-weight', 'order', 'sibling', 'field');
+
   foreach (element_children($form) as $field) {
     $rows[] = array(
       'class' => 'draggable',
@@ -437,5 +441,6 @@ function theme_addresses_field_weight(&$form) {
       ),
     );
   }
+
   return theme('table', array(), $rows, array('id' => 'addresses-field-weight')) . drupal_render($form);
 }
