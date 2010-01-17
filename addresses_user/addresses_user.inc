@@ -66,7 +66,7 @@ function _addresses_user_address_get($id, $id_type = 'eid') {
  *   depending on the $type variable
  */
 function _addresses_user_address_save($address, $id) {
-  if (!empty($address) and is_array($address)) {
+  if (!empty($address) && is_array($address)) {
     // If this address is the Primary, change all other address
     // to NOT primary
     if (!empty($address['is_primary'])) {

@@ -184,7 +184,7 @@ function addresses_elements_process($element, $edit, $form_state, $form) {
   if (empty($element['#required'])) {
     foreach ($fields as $field => $required) {
       if ($required == ADDRESSES_FIELD_REQUIRED
-          and $form['#id'] == 'content-field-edit-form') {
+          && $form['#id'] == 'content-field-edit-form') {
         $fields[$field] = ADDRESSES_FIELD_SHOW;
       }
     }

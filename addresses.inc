@@ -576,12 +576,12 @@ function _addresses_province_get($country = NULL) {
   $countries_all = _addresses_country_get();
 
   // Test if its needed to update the province list
-  if (empty($country) and empty($provinces)) {
+  if (empty($country) && empty($provinces)) {
     // Get the countries list
     $countries = array_keys($countries_all);
     $update = TRUE;
   }
-  elseif (!empty($country) and $countries_all[$country] and empty($provinces[$country])) {
+  elseif (!empty($country) && $countries_all[$country] && empty($provinces[$country])) {
     $countries[] = $country;
     $update = TRUE;
   }
@@ -926,7 +926,7 @@ function theme_addresses_singleline($afields) {
 
   // Add the state / province
   if (!empty($afields['province'])) {
-    if (!empty($afields['street']) or !empty($afields['city'])) {
+    if (!empty($afields['street']) || !empty($afields['city'])) {
       $output .= ', ';
     }
     $output .= $afields['province'];

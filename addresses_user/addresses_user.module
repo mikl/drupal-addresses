@@ -16,9 +16,9 @@
  */
 function _addresses_user_access($account) {
   global $user;
-  if (($account->uid == $user->uid or $user->uid == 1)
-      and variable_get('addresses_user_book', FALSE)
-      and user_access('create address book', $account)) {
+  if (($account->uid == $user->uid || $user->uid == 1)
+      && variable_get('addresses_user_book', FALSE)
+      && user_access('create address book', $account)) {
     return TRUE;
   }
 }
@@ -84,8 +84,8 @@ function addresses_user_form_user_register_alter(&$form, &$form_state) {
  * Put the address form into the user form.
  */
 function addresses_user_form_user_profile_form_alter(&$form, &$form_state, $register = FALSE) {
-  if (!variable_get('addresses_user_book', FALSE) and
-      ($register or $form['_category']['#value'] == 'account')) {
+  if (!variable_get('addresses_user_book', FALSE) &&
+      ($register || $form['_category']['#value'] == 'account')) {
     if (empty($register)) {
       module_load_include('inc', 'addresses_user');
       if ($addresses = _addresses_user_address_get($form['#uid'])) {

@@ -194,9 +194,9 @@ function _addresses_province_validate($form, &$form_state) {
   // It should be the Province code listed on the
   // given COUNTRY.inc file
   if ($province = $form['province']['#value']
-      and $country = $form['country']['#value']
-      and $provinces = _addresses_province_get($country)
-      and empty($provinces[drupal_strtoupper($province)])) {
+      && $country = $form['country']['#value']
+      && $provinces = _addresses_province_get($country)
+      && empty($provinces[drupal_strtoupper($province)])) {
 
     // Get the province fieldname
     $field_name = $form['province']['#name'];
