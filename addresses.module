@@ -60,7 +60,7 @@ function addresses_addressesfieldapi($op, $fields = array(), $values = array()) 
           'name' => t('The name of the country.'),
           'code2' => t('The 2-digit country code.'),
           'code3' => t('The 3-digit country code.'),
-          'name_hcard'  => t('An hcard/vcard representation of the country name.'),
+          'name_hcard' => t('An hcard/vcard representation of the country name.'),
           'code2_hcard' => t('An hcard/vcard representation of the 2-digit country code.'),
           'code3_hcard' => t('An hcard/vcard representation of the 3-digit country code.'),
         ),
@@ -105,7 +105,7 @@ function addresses_addressesfieldapi($op, $fields = array(), $values = array()) 
           'plain' => t('The street, number, etc.'),
           'hcard' => t('An hcard/vcard representation of the street.'),
         ),
-        'token'       => 'addresses_adr',
+        'token' => 'addresses_adr',
       ),
       'additional' => array(
         'type' => 'varchar',
@@ -162,10 +162,10 @@ function addresses_elements() {
 
   return array(
     'addresses_elements' => array(
-      '#columns'  => $fields,
-      '#delta'    => 0,
-      '#input'    => TRUE,
-      '#process'  => array('addresses_elements_process'),
+      '#columns' => $fields,
+      '#delta' => 0,
+      '#input' => TRUE,
+      '#process' => array('addresses_elements_process'),
     )
   );
 }
@@ -198,8 +198,8 @@ function addresses_elements_process($element, $edit, $form_state, $form) {
   // for further processing
   if (!empty($values['aid'])) {
     $element['aid'] = array(
-      '#type'   => 'hidden',
-      '#value'  => $values['aid']
+      '#type' => 'hidden',
+      '#value' => $values['aid']
     );
   }
 
@@ -220,27 +220,27 @@ function addresses_elements_process($element, $edit, $form_state, $form) {
  */
 function addresses_menu() {
   $items['admin/settings/address'] = array(
-    'access arguments'  => array('access administration pages'),
-    'description'       => 'Settings for Address module',
-    'file'              => 'addresses.settings.inc',
-    'page callback'     => 'drupal_get_form',
-    'page arguments'    => array('_addresses_settings'),
-    'title'             => 'Addresses',
+    'access arguments' => array('access administration pages'),
+    'description' => 'Settings for Address module',
+    'file' => 'addresses.settings.inc',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('_addresses_settings'),
+    'title' => 'Addresses',
   );
   $items['admin/settings/address/format'] = array(
-    'access arguments'  => array('access administration pages'),
-    'description'       => 'Format addresses',
-    'file'              => 'addresses.settings.inc',
-    'page callback'     => 'drupal_get_form',
-    'page arguments'    => array('_addresses_settings_format', 4),
-    'title'             => 'Addresses Format',
-    'type'              => MENU_CALLBACK
+    'access arguments' => array('access administration pages'),
+    'description' => 'Format addresses',
+    'file' => 'addresses.settings.inc',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('_addresses_settings_format', 4),
+    'title' => 'Addresses Format',
+    'type' => MENU_CALLBACK
   );
   $items['admin/settings/address/autocomplete'] = array(
-    'access callback'   => TRUE,
-    'file'              => 'addresses.settings.inc',
-    'page callback'     => '_addresses_autocomplete',
-    'type'              => MENU_CALLBACK
+    'access callback' => TRUE,
+    'file' => 'addresses.settings.inc',
+    'page callback' => '_addresses_autocomplete',
+    'type' => MENU_CALLBACK
   );
 
   return $items;
