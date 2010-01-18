@@ -185,10 +185,10 @@ function _addresses_province_validate($form, &$form_state) {
   // Check if its a valid province.
   // It should be the Province code listed on the
   // given COUNTRY.inc file
-  if ($province = $form['province']['#value']
-    && $country = $form['country']['#value']
-    && $provinces = _addresses_province_get($country)
-    && empty($provinces[drupal_strtoupper($province)])) {
+  $province = $form['province']['#value'];
+  $country = $form ['country']['#value'];
+  $provinces = _addresses_province_get($country);
+  if (empty($provinces[drupal_strtoupper($province)])) {
 
     // Get the province fieldname
     $field_name = $form['province']['#name'];
@@ -353,7 +353,8 @@ function _addresses_settings_format(&$form_state, $country) {
     $rows[] = array(
       array(
         'data' => drupal_ucfirst($key) .' '. t('tokens'),
-        'class' => 'region', 'colspan' => 2
+        'class' => 'region', 
+        'colspan' => 2,
       )
     );
 
