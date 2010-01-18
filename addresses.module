@@ -233,7 +233,7 @@ function addresses_menu() {
   $items = array();
 
   $items['admin/settings/address'] = array(
-    'access arguments' => array('access administration pages'),
+    'access arguments' => array('administer addresses'),
     'description' => 'Settings for Address module',
     'file' => 'addresses.settings.inc',
     'page callback' => 'drupal_get_form',
@@ -242,7 +242,7 @@ function addresses_menu() {
   );
 
   $items['admin/settings/address/format'] = array(
-    'access arguments' => array('access administration pages'),
+    'access arguments' => array('administer addresses'),
     'description' => 'Format addresses',
     'file' => 'addresses.settings.inc',
     'page callback' => 'drupal_get_form',
@@ -259,6 +259,13 @@ function addresses_menu() {
   );
 
   return $items;
+}
+
+/**
+ * Implementation of hook_perm().
+ */
+function addresses_perm() {
+  return array('administer addresses');
 }
 
 /**
