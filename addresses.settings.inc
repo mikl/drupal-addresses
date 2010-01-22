@@ -72,7 +72,7 @@ function _addresses_addressesfieldapi_form($fields = array(), $values = array())
       '#type' => 'textfield',
       '#weight' => empty($field_weights['province']['weight']) ? 0 : $field_weights['province']['weight'],
     );
-    $form['#element_validate'][] = '_addresses_province_validate';
+    $form['#element_validate'][] = '_addresses_province_field_validate';
   }
 
   // Adds the City
@@ -179,14 +179,101 @@ function _addresses_autocomplete($country, $string = '') {
 }
 
 /**
+ * Validation function for ISO 3166-1 alpha-2 country codes.
+ *
+ * @param $country
+ *   ISO 3166-1 alpha-2 code of a country.
+ * @return
+ *   Boolean.
+ */
+function _addresses_country_valid($country) {
+  if (empty($country)) {
+    return FALSE;
+  }
+
+  // Country codes are listed in lowercase throughout the system
+  $country = strtolower($country);
+
+  // Cache results to prevent _addresses_country_get() being ran unnecessarily
+  // Won't be needed once http://drupal.org/node/680376 is complete
+  static $countries = array(
+    'invalid' => array(),
+    'valid' => array()
+  );
+  // If country is in the invalid sub-array elseif in the valid sub-array
+  if (array_search($country, $countries['invalid']) !== FALSE) {
+    return FALSE;
+  }
+  elseif (array_search($country, $countries['valid']) !== FALSE) {
+    return TRUE;
+  }
+
+  // See if country code is found by _addresses_country_get().
+  if (!_addresses_country_get(array($country => ' '))) {
+    $countries['invalid'][] = $country;
+    return FALSE;
+  }
+
+  $countries['valid'][] = $country;
+  return TRUE;
+}
+
+/**
+ * Validate province code or province name of a country.
+ *
+ * @param $country
+ *   ISO 3166-1 alpha-2 code of a country.
+ * @param $province
+ *   ISO-3166-2 code or province name.
+ * @return
+ *   Returns FALSE if $country or $province are invalid.
+ *   Returns ISO-3166-2 code if valid.
+ *   Returns NULL if $country does not contain any provinces.
+ */
+function _addresses_province_valid($country, $province) {
+  // Ensure that country code provided is valid
+  if (!_addresses_country_valid($country)) {
+    return FALSE;
+  }
+
+  $provinces = _addresses_province_get($country);
+
+  // If the country chosen does not contain any provinces
+  if (empty($provinces)) {
+    return NULL;
+  }
+
+  // If $province provided matches ISO-3166-2 code.
+  if ($provinces[strtoupper($province)]) {
+    // Province supplied is ISO-3166-2 code.
+    return $province;
+  }
+
+  // Flip array and change to lowercase to match names in key, can not use
+  // array_search() or in_array() as they are case-sensitive.
+  $provinces = array_change_key_case(array_flip($provinces));
+  if ($provinces[strtolower($province)]) {
+    // Return the ISO-3166-2 province code.
+    return $provinces[strtolower($province)];
+  }
+
+  // $province provided did not return any valid matches.
+  return FALSE;
+}
+
+/**
  * Validate the province field
+ *
+ * @deprecated
+ *   Use _addresses_province_field_validate() which accepts not only ISO-3166-2
+ *   but also provinces by name. To be removed in 2.x.
  */
 function _addresses_province_validate($form, &$form_state) {
   // Check if its a valid province.
   // It should be the Province code listed on the
   // given COUNTRY.inc file
   $province = $form['province']['#value'];
-  $country = $form ['country']['#value'];
+  $country = $form['country']['#value'];
   $provinces = _addresses_province_get($country);
   if (empty($provinces[drupal_strtoupper($province)])) {
 
@@ -199,6 +286,39 @@ function _addresses_province_validate($form, &$form_state) {
     form_set_error($field_name, t('Could not find %province as a province from %country. Try to use the province abbreviation or number.', array(
       '%province' => $form['province']['#value'],
       '%country' => $countries[$country])));
+  }
+}
+
+/**
+ * Validate the province field
+ */
+function _addresses_province_field_validate($form, &$form_state) {
+  $province = _addresses_province_valid(
+    $form['country']['#value'],
+    $form['province']['#value']
+  );
+
+  // If province is valid or if the country does not have any provinces
+  if ($province || is_null($province)) {
+    // Find array's key path to province field's value in $form_state
+    $form_state_province =& $form_state['values'];
+    foreach ($form['province']['#parents'] as $v) {
+      $form_state_province =& $form_state_province[$v];
+    }
+
+    // Set province to ISO-3166-2 code (properly uppercased)
+    $form_state_province = $province;
+  }
+  else {
+    // Get the province fieldname
+    $field_name = $form['province']['#name'];
+    $field_name = drupal_substr($field_name, 0, -1);
+    $field_name = preg_replace('/([^]])\[/', '\1][', $field_name);
+
+    $countries = _addresses_country_get();
+    form_set_error($field_name, t('Could not find %province as a province from %country. Try to use the province abbreviation or number.', array(
+      '%province' => $form['province']['#value'],
+      '%country' => $countries[$form['country']['#value']])));
   }
 }
 
@@ -353,7 +473,7 @@ function _addresses_settings_format(&$form_state, $country) {
     $rows[] = array(
       array(
         'data' => drupal_ucfirst($key) .' '. t('tokens'),
-        'class' => 'region', 
+        'class' => 'region',
         'colspan' => 2,
       )
     );
