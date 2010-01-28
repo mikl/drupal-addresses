@@ -520,9 +520,9 @@ function theme_addresses_elements($element) {
  *   String. The single line address
  * @ingroup themeable
  */
-function theme_addresses_settings_fields(&$form) {
+function theme_addresses_settings_fields($form) {
   foreach (element_children($form) as $ftype) {
-    $field = &$form[$ftype];
+    $field = $form[$ftype];
     $rows[] = array(
       $field['#title'],
       drupal_render($field[0]),
