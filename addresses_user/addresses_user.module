@@ -183,11 +183,11 @@ function addresses_user_theme() {
 /**
  * Implementation of hook_user().
  */
-function addresses_user_user($op, &$edit, &$account) {
+function addresses_user_user($op, &$edit, &$account, $category = NULL) {
   switch ($op) {
     case 'delete':
-      module_load_include('inc', 'addresses_user');
-      _addresses_user_address_delete($account->uid);
+      // Delete all addresses that the user has set under their account
+      db_query('DELETE FROM {addresses_user} WHERE eid = %d', $account->uid);
       break;
     case 'view':
       if (!variable_get('addresses_user_book', FALSE)) {
