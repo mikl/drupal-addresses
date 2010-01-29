@@ -651,33 +651,17 @@ function theme_addresses($afields) {
     }
   }
 
-  // If there is still no address format, use the default countries format
+  // If there is no address format, use the default format
   if (empty($address_format)) {
-    $default_country = variable_get('addresss_country_default', 'us');
-    // Get the countries address format from a variable
-    $address_format = variable_get('addresses_format_'. $default_country, '');
-    // If there is still no address format
-    if (empty($address_format)) {
-      // Load the country code specific .inc file if it exists.
-      module_load_include('inc', 'addresses', '/countries/'. $default_country);
-      $function = 'addresses_address_format_'. $default_country;
-      // If the country code specific .inc file provides an address format
-      if (function_exists($function)) {
-        $address_format = $function();
-        variable_set('addresses_format_'. $default_country, $addres_format);
-      }
-    }
-  }
+    $address_format = variable_get('addresses_format_default', FALSE);
 
-  // If there is still no address format, use the U.S. format
-  if(empty($address_format)) {
-    // Get the U.S. format from a variable
-    $address_format = variable_get('addresses_format_us', '');
-    // If there is still no address format
-    if (empty($address_format)) {
+    // 'addresses_format_default' is not set, use US's programmed format
+    if (!$address_format) {
       module_load_include('inc', 'addresses', '/countries/us');
-      $address_format = addresses_address_format_us();
-      variable_set('addresses_format_us', $address_format);
+      $address_format = variable_get('addresses_format_default', addresses_address_format_us());
+      // Store as addresses_format_default to prevent fetching from filesystem
+      // next time.
+      variable_set('addresses_format_default', $address_format);
     }
   }
 
