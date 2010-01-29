@@ -72,6 +72,15 @@ function _addresses_addressesfieldapi_form($fields = array(), $values = array())
       '#type' => 'textfield',
       '#weight' => empty($field_weights['province']['weight']) ? 0 : $field_weights['province']['weight'],
     );
+    // If country field is displayed then use AJAX
+    // See addresses.js
+    if ($form['country']) {
+      drupal_add_js(drupal_get_path('module', 'addresses') . '/addresses.js');
+      // Due to varying field names we use the following classes for the JS
+      // @see http://drupal.org/node/244471#comment-2499288
+      $form['province']['#attributes']['class'] = 'addresses-province-field';
+      $form['country']['#attributes']['class'] = 'addresses-country-field';
+    }
     $form['#element_validate'][] = '_addresses_province_field_validate';
   }
 
@@ -146,6 +155,10 @@ function _addresses_addressesfieldapi_form($fields = array(), $values = array())
  *   String (optional). The state name typed by user
  * @return
  *   Javascript array. List of states
+ *
+ * @deprecated
+ *   This implementation was never functional in 6.x. To be removed in
+ *   Addresses 2.x.
  */
 function _addresses_autocomplete($country, $string = '') {
   $matches = array();
@@ -216,6 +229,59 @@ function _addresses_country_valid($country) {
 
   $countries['valid'][] = $country;
   return TRUE;
+}
+
+/**
+ * Callback function for loading provinces when changing the country of an
+ * address.
+ *
+ * @return
+ *   JSON encoded province selection field.
+ */
+function _addresses_province_ajax() {
+  // ISO 3166-1 alpha-2 code of a country.
+  $country = $_GET['country'];
+  // HTML id attribute of select field.
+  $field_id = $_GET['field_id'];
+  // HTML name attribute of select field.
+  $field_name = $_GET['field_name'];
+  // HTML id attribute of province's wrapper.
+  $passback = $_GET['passback'];
+  // ISO-3166-2 code for the province or state to mark as selected.
+  $province = $_GET['province'];
+
+  // Check that required fields are supplied
+  if (empty($country) || empty($field_id) || empty($field_name) || empty($passback)) {
+    return drupal_json(array('error' => 'Invalid call'));
+  }
+
+  // $element is a form element we build below to get the needed HTML
+  $element = array();
+  $output = '';
+  $hide = FALSE;
+
+  module_load_include('inc', 'addresses');
+  $provinces = _addresses_province_get($country);
+  // If no provinces exist for country
+  if (empty($provinces)) {
+    $hide = TRUE;
+  }
+
+  // No need to use drupal_strtoupper() as ISO-3166-2 codes are latin based
+  $element['#value'] = strtoupper($province);
+  $element['#options'] = _addresses_province_get($country);
+
+  // Generate province field HTML
+  $output .= '<label for="'. $field_id .'">'. t('State / Province: ') . '</label>';
+  $output .= '<select id="'. $field_id .'" name="'. $field_name
+    .'" class="addresses-province-field">'
+    . form_select_options($element) .'</select>';
+
+  return drupal_json(array(
+    'field' => $output,
+    'passback' => $passback,
+    'hide' => $hide,
+  ));
 }
 
 /**

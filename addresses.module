@@ -251,6 +251,20 @@ function addresses_menu() {
     'type' => MENU_CALLBACK
   );
 
+  $items['addresses/province_ajax'] = array(
+    'access callback' => TRUE,
+    'file' => 'addresses.settings.inc',
+    'page callback' => '_addresses_province_ajax',
+    'type' => MENU_CALLBACK,
+  );
+
+  /**
+   * Autocomplete menu item
+   *
+   * @deprecated
+   *   This implementation was never functional in 6.x. To be removed in
+   *   Addresses 2.x.
+   */
   $items['admin/settings/address/autocomplete'] = array(
     'access callback' => TRUE,
     'file' => 'addresses.settings.inc',

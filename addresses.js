@@ -1,37 +1,47 @@
 /**
  * $Id$
- * @author Bruno Massa
+ * @author Cody Craven
  * @file addresses.js
- * Autocompletion for Province field.
- * This jQuery function will force the Province field
- * to autcomplete the pronvice for a given country.
+ *
+ * Rebuild province field with a select list of provinces for country selected
+ * on load and on change.
  */
-/*global Drupal, $ */
-
 Drupal.behaviors.addresses = function(context) {
-  // Use this ID to 'simplify' the callings
-  var id = '#edit-addresses-';
+  // Load province select element onLoad
+  performProvinceAjax($('.addresses-country-field'));
 
-  // Record the original URL
-  var url = Drupal.settings.absPath + '/admin/settings/addresses/autocomplete/';
+  // Bind country changes to reload the province field
+  $('.addresses-country-field').bind('change', function() {
+    performProvinceAjax(this);
+  });
 
-  // Get all address
-  for (var n = 0; true; n++) {
-    // Check if this Field exists.
-    // If not, stop the script
-    if (!$(id + n +'-country').length) {
-      break;
-    }
+  // Make province select list call
+  function performProvinceAjax(countryElement) {
+    // Country field's related province element
+    var provinceElement = $(countryElement).parent().siblings().children('.addresses-province-field');
 
-    // Set the country code at the beginning
-    if ($(id + n +'-country').val()) {
-      $(id + n +'-province-autocomplete').val(url + $(id + n +'-country').val());
-    }
-
-    // Change the country code everytime the country field changes
-    $(id + n +'-country').change(function() {
-      $(id + n +'-province-autocomplete').val(url + $(this).val());
-//       Drupal.behaviors.autocomplete();
+    $.ajax({
+      type: 'GET',
+      url: Drupal.settings.basePath + 'addresses/province_ajax',
+      success: updateProvinceField,
+      dataType: 'json',
+      data: {
+        country:$(countryElement).val(),
+        field_id:provinceElement.attr('id'),
+        field_name:provinceElement.attr('name'),
+        passback:provinceElement.parent().attr('id'),
+        province:provinceElement.val(),
+      },
     });
+  }
+
+  // Populate province field
+  function updateProvinceField(data) {
+    if (data.hide) {
+      $('#' + data.passback).hide();
+    } else {
+      $('#' + data.passback).show();
+    }
+    $('#' + data.passback).html(data.field);
   }
 };
