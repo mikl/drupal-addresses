@@ -554,6 +554,8 @@ function _addresses_settings_format(&$form_state, $country) {
 
   $output = theme('table', $headers, $rows, array('class' => 'description'));
 
+  $form['#redirect'] = 'admin/settings/address';
+
   $form['token_help'] = array(
     '#value' => $output,
   );
