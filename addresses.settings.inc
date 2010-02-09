@@ -251,25 +251,28 @@ function _addresses_province_ajax() {
   $province = $_GET['province'];
 
   // Check that required fields are supplied
-  if (empty($country) || empty($field_id) || empty($field_name) || empty($passback)) {
+  if (empty($field_id) || empty($field_name) || empty($passback)) {
     return drupal_json(array('error' => 'Invalid call'));
   }
 
   // $element is a form element we build below to get the needed HTML
   $element = array();
+  // No need to use drupal_strtoupper() as ISO-3166-2 codes are latin based
+  $element['#value'] = strtoupper($province);
+  $element['#options'] = array();
+  $provinces = array();
   $output = '';
   $hide = FALSE;
 
-  module_load_include('inc', 'addresses');
-  $provinces = _addresses_province_get($country);
-  // If no provinces exist for country
+  if (!empty($country)) {
+    module_load_include('inc', 'addresses');
+    $provinces = _addresses_province_get($country);
+    $element['#options'] = _addresses_province_get($country);
+  }
+
   if (empty($provinces)) {
     $hide = TRUE;
   }
-
-  // No need to use drupal_strtoupper() as ISO-3166-2 codes are latin based
-  $element['#value'] = strtoupper($province);
-  $element['#options'] = _addresses_province_get($country);
 
   // Generate province field HTML
   $output .= '<label for="'. $field_id .'">'. t('State / Province: ') . '</label>';
