@@ -22,10 +22,11 @@ Drupal.behaviors.addresses = function(context) {
 
     $.ajax({
       type: 'GET',
-      url: Drupal.settings.basePath + 'addresses/province_ajax',
+      url: Drupal.settings.basePath,
       success: updateProvinceField,
       dataType: 'json',
       data: {
+        q:'addresses/province_ajax',
         country:$(countryElement).val(),
         field_id:provinceElement.attr('id'),
         field_name:provinceElement.attr('name'),
