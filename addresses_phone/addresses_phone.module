@@ -17,7 +17,7 @@ function addresses_phone_addressesfieldapi($op, $fields = array(), $values = arr
     return array(
       'phone' => array(
         'type' => 'varchar',
-        'length' => 16,
+        'length' => 24,
         'title' => t('Phone'),
         'description' => t('Phone numbers, like cellphone, home, office.'),
         'default' => '',
@@ -30,7 +30,7 @@ function addresses_phone_addressesfieldapi($op, $fields = array(), $values = arr
       ),
       'fax' => array(
         'type' => 'varchar',
-        'length' => 16,
+        'length' => 24,
         'title' => t('Fax'),
         'description' => t('Fax number.'),
         'default' => '',
@@ -52,8 +52,8 @@ function addresses_phone_addressesfieldapi($op, $fields = array(), $values = arr
         '#type'           => 'textfield',
         '#title'          => t('Phone'),
         '#default_value'  => isset($values['phone']) ? $values['phone'] : '',
-        '#size'           => 50,
-        '#maxlength'      => 75,
+        '#size'           => 30,
+        '#maxlength'      => 24,
         '#attributes'     => NULL,
         '#required'       => ($fields['phone'] == ADDRESSES_FIELD_REQUIRED),
         '#weight'         => empty($field_weights['phone']['weight']) ? 0 :
@@ -67,8 +67,8 @@ function addresses_phone_addressesfieldapi($op, $fields = array(), $values = arr
         '#type'           => 'textfield',
         '#title'          => t('Fax'),
         '#default_value'  => isset($values['fax']) ? $values['fax'] : '',
-        '#size'           => 50,
-        '#maxlength'      => 75,
+        '#size'           => 30,
+        '#maxlength'      => 24,
         '#attributes'     => NULL,
         '#required'       => ($fields['fax'] == ADDRESSES_FIELD_REQUIRED),
         '#weight'         => empty($field_weights['fax']['weight']) ? 0 :
