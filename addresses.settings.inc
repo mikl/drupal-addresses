@@ -621,7 +621,7 @@ function theme_addresses_settings_fields($form) {
  *   String. The table with draggable items
  * @ingroup themeable
  */
-function theme_addresses_field_weight(&$form) {
+function theme_addresses_field_weight($form) {
   drupal_add_tabledrag('addresses-field-weight', 'order', 'sibling', 'field');
 
   foreach (element_children($form) as $field) {

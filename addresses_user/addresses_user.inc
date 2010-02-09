@@ -204,7 +204,7 @@ function _addresses_user_form(&$form_state, $fields = array(), $values = array()
  * @param &$addresses
  *   Array. A list of user addresses
  */
-function theme_addresses_user_overview($uid, &$addresses) {
+function theme_addresses_user_overview($uid, $addresses) {
   // Get the current page URL, to force the forms
   // to return here.
   $destination = drupal_get_destination();
