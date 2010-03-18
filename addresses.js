@@ -31,8 +31,8 @@ Drupal.behaviors.addresses = function(context) {
         field_id:provinceElement.attr('id'),
         field_name:provinceElement.attr('name'),
         passback:provinceElement.parent().attr('id'),
-        province:provinceElement.val(),
-      },
+        province:provinceElement.val()
+      }
     });
   }
 
