@@ -27,6 +27,6 @@ function addresses_uninstall() {
  */
 function addresses_update_6106() {
   // Clear address format's as tokens have changed
-  $ret[] = update_sql("DELETE FROM variable WHERE name LIKE 'addresses_format_%'");
+  $ret[] = update_sql("DELETE FROM {variable} WHERE name LIKE 'addresses_format_%'");
   return $ret;
 }
