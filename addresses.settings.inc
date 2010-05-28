@@ -360,8 +360,15 @@ function _addresses_province_validate($form, &$form_state) {
 
 /**
  * Validate the province field
+ *
+ * @return void
  */
 function _addresses_province_field_validate($form, &$form_state) {
+  // If province is not required and empty then prevent validation
+  if (!$form['province']['#required'] && $form['province']['#value'] == '') {
+    return;
+  }
+
   $province = _addresses_province_valid(
     $form['country']['#value'],
     $form['province']['#value']
@@ -378,7 +385,8 @@ function _addresses_province_field_validate($form, &$form_state) {
     // Set province to ISO-3166-2 code (properly uppercased)
     $form_state_province = $province;
   }
-  else {
+  // Prevent inability to alter CCK fields in some instances
+  else if ($form_state['values']['form_id'] != 'content_field_edit_form') {
     // Get the province fieldname
     $field_name = $form['province']['#name'];
     $field_name = drupal_substr($field_name, 0, -1);
