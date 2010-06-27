@@ -72,12 +72,12 @@ function addresses_cck_field_formatter_info() {
       'multiple values' => CONTENT_HANDLE_CORE,
       'field types'     => array('addresses_cck'),
     ),
-//     'single_line' => array(
-//       'label'           => t('Single Line'),
-//       'arguments'       => array('element'),
-//       'multiple values' => CONTENT_HANDLE_CORE,
-//       'field types'     => array('addresses_cck'),
-//     ),
+    'single_line' => array(
+      'label'           => t('Single Line'),
+      'arguments'       => array('element'),
+      'multiple values' => CONTENT_HANDLE_CORE,
+      'field types'     => array('addresses_cck'),
+    ),
   );
 
   $afields = module_invoke_all('addressesfieldapi', 'fields');
