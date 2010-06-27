@@ -362,7 +362,7 @@ function addresses_theme() {
       'file' => 'addresses.settings.inc',
     ),
     // Shows addresses using a single line
-    'addresses_address_single_line' => array(
+    'addresses_address_singleline' => array(
       'arguments' => array('addresses'),
       'file' => 'addresses.inc',
     ),

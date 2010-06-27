@@ -887,7 +887,7 @@ function theme_addresses_postal_code($afields, $format = 'plain') {
  *   String. The single line address
  * @ingroup themeable
  */
-function theme_addresses_singleline($afields) {
+function theme_addresses_address_singleline($afields) {
   // Check if its a valied address
   if (empty($afields)) {
     return '';
