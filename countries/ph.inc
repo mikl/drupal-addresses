@@ -70,6 +70,7 @@ function addresses_province_list_ph() {
     'MOP' => t('Mountain Province'),
     'NOC' => t('Negros Occidental'),
     'NOR' => t('Negros Oriental'),
+    'NCR' => t('National Capital Region'),
     'NCT' => t('North Cotabato'),
     'NSM' => t('Northern Samar'),
     'NEC' => t('Nueva Ecija'),
