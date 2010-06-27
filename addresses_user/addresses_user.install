@@ -82,6 +82,7 @@ function addresses_user_schema() {
     }
   }
   else {
+    $fields_existing = array();
     foreach (array_keys($fields) as $field) {
       $fields_existing[$field] = TRUE;
     }
