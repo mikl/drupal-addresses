@@ -538,6 +538,7 @@ function _addresses_settings_format(&$form_state, $country) {
     '#default_value' => $format_address,
     '#title' => t('Address Format: %country', array('%country' => $cname)),
     '#type' => 'textarea',
+    '#wysiwyg' => FALSE,
   );
 
   // Simulate theme('token_help'), but include two types and
