@@ -456,9 +456,10 @@ function _addresses_settings(&$form_state) {
   );
 
   foreach ($fields as $field_code => $field) {
+    $weight = empty($field_weights[$field_code]['weight']) ? 0 : $field_weights[$field_code]['weight'];
     $form['addresses_field_weight'][$field_code] = array(
       '#tree' => TRUE,
-      '#weight' => empty($field_weights[$field_code]['weight']) ? 0 : $field_weights[$field_code]['weight'],
+      '#weight' => $weight,
     );
     $form['addresses_field_weight'][$field_code]['field'] = array(
       '#attributes' => array('class' => 'field'),
@@ -467,7 +468,7 @@ function _addresses_settings(&$form_state) {
     );
     $form['addresses_field_weight'][$field_code]['weight'] = array(
       '#attributes' => array('class' => 'field'),
-      '#default_value' => $field_weights[$field_code]['weight'],
+      '#default_value' => $weight,
       '#type' => 'weight',
     );
   }
