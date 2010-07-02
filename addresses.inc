@@ -743,7 +743,7 @@ function theme_addresses_country($afields, $format = 'name') {
   $country = check_plain($afields['country']);
   if (!empty($country)) {
     $countries = _addresses_country_get();
-    switch($format) {
+    switch ($format) {
       case 'name':
         return $countries[$country];
       case 'code2':

@@ -55,7 +55,8 @@ function addresses_phone_update_6100(&$sandbox) {
               // Unset the table to skip updating as it has already been updated
               $table =  FALSE;
             }
-          } else {
+          }
+          else {
             $table = 'content_type_' . $type['type'];
             $shared_table = FALSE;
           }
@@ -64,10 +65,10 @@ function addresses_phone_update_6100(&$sandbox) {
           if ($table) {
             // Check that fields exists, probably not needed, then alter entity attributes
             if ($field['columns']['phone']) {
-              db_change_field($ret, $table, $field_name.'_phone', $field_name.'_phone', $phone_definition);
+              db_change_field($ret, $table, $field_name . '_phone', $field_name . '_phone', $phone_definition);
             }
             if ($field['columns']['fax']) {
-              db_change_field($ret, $table, $field_name.'_fax', $field_name.'_fax', $fax_definition);
+              db_change_field($ret, $table, $field_name . '_fax', $field_name . '_fax', $fax_definition);
             }
 
             if ($shared_table) {
@@ -98,3 +99,5 @@ function addresses_phone_uninstall() {
   drupal_set_message(t('To remove phone and fax numbers from Addresses, you need to remove them from your formatting options in the <a href="!addresses_admin">Addresses configuration area</a>.',
     array('!addresses_admin' => url('admin/settings/address'))), 'status');
 }
+
+// vim: ts=2 sw=2 et syntax=php

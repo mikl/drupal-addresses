@@ -386,7 +386,7 @@ function _addresses_province_field_validate($form, &$form_state) {
     $form_state_province = $province;
   }
   // Prevent inability to alter CCK fields in some instances
-  else if ($form_state['values']['form_id'] != 'content_field_edit_form') {
+  elseif ($form_state['values']['form_id'] != 'content_field_edit_form') {
     // Get the province fieldname
     $field_name = $form['province']['#name'];
     $field_name = drupal_substr($field_name, 0, -1);

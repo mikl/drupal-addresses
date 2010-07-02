@@ -16,6 +16,7 @@ function addresses_phone_addressesfieldapi($op, $fields = array(), $values = arr
   if ($op == 'fields') {
     return array(
       'phone' => array(
+        'module' => 'phone',
         'type' => 'varchar',
         'length' => 24,
         'title' => t('Phone'),
@@ -29,6 +30,7 @@ function addresses_phone_addressesfieldapi($op, $fields = array(), $values = arr
         'token' => 'addresses_general',
       ),
       'fax' => array(
+        'module' => 'phone',
         'type' => 'varchar',
         'length' => 24,
         'title' => t('Fax'),
@@ -79,8 +81,8 @@ function addresses_phone_addressesfieldapi($op, $fields = array(), $values = arr
     foreach (array_keys($fields) as $ftype) {
       if ($fields[$ftype] == ADDRESSES_FIELD_HIDDEN) {
         $form[$ftype] = array(
-          '#type'           => 'hidden',
-          '#value'          => isset($values[$ftype]) ? $values[$ftype] : '',
+          '#type'         => 'hidden',
+          '#value'        => isset($values[$ftype]) ? $values[$ftype] : '',
         );
       }
     }
@@ -95,13 +97,13 @@ function addresses_phone_addressesfieldapi($op, $fields = array(), $values = arr
 function addresses_phone_theme() {
   return array(
     // Shows address fields
-    'addresses_phone' => array(
+    'addresses_phone_phone' => array(
       'arguments' => array(
         'form',
         'format' => 'plain',
       ),
     ),
-    'addresses_fax' => array(
+    'addresses_phone_fax' => array(
       'arguments' => array(
         'form',
         'format' => 'plain',
@@ -114,20 +116,20 @@ function addresses_phone_theme() {
  * Print a formatted phone field.
  *
  * @param $afields
- *   All address fields values.
+ *   All address field values.
  * @param $format
  *   The format to return the field in.
  * @return
  *   A formatted phone field.
  */
-function theme_addresses_phone($afields, $format = 'plain') {
+function theme_addresses_phone_phone($afields, $format = 'plain') {
   $phone = check_plain($afields['phone']);
   if (!empty($phone)) {
     switch ($format) {
-      case 'plain':
-        return $phone;
-      case 'hcard':
-        return '<dt>'. t('Phone') .': </dt><dd class="phone">'. $phone .'</dd>';
+    case 'plain':
+      return $phone;
+    case 'hcard':
+      return '<dt>'. t('Phone') .': </dt><dd class="phone">'. $phone .'</dd>';
     }
   }
 }
@@ -142,14 +144,16 @@ function theme_addresses_phone($afields, $format = 'plain') {
  * @return
  *   A formatted fax field.
  */
-function theme_addresses_fax($afields, $format = 'plain') {
+function theme_addresses_phone_fax($afields, $format = 'plain') {
   $fax = check_plain($afields['fax']);
   if (!empty($fax)) {
     switch ($format) {
-      case 'plain':
-        return $fax;
-      case 'hcard':
-        return '<dt>'. t('Fax') .': </dt><dd class="fax">'. $fax .'</dd>';
+    case 'plain':
+      return $fax;
+    case 'hcard':
+      return '<dt>'. t('Fax') .': </dt><dd class="fax">'. $fax .'</dd>';
     }
   }
 }
+
+// vim: ts=2 sw=2 et syntax=php

@@ -383,7 +383,7 @@ function addresses_token_list($type = 'all') {
 
     foreach ($fields as $field => $field_data) {
       if (isset($field_data['theme'])) {
-        if(($type == 'addresses_general' || $type == 'all') && $field_data['token'] == 'addresses_general') {
+        if (($type == 'addresses_general' || $type == 'all') && $field_data['token'] == 'addresses_general') {
           $category = 'Addresses: General';
         }
         elseif (($type == 'addresses_adr' || $type == 'all') && $field_data['token'] == 'addresses_adr') {
@@ -415,7 +415,15 @@ function addresses_token_values($type, $object = NULL) {
       foreach ($fields as $field => $field_data) {
         if ($field_data['token'] == $type && isset($field_data['theme'])) {
           foreach (array_keys($field_data['theme']) as $format) {
-            $values['addresses_'. $field .'_'. $format] = theme('addresses_'. $field, $object, $format);
+            // Sub-modules such as addresses_phone add a module specification to
+            // avoid clashes between modules.
+            if (!empty($field_data['module'])) {
+              $module = $field_data['module'] . '_';
+            }
+            else {
+              $module = '';
+            }
+            $values['addresses_'. $field .'_'. $format] = theme('addresses_'. $module . $field, $object, $format);
           }
         }
       }
@@ -423,3 +431,5 @@ function addresses_token_values($type, $object = NULL) {
       return $values;
   }
 }
+
+// vim: ts=2 sw=2 et syntax=php
