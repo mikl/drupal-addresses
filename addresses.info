@@ -3,3 +3,4 @@ core            = "6.x"
 dependencies[]  = token
 description     = "You can associate a geographic location with content and users."
 name            = "Addresses"
+package         = "Addresses"

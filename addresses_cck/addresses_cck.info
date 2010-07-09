@@ -4,3 +4,4 @@ description     = "Link addresses to contents using CCK"
 dependencies[]  = addresses
 dependencies[]  = content
 name            = "Addresses - CCK"
+package         = "Addresses"

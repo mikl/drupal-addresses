@@ -3,3 +3,4 @@ core            = "6.x"
 description     = "Add phone and fax fields on addresses"
 dependencies[]  = addresses
 name            = "Addresses - Phone/Fax"
+package         = "Addresses"
