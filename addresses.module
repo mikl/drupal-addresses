@@ -42,7 +42,7 @@ function addresses_addressesfieldapi($op, $fields = array(), $values = array()) 
       'type' => 'varchar',
       'length' => 75,
       'title' => t('Address Name'),
-      'description' => t('The nickname of this address, like "Home", "Office", "Anna\'s appartment."'),
+      'description' => t('The nickname of this address, like "Home", "Office", "Anna\'s apartment."'),
       'default' => '',
       'display' => ADDRESSES_FIELD_NONE,
       'theme' => array(
@@ -118,7 +118,7 @@ function addresses_addressesfieldapi($op, $fields = array(), $values = array()) 
       'type' => 'varchar',
       'length' => 255,
       'title' => t('Additional'),
-      'description' => t('Additional address information like appartment block, number or address reference.'),
+      'description' => t('Additional address information like apartment block, number or address reference.'),
       'default' => '',
       'display' => ADDRESSES_FIELD_SHOW,
       'theme' => array(
