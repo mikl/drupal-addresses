@@ -30,3 +30,5 @@ function addresses_update_6106() {
   $ret[] = update_sql("DELETE FROM {variable} WHERE name LIKE 'addresses_format_%'");
   return $ret;
 }
+
+// vim: ts=2 sw=2 et syntax=php

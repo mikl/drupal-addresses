@@ -30,7 +30,7 @@ function _addresses_user_access($account) {
  */
 function addresses_user_form__addresses_settings_alter(&$form, &$form_state) {
   module_load_include('settings.inc', 'addresses');
-  $form += _addresses_settings_fields(variable_get('addresses_user', array()));
+  $form += _addresses_settings_fields(variable_get('addresses_user_settings', array()));
 
   // Set the 'addresses' as a fieldset
   $form['addresses_user'] = array(
@@ -65,6 +65,13 @@ function addresses_user_form__addresses_settings_alter(&$form, &$form_state) {
     '#tree'           => FALSE,
     '#type'           => 'checkbox',
   );
+
+  // Even though this form will be passed through to system_settings_form, we
+  // will still need a custom submit handler so that we can save the field settings
+  // in a compatible format.  This is because the fieldset added here applies
+  // the #tree attribute to the rest of the form elements, which changes the shape
+  // of the data returned on submit.
+  $form['#submit'][] = '_addresses_user_settings_submit';
 }
 
 /**
@@ -142,6 +149,28 @@ function _addresses_user_form_submit($form, &$form_state) {
   $address =& $form_state['values']['addresses'];
 
   _addresses_user_address_save($address, $uid);
+}
+
+/**
+ * Submit the settings
+ *
+ * @ingroup form
+ */
+function _addresses_user_settings_submit($form, &$form_state) {
+  $ftypes = $form_state['values']['addresses_user'];
+  $fields = array();
+  $settings = array();
+
+  foreach ($ftypes as $ftype => $elements) {
+    $fields[$ftype] = $elements[$ftype . '_select'];
+    foreach ($elements as $name => $value) {
+      $settings[$name] = $value;
+    }
+  }
+
+  variable_set('addresses_user', $fields);
+  variable_set('addresses_user_settings', $settings);
+  unset($form_state['addresses_user']);
 }
 
 /**

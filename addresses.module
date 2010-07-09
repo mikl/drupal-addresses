@@ -188,6 +188,10 @@ function addresses_elements() {
  *   Array. Form fields
  */
 function addresses_elements_process($element, $edit, $form_state, $form) {
+  // The $form['#field_info'] entry comes from CCK
+  $settings = empty($form['#field_info'][$element['#field_name']])
+    ? variable_get('addresses_user_settings', array())
+    : $form['#field_info'][$element['#field_name']];
   $fields = $element['#fields'];
   $values = $element['#default_value'];
 
@@ -217,12 +221,33 @@ function addresses_elements_process($element, $edit, $form_state, $form) {
   // Include the main module file
   module_load_include('inc', 'addresses');
 
-  // Get other fields from hook_addressesfieldsapi
-  $element = array_merge(
-    $element,
-    module_invoke_all('addressesfieldapi', 'form', $fields, $values)
-  );
+  // Update the $fields array to reflect element visibility settings per the
+  // new global settings options.  It would be cleaner to simply update the
+  // form generation function, but this method will be compatible with extra
+  // contrib fields.
+  foreach (array_keys($fields) as $ftype) {
+    if (isset($fields[$ftype]) && !empty($settings[$ftype . '_select'])) {
+      $fields[$ftype] = $settings[$ftype . '_select'];
+    }
+  }
 
+  // Invoke addressfieldapi to allow modules to add their own addresses fields.
+  // Then update these fields with the global settings for each field instance.
+  $extra = module_invoke_all('addressesfieldapi', 'form', $fields, $values);
+  foreach (element_children($extra) as $ename) {
+    if (isset($settings[$ename . '_label'])) {
+      $extra[$ename]['#title'] = t($settings[$ename . '_label']);
+    }
+    if (isset($settings[$ename . '_desc'])) {
+      $extra[$ename]['#description'] = t($settings[$ename . '_desc']);
+    }
+    if ('textfield' == $extra[$ename]['#type'] && isset($settings[$ename . '_size'])) {
+      $extra[$ename]['#size'] = $settings[$ename . '_size'];
+    }
+  }
+
+  // Add the extra fields to the element and return it.
+  $element = array_merge($element, $extra);
   return $element;
 }
 

@@ -77,7 +77,7 @@ function _addresses_addressesfieldapi_form($fields = array(), $values = array())
     if ($form['country']) {
       drupal_add_js(drupal_get_path('module', 'addresses') . '/addresses.js');
       // Due to varying field names we use the following classes for the JS
-      // @see http://drupal.org/node/244471#comment-2499288
+      // see http://drupal.org/node/244471#comment-2499288
       $form['province']['#attributes']['class'] = 'addresses-province-field';
       $form['country']['#attributes']['class'] = 'addresses-country-field';
     }
@@ -205,7 +205,7 @@ function _addresses_country_valid($country) {
   }
 
   // Country codes are listed in lowercase throughout the system
-  $country = strtolower($country);
+  $country = drupal_strtolower($country);
 
   // Cache results to prevent _addresses_country_get() being ran unnecessarily
   // Won't be needed once http://drupal.org/node/680376 is complete
@@ -258,7 +258,7 @@ function _addresses_province_ajax() {
   // $element is a form element we build below to get the needed HTML
   $element = array();
   // No need to use drupal_strtoupper() as ISO-3166-2 codes are latin based
-  $element['#value'] = strtoupper($province);
+  $element['#value'] = drupal_strtoupper($province);
   $element['#options'] = array();
   $provinces = array();
   $output = '';
@@ -448,9 +448,9 @@ function _addresses_settings(&$form_state) {
   $form['addresses_field_weight'] = array(
     '#collapsed' => $field_weights,
     '#collapsible' => TRUE,
-    '#description' => t('Choose what fields should appear first.'),
+    '#description' => t('Choose the order in which fields are displayed in user forms.'),
     '#theme' => 'addresses_field_weight',
-    '#title' => t('Field Order'),
+    '#title' => t('Field order'),
     '#type' => 'fieldset',
     '#tree' => TRUE,
   );
@@ -470,6 +470,7 @@ function _addresses_settings(&$form_state) {
       '#attributes' => array('class' => 'field'),
       '#default_value' => $weight,
       '#type' => 'weight',
+      '#delta' => 50,
     );
   }
 
@@ -494,19 +495,75 @@ function _addresses_settings(&$form_state) {
 function _addresses_settings_fields($field_values = array()) {
   $ftypes = module_invoke_all('addressesfieldapi', 'fields');
 
+  // List of address fields
+  // We let the user choose the current status, sizes, labels and descriptions
   foreach ($ftypes as $ftype => $field) {
-    // List of address fields
-    $form['addresses'][$ftype] = array(
-      '#default_value'  => !isset($field_values[$ftype]) ? $field['display'] : $field_values[$ftype],
+    // Mode
+    $form['addresses'][$ftype][$ftype . '_select'] = array(
+      '#type' => 'select',
       '#options' => array(
-        ADDRESSES_FIELD_NONE      => '',
-        ADDRESSES_FIELD_SHOW      => '',
-        ADDRESSES_FIELD_REQUIRED  => '',
-        ADDRESSES_FIELD_HIDDEN    => '',
+        ADDRESSES_FIELD_NONE      => 'None',
+        ADDRESSES_FIELD_SHOW      => 'Normal',
+        ADDRESSES_FIELD_REQUIRED  => 'Required',
+        ADDRESSES_FIELD_HIDDEN    => 'Hidden',
       ),
-      '#title' => $field['title'],
-      '#type' => 'radios',
+      '#default_value'  => !isset($field_values[$ftype . '_select']) ? $field['display'] : $field_values[$ftype . '_select'],
     );
+
+    // Size
+    if ($field['type'] == 'int') {
+      $form['addresses'][$ftype][$ftype . '_size'] = array(
+        '#type' => 'textfield',
+        '#size' => 3,
+        '#maxlength' => 3,
+        '#default_value' => 0,
+        '#disabled' => TRUE,
+      );
+    }
+    else {
+      if (isset($field_values[$ftype . '_size'])) {
+        $size = $field_values[$ftype . '_size'];
+      }
+      elseif (empty($field['length'])) {
+        if ($field['type'] == 'text') {
+          $size = 60;
+        }
+        else {
+          $size = '';
+        }
+      }
+      else {
+        // the default field length is what we want in the database
+        // here we reduce the size to the Drupal Core maximum if larger
+        $size = $field['length'];
+        if ($size > 60) {
+          $size = 60;
+        }
+      }
+      $form['addresses'][$ftype][$ftype . '_size'] = array(
+        '#type' => 'textfield',
+        '#size' => 3,
+        '#maxlength' => 3,
+        '#default_value' => $size,
+      );
+    }
+
+    // Label
+    $form['addresses'][$ftype][$ftype . '_label'] = array(
+      '#type' => 'textfield',
+      '#size' => 20,
+      '#maxlength' => 255,
+      '#default_value' => !isset($field_values[$ftype . '_label']) ? $field['title'] : $field_values[$ftype . '_label'],
+    );
+
+    // Description
+    $form['addresses'][$ftype][$ftype . '_desc'] = array(
+      '#type' => 'textfield',
+      '#size' => 60,
+      '#maxlength' => 255,
+      '#default_value' => !isset($field_values[$ftype . '_desc']) ? $field['description'] : $field_values[$ftype . '_desc'],
+    );
+    $form['addresses'][$ftype]['#title'] = $field['title'];
   }
 
   $form['addresses']['#theme'] = 'addresses_settings_fields';
@@ -606,15 +663,15 @@ function theme_addresses_settings_fields($form) {
     $field = $form[$ftype];
     $rows[] = array(
       $field['#title'],
-      drupal_render($field[0]),
-      drupal_render($field[1]),
-      drupal_render($field[2]),
-      drupal_render($field[3]),
+      drupal_render($field[$ftype . '_select']),
+      drupal_render($field[$ftype . '_size']),
+      drupal_render($field[$ftype . '_label']),
+      drupal_render($field[$ftype . '_desc']),
     );
     unset($form[$ftype]);
   }
 
-  $header = array(t('Field'), t('None'), t('Normal'), t('Required'), t('Hidden'));
+  $header = array(t('Field'), t('Visibility'), t('Size'), t('Label'), t('Help text'));
   $output = theme('table', $header, $rows);
 
   $output .= drupal_render($form);
@@ -646,3 +703,5 @@ function theme_addresses_field_weight($form) {
 
   return theme('table', array(), $rows, array('id' => 'addresses-field-weight')) . drupal_render($form);
 }
+
+// vim: ts=2 sw=2 et syntax=php

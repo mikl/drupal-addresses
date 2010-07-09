@@ -141,9 +141,11 @@ function addresses_cck_field_settings($op, $field) {
 
       // With the fields and their values correctly assigned,
       // its time to recover only the field name and its value
-      // and save it
-      foreach (array_keys($form['addresses']) as $field) {
-        $fields[] = $field;
+      // and save that
+      foreach (array_keys($form['addresses']) as $ftype) {
+        foreach (element_children($form['addresses'][$ftype]) as $field) {
+          $fields[] = $field;
+        }
       }
       return $fields;
 
@@ -191,7 +193,7 @@ function addresses_cck_field_settings($op, $field) {
  */
 function _addresses_cck_field_validate(&$form, &$form_state) {
   foreach (array_keys($form_state['values']['columns']) as $ftype) {
-    if ($form_state['values'][$ftype] == ADDRESSES_FIELD_REQUIRED) {
+    if ($form_state['values'][$ftype . '_select'] == ADDRESSES_FIELD_REQUIRED) {
       form_set_value($form['field']['required'], TRUE, $form_state);
       return;
     }
@@ -200,7 +202,7 @@ function _addresses_cck_field_validate(&$form, &$form_state) {
 }
 
 /**
- * Implementation of hook_geocode_handlers_alter.
+ * Implementation of hook_geocode_handlers_alter().
  *
  * Allows the address field to be used by the geocode module.
  *

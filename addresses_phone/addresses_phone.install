@@ -26,7 +26,7 @@ function addresses_phone_update_6100(&$sandbox) {
 
   // Define settings for the phone and fax fields, all settings must be defined
   // to comply with pgsql requirement.
-  // @see db_change_field()
+  // see db_change_field()
   $phone_definition = $fax_definition = array(
     'default' => '', 'length' => 24, 'not null' => FALSE, 'type' => 'varchar',
   );
