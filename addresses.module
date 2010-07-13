@@ -226,7 +226,7 @@ function addresses_elements_process($element, $edit, $form_state, $form) {
   // form generation function, but this method will be compatible with extra
   // contrib fields.
   foreach (array_keys($fields) as $ftype) {
-    if (isset($fields[$ftype]) && !empty($settings[$ftype . '_select'])) {
+    if (!empty($settings[$ftype . '_select'])) {
       $fields[$ftype] = $settings[$ftype . '_select'];
     }
   }

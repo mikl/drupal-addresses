@@ -560,7 +560,6 @@ function _addresses_settings_fields($field_values = array()) {
     $form['addresses'][$ftype][$ftype . '_desc'] = array(
       '#type' => 'textfield',
       '#size' => 60,
-      '#maxlength' => 255,
       '#default_value' => !isset($field_values[$ftype . '_desc']) ? $field['description'] : $field_values[$ftype . '_desc'],
     );
     $form['addresses'][$ftype]['#title'] = $field['title'];
