@@ -27,5 +27,5 @@ function theme_addresses_cck_formatter_single_line($element) {
   module_load_include('inc', 'addresses');
 
   // Print the address using the one-line only theme
-  return theme('addresses_singleline', $element['#item']);
+  return theme('addresses_address_singleline', $element['#item']);
 }
