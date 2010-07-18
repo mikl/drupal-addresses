@@ -15,7 +15,11 @@
  * for further info.
  *
  * @param $available
- *   String (optional). A list of countries that are allowed.
+ *   Array (optional). A list of countries that are allowed.
+ * @param $top_countries
+ *   Array (optional). A list of countries to also display
+ *   at the top of the list. (The rest of the list will still
+ *   include those top countries.)
  * @param $upper
  *   Boolean (optional). When TRUE, the country codes will
  *   be totally in Upper Case. Its the default ISO code,
@@ -25,7 +29,7 @@
  *   Array. 'COUNTRY CODE' => 'COUNTRY NAME' pairs as layed out in
  *   ISO 3166-1 alpha-2
  */
-function _addresses_country_get($available = array(), $upper = FALSE) {
+function _addresses_country_get($available = array(), $top_countries = array(), $upper = FALSE) {
   $countries = array(
     'ad' => t('Andorra'),
     'ae' => t('United Arab Emirates'),
@@ -282,15 +286,34 @@ function _addresses_country_get($available = array(), $upper = FALSE) {
     }
   }
 
+  // Sort the list and return
+  natcasesort($countries);
+
+  // Move any designated countries to the top of the list
+  if (!empty($top_countries) && is_array($top_countries)) {
+    $top_list = array();
+    foreach ($top_countries as $ccode => $ignore) {
+      if (!empty($countries[$ccode])) {
+        // only add top countries if defined in the countries array
+        $top_list['top_' . $ccode] = $countries[$ccode];
+      }
+    }
+    if (!empty($top_list)) {
+      // sort like $countries
+      natcasesort($top_list);
+      // add a separator
+      $top_list['separator'] = '____________________';
+      // merge in full countries list
+      $countries = array_merge($top_list, $countries);
+    }
+  }
+
   // In fact, the ISO codes for countries are all Upper Case.
   // So, if someone needs the list as the official records,
   // it will convert.
   if (!empty($upper)) {
     $countries = array_change_key_case($countries, CASE_UPPER);
   }
-
-  // Sort the list and return
-  natcasesort($countries);
 
   return $countries;
 }
@@ -931,3 +954,5 @@ function theme_addresses_address_singleline($afields) {
 
   return $output;
 }
+
+// vim: ts=2 sw=2 et syntax=php

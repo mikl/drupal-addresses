@@ -43,19 +43,25 @@ function _addresses_addressesfieldapi_form($fields = array(), $values = array())
   // Adds the Country
   if (!empty($fields['country'])) {
     // Get a list of enabled countries
-    $countries = _addresses_country_get(variable_get('addresses_country_list', array()));
+    $countries = _addresses_country_get(variable_get('addresses_country_list', array()),
+        variable_get('addresses_top_countries', array()));
     if (count($countries) > 1) {
       $countries = array('' => '') + $countries;
+    }
+    $country = isset($values['country']) ? $values['country'] : '';
+    if (isset($countries['top_' . $country])) {
+      $country = 'top_' . $country;
     }
 
     $form['country'] = array(
       '#type' => 'select',
       '#title' => t('Country'),
-      '#default_value' => isset($values['country']) ? $values['country'] : '',
+      '#default_value' => $country,
       '#options' => $countries,
       '#description' => NULL,
       '#extra' => 0,
       '#multiple' => FALSE,
+      '#element_validate' => array('_addresses_validate_top_countries'),
       '#required' => ($fields['country'] == ADDRESSES_FIELD_REQUIRED),
       '#weight' => empty($field_weights['country']['weight']) ? 0 : $field_weights['country']['weight'],
     );
@@ -144,6 +150,26 @@ function _addresses_addressesfieldapi_form($fields = array(), $values = array())
   }
 
   return $form;
+}
+
+/**
+ * With the addition of top countries, we may get selections such
+ * as 'top_\<country name>' which we want to convert to plain
+ * '\<country name>'.
+ *
+ * @param $element
+ *   Array. A representation of the element being validated.
+ * @param $form_state
+ *   Array. The current state of the form.
+ */
+function _addresses_validate_top_countries($element, &$form_state) {
+  if ($form_state['values']['addresses']['country'] == 'separator') {
+    // the user selected the separator!
+    $form_state['values']['addresses']['country'] = '';
+  }
+  elseif (substr($form_state['values']['addresses']['country'], 0, 4) == 'top_') {
+    $form_state['values']['addresses']['country'] = substr($form_state['values']['addresses']['country'], 4);
+  }
 }
 
 /**
@@ -408,6 +434,7 @@ function _addresses_settings(&$form_state) {
   module_load_include('inc', 'addresses');
   $countries = _addresses_country_get();
   $country_list = variable_get('addresses_country_list', array_keys(_addresses_country_get()));
+  $top_countries = variable_get('addresses_top_countries', array());
 
   // List of countries that the site allow
   $form['addresses_country_list'] = array(
@@ -417,6 +444,15 @@ function _addresses_settings(&$form_state) {
     '#options' => $countries,
     '#type' => 'select',
     '#title' => t('Possible country'),
+  );
+
+  $form['addresses_top_countries'] = array(
+    '#default_value' => $top_countries,
+    '#description' => t('Select any countries you want to also display at the top of the list of countries.'),
+    '#multiple' => TRUE,
+    '#options' => $countries,
+    '#type' => 'select',
+    '#title' => t('Top countries'),
   );
 
   // Allow users to change address formats
