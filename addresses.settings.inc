@@ -131,8 +131,7 @@ function _addresses_addressesfieldapi_form($fields = array(), $values = array())
     $form['postal_code'] = array(
       '#type' => 'textfield',
       '#title' => t('Postal code'),
-
-    '#default_value' => isset($values['postal_code']) ? $values['postal_code'] : '',
+      '#default_value' => isset($values['postal_code']) ? $values['postal_code'] : '',
       '#size' => 16,
       '#maxlength' => 16,
       '#required' => ($fields['postal_code'] == ADDRESSES_FIELD_REQUIRED),
