@@ -202,11 +202,13 @@ function _addresses_autocomplete($country, $string = '') {
     // Get only the first 5 provinces that matches
     // partially with the given piece of text
     if (!empty($provinces)) {
+      $counter = 5;
       while (list($code, $name) = each($provinces)) {
-        if ($counter < 5) {
-          if (preg_match($string, drupal_strtolower($name))) {
-            $matches[$code] = drupal_strtolower($name);
-            ++$counter;
+        if (preg_match($string, drupal_strtolower($name))) {
+          $matches[$code] = drupal_strtolower($name);
+          --$counter;
+          if ($counter <= 0) {
+            break;
           }
         }
       }
@@ -332,6 +334,10 @@ function _addresses_province_ajax() {
  *   Returns NULL if $country does not contain any provinces.
  */
 function _addresses_province_valid($country, $province) {
+  if (substr($country, 0, 4) == 'top_') {
+    $country = substr($country, 4);
+  }
+
   // Ensure that country code provided is valid
   if (!_addresses_country_valid($country)) {
     return FALSE;
@@ -375,6 +381,9 @@ function _addresses_province_validate($form, &$form_state) {
   // given COUNTRY.inc file
   $province = $form['province']['#value'];
   $country = $form['country']['#value'];
+  if (substr($country, 0, 4) == 'top_') {
+    $country = substr($country, 4);
+  }
   $provinces = _addresses_province_get($country);
   if (empty($provinces[drupal_strtoupper($province)])) {
 
