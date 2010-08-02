@@ -189,6 +189,10 @@ function _addresses_validate_top_countries($element, &$form_state) {
 function _addresses_autocomplete($country, $string = '') {
   $matches = array();
 
+  if (substr($country, 0, 4) == 'top_') {
+    $country = substr($country, 4);
+  }
+
   // Check if the country code is there
   if ($country) {
     $string = drupal_strtolower($string);
