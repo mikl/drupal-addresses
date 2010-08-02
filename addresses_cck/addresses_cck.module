@@ -192,6 +192,9 @@ function addresses_cck_field_settings($op, $field) {
  * @ingroup form
  */
 function _addresses_cck_field_validate(&$form, &$form_state) {
+  if (substr($form_state['values']['country'], 0, 4) == 'top_') {
+    $form_state['values']['country'] = substr($form_state['values']['country'], 4);
+  }
   foreach (array_keys($form_state['values']['columns']) as $ftype) {
     if ($form_state['values'][$ftype . '_select'] == ADDRESSES_FIELD_REQUIRED) {
       form_set_value($form['field']['required'], TRUE, $form_state);
