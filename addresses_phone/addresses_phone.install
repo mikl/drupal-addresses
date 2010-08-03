@@ -12,6 +12,11 @@
 function addresses_phone_install() {
   drupal_set_message(t('To display phone and fax numbers with Addresses, you need to add them to your formatting options in the <a href="!addresses_admin">Addresses configuration area</a>.',
     array('!addresses_admin' => url('admin/settings/address'))), 'status');
+
+  if (module_exists('addresses_user')) {
+    module_load_include('module', 'addresses_user');
+    addresses_user_new_install();
+  }
 }
 
 /**

@@ -7,6 +7,30 @@
  */
 
 /**
+ * On installation call this function so we make sure to
+ * reset the user schema with new fields.
+ */
+function addresses_user_new_install() {
+  variable_set('addresses_user_reset_schema', 1);
+}
+
+/**
+ * The user table requires a valid schema, but the
+ * addresses_user_schema() function may be called
+ * before the fields are all defined/available. For
+ * this reason, we want to reset the schema after
+ * other modules were initialized.
+ */
+function addresses_user_init() {
+  if (variable_get('addresses_user_reset_schema', 0)) {
+    // this will call addresses_user_schema()
+    // and fix-up the table as required
+    cache_clear_all('schema', 'cache', TRUE);
+    drupal_get_schema('addresses_user');
+  }
+}
+
+/**
  * Check if user is allowed to have an address book.
  *
  * @param $account

@@ -8,18 +8,31 @@
 
 /**
  * Implementation of hook_install().
+ *
+ * @warning
+ * Whenever the .install is loaded for installation, all the
+ * .module of all the other modules being installed may not
+ * yet be loaded (if you install all the Addresses module all
+ * at once, for instance.)
+ *
+ * This means we cannot be sure that module_invoke_all() will
+ * work properly.
+ *
+ * Note that moving the addressesfieldapi to the .install wouldn't
+ * work either because all the .install files are not loaded when
+ * this function is being executed.
+ *
+ * Our current solution is to set the addresses_user_reset_schema
+ * variable to 1 and reset the schema's on init (and getting the
+ * schema to make sure the table gets rebuilt.)
  */
 function addresses_user_install() {
   // Install the necessary Database tables
   drupal_install_schema('addresses_user');
 
-  // Save the list of the installed fields
-  $fields = module_invoke_all('addressesfieldapi', 'fields');
-  $fields_installed = array();
-  foreach (array_keys($fields) as $field) {
-    $fields_installed[$field] = TRUE;
-  }
-  variable_set('addresses_user_fields', $fields_installed);
+  // Ask the system to reset the user schema
+  module_load_include('module', 'addresses_user');
+  addresses_user_new_install();
 }
 
 /**
@@ -101,6 +114,7 @@ function addresses_user_uninstall() {
 
   // Delete global variables
   variable_del('addresses_user_book');
+  variable_del('addresses_user_fields');
 }
 
 // vim: ts=2 sw=2 et syntax=php
