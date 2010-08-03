@@ -174,7 +174,9 @@ function addresses_cck_field_settings($op, $field) {
       $ftypes = module_invoke_all('addressesfieldapi', 'fields');
       foreach ($ftypes as $ftype => $field_data) {
         $field_cck = $cck_default;
-        $field_cck['title'] .= ' '. $field_data['title'];
+        if (isset($field_data['title'])) {
+          $field_cck['title'] .= ' '. $field_data['title'];
+        }
         $field_cck['field']['field'] = $field['field_name'] .'_'. $ftype;
         $field_cck['filter']['title'] .= ' '. $field_data['title'];
 
@@ -292,3 +294,5 @@ function addresses_cck_widget_info() {
     ),
   );
 }
+
+// vim: ts=2 sw=2 et syntax=php
