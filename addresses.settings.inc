@@ -384,18 +384,20 @@ function _addresses_province_validate($form, &$form_state) {
   if (substr($country, 0, 4) == 'top_') {
     $country = substr($country, 4);
   }
-  $provinces = _addresses_province_get($country);
-  if (empty($provinces[drupal_strtoupper($province)])) {
+  if ($country && $province) {
+    $provinces = _addresses_province_get($country);
+    if (empty($provinces[drupal_strtoupper($province)])) {
 
-    // Get the province fieldname
-    $field_name = $form['province']['#name'];
-    $field_name = drupal_substr($field_name, 0, -1);
-    $field_name = preg_replace('/([^]])\[/', '\1][', $field_name);
+      // Get the province fieldname
+      $field_name = $form['province']['#name'];
+      $field_name = drupal_substr($field_name, 0, -1);
+      $field_name = preg_replace('/([^]])\[/', '\1][', $field_name);
 
-    $countries = _addresses_country_get();
-    form_set_error($field_name, t('Could not find %province as a province from %country. Try to use the province abbreviation or number.', array(
-      '%province' => $form['province']['#value'],
-      '%country' => $countries[$country])));
+      $countries = _addresses_country_get();
+      form_set_error($field_name, t('Could not find %province as a province from %country. Try to use the province abbreviation or number.', array(
+        '%province' => $form['province']['#value'],
+        '%country' => $countries[$country])));
+    }
   }
 }
 
