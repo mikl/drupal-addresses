@@ -162,12 +162,18 @@ function _addresses_addressesfieldapi_form($fields = array(), $values = array())
  *   Array. The current state of the form.
  */
 function _addresses_validate_top_countries($element, &$form_state) {
-  if ($form_state['values']['addresses']['country'] == 'separator') {
-    // the user selected the separator!
-    $form_state['values']['addresses']['country'] = '';
+  if (isset($element['#parents'][0])) {
+    $field_name = $element['#parents'][0];
   }
-  elseif (substr($form_state['values']['addresses']['country'], 0, 4) == 'top_') {
-    $form_state['values']['addresses']['country'] = substr($form_state['values']['addresses']['country'], 4);
+  else {
+    $field_name = 'addresses';
+  }
+  if ($form_state['values'][$field_name]['country'] == 'separator') {
+    // the user selected the separator!
+    $form_state['values'][$field_name]['country'] = '';
+  }
+  elseif (substr($form_state['values'][$field_name]['country'], 0, 4) == 'top_') {
+    $form_state['values'][$field_name]['country'] = substr($form_state['values'][$field_name]['country'], 4);
   }
 }
 
