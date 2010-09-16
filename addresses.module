@@ -227,7 +227,13 @@ function addresses_elements_process($element, $edit, $form_state, $form) {
   // contrib fields.
   foreach (array_keys($fields) as $ftype) {
     if (!empty($settings[$ftype . '_select'])) {
-      $fields[$ftype] = $settings[$ftype . '_select'];
+      if ($form['form_id']['#value'] == 'content_field_edit_form') {
+        // force optional on content_field_edit_form
+        $fields[$ftype] = ADDRESSES_FIELD_SHOW;
+      }
+      else {
+        $fields[$ftype] = $settings[$ftype . '_select'];
+      }
     }
   }
 
@@ -432,29 +438,33 @@ function addresses_token_list($type = 'all') {
  * Implementation of hook_token_values().
  */
 function addresses_token_values($type, $object = NULL) {
-  switch ($type) {
-    case 'addresses_general':
-    case 'addresses_adr':
-      $fields = module_invoke_all('addressesfieldapi', 'fields');
+  $values = array();
 
-      foreach ($fields as $field => $field_data) {
-        if ($field_data['token'] == $type && isset($field_data['theme'])) {
-          foreach (array_keys($field_data['theme']) as $format) {
-            // Sub-modules such as addresses_phone add a module specification to
-            // avoid clashes between modules.
-            if (!empty($field_data['module'])) {
-              $module = $field_data['module'] . '_';
-            }
-            else {
-              $module = '';
-            }
-            $values['addresses_'. $field .'_'. $format] = theme('addresses_'. $module . $field, $object, $format);
+  switch ($type) {
+  case 'addresses_general':
+  case 'addresses_adr':
+    $fields = module_invoke_all('addressesfieldapi', 'fields');
+
+    foreach ($fields as $field => $field_data) {
+      if ($field_data['token'] == $type && isset($field_data['theme'])) {
+        foreach (array_keys($field_data['theme']) as $format) {
+          // Sub-modules such as addresses_phone add a module specification to
+          // avoid clashes between modules.
+          if (!empty($field_data['module'])) {
+            $module = $field_data['module'] . '_';
           }
+          else {
+            $module = '';
+          }
+          $values['addresses_'. $field .'_'. $format] = theme('addresses_'. $module . $field, $object, $format);
         }
       }
+    }
+    break;
 
-      return $values;
   }
+
+  return $values;
 }
 
 // vim: ts=2 sw=2 et syntax=php
