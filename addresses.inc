@@ -741,13 +741,14 @@ function theme_addresses_is_primary($afields, $format = 'plain') {
  *   A formatted aname field.
  */
 function theme_addresses_aname($afields, $format = 'plain') {
-  $aname = check_plain($afields['aname']);
-  if (!empty($aname)) {
+  if (!empty($afields['aname'])) {
     switch ($format) {
-      case 'plain':
-        return $aname;
-      case 'hcard':
-        return '<span class="fn org">'. theme('placeholder', $aname) .'</span>';
+    case 'plain':
+      return check_plain($afields['aname']);
+
+    case 'hcard':
+      return '<span class="fn org">'. theme('placeholder', $afields['aname']) .'</span>';
+
     }
   }
 }
