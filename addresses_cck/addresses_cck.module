@@ -177,8 +177,9 @@ function addresses_cck_field_settings($op, $field) {
         if (isset($field_data['title'])) {
           $field_cck['title'] .= ' '. $field_data['title'];
         }
-        $field_cck['field']['field'] = $field['field_name'] .'_'. $ftype;
-        $field_cck['filter']['title'] .= ' '. $field_data['title'];
+        $field_cck['filter']['field'] = $field['field_name'] .'_'. $ftype;
+//        $field_cck['filter']['title'] .= ' '. $field_data['title'];
+        $field_cck['filter']['title'] = $cck_default['title short'] . ': ' . $field_cck['filter']['title'] . ' '. $field_data['title'];
 
 //         unset($field_cck['field']['additional fields']);
         $data[$table_alias][$field['field_name'] .'_'. $ftype] = $field_cck;
