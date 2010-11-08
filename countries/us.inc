@@ -70,6 +70,9 @@ function addresses_province_list_us() {
     'WI' => t('Wisconsin'),
     'WY' => t('Wyoming'),
 
+    'AA' => t('Armed Forces Americas'),
+    'AE' => t('Armed Forces Europe'),
+    'AP' => t('Armed Forces Pacific'),
     'AS' => t('American Samoa'),
     'FM' => t('Federated States of Micronesia'),
     'GU' => t('Guam'),
