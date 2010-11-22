@@ -467,4 +467,85 @@ function addresses_token_values($type, $object = NULL) {
   return $values;
 }
 
+/**
+ * Implementation of hook_feeds_node_processor_targets_alter
+ *
+ * This will allow the mapping of feed data to Addresses module field attributes
+ *
+ * @param &$targets
+ *   Array containing the targets to be offered to the user. Add to this array
+ *   to expose additional options. Remove from this array to suppress options.
+ *   Remove with caution.
+ * @param $content_type
+ *   The content type of the target node.
+ */
+function addresses_feeds_node_processor_targets_alter(&$targets, $content_type) {
+  $info = content_types($content_type);
+
+  //retrieve the attributes currently available from the addresses module
+  $attributes = module_invoke_all('addressesfieldapi','fields');
+
+  $fields = array();
+  if (isset($info['fields']) && count($info['fields'])) {
+    foreach ($info['fields'] as $field_name => $field) {
+
+      //if this is an address field
+      if (in_array($field['type'], array('addresses_cck'))) {
+        $name = isset($field['widget']['label']) ? $field['widget']['label'] : $field_name;
+
+        //loop over the attributes available to addresses field
+        foreach ($attributes as $attr_key => $attribute) {
+
+          //if a field is unused based on settings, then we'll note those fields
+          //in the drop down
+          $used = ($field['columns'][$attr_key]['display'] > 0 ? TRUE : FALSE);
+
+          $targets[$field_name .':'. $attr_key] = array(
+            'name' => t('!field_name (!title) !used', array('!field_name' => $name,
+                                                      '!title' => $attribute['title'],
+                                                      '!used' => (!$used ? ' [not used]' : '')
+                                                      )),
+            'description' => t('!title of what my custom node field does.', array('!title' => $attribute['title'])),
+            'callback' => 'addresses_feeds_set_target',
+            //'real_target' => $field_name,
+          );
+
+        }//end - loop
+      }//end - if
+    }//end - foreach
+  }//end - if
+}
+
+/**
+ * Callback from hook_feeds_node_processor_targets_alter defined above
+ *
+ * This handles the actual import process, updating the node with the passed in
+ * $value
+ *
+ * @param $node
+ *   Reference to the node object we are working on.
+ * @param $target
+ *   The selected link CCK field.
+ * @param $value
+ *   The value to assign to the CCK field.
+ */
+function addresses_feeds_set_target($node, $target, $value) {
+  list($field_name, $sub_field) = split(':', $target);
+
+  $field = (isset($node->$field_name) ? $node->$field_name : array());
+  if (is_array($value)) {
+    $i = 0;
+    foreach ($value as $v) {
+      if (!is_array($v) && !is_object($v)) {
+        $field[$i][$sub_field] = $v;
+      }
+      $i++;
+    }
+  } else {
+    $field[0][$sub_field] = $value;
+  }
+
+  $node->$field_name = $field;
+}
+
 // vim: ts=2 sw=2 et syntax=php
