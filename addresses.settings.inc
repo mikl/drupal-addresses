@@ -168,9 +168,16 @@ function _addresses_validate_top_countries($element, &$form_state) {
   else {
     $field_name = 'addresses';
   }
-  if ($form_state['values'][$field_name]['country'] == 'separator') {
+  if (isset($form_state['values'][$field_name]['0']['country']) && $form_state['values'][$field_name]['0']['country'] == 'separator') {
+    // the user selected the separator!
+    $form_state['values'][$field_name]['0']['country'] = '';
+  }
+  elseif ($form_state['values'][$field_name]['country'] == 'separator') {
     // the user selected the separator!
     $form_state['values'][$field_name]['country'] = '';
+  }
+  elseif (isset($form_state['values'][$field_name]['0']['country']) && substr($form_state['values'][$field_name]['0']['country'], 0, 4) == 'top_') {
+    $form_state['values'][$field_name]['0']['country'] = substr($form_state['values'][$field_name]['0']['country'], 4);
   }
   elseif (substr($form_state['values'][$field_name]['country'], 0, 4) == 'top_') {
     $form_state['values'][$field_name]['country'] = substr($form_state['values'][$field_name]['country'], 4);
