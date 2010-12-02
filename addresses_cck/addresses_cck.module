@@ -296,4 +296,59 @@ function addresses_cck_widget_info() {
   );
 }
 
+/**
+ * Implementation of hook_token_list().
+ */
+function addresses_cck_token_list($type = 'all') {
+  if ($type == 'field' || $type == 'all') {
+    $tokens = array();
+
+    $fields = module_invoke_all('addressesfieldapi', 'fields');
+
+    foreach ($fields as $field => $field_data) {
+      if (isset($field_data['theme'])) {
+        foreach ($field_data['theme'] as $theme => $theme_title) {
+          $tokens['addresses'][$field . '_' . $theme] = $theme_title;
+        }
+      }
+    }
+
+    return $tokens;
+  }
+}
+
+/**
+ * Implementation of hook_token_values().
+ */
+function addresses_cck_token_values($type, $object = NULL) {
+  if ($type == 'field') {
+    $tokens = array();
+    $item = $object[0];
+
+    $fields = module_invoke_all('addressesfieldapi', 'fields');
+
+    foreach ($fields as $field => $field_data) {
+      if (isset($field_data['theme'])) {
+
+        // Sub-modules such as addresses_phone add a module specification to
+        // avoid clashes between modules.
+        if (!empty($field_data['module'])) {
+          $module = $field_data['module'] . '_';
+        }
+        else {
+          $module = '';
+        }
+
+        if (isset($field_data['theme'])) {
+          foreach ($field_data['theme'] as $theme => $theme_title) {
+            $tokens[$field . '_' . $theme] = theme('addresses_' . $module . $field, $item, $theme);
+          }
+        }
+      }
+    }
+
+    return $tokens;
+  }
+}
+
 // vim: ts=2 sw=2 et syntax=php
