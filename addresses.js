@@ -31,7 +31,8 @@ Drupal.behaviors.addresses = function(context) {
         field_id:provinceElement.attr('id'),
         field_name:provinceElement.attr('name'),
         passback:provinceElement.parent().attr('id'),
-        province:provinceElement.val()
+        province:provinceElement.val(),
+        language:Drupal.settings.addresses.language
       }
     });
   }
@@ -46,3 +47,4 @@ Drupal.behaviors.addresses = function(context) {
     $('#'+data.passback).html(data.field);
   }
 };
+// vim: ts=2 sw=2 et syntax=javascript

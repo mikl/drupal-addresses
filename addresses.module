@@ -188,6 +188,11 @@ function addresses_elements() {
  *   Array. Form fields
  */
 function addresses_elements_process($element, $edit, $form_state, $form) {
+  global $language;
+
+  // Add the language definition in the settings so we can properly select words in a given language.
+  drupal_add_js(array('addresses' => array('language' => $language->language)), 'setting');
+
   // The $form['#field_info'] entry comes from CCK
   $settings = empty($form['#field_info'][$element['#field_name']])
     ? variable_get('addresses_user_settings', array())
