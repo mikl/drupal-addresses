@@ -1,5 +1,4 @@
 <?php
-// $Id$
 /**
  * @author Bruno Massa
  * @file

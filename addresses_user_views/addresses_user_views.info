@@ -1,4 +1,3 @@
-; $Id$
 name           = Addresses User Views
 package        = "Addresses"
 description    = Add views support to the Addresses User module. WARNING: Remember that views can easily display a lot of PRIVATE data. Be very careful when enabling this module.

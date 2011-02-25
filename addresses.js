@@ -1,5 +1,4 @@
 /**
- * $Id$
  * @author Cody Craven
  * @file addresses.js
  *
