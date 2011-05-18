@@ -197,10 +197,13 @@ function _addresses_cck_field_validate(&$form, &$form_state) {
   if (substr($form_state['values']['country'], 0, 4) == 'top_') {
     $form_state['values']['country'] = substr($form_state['values']['country'], 4);
   }
-  foreach (array_keys($form_state['values']['columns']) as $ftype) {
-    if ($form_state['values'][$ftype . '_select'] == ADDRESSES_FIELD_REQUIRED) {
-      form_set_value($form['field']['required'], TRUE, $form_state);
-      return;
+
+  if (isset($form_state['values']['columns']) && is_array($form_state['values']['columns'])) {
+    foreach (array_keys($form_state['values']['columns']) as $ftype) {
+      if ($form_state['values'][$ftype . '_select'] == ADDRESSES_FIELD_REQUIRED) {
+        form_set_value($form['field']['required'], TRUE, $form_state);
+        return;
+      }
     }
   }
   form_set_value($form['field']['required'], FALSE, $form_state);
@@ -258,8 +261,9 @@ function addresses_cck_widget(&$form, &$form_state, $field, $items, $delta = 0) 
 
   // Get all form fields for building addresses
   $ftypes = module_invoke_all('addressesfieldapi', 'fields');
+  $fields = array();
   foreach (array_keys($ftypes) as $ftype) {
-    $fields[$ftype] = $field[$ftype];
+    $fields[$ftype] = (isset($field[$ftype])) ? $field[$ftype] : NULL;
   }
 
   // The Addresses field

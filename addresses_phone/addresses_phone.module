@@ -12,6 +12,8 @@
  * allow other modules to add more fields to the addresses
  */
 function addresses_phone_addressesfieldapi($op, $fields = array(), $values = array()) {
+  $form = array();
+
   if ($op == 'fields') {
     return array(
       'phone' => array(

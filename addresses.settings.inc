@@ -13,6 +13,7 @@
  */
 function _addresses_addressesfieldapi_form($fields = array(), $values = array()) {
   $field_weights = variable_get('addresses_field_weight', array());
+  $form = array();
 
   // Let users select if the address is the primary
   if (!empty($fields['is_primary'])) {
