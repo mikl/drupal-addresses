@@ -285,14 +285,6 @@ function _addresses_country_valid($country) {
 function _addresses_province_ajax() {
   global $language;
 
-  // Keep the same language between calls so that t() calls work as expected
-  if (!empty($_GET['language'])) {
-    $languages = language_list(); // get all languages
-    if (isset($languages[$_GET['language']])) {
-      $language = $languages[$_GET['language']];
-    }
-  }
-
   // ISO 3166-1 alpha-2 code of a country.
   $country = $_GET['country'];
   if (substr($country, 0, 4) == 'top_') {
